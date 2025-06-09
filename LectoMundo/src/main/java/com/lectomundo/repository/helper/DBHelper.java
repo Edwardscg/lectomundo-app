@@ -1,5 +1,8 @@
 package com.lectomundo.repository.helper;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -122,6 +125,32 @@ public class DBHelper {
 
                 cr.cerrar();
             }
+        }
+
+        return lista;
+    }
+
+    // Ejecuta una consulta SQL y llena una ObservableList con objetos mapeados desde el ResultSet.
+    public static <T> ObservableList<T> llenarTabla(String sql, RowMapper<T> mapper) {
+
+        ObservableList<T> lista = FXCollections.observableArrayList();
+
+        try (Connection conn = DBConexion.establecerConexion();
+             Statement st = conn.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+
+            while (rs.next()) {
+
+                T objeto = mapper.mapRow(rs);
+                lista.add(objeto);
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        } catch (Exception e) {
+
+            throw new RuntimeException(e);
         }
 
         return lista;
