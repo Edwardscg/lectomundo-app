@@ -1,0 +1,17 @@
+# LectoMundo .gitignore 
+# IDEs
+.idea/
+*.iml
+
+# Maven
+target/
+
+# Archivos compilados
+*.class
+
+# Archivos temporales del sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
