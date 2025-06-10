@@ -48,6 +48,13 @@ public class AlquilerDAO {
         return DBHelper.obtenerListaEntidad(sql, this::mapearAlquiler, id_usuario);
     }
 
+    public List<Documento> verDocumentosAlquiladosPorUsuario(int id_usuario) throws Exception{
+
+        String sql = " SELECT d.* FROM documento d JOIN alquiler a ON d.id_documento = a.id_documento WHERE a.id_usuario = ? ";
+
+        return DBHelper.obtenerListaEntidad(sql, documentoDAO::mapearDocumento, id_usuario);
+    }
+
     public List<Alquiler> verAlquileresActivosPorUsuario(int id_usuario) throws Exception {
 
         String sql = "SELECT * FROM alquiler WHERE id_usuario = ? AND estado = 'activo'";
