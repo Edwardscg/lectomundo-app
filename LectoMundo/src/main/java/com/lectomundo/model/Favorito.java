@@ -4,11 +4,13 @@ public class Favorito {
     private int id_favorito;
     private Cliente cliente;
     private Documento documento;
+    private boolean es_favorito;
 
-    public Favorito(int id_favorito, Cliente cliente, Documento documento) {
+    public Favorito(int id_favorito, Cliente cliente, Documento documento, boolean es_favorito) {
         this.id_favorito = id_favorito;
         this.cliente = cliente;
         this.documento = documento;
+        this.es_favorito = es_favorito;
     }
 
     public int getId_favorito() {
@@ -33,5 +35,13 @@ public class Favorito {
 
     public void setDocumento(Documento documento) {
         this.documento = documento;
+    }
+
+    public boolean isEs_favorito() {
+        return es_favorito;
+    }
+
+    public void setEs_favorito(boolean es_favorito) {
+        this.es_favorito = es_favorito;
     }
 }
