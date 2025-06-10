@@ -87,6 +87,13 @@ public class DocumentoDAO {
         return DBHelper.obtenerListaEntidad(sql, this::mapearDocumento, genero);
     }
 
+    public void actualizarPuntuacionYValoracion(int id_documento, float promedio, int cantidad_valoraciones) throws Exception {
+
+        String sql = "UPDATE documento SET puntuacion_promedio = ?, cantidad_valoraciones = ? WHERE id_documento = ?";
+
+        DBHelper.manejarEntidad(sql, promedio, cantidad_valoraciones, id_documento);
+    }
+
     private Documento mapearDocumento(ResultSet rs) throws Exception{
 
         return new Documento(rs.getInt("id_libro"), rs.getString("titulo"), rs.getString("autor"), rs.getString("tipo_documento"), rs.getDate("fecha_publicacion").toLocalDate(), rs.getString("genero"), rs.getString("descripcion"), rs.getString("pdf_url"), rs.getString("portada_url"), rs.getInt("precio"), rs.getFloat("puntuacion_promedio"), rs.getInt("cantidad_valoraciones"));
