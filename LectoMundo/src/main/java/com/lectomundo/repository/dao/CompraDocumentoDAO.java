@@ -13,4 +13,11 @@ public class CompraDocumentoDAO {
 
         DBHelper.manejarEntidad(sql, compra.getCliente().getId_usuario(), compra.getDocumento().getId_documento(), Timestamp.valueOf(compra.getFecha_compra()), compra.getCosto());
     }
+
+    public boolean estaComprado(int id_usuario, int id_documento) throws Exception {
+
+        String sql = "SELECT 1 FROM compra_documento WHERE id_usuario = ? AND id_documento = ? LIMIT 1;";
+
+        return DBHelper.obtenerEntidad(sql, rs -> true, id_usuario, id_documento) !=null;
+    }
 }
