@@ -42,6 +42,23 @@ public class ValoracionDAO {
         return DBHelper.obtenerListaEntidad(sql, this::mapearValoracion, id_documento);
     }
 
+    public float obtenerPromedioValoracion(int id_libro) throws Exception {
+
+        String sql = "SELECT AVG(puntuacion) AS promedio FROM valoracion WHERE id_documento = ?;";
+
+        Float promedio = DBHelper.obtenerEntidad(sql, rs -> rs.getFloat("promedio"), id_libro);
+
+        return promedio!=null ? promedio: 0;
+    }
+
+    public int contarValoracionesPorDocumento(int id_documento) throws Exception {
+        String sql = "SELECT COUNT(*) AS total FROM valoracion WHERE id_documento = ?;";
+
+        Integer total = DBHelper.obtenerEntidad(sql, rs -> rs.getInt("total"), id_documento);
+
+        return total != null ? total : 0;
+    }
+
     private Valoracion mapearValoracion(ResultSet rs) throws Exception{
 
         Usuario usuario = usuarioDAO.buscarUsuarioPorId(rs.getInt("id_usuario"));
