@@ -66,4 +66,19 @@ public class UsuarioService {
             return true;
         }
     }
+
+    public void actualizarUsuario(Usuario usuario) throws Exception{
+
+        if (usuario == null || usuario.getCorreo().isBlank() || usuario.getNombre_usuario().isBlank()) {
+
+            throw new IllegalArgumentException("Datos inválidos.");
+        }
+
+        usuarioDAO.actualizarUsuario(usuario);
+    }
+
+    public void actualizarMonedas(int id_usuario, int nuevasMonedas) throws Exception{
+
+        usuarioDAO.actualizarMonedas(id_usuario, nuevasMonedas);
+    }
 }
