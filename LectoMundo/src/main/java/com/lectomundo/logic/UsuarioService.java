@@ -8,9 +8,9 @@ public class UsuarioService {
 
     UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-    public void registrarUsuario(Usuario usuario) throws Exception{
+    public void registrarUsuario(Usuario usuario) throws Exception {
 
-        if(usuario instanceof Cliente){
+        if (usuario instanceof Cliente) {
 
             usuario.setTipo_usuario("Cliente");
         }
@@ -29,19 +29,41 @@ public class UsuarioService {
         usuarioDAO.registrarUsuario(usuario);
     }
 
-    public Usuario loguearUsuario(String correo, String contraseña) throws Exception{
+    public Usuario loguearUsuario(String correo, String contraseña) throws Exception {
 
-        if(correo == null || contraseña == null || correo.isBlank() || contraseña.isBlank()){
+        if (correo == null || contraseña == null || correo.isBlank() || contraseña.isBlank()) {
 
             throw new IllegalArgumentException("Correo o contraseña inválidos.");
         }
 
         Usuario usuario = usuarioDAO.loguearUsuario(correo, contraseña);
 
-        if(usuario == null){
+        if (usuario == null) {
 
             throw new Exception("Credenciales incorrectas.");
         }
         return usuario;
+    }
+
+    public boolean actualizarContraseña(String correo, String nueva_contraseña) throws Exception {
+
+
+        if (correo == null || correo.isBlank() || nueva_contraseña == null || nueva_contraseña.isBlank()) {
+
+            return false;
+        }
+
+        Usuario usuario = usuarioDAO.buscarUsuarioPorCorreo(correo);
+
+        if (usuario == null) {
+
+            return false;
+        }else {
+
+            usuario.setContraseña(nueva_contraseña);
+            usuarioDAO.actualizarUsuario(usuario);
+
+            return true;
+        }
     }
 }
