@@ -28,4 +28,20 @@ public class UsuarioService {
 
         usuarioDAO.registrarUsuario(usuario);
     }
+
+    public Usuario loguearUsuario(String correo, String contraseña) throws Exception{
+
+        if(correo == null || contraseña == null || correo.isBlank() || contraseña.isBlank()){
+
+            throw new IllegalArgumentException("Correo o contraseña inválidos.");
+        }
+
+        Usuario usuario = usuarioDAO.loguearUsuario(correo, contraseña);
+
+        if(usuario == null){
+
+            throw new Exception("Credenciales incorrectas.");
+        }
+        return usuario;
+    }
 }
