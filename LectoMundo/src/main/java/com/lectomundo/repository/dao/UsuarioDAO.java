@@ -4,6 +4,7 @@ import com.lectomundo.model.Administrador;
 import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Usuario;
 import com.lectomundo.repository.helper.DBHelper;
+import javafx.collections.ObservableList;
 
 import java.sql.ResultSet;
 import java.util.List;
@@ -90,6 +91,13 @@ public class UsuarioDAO {
         return DBHelper.obtenerListaEntidad(sql, this::mapearFilaUsuario, tipo_usuario);
     }
 
+    public List<Usuario> verUsuarios()throws Exception{
+
+        String sql = "select * from usuario";
+
+        return DBHelper.obtenerListaEntidad(sql, this::mapearFilaUsuario);
+    }
+
     private Usuario mapearFilaUsuario(ResultSet rs) throws Exception{
 
         String tipo_usuario = rs.getString("tipo");
@@ -104,4 +112,5 @@ public class UsuarioDAO {
 
         }
     }
+
 }
