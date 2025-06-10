@@ -28,6 +28,13 @@ public class NotificacionDAO {
         return DBHelper.obtenerListaEntidad(sql, this::mapearNotificacion, id_usuario);
     }
 
+    public void marcarNotificacionComoLeida(int id_notificacion) throws Exception {
+
+        String sql = "UPDATE notificacion SET es_leido = TRUE WHERE id_notificacion = ?;";
+
+        DBHelper.manejarEntidad(sql, id_notificacion);
+    }
+
     private Notificacion mapearNotificacion(ResultSet rs) throws Exception{
 
         Usuario usuario = usuarioDAO.buscarUsuarioPorId(rs.getInt("id_usuario"));
