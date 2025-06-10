@@ -91,7 +91,7 @@ public class UsuarioDAO {
         return DBHelper.obtenerListaEntidad(sql, this::mapearFilaUsuario, tipo_usuario);
     }
 
-    public List<Usuario> verUsuarios()throws Exception{
+    public List<Usuario> obtenerUsuarios()throws Exception{
 
         String sql = "select * from usuario";
 

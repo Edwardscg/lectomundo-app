@@ -1,9 +1,11 @@
 package com.lectomundo.repository.dao;
 
 import com.lectomundo.model.Documento;
+import com.lectomundo.repository.helper.DBConexion;
 import com.lectomundo.repository.helper.DBHelper;
 
-import java.sql.Date;
+import java.sql.*;
+import java.util.List;
 
 public class DocumentoDAO {
 
@@ -41,5 +43,24 @@ public class DocumentoDAO {
 
             throw new Exception("No se pudo eliminar el Documento");
         }
+    }
+
+    public Documento buscarDocumentoPorId(int id_documento) throws Exception {
+
+        String sql = "SELECT * FROM libro WHERE id_libro = ?;";
+
+        return DBHelper.obtenerEntidad(sql, this::mapearDocumento, id_documento);
+    }
+
+    public List<Documento> obtenerDocumentos() throws Exception{
+
+        String sql = "select * from documento";
+
+        return DBHelper.obtenerListaEntidad(sql, this::mapearDocumento);
+    }
+
+    private Documento mapearDocumento(ResultSet rs) throws Exception{
+
+        return new Documento(rs.getInt("id_libro"), rs.getString("titulo"), rs.getString("autor"), rs.getString("tipo_documento"), rs.getDate("fecha_publicacion").toLocalDate(), rs.getString("genero"), rs.getString("descripcion"), rs.getString("pdf_url"), rs.getString("portada_url"), rs.getInt("precio"), rs.getFloat("puntuacion_promedio"), rs.getInt("cantidad_valoraciones"));
     }
 }
