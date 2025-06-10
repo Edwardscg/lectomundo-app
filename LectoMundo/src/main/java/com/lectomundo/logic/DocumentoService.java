@@ -19,6 +19,13 @@ public class DocumentoService {
         documentoDAO.editarDocumento(documento);
     }
 
+    public void eliminarDocumento(int id_documento) throws Exception {
+        if (id_documento <= 0) {
+            throw new IllegalArgumentException("ID de documento inválido.");
+        }
+        documentoDAO.eliminarDocumento(id_documento);
+    }
+
     private void validarDocumento(Documento documento, boolean requiere_id) throws Exception {
         if (documento == null) {
             throw new IllegalArgumentException("El documento no puede ser nulo.");
