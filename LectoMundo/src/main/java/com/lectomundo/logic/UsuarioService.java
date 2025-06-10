@@ -111,4 +111,13 @@ public class UsuarioService {
 
         return usuarioDAO.buscarUsuariosPorTipo(tipo_usuario);
     }
+
+    public void eliminarUsuario(int id_usuario) throws Exception {
+
+        if (id_usuario <= 0) {
+            throw new IllegalArgumentException("ID inválido.");
+        }
+
+        usuarioDAO.eliminarUsuario(id_usuario);
+    }
 }
