@@ -5,6 +5,8 @@ import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Usuario;
 import com.lectomundo.repository.helper.DBHelper;
 
+import java.sql.ResultSet;
+
 public class UsuarioDAO {
 
     public void registrarUsuario(Usuario usuario) throws Exception {
@@ -61,5 +63,37 @@ public class UsuarioDAO {
         }
     }
 
-    
+    public Usuario buscarUsuarioPorId(int id_usuario) throws Exception {
+        String sql ="SELECT * FROM usuario WHERE id_usuario = ?;";
+
+        return DBHelper.obtenerEntidad(sql, this::mapearFilaUsuario, id_usuario);
+    }
+
+    public Usuario buscarUsuarioPorCorreo(String correo) throws Exception {
+        String sql ="SELECT * FROM usuario WHERE correo = ?;";
+
+        return DBHelper.obtenerEntidad(sql, this::mapearFilaUsuario, correo);
+    }
+
+    public Usuario loguearUsuario(String correo, String contrasena) throws Exception {
+
+        String sql = "SELECT * FROM usuario WHERE correo = ? AND contrasena = ?;";
+
+        return DBHelper.obtenerEntidad(sql, this::mapearFilaUsuario, correo, contrasena);
+    }
+
+    private Usuario mapearFilaUsuario(ResultSet rs) throws Exception{
+
+        String tipo_usuario = rs.getString("tipo");
+
+        if(tipo_usuario.equals("cliente")){
+
+            return new Cliente(rs.getInt("id_usuario"), rs.getString("nombre_usuario"), rs.getString("correo"), rs.getString("contraseña"), rs.getString("tipo"), rs.getInt("monedas"));
+
+        } else{
+
+            return new Administrador(rs.getInt("id_usuario"), rs.getString("nombre"), rs.getString("correo"), rs.getString("contraseña"), rs.getString("tipo"));
+
+        }
+    }
 }
