@@ -94,7 +94,7 @@ public class DocumentoDAO {
         DBHelper.manejarEntidad(sql, promedio, cantidad_valoraciones, id_documento);
     }
 
-    private Documento mapearDocumento(ResultSet rs) throws Exception{
+    public Documento mapearDocumento(ResultSet rs) throws Exception{
 
         return new Documento(rs.getInt("id_libro"), rs.getString("titulo"), rs.getString("autor"), rs.getString("tipo_documento"), rs.getDate("fecha_publicacion").toLocalDate(), rs.getString("genero"), rs.getString("descripcion"), rs.getString("pdf_url"), rs.getString("portada_url"), rs.getInt("precio"), rs.getFloat("puntuacion_promedio"), rs.getInt("cantidad_valoraciones"));
     }
