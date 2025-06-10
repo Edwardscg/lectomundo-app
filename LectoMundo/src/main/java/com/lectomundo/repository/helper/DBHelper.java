@@ -121,6 +121,7 @@ public class DBHelper {
             }
 
         }finally {
+
             if(cr!=null){
 
                 cr.cerrar();
