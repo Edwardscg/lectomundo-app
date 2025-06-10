@@ -41,4 +41,11 @@ public class UsuarioDAO {
 
         DBHelper.manejarEntidad(sql, nuevas_monedas, id_usuario);
     }
+
+    public void cambiarContraseña(int id_usuario, String contraseña_actual, String nueva_contrasena) throws Exception {
+
+        String sql = "UPDATE usuario SET contrasena = ? WHERE id_usuario = ? AND contrasena = ?";
+
+        DBHelper.manejarEntidad(sql, nueva_contrasena, id_usuario, contraseña_actual);
+    }
 }
