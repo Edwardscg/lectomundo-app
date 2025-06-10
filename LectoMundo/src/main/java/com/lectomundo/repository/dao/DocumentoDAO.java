@@ -59,6 +59,34 @@ public class DocumentoDAO {
         return DBHelper.obtenerListaEntidad(sql, this::mapearDocumento);
     }
 
+    public List<Documento> buscarDocumentosPorTitulo(String titulo) throws Exception {
+
+        String sql = "SELECT * FROM documento WHERE titulo LIKE ?";
+
+        return DBHelper.obtenerListaEntidad(sql, this::mapearDocumento, titulo);
+    }
+
+    public List<Documento> buscarDocumentosPorAutor(String autor) throws Exception {
+
+        String sql = "SELECT * FROM documento WHERE autor LIKE ?";
+
+        return DBHelper.obtenerListaEntidad(sql, this::mapearDocumento, autor);
+    }
+
+    public List<Documento> buscarDocumentosPorTipo(String tipo_documento) throws Exception{
+
+        String sql = "SELECT * FROM documento WHERE tipo_documento LIKE ?";
+
+        return DBHelper.obtenerListaEntidad(sql, this::mapearDocumento, tipo_documento);
+    }
+
+    public List<Documento> buscarDocumentosPorGenero(String genero) throws Exception {
+
+        String sql = "SELECT * FROM documento WHERE genero LIKE ?";
+
+        return DBHelper.obtenerListaEntidad(sql, this::mapearDocumento, genero);
+    }
+
     private Documento mapearDocumento(ResultSet rs) throws Exception{
 
         return new Documento(rs.getInt("id_libro"), rs.getString("titulo"), rs.getString("autor"), rs.getString("tipo_documento"), rs.getDate("fecha_publicacion").toLocalDate(), rs.getString("genero"), rs.getString("descripcion"), rs.getString("pdf_url"), rs.getString("portada_url"), rs.getInt("precio"), rs.getFloat("puntuacion_promedio"), rs.getInt("cantidad_valoraciones"));
