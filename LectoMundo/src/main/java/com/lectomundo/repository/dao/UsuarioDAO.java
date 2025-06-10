@@ -6,6 +6,7 @@ import com.lectomundo.model.Usuario;
 import com.lectomundo.repository.helper.DBHelper;
 
 import java.sql.ResultSet;
+import java.util.List;
 
 public class UsuarioDAO {
 
@@ -80,6 +81,13 @@ public class UsuarioDAO {
         String sql = "SELECT * FROM usuario WHERE correo = ? AND contrasena = ?;";
 
         return DBHelper.obtenerEntidad(sql, this::mapearFilaUsuario, correo, contrasena);
+    }
+
+    public List<Usuario> buscarUsuariosPorTipo(String tipo_usuario) throws Exception {
+
+        String sql ="SELECT * FROM usuario WHERE tipo = ?;";
+
+        return DBHelper.obtenerListaEntidad(sql, this::mapearFilaUsuario, tipo_usuario);
     }
 
     private Usuario mapearFilaUsuario(ResultSet rs) throws Exception{
