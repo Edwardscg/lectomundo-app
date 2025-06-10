@@ -9,6 +9,7 @@ import com.lectomundo.repository.helper.DBHelper;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.util.List;
 
 public class MembresiaDAO {
 
@@ -53,6 +54,20 @@ public class MembresiaDAO {
         Integer tiene_membresia = DBHelper.obtenerEntidad(sql, rs -> 1, id_usuario, Estado.activo.toString());
 
         return tiene_membresia !=null;
+    }
+
+    public List<Membresia> verMembresiasPorUsuario(int id_usuario) throws Exception {
+
+        String sql = "SELECT * FROM membresia WHERE id_usuario = ? ORDER BY fecha_inicio DESC";
+
+        return DBHelper.obtenerListaEntidad(sql, this::mapearMembresia, id_usuario);
+    }
+
+    public List<Membresia> verMembresias() throws Exception {
+
+        String sql = "SELECT * FROM membresia ORDER BY fecha_inicio DESC";
+
+        return DBHelper.obtenerListaEntidad(sql, this::mapearMembresia);
     }
 
     private Membresia mapearMembresia(ResultSet rs) throws Exception{
