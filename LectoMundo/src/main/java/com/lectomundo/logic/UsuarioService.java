@@ -4,6 +4,8 @@ import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Usuario;
 import com.lectomundo.repository.dao.UsuarioDAO;
 
+import java.util.List;
+
 public class UsuarioService {
 
     UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -80,5 +82,33 @@ public class UsuarioService {
     public void actualizarMonedas(int id_usuario, int nuevasMonedas) throws Exception{
 
         usuarioDAO.actualizarMonedas(id_usuario, nuevasMonedas);
+    }
+
+    public Usuario buscarUsuarioPorId(int id_usuario) throws Exception {
+
+        if (id_usuario <= 0) {
+            throw new IllegalArgumentException("ID inválido.");
+        }
+
+        return usuarioDAO.buscarUsuarioPorId(id_usuario);
+    }
+
+    public Usuario buscarUsuarioPorCorreo(String correo) throws Exception{
+
+        if (correo == null || correo.isBlank()) {
+            throw new IllegalArgumentException("Correo inválido.");
+        }
+
+        return usuarioDAO.buscarUsuarioPorCorreo(correo);
+    }
+
+    public List<Usuario> buscarUsuarioPorTipo(String tipo_usuario) throws Exception{
+
+        if(tipo_usuario == null || tipo_usuario.isBlank()){
+
+            throw new Exception("Tipo de usuario no existente.");
+        }
+
+        return usuarioDAO.buscarUsuariosPorTipo(tipo_usuario);
     }
 }
