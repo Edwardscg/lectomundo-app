@@ -9,7 +9,7 @@ public class UsuarioDAO {
 
     public void registrarUsuario(Usuario usuario) throws Exception {
 
-        String sql = "INSERT INTO usuario (nombre, correo, contrasena, tipo, monedas) VALUES (?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO usuario (nombre_usuario, correo, contraseña, tipo, monedas) VALUES (?, ?, ?, ?, ?);";
 
         Object monedas = (usuario instanceof Administrador) ? null:0;
 
@@ -25,7 +25,7 @@ public class UsuarioDAO {
 
         boolean es_admin = usuario instanceof Administrador;
 
-        String sql = es_admin ? "UPDATE usuario SET nombre = ?, correo = ?, contrasena = ?, tipo = ? WHERE id_usuario = ?" : "UPDATE usuario SET nombre = ?, correo = ?, contrasena = ?, tipo = ?, monedas = ? WHERE id_usuario = ?";
+        String sql = es_admin ? "UPDATE usuario SET nombre_usuario = ?, correo = ?, contraseña = ?, tipo = ? WHERE id_usuario = ?" : "UPDATE usuario SET nombre_usuario = ?, correo = ?, contraseña = ?, tipo = ?, monedas = ? WHERE id_usuario = ?";
 
         int fila_afectada = es_admin ? DBHelper.manejarEntidad(sql, usuario.getNombre_usuario(), usuario.getCorreo(), usuario.getContraseña(), usuario.getTipo_usuario(), usuario.getId_usuario()) : DBHelper.manejarEntidad(sql, usuario.getNombre_usuario(), usuario.getCorreo(), usuario.getContraseña(), usuario.getTipo_usuario(), ((Cliente) usuario).getMonedas(), usuario.getId_usuario());
 
@@ -44,8 +44,22 @@ public class UsuarioDAO {
 
     public void cambiarContraseña(int id_usuario, String contraseña_actual, String nueva_contrasena) throws Exception {
 
-        String sql = "UPDATE usuario SET contrasena = ? WHERE id_usuario = ? AND contrasena = ?";
+        String sql = "UPDATE usuario SET contraseña = ? WHERE id_usuario = ? AND contraseña = ?";
 
         DBHelper.manejarEntidad(sql, nueva_contrasena, id_usuario, contraseña_actual);
     }
+
+    public void eliminarUsuario(int id_usuario) throws Exception {
+
+        String sql = "DELETE FROM usuario WHERE id_usuario = ?;";
+
+        int filasAfectadas = DBHelper.manejarEntidad(sql, id_usuario);
+
+        if(filasAfectadas == 0){
+
+            throw new Exception("No se pudo eliminar al usuario");
+        }
+    }
+
+    
 }
