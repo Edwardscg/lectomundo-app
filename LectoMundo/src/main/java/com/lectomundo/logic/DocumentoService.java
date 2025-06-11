@@ -53,7 +53,7 @@ public class DocumentoService {
 
         if(tipo_documento == null || tipo_documento.isBlank()){
 
-            throw new IllegalArgumentException("El campo tipo de documento no puede estar vacio.")
+            throw new IllegalArgumentException("El campo tipo de documento no puede estar vacio.");
         }
 
         return documentoDAO.buscarDocumentosPorTipo(tipo_documento);
