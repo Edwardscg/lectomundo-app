@@ -1,8 +1,8 @@
 package com.lectomundo.logic;
 
-import jakarta.mail.Authenticator;
-import jakarta.mail.PasswordAuthentication;
-import jakarta.mail.Session;
+import jakarta.mail.*;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 
 import java.util.Properties;
 
@@ -27,5 +27,36 @@ public class CorreoService {
         });
     }
 
+    public boolean enviarCorreo(String destinatario, String asunto, String mensaje) throws MessagingException {
 
+        Message message = new MimeMessage(crearSession());
+        message.setFrom(new InternetAddress(remitente));
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
+        message.setSubject(asunto);
+        message.setText(mensaje);
+
+        Transport.send(message);
+        return true;
+    }
+
+    public static String generarCodigoDeVerificacion() {
+
+        return String.valueOf((int) (Math.random() * 900000) + 100000);
+    }
+
+    public static boolean enviarCodigoPorCorreo(String correo, String codigo) {
+
+        try {
+
+            String asunto = "Código de verificación";
+
+            CorreoService correoService = new CorreoService();
+            return correoService.enviarCorreo(correo, asunto, "Tu código es: " + codigo);
+
+        } catch (MessagingException e) {
+
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
