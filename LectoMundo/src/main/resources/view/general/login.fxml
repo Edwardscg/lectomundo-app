@@ -21,8 +21,8 @@
         <Label text="Contraseña:"/>
         <PasswordField fx:id="txtContraseña" promptText="Ingresa tu contraseña"/>
 
-        <Button text="Iniciar Sesión" onAction="#handleIniciarSesion" prefWidth="200"/>
-        <Button text="Registrarse" onAction="#handleAbrirRegistro" prefWidth="200"/>
+        <Button text="Iniciar Sesión" onAction="#IniciarSesion" prefWidth="200"/>
+        <Button text="Registrarse" onAction="#AbrirRegistro" prefWidth="200"/>
 
         <Hyperlink fx:id="hyperlinkrecuperarContraseña" text="¿Olvidaste tu contraseña?" onAction="#handleRecuperarContraseña"/>
 
