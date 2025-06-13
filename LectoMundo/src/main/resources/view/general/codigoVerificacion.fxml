@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.lectomundo.controller.general.CodigoVerificacionControlador"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <VBox alignment="CENTER" spacing="14.0"
+          AnchorPane.topAnchor="30.0"
+          AnchorPane.leftAnchor="40.0"
+          AnchorPane.rightAnchor="40.0">
+
+        <Label text="Verificación de Código" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+        <Label fx:id="lblCorreo" text="Código enviado a: " style="-fx-font-size: 12px;"/>
+
+        <TextField fx:id="txtCodigo" promptText="Ingrese el código recibido"/>
+
+        <Button text="Verificar" onAction="#VerificarCodigo" prefWidth="150"/>
+
+    </VBox>
+</AnchorPane>
