@@ -1,6 +1,7 @@
 package com.lectomundo.controller.general;
 
 import com.lectomundo.controller.UIHelper;
+import com.lectomundo.logic.CorreoService;
 import com.lectomundo.logic.UsuarioService;
 import com.lectomundo.model.Usuario;
 import javafx.fxml.FXML;
@@ -28,10 +29,15 @@ public class LoginControlador {
         UsuarioService usuarioService = new UsuarioService();
         Usuario usuario = usuarioService.loguearUsuario(correo, contraseña);
 
-        if(usuario!=null){
+        String codigo = CorreoService.generarCodigoDeVerificacion();
+        CorreoService.enviarCodigoPorCorreo(correo, codigo);
+
+        boolean verificado = UIHelper.abrirVentanaDeVerificacion(correo, codigo);
+
+        if(usuario!=null && verificado){
 
             Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
-            UIHelper.abrirVentana(ventana_actual, "", "Administrador");
+            UIHelper.abrirVentana(ventana_actual, "/view/admin/admin.fxml", "Administrador");
 
         }else {
 

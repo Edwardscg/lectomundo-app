@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.lectomundo.controller.admin.SubirDocumentoControlador"
+            prefHeight="800.0" prefWidth="600.0">
+
+    <VBox alignment="CENTER" spacing="12" AnchorPane.topAnchor="50" AnchorPane.leftAnchor="30" AnchorPane.rightAnchor="30">
+
+        <Label text="Subir Documento" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+        <TextField fx:id="txtTitulo" promptText="Título del documento" />
+        <TextField fx:id="txtAutor" promptText="Autor" />
+        <TextField fx:id="txtTipo" promptText="Tipo de Documento" />
+        <TextField fx:id="txtGenero" promptText="Género" />
+        <TextArea fx:id="areaDescripcion" promptText="Descripción" prefRowCount="4" wrapText="true"/>
+        <TextField fx:id="txtPrecio" promptText="Precio"/>
+        <DatePicker fx:id="pickerFechaPublicacion" promptText="Fecha de publicación"/>
+        <HBox spacing="10" alignment="CENTER">
+
+            <Button fx:id="btnSeleccionarPDF" text="Seleccionar PDF" onAction="#seleccionarPDF"/>
+            <Label fx:id="lblNombrePDF" text="Ningun archivo seleccionado"/>
+
+        </HBox>
+
+        <HBox spacing="10" alignment="CENTER">
+
+            <Button fx:id="btnSeleccionarPortada" text="Seleccionar portada" onAction="#seleccionarPortada"/>
+            <Label fx:id="lblNombrePortada" text="Ninguna imagen seleccionada" />
+
+        </HBox>
+
+        <Button fx:id="btnSubirDocumento" text="Subit Documento" onAction="#subirDocumento" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;"/>
+
+    </VBox>
+
+</AnchorPane>
