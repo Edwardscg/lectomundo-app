@@ -23,7 +23,7 @@ public class BackBlazeUploader {
     private String authToken;
     private String bucketId;
 
-    public BackblazeUploader() throws Exception{
+    public BackBlazeUploader() throws Exception{
 
         authorizeAccount();
         getBucketId();

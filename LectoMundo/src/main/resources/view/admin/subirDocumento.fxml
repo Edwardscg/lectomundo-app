@@ -36,7 +36,7 @@
 
         </HBox>
 
-        <Button fx:id="btnSubirDocumento" text="Subit Documento" onAction="#subitDocumento" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;"/>
+        <Button fx:id="btnSubirDocumento" text="Subit Documento" onAction="#subirDocumento" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;"/>
 
     </VBox>
 

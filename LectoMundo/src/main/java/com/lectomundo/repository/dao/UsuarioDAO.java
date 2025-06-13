@@ -108,7 +108,7 @@ public class UsuarioDAO {
 
         } else{
 
-            return new Administrador(rs.getInt("id_usuario"), rs.getString("nombre"), rs.getString("correo"), rs.getString("contraseña"), rs.getString("tipo"));
+            return new Administrador(rs.getInt("id_usuario"), rs.getString("nombre_usuario"), rs.getString("correo"), rs.getString("contraseña"), rs.getString("tipo"));
 
         }
     }
