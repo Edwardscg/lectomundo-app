@@ -14,7 +14,7 @@ public class UsuarioService {
 
         if (usuario instanceof Cliente) {
 
-            usuario.setTipo_usuario("Cliente");
+            usuario.setTipo_usuario("cliente");
         }
 
         if (usuario == null || usuario.getNombre_usuario().isBlank() || usuario.getCorreo().isBlank() || usuario.getContraseña().isBlank()) {

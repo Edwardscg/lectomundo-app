@@ -78,7 +78,7 @@ public class UIHelper {
             Stage stage = new Stage();
             stage.setTitle("Verificación de Código");
             stage.setScene(new Scene(root));
-            stage.show();
+            stage.showAndWait();
 
             return codigoVerificacionControlador.fueVerificado();
         }catch (Exception e){
