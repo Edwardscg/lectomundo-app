@@ -46,5 +46,10 @@ public class LoginControlador {
         UIHelper.abrirVentana(ventana_actual, "/view/general/registro.fxml", "Registro");
     }
 
+    @FXML
+    private void RecuperarContraseña(){
 
+        Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
+        UIHelper.abrirVentana(ventana_actual, "/view/general/recuperarContraseña.fxml", "Recuperación de Contraseña");
+    }
 }

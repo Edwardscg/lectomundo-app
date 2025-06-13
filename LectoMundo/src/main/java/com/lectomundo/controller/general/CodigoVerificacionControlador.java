@@ -19,7 +19,7 @@ public class CodigoVerificacionControlador {
     }
 
     @FXML
-    private void handleVerificarCodigo(){
+    private void VerificarCodigo(){
 
         String ingresado = txtCodigo.getText().trim();
 
