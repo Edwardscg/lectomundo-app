@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.lectomundo.controller.admin.AdminControlador"
+            prefHeight="650.0" prefWidth="1200.0">
+    <top>
+
+        <HBox spacing="20" style="-fx-background-color: #2c3e50; -fx-padding: 15;">
+
+            <Label fx:id="lbTitulo" text="Panel de Administrador" style="-fx-text-fill: white; -fx-font-size: 18;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="btnCerrarSesion" text="Cerrar Sesión" style="-fx-background-color: #e74c3c; -fx-text-fill: white;"/>
+
+        </HBox>
+
+    </top>
+
+    <left>
+
+        <VBox spacing="10" alignment="TOP_CENTER" style="-fx-background-color: #34495e; -fx-padding: 20;">
+
+            <Button fx:id="btnLibros" text="Libros" prefWidth="150" style="-fx-background-color: #ecf0f1;"/>
+            <Button fx:id="btnUsuarios" text="Usuarios" prefWidth="150" style="-fx-background-color: #ecf0f1;"/>
+            <Button fx:id="btnEstadisticas" text="Estadisticas" prefWidth="150" style="-fx-background-color: #ecf0f1;"/>
+
+        </VBox>
+
+    </left>
+
+    <center>
+
+        <StackPane fx:id="paneContenido" style="-fx-background-color: #f8f9fa;"/>
+
+    </center>
+
+</BorderPane>
