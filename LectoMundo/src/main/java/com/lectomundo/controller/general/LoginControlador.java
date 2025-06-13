@@ -45,4 +45,6 @@ public class LoginControlador {
         Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
         UIHelper.abrirVentana(ventana_actual, "/view/general/registro.fxml", "Registro");
     }
+
+
 }

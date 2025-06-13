@@ -1,5 +1,6 @@
 package com.lectomundo.controller;
 
+import com.lectomundo.controller.general.CodigoVerificacionControlador;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -61,6 +62,30 @@ public class UIHelper {
 
             e.printStackTrace();
             mostrarAlerta("Error", "No se pudo cambiar la escena a :" + titulo);
+        }
+    }
+
+    public static boolean abrirVentanaDeVerificacion(String correo, String codigo_generado){
+
+        try{
+
+            FXMLLoader loader = new FXMLLoader(UIHelper.class.getResource("/view/general/codigoVerificacion.fxml"));
+            Parent root = loader.load();
+
+            CodigoVerificacionControlador codigoVerificacionControlador = loader.getController();
+            codigoVerificacionControlador.inicializarDatos(correo, codigo_generado);
+
+            Stage stage = new Stage();
+            stage.setTitle("Verificación de Código");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            return codigoVerificacionControlador.fueVerificado();
+        }catch (Exception e){
+
+            e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "No se pudo abrir la ventana de verificación.");
+            return false;
         }
     }
 

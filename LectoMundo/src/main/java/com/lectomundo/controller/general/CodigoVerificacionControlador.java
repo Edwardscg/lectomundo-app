@@ -10,6 +10,7 @@ public class CodigoVerificacionControlador {
     @FXML private Label lblCorreo;
 
     private String codigo_correcto;
+    private boolean verificacionHecha = false;
 
     public void inicializarDatos(String correo, String codigo){
 
@@ -32,6 +33,7 @@ public class CodigoVerificacionControlador {
 
             try{
 
+                verificacionHecha = true;
                 UIHelper.mostrarAlerta("Acción exitosa", "Codigo verificado correctamente.");
                 Stage ventana_actual = (Stage) txtCodigo.getScene().getWindow();
                 UIHelper.cerrarVentana(ventana_actual);
@@ -43,5 +45,10 @@ public class CodigoVerificacionControlador {
 
             UIHelper.mostrarAlerta("Código incorrecto", "Ingrese el código que recibió en su correo.");
         }
+    }
+
+    public boolean fueVerificado(){
+
+        return verificacionHecha;
     }
 }
