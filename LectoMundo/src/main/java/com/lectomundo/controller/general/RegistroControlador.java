@@ -18,7 +18,7 @@ public class RegistroControlador {
     @FXML private TextField txtConfirmarContraseña;
 
     @FXML
-    private void handleRegistro() throws Exception{
+    private void Registrarse() throws Exception{
 
         String nombre = txtNombreUsuario.getText().trim();
         String correo = txtCorreo.getText().trim();
@@ -62,5 +62,12 @@ public class RegistroControlador {
 
             UIHelper.mostrarAlerta("Error", "No se completó la verificación.");
         }
+    }
+
+    @FXML
+    private void Cancelar(){
+
+        Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
+        UIHelper.abrirVentana(ventana_actual, "/view/general/login.fxml", "Login");
     }
 }
