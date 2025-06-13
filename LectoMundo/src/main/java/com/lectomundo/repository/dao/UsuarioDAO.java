@@ -79,7 +79,7 @@ public class UsuarioDAO {
 
     public Usuario loguearUsuario(String correo, String contrasena) throws Exception {
 
-        String sql = "SELECT * FROM usuario WHERE correo = ? AND contrasena = ?;";
+        String sql = "SELECT * FROM usuario WHERE correo = ? AND contraseña = ?;";
 
         return DBHelper.obtenerEntidad(sql, this::mapearFilaUsuario, correo, contrasena);
     }
