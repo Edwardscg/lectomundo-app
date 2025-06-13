@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.lectomundo.controller.general.LoginControlador"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <VBox alignment="CENTER" spacing="15.0" AnchorPane.topAnchor="50" AnchorPane.leftAnchor="30" AnchorPane.rightAnchor="30">
+
+        <Label text = "Biblioteca Virtual" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
+
+        <Label text="Correo electrónico:"/>
+        <TextField fx:id="txtCorreo" promptText="Ingresa tu correo" />
+
+        <Label text="Contraseña:"/>
+        <PasswordField fx:id="txtContraseña" promptText="Ingresa tu contraseña"/>
+
+        <Button text="Iniciar Sesión" onAction="#IniciarSesion" prefWidth="200"/>
+        <Button text="Registrarse" onAction="#AbrirRegistro" prefWidth="200"/>
+
+        <Hyperlink fx:id="hyperlinkrecuperarContraseña" text="¿Olvidaste tu contraseña?" onAction="#RecuperarContraseña"/>
+
+    </VBox>
+
+</AnchorPane>

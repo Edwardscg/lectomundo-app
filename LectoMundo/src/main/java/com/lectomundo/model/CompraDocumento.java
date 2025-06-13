@@ -2,14 +2,14 @@ package com.lectomundo.model;
 
 import java.time.LocalDateTime;
 
-public class CompraLibro {
+public class CompraDocumento {
     private int id_compra;
     private Cliente cliente;
     private Documento documento;
     private LocalDateTime fecha_compra;
     private int costo;
 
-    public CompraLibro(int id_compra, Cliente cliente, Documento documento, LocalDateTime fecha_compra, int costo) {
+    public CompraDocumento(int id_compra, Cliente cliente, Documento documento, LocalDateTime fecha_compra, int costo) {
         this.id_compra = id_compra;
         this.cliente = cliente;
         this.documento = documento;

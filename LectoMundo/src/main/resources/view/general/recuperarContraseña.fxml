@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.lectomundo.controller.general.RecuperarContraseñaControlador"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <VBox alignment="CENTER" spacing="10" layoutX="50" layoutY="30" prefWidth="300" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50">
+
+        <Label text="Recuperación de Contraseña" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+        <Label text="Ingresa tu correo: "/>
+        <TextField fx:id="txtCorreo" promptText="correo@ejemplo.com"/>
+
+        <Button text="Enviar código" onAction="#EnviarCodigo"/>
+
+        <VBox alignment="CENTER" fx:id="vboxSeccionCodigo" visible="false" spacing="10">
+
+            <TextField fx:id="txtCodigo" promptText="Código recibido"/>
+            <PasswordField fx:id="txtNuevaContraseña" promptText="Nueva contraseña"/>
+            <PasswordField fx:id="txtConfirmarContraseña" promptText="Confirmar nueva contraseña"/>
+            <Button text="Confirmar cambio" onAction="#ConfirmarCambio"/>
+
+        </VBox>
+
+        <Button text="Regresar a Login" onAction="#IrALogin"/>
+
+    </VBox>
+
+</AnchorPane>
