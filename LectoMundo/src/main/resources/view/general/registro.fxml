@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.lectomundo.controller.general.RegistroControlador"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <VBox alignment="CENTER" spacing="12.0"
+          AnchorPane.topAnchor="20.0"
+          AnchorPane.leftAnchor="30.0"
+          AnchorPane.rightAnchor="30">
+
+        <Label text="Registro" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+        <TextField fx:id="txtNombre" promptText="Nombre"/>
+        <TextField fx:id="txtCorreo" promptText="Correo electrónico"/>
+        <PasswordField fx:id="txtContraseña" promptText="Contraseña"/>
+        <PasswordField fx:id="txtConfirmarContraseña" promptText="Confirmar contraseña"/>
+
+        <Button text="Registrarse" onAction="#Registrarse" prefWidth="200"/>
+        <Button text="Cancelar" onAction="#Cancelar" prefWidth="200"/>
+
+    </VBox>
+</AnchorPane>
