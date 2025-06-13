@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.lectomundo.controller.admin.AdminDocumentosControlador"
+            prefHeight="600.0" prefWidth="1000.0">
+
+    <top>
+
+        <HBox spacing="10" style="-fx-background-color: #ecf0f1 -fx-padding: 15;">
+
+            <TextField fx:id="txtBuscar" promptText="Buscar por titulo, autor..." HBox.hgrow="ALWAYS"/>
+            <Button fx:id="btnBuscar" text="Buscar"/>
+            <Button fx:id="btnSubitDocumentp" text="Subir Documento" style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
+
+        </HBox>
+
+    </top>
+
+    <center>
+
+        <TableView fx:id="tblDocumentos" prefHeight="550" style="-fx-background-color: white;">
+
+            <columns>
+
+                <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+                <TableColumn fx:id="colTitulo" text="Título" prefWidth="150"/>
+                <TableColumn fx:id="colAutor" text="Autor" prefWidth="100"/>
+                <TableColumn fx:id="colTipo" text="Tipo" prefWidth="100"/>
+                <TableColumn fx:id="colFecha" text="Fecha publicación" prefWidth="110"/>
+                <TableColumn fx:id="colGenero" text="Género" prefWidth="100"/>
+                <TableColumn fx:id="colPrecio" text="Precio" prefWidth="80"/>
+                <TableColumn fx:id="colPuntuacion" text="Puntuación" prefWidth="80"/>
+                <TableColumn fx:id="colValoraciones" text="Valoraciones" prefWidth="80"/>
+
+            </columns>
+
+        </TableView>
+
+    </center>
+
+</BorderPane>
