@@ -18,7 +18,7 @@
 
         <Label text="Registro" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
 
-        <TextField fx:id="txtNombre" promptText="Nombre"/>
+        <TextField fx:id="txtNombreUsuario" promptText="Nombre de Usuario"/>
         <TextField fx:id="txtCorreo" promptText="Correo electrónico"/>
         <PasswordField fx:id="txtContraseña" promptText="Contraseña"/>
         <PasswordField fx:id="txtConfirmarContraseña" promptText="Confirmar contraseña"/>

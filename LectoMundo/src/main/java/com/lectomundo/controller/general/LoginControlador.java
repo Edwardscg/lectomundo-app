@@ -31,11 +31,18 @@ public class LoginControlador {
         if(usuario!=null){
 
             Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
-            UIHelper.abrirVentana(ventana_actual, "/view/admin/PanelAdministrador.fxml", "Administrador");
+            UIHelper.abrirVentana(ventana_actual, "", "Administrador");
 
         }else {
 
             UIHelper.mostrarAlerta("Error", "Correo o contraseña incorrectos.");
         }
+    }
+
+    @FXML
+    private void AbrirRegistro(){
+
+        Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
+        UIHelper.abrirVentana(ventana_actual, "/view/general/registro.fxml", "Registro");
     }
 }
