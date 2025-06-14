@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.lectomundo.controller.admin.EditarDocumentoControlador"
+            prefHeight="800.0" prefWidth="600.0">
+
+    <VBox alignment="CENTER" spacing="12" AnchorPane.topAnchor="50" AnchorPane.leftAnchor="30" AnchorPane.rightAnchor="30" >
+
+        <Label text="Editar Documento" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+        <TextField fx:id="txtTitulo" promptText="Título"/>
+        <TextField fx:id="txtAutor" promptText="Autor"/>
+        <TextField fx:id="txtTipo" promptText="Tipo de Documento"/>
+        <DatePicker fx:id="pickerFechaPublicacion"/>
+        <TextField fx:id="txtGenero" promptText="Género"/>
+        <TextArea fx:id="txtDescripcion" promptText="Descripción" prefRowCount="4"/>
+        <TextField fx:id="txtPrecio" promptText="Precio"/>
+        <TextField fx:id="txtPdf" promptText="PDF URL" editable="false"/>
+        <TextField fx:id="txtPortada" promptText="Portada URL" editable="false"/>
+        <HBox spacing="10">
+            <Button fx:id="btnSeleccionarPdf" text="Cambiar PDF" visible="false"/>
+            <Button fx:id="btnSeleccionarPortada" text="Cambiar Portada" visible="false"/>
+        </HBox>
+
+        <HBox spacing="10">
+            <Button fx:id="btnGuardar" text="Guardar Cambios" onAction="#guardarCambios" style="-fx-background-color: #27ae60; -fx-text-fill: white;"/>
+            <Button fx:id="btnCancelar" text="Cancelar" onAction="#cancelar"/>
+        </HBox>
+
+    </VBox>
+
+</AnchorPane>
