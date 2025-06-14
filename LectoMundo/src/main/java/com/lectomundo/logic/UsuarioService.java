@@ -3,6 +3,7 @@ package com.lectomundo.logic;
 import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Usuario;
 import com.lectomundo.repository.dao.UsuarioDAO;
+import javafx.collections.ObservableList;
 
 import java.util.List;
 
@@ -119,5 +120,10 @@ public class UsuarioService {
         }
 
         usuarioDAO.eliminarUsuario(id_usuario);
+    }
+
+    public ObservableList<Usuario> verUsuarios() throws Exception{
+
+        return usuarioDAO.verUsuarios();
     }
 }
