@@ -18,10 +18,10 @@
         <TextField fx:id="txtTitulo" promptText="Título del documento" />
         <TextField fx:id="txtAutor" promptText="Autor" />
         <TextField fx:id="txtTipo" promptText="Tipo de Documento" />
+        <DatePicker fx:id="pickerFechaPublicacion" promptText="Fecha de publicación"/>
         <TextField fx:id="txtGenero" promptText="Género" />
         <TextArea fx:id="areaDescripcion" promptText="Descripción" prefRowCount="4" wrapText="true"/>
         <TextField fx:id="txtPrecio" promptText="Precio"/>
-        <DatePicker fx:id="pickerFechaPublicacion" promptText="Fecha de publicación"/>
         <HBox spacing="10" alignment="CENTER">
 
             <Button fx:id="btnSeleccionarPDF" text="Seleccionar PDF" onAction="#seleccionarPDF"/>
@@ -36,7 +36,7 @@
 
         </HBox>
 
-        <Button fx:id="btnSubirDocumento" text="Subit Documento" onAction="#subirDocumento" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;"/>
+        <Button fx:id="btnSubirDocumento" text="Subir Documento" onAction="#subirDocumento" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;"/>
 
     </VBox>
 

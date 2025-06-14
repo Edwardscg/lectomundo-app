@@ -17,7 +17,9 @@
 
             <TextField fx:id="txtBuscar" promptText="Buscar por titulo, autor..." HBox.hgrow="ALWAYS"/>
             <Button fx:id="btnBuscar" text="Buscar"/>
-            <Button fx:id="btnSubitDocumentp" text="Subir Documento" style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
+            <Button fx:id="btnEditarDocumento" text="Editar" onAction="#editarDocumentoSeleccionado" style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
+            <Button fx:id="btnEliminarDocumento" text="Editar" onAction="#eliminarDocumentoSeleccionado" style="-fx-background-color: #ff0000; -fx-text-fill: white;"/>
+            <Button fx:id="btnSubirDocumentp" text="Subir Documento" onAction="#irASubirDocumento" style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
 
         </HBox>
 

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.lectomundo.controller.general.ConfirmarAccionControlador"
+            prefHeight="180.0" prefWidth="400.0">
+
+    <VBox spacing="20" alignment="CENTER" AnchorPane.topAnchor="20" AnchorPane.bottomAnchor="20"
+          AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+
+        <Label fx:id="lblMensaje" text="¿Estás seguro?" wrapText="true" style="-fx-font-size: 16px;"/>
+
+        <HBox spacing="20" alignment="CENTER">
+            <Button fx:id="btnAceptar" text="Sí" minWidth="80" onAction="#accionAceptar"/>
+            <Button fx:id="btnCancelar" text="No" minWidth="80" onAction="#accionCancelar"/>
+        </HBox>
+    </VBox>
+
+</AnchorPane>

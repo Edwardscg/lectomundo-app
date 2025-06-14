@@ -3,6 +3,7 @@ package com.lectomundo.repository.dao;
 import com.lectomundo.model.Documento;
 import com.lectomundo.repository.helper.DBConexion;
 import com.lectomundo.repository.helper.DBHelper;
+import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.util.List;
@@ -23,9 +24,9 @@ public class DocumentoDAO {
 
     public void editarDocumento(Documento documento) throws Exception {
 
-        String sql = "UPDATE documento SET titulo = ?, autor = ?, tipo_documento = ?, fecha_publicacion = ?, genero = ?, descripcion = ?, pdf_url = ?, portada_url = ?, precio = ?, puntuacion_promedio = ?, cantidad_valoraciones = ? WHERE id_documento = ?;";
+        String sql = "UPDATE documento SET titulo = ?, autor = ?, tipo_documento = ?, fecha_publicacion = ?, genero = ?, descripcion = ?, precio = ? WHERE id_documento = ?;";
 
-        int fila_afectada= DBHelper.manejarEntidad(sql, documento.getTitulo(), documento.getAutor(), documento.getTipo_documento(), Date.valueOf(documento.getFecha_publicacion()), documento.getGenero(), documento.getDescripcion(), documento.getPdf_url(), documento.getPortada_url(), documento.getPrecio(), documento.getPuntuacion_promedio(), documento.getCantidad_valoraciones(), documento.getId_documento());
+        int fila_afectada= DBHelper.manejarEntidad(sql, documento.getTitulo(), documento.getAutor(), documento.getTipo_documento(), Date.valueOf(documento.getFecha_publicacion()), documento.getGenero(), documento.getDescripcion(), documento.getPrecio(), documento.getId_documento());
 
         if(fila_afectada==0){
 
@@ -94,8 +95,16 @@ public class DocumentoDAO {
         DBHelper.manejarEntidad(sql, promedio, cantidad_valoraciones, id_documento);
     }
 
+    public ObservableList<Documento> verDocumentos() throws Exception{
+
+        String sql = "SELECT * FROM documento";
+
+        return DBHelper.llenarTabla(sql, rs -> new Documento(rs.getInt("id_documento"), rs.getString("titulo"), rs.getString("autor"), rs.getString("tipo_documento"), rs.getDate("fecha_publicacion").toLocalDate(), rs.getString("genero"), rs.getString("descripcion"), rs.getInt("precio"), rs.getFloat("puntuacion_promedio"), rs.getInt("cantidad_valoraciones")));
+
+    }
+
     public Documento mapearDocumento(ResultSet rs) throws Exception{
 
-        return new Documento(rs.getInt("id_libro"), rs.getString("titulo"), rs.getString("autor"), rs.getString("tipo_documento"), rs.getDate("fecha_publicacion").toLocalDate(), rs.getString("genero"), rs.getString("descripcion"), rs.getString("pdf_url"), rs.getString("portada_url"), rs.getInt("precio"), rs.getFloat("puntuacion_promedio"), rs.getInt("cantidad_valoraciones"));
+        return new Documento(rs.getInt("id_documento"), rs.getString("titulo"), rs.getString("autor"), rs.getString("tipo_documento"), rs.getDate("fecha_publicacion").toLocalDate(), rs.getString("genero"), rs.getString("descripcion"), rs.getString("pdf_url"), rs.getString("portada_url"), rs.getInt("precio"), rs.getFloat("puntuacion_promedio"), rs.getInt("cantidad_valoraciones"));
     }
 }
