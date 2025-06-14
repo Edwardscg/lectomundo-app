@@ -1,13 +1,16 @@
 package com.lectomundo.controller;
 
 import com.lectomundo.controller.general.CodigoVerificacionControlador;
+import com.lectomundo.controller.general.ConfirmarAccionControlador;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.function.Consumer;
 
 public class UIHelper {
 
@@ -84,7 +87,7 @@ public class UIHelper {
         }catch (Exception e){
 
             e.printStackTrace();
-            UIHelper.mostrarAlerta("Error", "No se pudo abrir la ventana de verificación.");
+            mostrarAlerta("Error", "No se pudo abrir la ventana de verificación.");
             return false;
         }
     }
@@ -94,6 +97,32 @@ public class UIHelper {
         if(stage!=null){
 
             stage.close();
+        }
+    }
+
+    public static boolean abrirVentanaConfirmacion(String mensaje){
+
+        try{
+
+            FXMLLoader loader = new FXMLLoader(UIHelper.class.getResource("/view/general/confirmarAccion.fxml"));
+            Parent root = loader.load();
+
+            ConfirmarAccionControlador confirmarAccionControlador = loader.getController();
+            confirmarAccionControlador.inicializar(mensaje);
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Confirmación");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+            return ConfirmarAccionControlador.confirmar_accion;
+
+        }catch (IOException e){
+
+            e.printStackTrace();
+            mostrarAlerta("Error", "No se pudo abrir la ventana de confirmación..");
+            return false;
         }
     }
 }

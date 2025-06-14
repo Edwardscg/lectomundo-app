@@ -111,5 +111,26 @@ public class AdminDocumentosControlador {
         }
     }
 
+    @FXML
+    private void eliminarDocumentoSeleccionado() throws Exception {
+
+        Documento documentoSeleccionado = tblDocumentos.getSelectionModel().getSelectedItem();
+
+        if(documentoSeleccionado == null){
+
+            UIHelper.mostrarAlerta("Advertencia", "Selecciona un documento para eliminar");
+            return;
+        }
+
+        boolean corfirmar_accion = UIHelper.abrirVentanaConfirmacion("¿Estás seguro de eliminar este documento?");
+
+        if(corfirmar_accion){
+
+            documentoService.eliminarDocumento(documentoSeleccionado.getId_documento());
+            UIHelper.mostrarAlerta("Éxito", "Documento eliminado.");
+            cargarDocumentos();
+        }
+    }
+
 
 }
