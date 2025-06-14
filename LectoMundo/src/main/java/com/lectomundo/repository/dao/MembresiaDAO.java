@@ -1,10 +1,8 @@
 package com.lectomundo.repository.dao;
 
-import com.lectomundo.model.Cliente;
-import com.lectomundo.model.Estado;
-import com.lectomundo.model.Membresia;
-import com.lectomundo.model.Usuario;
+import com.lectomundo.model.*;
 import com.lectomundo.repository.helper.DBHelper;
+import javafx.collections.ObservableList;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -63,11 +61,11 @@ public class MembresiaDAO {
         return DBHelper.obtenerListaEntidad(sql, this::mapearMembresia, id_usuario);
     }
 
-    public List<Membresia> verMembresias() throws Exception {
+    public ObservableList<Membresia> verMembresias() throws Exception {
 
         String sql = "SELECT * FROM membresia ORDER BY fecha_inicio DESC";
 
-        return DBHelper.obtenerListaEntidad(sql, this::mapearMembresia);
+        return DBHelper.llenarTabla(sql, rs -> new Membresia(rs.getInt("id_membresia"), (Cliente) usuarioDAO.buscarUsuarioPorId(rs.getInt("id_usuario")), rs.getDate("fecha_inicio").toLocalDate(), rs.getDate("fecha_fin").toLocalDate(), rs.getInt("costo"), Estado.valueOf(rs.getString("estado"))));
     }
 
     private Membresia mapearMembresia(ResultSet rs) throws Exception{
