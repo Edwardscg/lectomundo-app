@@ -24,7 +24,7 @@
 
     <center>
 
-        <TableView fx:id="tblUsuarios" prefHeight="550" style="-fx-background-color: #212f3c; -fx-padding: 15;">
+        <TableView fx:id="tblMembresias" prefHeight="550" style="-fx-background-color: #212f3c; -fx-padding: 15;">
 
             <columns>
 

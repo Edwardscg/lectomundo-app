@@ -35,7 +35,7 @@ public class MembresiaDAO {
 
         String sql = "UPDATE membresia SET estado = ?, fecha_fin = ? WHERE id_membresia = ?";
 
-        DBHelper.manejarEntidad(sql, Estado.finazlizado.toString(), Date.valueOf(LocalDate.now()), id_membresia);
+        DBHelper.manejarEntidad(sql, Estado.finalizado.toString(), Date.valueOf(LocalDate.now()), id_membresia);
     }
 
     public Membresia buscarMembresiaPorId(int id_membresia) throws Exception {
@@ -63,9 +63,13 @@ public class MembresiaDAO {
 
     public ObservableList<Membresia> verMembresias() throws Exception {
 
-        String sql = "SELECT * FROM membresia WHERE estado = 'activa' ORDER BY fecha_inicio DESC";
+        String sql = "SELECT m.*, u.tipo FROM membresia m  JOIN usuario u ON m.id_usuario = u.id_usuario WHERE m.estado = 'activo' AND u.tipo = 'cliente'  ORDER BY m.fecha_inicio DESC";
 
-        return DBHelper.llenarTabla(sql, rs -> new Membresia(rs.getInt("id_membresia"), (Cliente) usuarioDAO.buscarUsuarioPorId(rs.getInt("id_usuario")), rs.getDate("fecha_inicio").toLocalDate(), rs.getDate("fecha_fin").toLocalDate(), rs.getInt("costo"), Estado.valueOf(rs.getString("estado"))));
+        return DBHelper.llenarTabla(sql, rs -> {
+            Cliente cliente = (Cliente) usuarioDAO.buscarUsuarioPorId(rs.getInt("id_usuario"));
+
+            return new Membresia(rs.getInt("id_membresia"), cliente, rs.getDate("fecha_inicio").toLocalDate(), rs.getDate("fecha_fin").toLocalDate(), rs.getInt("costo"), Estado.valueOf(rs.getString("estado")));
+        });
     }
 
     private Membresia mapearMembresia(ResultSet rs) throws Exception{

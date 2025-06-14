@@ -25,7 +25,7 @@ public class MembresiaService {
         membresiaDAO.actualizarMembresia(membresia);
     }
 
-    private void finalizarMembresia(int id_membresia) throws Exception{
+    public void finalizarMembresia(int id_membresia) throws Exception{
 
         if(id_membresia <=0){
 
@@ -35,7 +35,7 @@ public class MembresiaService {
         membresiaDAO.finalizarMembresia(id_membresia);
     }
 
-    private ObservableList<Membresia> verMembresias() throws Exception{
+    public ObservableList<Membresia> verMembresias() throws Exception{
 
         return membresiaDAO.verMembresias();
     }
@@ -59,8 +59,8 @@ public class MembresiaService {
         }
 
         Estado estado = membresia.getEstado_membresia();
-        if ((estado != Estado.activo && estado != Estado.finazlizado)) {
-            throw new IllegalArgumentException("Estado inválido. Debe ser 'activa' o 'finalizada'.");
+        if ((estado != Estado.activo && estado != Estado.finalizado)) {
+            throw new IllegalArgumentException("Estado inválido. Debe ser 'activo' o 'finalizado'.");
         }
     }
 }
