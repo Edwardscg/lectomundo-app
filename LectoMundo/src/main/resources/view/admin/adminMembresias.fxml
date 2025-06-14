@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.lectomundo.controller.admin.AdminMembresiaControlador"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <top>
+
+        <HBox spacing="10" style="-fx-background-color: #ecf0f1; -fx-padding: 25;">
+
+            <TextField fx:id="txtBuscar" promptText="Buscar por nombre, tipo..." HBox.hgrow="ALWAYS"/>
+            <Button fx:id="btnBuscar" text="Buscar"/>
+
+        </HBox>
+
+    </top>
+
+    <center>
+
+        <TableView fx:id="tblUsuarios" prefHeight="550" style="-fx-background-color: #212f3c; -fx-padding: 15;">
+
+            <columns>
+
+                <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+                <TableColumn fx:id="colIdCliente" text="Id de Usuario" prefWidth="130"/>
+                <TableColumn fx:id="colFechaInicio" text="Fecha de Inicio" prefWidth="140"/>
+                <TableColumn fx:id="colFechaFin" text="Fecha de Fin" prefWidth="140"/>
+                <TableColumn fx:id="colCosto" text="Costo" prefWidth="120"/>
+
+            </columns>
+
+        </TableView>
+
+    </center>
+
+</BorderPane>

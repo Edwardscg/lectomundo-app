@@ -63,7 +63,7 @@ public class MembresiaDAO {
 
     public ObservableList<Membresia> verMembresias() throws Exception {
 
-        String sql = "SELECT * FROM membresia ORDER BY fecha_inicio DESC";
+        String sql = "SELECT * FROM membresia WHERE estado = 'activa' ORDER BY fecha_inicio DESC";
 
         return DBHelper.llenarTabla(sql, rs -> new Membresia(rs.getInt("id_membresia"), (Cliente) usuarioDAO.buscarUsuarioPorId(rs.getInt("id_usuario")), rs.getDate("fecha_inicio").toLocalDate(), rs.getDate("fecha_fin").toLocalDate(), rs.getInt("costo"), Estado.valueOf(rs.getString("estado"))));
     }
