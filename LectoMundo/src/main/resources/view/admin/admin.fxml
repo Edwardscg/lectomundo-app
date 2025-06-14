@@ -26,9 +26,10 @@
 
         <VBox spacing="10" alignment="TOP_CENTER" style="-fx-background-color: #34495e; -fx-padding: 20;">
 
-            <Button fx:id="btnDocumentos" text="Libros" onAction="#cargarDocumentos" prefWidth="150" style="-fx-background-color: #ecf0f1;"/>
-            <Button fx:id="btnUsuarios" text="Usuarios" prefWidth="150" style="-fx-background-color: #ecf0f1;"/>
+            <Button fx:id="btnDocumentos" text="Documentos" onAction="#cargarDocumentos" prefWidth="150" style="-fx-background-color: #ecf0f1;"/>
+            <Button fx:id="btnUsuarios" text="Usuarios" onAction="#cargarUsuarios" prefWidth="150" style="-fx-background-color: #ecf0f1;"/>
             <Button fx:id="btnEstadisticas" text="Estadisticas" prefWidth="150" style="-fx-background-color: #ecf0f1;"/>
+            <Button fx:id="btnMembresias" text="Membresias" onAction="#cargarMembresias" prefWidth="150" style="-fx-background-color: #ecf0f1;"/>
 
         </VBox>
 

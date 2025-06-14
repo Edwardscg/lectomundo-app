@@ -2,6 +2,7 @@ package com.lectomundo.repository.dao;
 
 import com.lectomundo.model.Administrador;
 import com.lectomundo.model.Cliente;
+import com.lectomundo.model.Documento;
 import com.lectomundo.model.Usuario;
 import com.lectomundo.repository.helper.DBHelper;
 import javafx.collections.ObservableList;
@@ -96,6 +97,25 @@ public class UsuarioDAO {
         String sql = "select * from usuario";
 
         return DBHelper.obtenerListaEntidad(sql, this::mapearFilaUsuario);
+    }
+
+    public ObservableList<Usuario> verUsuarios() throws Exception{
+
+        String sql = "SELECT * FROM usuario";
+
+        return DBHelper.llenarTabla(sql, rs ->  {
+            String tipo_usuario = rs.getString("tipo");
+
+            if(tipo_usuario.equals("cliente")){
+
+                int monedas = rs.getInt("monedas");
+
+                return new Cliente(rs.getInt("id_usuario"), rs.getString("nombre_usuario"), rs.getString("correo"), rs.getString("contraseña"), tipo_usuario, monedas);
+            }else {
+
+                return new Administrador(rs.getInt("id_usuario"), rs.getString("nombre_usuario"), rs.getString("correo"), rs.getString("contraseña"), tipo_usuario);
+            }
+        });
     }
 
     private Usuario mapearFilaUsuario(ResultSet rs) throws Exception{
