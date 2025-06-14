@@ -31,6 +31,19 @@ public class Documento {
         this.cantidad_valoraciones = cantidad_valoraciones;
     }
 
+    public Documento(int id_documento, String titulo, String autor, String tipo_documento, LocalDate fecha_publicacion, String genero, String descripcion, int precio, float puntuacion_promedio, int cantidad_valoraciones) {
+        this.id_documento = id_documento;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.tipo_documento = tipo_documento;
+        this.fecha_publicacion = fecha_publicacion;
+        this.genero = genero;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.puntuacion_promedio = puntuacion_promedio;
+        this.cantidad_valoraciones = cantidad_valoraciones;
+    }
+
     public int getId_documento() {
         return id_documento;
     }

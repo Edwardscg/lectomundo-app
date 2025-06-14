@@ -2,6 +2,7 @@ package com.lectomundo.logic;
 
 import com.lectomundo.model.Documento;
 import com.lectomundo.repository.dao.DocumentoDAO;
+import javafx.collections.ObservableList;
 
 import java.util.List;
 
@@ -64,6 +65,11 @@ public class DocumentoService {
             throw new IllegalArgumentException("El campo género no puede estar vacío.");
         }
         return documentoDAO.buscarDocumentosPorGenero(genero);
+    }
+
+    public ObservableList<Documento> verDocumentos()throws Exception{
+
+        return documentoDAO.verDocumentos();
     }
 
     private void validarDocumento(Documento documento, boolean requiere_id) throws Exception {
