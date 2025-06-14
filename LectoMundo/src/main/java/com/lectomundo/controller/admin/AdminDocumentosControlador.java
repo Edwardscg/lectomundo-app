@@ -1,5 +1,6 @@
 package com.lectomundo.controller.admin;
 
+import com.lectomundo.controller.UIHelper;
 import com.lectomundo.model.Documento;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,6 +34,13 @@ public class AdminDocumentosControlador {
     @FXML private TableColumn<Documento, Integer> colValoraciones;
 
     private ObservableList<Documento> listaDocumentos;
+
+    @FXML
+    private void irASubirDocumento(){
+
+        Stage ventana_actual = (Stage) txtBuscar.getScene().getWindow();
+        UIHelper.abrirVentana(ventana_actual, "/view/admin/subirDocumento.fxml", "Subir Documento");
+    }
 
 
 }

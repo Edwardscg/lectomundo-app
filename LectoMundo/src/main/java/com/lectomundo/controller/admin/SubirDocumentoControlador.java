@@ -62,11 +62,11 @@ public class SubirDocumentoControlador {
     }
 
     @FXML
-    public void subirLibro(){
+    public void subirDocumento(){
 
-        if(txtTitulo.getText().isEmpty() || txtAutor.getText().isEmpty() || txtGenero.getText().isEmpty() || areaDescripcion.getText().isEmpty()|| txtPrecio.getText().isEmpty() || pickerFechaPublicacion.getValue() == null || archivoPDF == null || imagenPortada == null){
+        if(txtTitulo.getText().isEmpty() || txtAutor.getText().isEmpty() || txtTipo.getText().isEmpty() || txtGenero.getText().isEmpty() || areaDescripcion.getText().isEmpty()|| txtPrecio.getText().isEmpty() || pickerFechaPublicacion.getValue() == null || archivoPDF == null || imagenPortada == null){
 
-            UIHelper.mostrarAlerta("Compos Incompletos", "Complete todos los campos y selecciona los archivos.");
+            UIHelper.mostrarAlerta("Campos Incompletos", "Complete todos los campos y selecciona los archivos.");
             return;
         }
 
@@ -89,7 +89,7 @@ public class SubirDocumentoControlador {
 
         } catch (Exception e) {
             e.printStackTrace();
-            UIHelper.mostrarAlerta("Error", "No se pudo subir el libro: "+ e.getMessage());
+            UIHelper.mostrarAlerta("Error", "No se pudo subir el documento: "+ e.getMessage());
         }
     }
 
