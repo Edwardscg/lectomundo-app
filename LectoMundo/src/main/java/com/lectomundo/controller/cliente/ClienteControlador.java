@@ -12,6 +12,7 @@ public class ClienteControlador {
 
     @FXML private StackPane panelContenedor;
 
+    public static Cliente cliente;
     private boolean menu_visible = true;
 
     @FXML

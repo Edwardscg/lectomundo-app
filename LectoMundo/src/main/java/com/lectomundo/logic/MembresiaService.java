@@ -35,7 +35,10 @@ public class MembresiaService {
         membresiaDAO.finalizarMembresia(id_membresia);
     }
 
+    public boolean tieneMembresiaActiva(int id_usuario) throws Exception{
 
+        return membresiaDAO.tieneMembresiaActiva(id_usuario);
+    }
 
     public ObservableList<Membresia> verMembresias() throws Exception{
 

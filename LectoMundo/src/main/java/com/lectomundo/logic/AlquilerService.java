@@ -50,6 +50,11 @@ public class AlquilerService {
         alquilerDAO.finalizarAlquiler(alquiler_activo.getId_alquiler());
     }
 
+    public boolean estaAlquilado(int id_usuario, int id_documento) throws Exception{
+
+        return alquilerDAO.estaAlquilado(id_usuario, id_documento);
+    }
+
     public List<Documento> obtenerAlquileresActivosPorUsuario(Cliente cliente) throws Exception{
 
         return alquilerDAO.verDocumentosAlquiladosPorUsuario(cliente.getId_usuario());

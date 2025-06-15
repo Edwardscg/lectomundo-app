@@ -69,6 +69,7 @@ public class AlquilerDAO {
         return DBHelper.obtenerEntidad(sql, this::mapearAlquiler, id_usuario, id_documento);
     }
 
+    //POSIBLE BORRADO
     public List<Alquiler> verAlquileresActivosPorUsuario(int id_usuario) throws Exception {
 
         String sql = "SELECT * FROM alquiler WHERE id_usuario = ? AND estado = 'activo'";
