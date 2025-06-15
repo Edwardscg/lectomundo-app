@@ -49,7 +49,7 @@
                     <Insets top="20" left="10" right="10" bottom="20"/>
                 </padding>
 
-                <Button fx:id="btnToggleMenu" text="☰" prefWidth="40">
+                <Button fx:id="btnAlternar" text="☰" prefWidth="40">
 
                     <tooltip>
 
@@ -59,7 +59,7 @@
 
                 </Button>
 
-                <Button fx:id="btnExplorar" text="📚 Explorar" prefWidth="200"/>
+                <Button fx:id="btnExplorar"  text="📚 Explorar" prefWidth="200"/>
                 <Button fx:id="btnAlquilados" text="📖 Documentos Alquilados" prefWidth="200"/>
                 <Button fx:id="btnComprados" text="🛒 Documentos Comprados" prefWidth="200"/>
                 <Button fx:id="btnFavoritos" text="⭐ Favoritos" prefWidth="200"/>
