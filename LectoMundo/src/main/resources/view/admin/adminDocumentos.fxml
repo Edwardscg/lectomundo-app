@@ -32,8 +32,8 @@
             <columns>
 
                 <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
-                <TableColumn fx:id="colTitulo" text="Título" prefWidth="150"/>
-                <TableColumn fx:id="colAutor" text="Autor" prefWidth="100"/>
+                <TableColumn fx:id="colTitulo" text="Título" prefWidth="180"/>
+                <TableColumn fx:id="colAutor" text="Autor" prefWidth="180"/>
                 <TableColumn fx:id="colTipo" text="Tipo" prefWidth="100"/>
                 <TableColumn fx:id="colFecha" text="Fecha publicación" prefWidth="110"/>
                 <TableColumn fx:id="colGenero" text="Género" prefWidth="100"/>

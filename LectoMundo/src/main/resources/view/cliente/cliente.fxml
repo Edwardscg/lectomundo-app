@@ -59,7 +59,7 @@
 
                 </Button>
 
-                <Button fx:id="btnExplorar"  text="📚 Explorar" prefWidth="200"/>
+                <Button fx:id="btnExplorar" onAction="#explorarDocumentos" text="📚 Explorar" prefWidth="200"/>
                 <Button fx:id="btnAlquilados" text="📖 Documentos Alquilados" prefWidth="200"/>
                 <Button fx:id="btnComprados" text="🛒 Documentos Comprados" prefWidth="200"/>
                 <Button fx:id="btnFavoritos" text="⭐ Favoritos" prefWidth="200"/>

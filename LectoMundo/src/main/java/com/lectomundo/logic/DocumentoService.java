@@ -67,6 +67,11 @@ public class DocumentoService {
         return documentoDAO.buscarDocumentosPorGenero(genero);
     }
 
+    public List<Documento> traerDocumentos()throws Exception{
+
+        return documentoDAO.obtenerDocumentos();
+    }
+
     public ObservableList<Documento> verDocumentos()throws Exception{
 
         return documentoDAO.verDocumentos();
