@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.lectomundo.controller.cliente.DetalleDocumentoControlador"
+            prefHeight="650.0" prefWidth="500.0">
+
+    <VBox alignment="CENTER" spacing="20">
+
+        <padding>
+            <Insets top="20" left="20" right="20" bottom="20"/>
+        </padding>
+
+        <ImageView fx:id="imgPortada" fitWidth="200" fitHeight="250" preserveRatio="true"/>
+
+        <Label fx:id="lblTitulo" style="-fx-font-size: 18px; -fx-font-weight: bold;" wrapText="true"/>
+        <Label fx:id="lblAutor" style="-fx-font-size: 14px;"/>
+        <Label fx:id="lblGenero" style="-fx-font-size: 14px;"/>
+        <Label fx:id="lblDescripcion" style="-fx-font-size: 14px;"/>
+
+        <HBox spacing="30">
+
+            <Button fx:id="btnAlquilar" text="Alquilar"/>
+            <Button fx:id="btnComprar" text="Comprar" />
+            <Button fx:id="btnLeer" text="Leer" visible="false"/>
+            <Button fx:id="btnDevolver" text="Devolver" visible="false"/>
+
+        </HBox>
+
+    </VBox>
+
+</AnchorPane>

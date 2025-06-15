@@ -1,5 +1,6 @@
 package com.lectomundo.controller.cliente;
 
+import com.lectomundo.model.Cliente;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -16,7 +17,7 @@ public class ClienteControlador {
     @FXML
     private void initialize(){
 
-
+        explorarDocumentos();
     }
 
     @FXML
