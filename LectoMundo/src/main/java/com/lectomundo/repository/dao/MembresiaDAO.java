@@ -49,9 +49,7 @@ public class MembresiaDAO {
 
         String sql = "SELECT COUNT(*) FROM membresia WHERE id_usuario = ? AND estado = ?";
 
-        Integer tiene_membresia = DBHelper.obtenerEntidad(sql, rs -> 1, id_usuario, Estado.activo.toString());
-
-        return tiene_membresia !=null;
+        return DBHelper.obtenerEntidad(sql, rs -> true, id_usuario, Estado.activo.toString()) !=null;
     }
 
     public List<Membresia> verMembresiasPorUsuario(int id_usuario) throws Exception {

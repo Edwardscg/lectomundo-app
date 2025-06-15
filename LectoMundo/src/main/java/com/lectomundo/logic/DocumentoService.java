@@ -8,7 +8,7 @@ import java.util.List;
 
 public class DocumentoService {
 
-    private final DocumentoDAO documentoDAO = new DocumentoDAO();
+    private DocumentoDAO documentoDAO = new DocumentoDAO();
 
     public void registrarDocumento(Documento documento) throws Exception {
 

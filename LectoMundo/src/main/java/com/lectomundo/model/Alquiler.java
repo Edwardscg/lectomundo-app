@@ -10,6 +10,9 @@ public class Alquiler {
     private LocalDateTime fecha_fin;
     private Estado estado_alquiler; // activo, finalizado
 
+    public Alquiler() {
+    }
+
     public Alquiler(int id_alquiler, Cliente cliente, Documento documento, LocalDateTime fecha_inicio, LocalDateTime fecha_fin, Estado estado_alquiler) {
         this.id_alquiler = id_alquiler;
         this.cliente = cliente;
