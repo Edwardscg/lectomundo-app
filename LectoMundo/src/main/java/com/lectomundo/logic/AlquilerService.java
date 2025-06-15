@@ -8,6 +8,7 @@ import com.lectomundo.repository.dao.AlquilerDAO;
 import com.lectomundo.repository.dao.MembresiaDAO;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class AlquilerService {
 
@@ -44,6 +45,15 @@ public class AlquilerService {
 
     public void devolverDocumento(Cliente cliente, Documento documento) throws Exception{
 
+        Alquiler alquiler_activo = alquilerDAO.obtenerAlquilerActivo(cliente.getId_usuario(), documento.getId_documento());
 
+        alquilerDAO.finalizarAlquiler(alquiler_activo.getId_alquiler());
     }
+
+    public List<Documento> obtenerAlquileresActivosPorUsuario(Cliente cliente) throws Exception{
+
+        return alquilerDAO.verDocumentosAlquiladosPorUsuario(cliente.getId_usuario());
+    }
+
+
 }

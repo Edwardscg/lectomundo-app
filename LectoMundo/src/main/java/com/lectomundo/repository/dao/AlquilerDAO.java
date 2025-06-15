@@ -50,7 +50,7 @@ public class AlquilerDAO {
 
     public List<Documento> verDocumentosAlquiladosPorUsuario(int id_usuario) throws Exception{
 
-        String sql = " SELECT d.* FROM documento d JOIN alquiler a ON d.id_documento = a.id_documento WHERE a.id_usuario = ? ";
+        String sql = " SELECT d.* FROM documento d JOIN alquiler a ON d.id_documento = a.id_documento WHERE a.id_usuario = ? AND a.estado = 'activo'";
 
         return DBHelper.obtenerListaEntidad(sql, documentoDAO::mapearDocumento, id_usuario);
     }
@@ -60,6 +60,13 @@ public class AlquilerDAO {
         String sql = "SELECT 1 FROM alquiler WHERE id_usuario = ? AND id_documento = ? AND estado = 'activo' LIMIT 1;";
 
         return DBHelper.obtenerEntidad(sql, rs -> true, id_usuario, id_documento) !=null;
+    }
+
+    public Alquiler obtenerAlquilerActivo(int id_usuario, int id_documento) throws Exception{
+
+        String sql = "SELECT * FROM alquiler WHERE id_usuario = ? AND id_documento = ? AND estado = 'activo' LIMIT 1";
+
+        return DBHelper.obtenerEntidad(sql, this::mapearAlquiler, id_usuario, id_documento);
     }
 
     public List<Alquiler> verAlquileresActivosPorUsuario(int id_usuario) throws Exception {
