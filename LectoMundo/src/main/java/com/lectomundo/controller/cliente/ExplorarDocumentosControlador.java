@@ -4,7 +4,6 @@ import com.lectomundo.logic.DocumentoService;
 import com.lectomundo.model.Documento;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import java.util.List;

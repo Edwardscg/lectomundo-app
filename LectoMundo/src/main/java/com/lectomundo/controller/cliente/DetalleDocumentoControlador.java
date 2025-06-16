@@ -7,15 +7,10 @@ import com.lectomundo.logic.MembresiaService;
 import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Documento;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
-
 
 public class DetalleDocumentoControlador {
 

@@ -1,13 +1,9 @@
 package com.lectomundo.controller.cliente;
 
-import com.lectomundo.logic.UsuarioService;
 import com.lectomundo.model.Cliente;
-import com.lectomundo.model.Usuario;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
 import javafx.scene.layout.StackPane;
 
 public class ClienteControlador {
