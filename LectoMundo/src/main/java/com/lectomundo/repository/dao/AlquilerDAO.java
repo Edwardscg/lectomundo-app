@@ -16,9 +16,9 @@ public class AlquilerDAO {
 
     public void registrarAlquiler(Alquiler alquiler) throws Exception {
 
-        String sql = "INSERT INTO alquiler (id_usuario, id_libro, fecha_inicio, fecha_fin, estado) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO alquiler (id_usuario, id_documento, fecha_inicio, fecha_fin, estado) VALUES (?, ?, ?, ?, ?)";
 
-        DBHelper.manejarEntidad(sql, alquiler.getCliente().getId_usuario(), alquiler.getDocumento().getId_documento(), Timestamp.valueOf(alquiler.getFecha_inicio()), Timestamp.valueOf(alquiler.getFecha_fin()), alquiler.getEstado_alquiler());
+        DBHelper.manejarEntidad(sql, alquiler.getCliente().getId_usuario(), alquiler.getDocumento().getId_documento(), Timestamp.valueOf(alquiler.getFecha_inicio()), Timestamp.valueOf(alquiler.getFecha_fin()), alquiler.getEstado_alquiler().name());
     }
 
     public void finalizarAlquiler(int id_alquiler) throws Exception {

@@ -8,7 +8,7 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.lectomundo.controller.cliente.DetalleDocumentoControlador"
-            prefHeight="650.0" prefWidth="480.0">
+            prefHeight="650.0" prefWidth="450.0">
 
     <VBox alignment="CENTER" spacing="20">
 
@@ -25,10 +25,10 @@
 
         <HBox spacing="30">
 
-            <Button fx:id="btnAlquilar" text="Alquilar"/>
+            <Button fx:id="btnAlquilar" onAction="#alquilarDocumento" text="Alquilar"/>
             <Button fx:id="btnComprar" text="Comprar" />
             <Button fx:id="btnLeer" text="Leer" visible="false"/>
-            <Button fx:id="btnDevolver" text="Devolver" visible="false"/>
+            <Button fx:id="btnDevolver" onAction="#devolverDocumento" text="Devolver" visible="false"/>
 
         </HBox>
 
