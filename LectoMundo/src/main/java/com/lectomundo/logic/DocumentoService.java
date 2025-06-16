@@ -8,7 +8,7 @@ import java.util.List;
 
 public class DocumentoService {
 
-    private final DocumentoDAO documentoDAO = new DocumentoDAO();
+    private DocumentoDAO documentoDAO = new DocumentoDAO();
 
     public void registrarDocumento(Documento documento) throws Exception {
 
@@ -65,6 +65,11 @@ public class DocumentoService {
             throw new IllegalArgumentException("El campo género no puede estar vacío.");
         }
         return documentoDAO.buscarDocumentosPorGenero(genero);
+    }
+
+    public List<Documento> traerDocumentos()throws Exception{
+
+        return documentoDAO.obtenerDocumentos();
     }
 
     public ObservableList<Documento> verDocumentos()throws Exception{

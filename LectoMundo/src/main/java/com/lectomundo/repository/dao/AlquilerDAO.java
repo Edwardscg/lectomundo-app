@@ -11,14 +11,14 @@ import java.util.List;
 
 public class AlquilerDAO {
 
-    private final UsuarioDAO usuarioDAO = new UsuarioDAO();
-    private final DocumentoDAO documentoDAO = new DocumentoDAO();
+    private UsuarioDAO usuarioDAO = new UsuarioDAO();
+    private DocumentoDAO documentoDAO = new DocumentoDAO();
 
     public void registrarAlquiler(Alquiler alquiler) throws Exception {
 
-        String sql = "INSERT INTO alquiler (id_usuario, id_libro, fecha_inicio, fecha_fin, estado) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO alquiler (id_usuario, id_documento, fecha_inicio, fecha_fin, estado) VALUES (?, ?, ?, ?, ?)";
 
-        DBHelper.manejarEntidad(sql, alquiler.getCliente().getId_usuario(), alquiler.getDocumento().getId_documento(), Timestamp.valueOf(alquiler.getFecha_inicio()), Timestamp.valueOf(alquiler.getFecha_fin()), alquiler.getEstado_alquiler());
+        DBHelper.manejarEntidad(sql, alquiler.getCliente().getId_usuario(), alquiler.getDocumento().getId_documento(), Timestamp.valueOf(alquiler.getFecha_inicio()), Timestamp.valueOf(alquiler.getFecha_fin()), alquiler.getEstado_alquiler().name());
     }
 
     public void finalizarAlquiler(int id_alquiler) throws Exception {
@@ -50,11 +50,26 @@ public class AlquilerDAO {
 
     public List<Documento> verDocumentosAlquiladosPorUsuario(int id_usuario) throws Exception{
 
-        String sql = " SELECT d.* FROM documento d JOIN alquiler a ON d.id_documento = a.id_documento WHERE a.id_usuario = ? ";
+        String sql = " SELECT d.* FROM documento d JOIN alquiler a ON d.id_documento = a.id_documento WHERE a.id_usuario = ? AND a.estado = 'activo'";
 
         return DBHelper.obtenerListaEntidad(sql, documentoDAO::mapearDocumento, id_usuario);
     }
 
+    public boolean estaAlquilado(int id_usuario, int id_documento) throws Exception {
+
+        String sql = "SELECT 1 FROM alquiler WHERE id_usuario = ? AND id_documento = ? AND estado = 'activo' LIMIT 1;";
+
+        return DBHelper.obtenerEntidad(sql, rs -> true, id_usuario, id_documento) !=null;
+    }
+
+    public Alquiler obtenerAlquilerActivo(int id_usuario, int id_documento) throws Exception{
+
+        String sql = "SELECT * FROM alquiler WHERE id_usuario = ? AND id_documento = ? AND estado = 'activo' LIMIT 1";
+
+        return DBHelper.obtenerEntidad(sql, this::mapearAlquiler, id_usuario, id_documento);
+    }
+
+    //POSIBLE BORRADO
     public List<Alquiler> verAlquileresActivosPorUsuario(int id_usuario) throws Exception {
 
         String sql = "SELECT * FROM alquiler WHERE id_usuario = ? AND estado = 'activo'";

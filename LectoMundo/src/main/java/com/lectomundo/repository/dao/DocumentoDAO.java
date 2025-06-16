@@ -48,7 +48,7 @@ public class DocumentoDAO {
 
     public Documento buscarDocumentoPorId(int id_documento) throws Exception {
 
-        String sql = "SELECT * FROM libro WHERE id_libro = ?;";
+        String sql = "SELECT * FROM documento WHERE id_documento = ?;";
 
         return DBHelper.obtenerEntidad(sql, this::mapearDocumento, id_documento);
     }

@@ -17,6 +17,9 @@ public class CompraDocumento {
         this.costo = documento.getPrecio() * 3;
     }
 
+    public CompraDocumento() {
+    }
+
     public int getId_compra() {
         return id_compra;
     }

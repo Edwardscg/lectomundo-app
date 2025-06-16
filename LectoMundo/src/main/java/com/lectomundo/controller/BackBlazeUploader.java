@@ -25,6 +25,7 @@ public class BackBlazeUploader {
     private String apiUrl;
     private String authToken;
     private String bucketId;
+    private String downloadUrl;
 
     public BackBlazeUploader() throws Exception{
 
@@ -47,6 +48,7 @@ public class BackBlazeUploader {
             this.apiUrl = jsonNode.get("apiUrl").asText();
             this.authToken = jsonNode.get("authorizationToken").asText();
             this.accountId = jsonNode.get("accountId").asText();
+            this.downloadUrl = jsonNode.get("downloadUrl").asText();
         }
     }
 
@@ -65,17 +67,27 @@ public class BackBlazeUploader {
             }
 
             JsonNode json = objectMapper.readTree(jsonString);
-
             JsonNode buckets = json.get("buckets");
+
             if (buckets == null || !buckets.isArray()) {
                 throw new IllegalStateException("Respuesta no contiene el array 'buckets': " + jsonString);
             }
+            System.out.println("Buckets disponibles");
 
             for (JsonNode bucket : buckets) {
+                String nombre = bucket.get("bucketName").asText();
+                String id = bucket.get("bucketId").asText();
+                System.out.println("Nombre: " + nombre + " | ID: "+id);
+
+                if (nombre.equals(nombre_deposito)) {
+                    this.bucketId = id;
+                    return;
+                }
+                /*
                 if (bucket.get("bucketName").asText().equals(nombre_deposito)) {
                     this.bucketId = bucket.get("bucketId").asText();
                     return;
-                }
+                }*/
             }
 
             throw new IllegalArgumentException("Bucket no encontrado: " + nombre_deposito);
@@ -119,7 +131,19 @@ public class BackBlazeUploader {
 
     public String getPublicUrl(String fileName){
 
-        return "https://f000.backblazeb2.com/file/" + nombre_deposito + "/" + fileName;
+        String[] partes = fileName.split("/");
+        StringBuilder pathCodificado = new StringBuilder();
+
+        for (int i = 0; i < partes.length; i++){
+
+            pathCodificado.append(URLEncoder.encode(partes[i], StandardCharsets.UTF_8));
+            if(i<partes.length -1){
+
+                pathCodificado.append("/");
+            }
+        }
+
+        return downloadUrl + "/file/" + nombre_deposito + "/" + pathCodificado;
     }
 
 }

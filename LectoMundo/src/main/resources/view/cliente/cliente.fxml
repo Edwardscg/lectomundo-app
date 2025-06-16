@@ -1,16 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.lectomundo.controller.cliente.ClienteControlador"
-            prefHeight="400.0" prefWidth="600.0">
+<BorderPane xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.lectomundo.controller.cliente.ClienteControlador"
+      prefHeight="700.0" prefWidth="1250.0">
+
+    <top>
+        <HBox spacing="15" alignment="CENTER_RIGHT" style="-fx-background-color: #aeb6bf;" prefHeight="50">
+            <padding>
+                <Insets left="10" right="20" top="5" bottom="5"/>
+            </padding>
+
+            <HBox spacing="5" alignment="CENTER">
+                <ImageView fx:id="iconoMoneda" fitHeight="24" fitWidth="24" pickOnBounds="true" preserveRatio="true"/>
+                <Label fx:id="lblMonedas" text="0" style="-fx-font-size: 14pt; -fx-font-weight: bold;"/>
+            </HBox>
+
+            <Button fx:id="btnComprarMonedas" text="➕">
+
+                <tooltip>
+
+                    <Tooltip text="Comprar Monedas"/>
+
+                </tooltip>
+
+            </Button>
+            <Button fx:id="btnNotificaciones" text="🔔">
+
+                <tooltip>
+
+                    <Tooltip text="Notificaciones"/>
+
+                </tooltip>
+
+            </Button>
+        </HBox>
+
+    </top>
+
+    <center>
+        <HBox>
+            <VBox fx:id="menuLateral" spacing="10" style="-fx-background-color: #2C3E50;" prefWidth="220" alignment="TOP_LEFT">
+                <padding>
+                    <Insets top="20" left="10" right="10" bottom="20"/>
+                </padding>
+
+                <Button fx:id="btnAlternar" text="☰" prefWidth="40">
+
+                    <tooltip>
+
+                        <Tooltip text="Mostrar/Ocultar"/>
+
+                    </tooltip>
+
+                </Button>
+
+                <Button fx:id="btnExplorar" onAction="#explorarDocumentos" text="📚 Explorar" prefWidth="200"/>
+                <Button fx:id="btnAlquilados" text="📖 Documentos Alquilados" prefWidth="200"/>
+                <Button fx:id="btnComprados" text="🛒 Documentos Comprados" prefWidth="200"/>
+                <Button fx:id="btnFavoritos" text="⭐ Favoritos" prefWidth="200"/>
+                <Button fx:id="btnMembresia" text="🎫 Membresía" prefWidth="200"/>
+                <Button fx:id="btnCuenta" text="👤 Cuenta" prefWidth="200"/>
+
+                <Region VBox.vgrow="ALWAYS"/>
+
+                <Button fx:id="btnCerrarSesion" text="⏻ Cerrar Sesión" style="-fx-text-fill: red;" prefWidth="200"/>
+            </VBox>
+
+            <StackPane fx:id="panelContenedor" VBox.vgrow="ALWAYS" />
+
+        </HBox>
+
+    </center>
 
 
 
-</AnchorPane>
+
+</BorderPane>

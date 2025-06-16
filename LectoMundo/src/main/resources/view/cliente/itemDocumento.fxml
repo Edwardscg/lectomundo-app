@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.lectomundo.controller.cliente.ItemDocumentoControlador"
+      prefHeight="300.0" prefWidth="250.0"
+      style="-fx-background-color: #ffffff; -fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0.1, 0, 3);">
+
+    <padding>
+        <Insets top="10" left="10" right="10" bottom="10"/>
+    </padding>
+
+    <ImageView fx:id="imgPortada" fitHeight="150" fitWidth="200" preserveRatio="true"/>
+    <Label fx:id="lblTitulo" wrapText="true" style="-fx-font-size: 14pt; -fx-font-weight: bold;"/>
+    <Label fx:id="lblDescripcion" wrapText="true" style="-fx-font-size: 11pt;" maxHeight="60"/>
+    <Button fx:id="btnVer" onAction="#verDetalle" text="Ver" maxWidth="Infinity" style="-fx-background-color: #2980B9; -fx-text-fill: white;"/>
+
+</VBox>
