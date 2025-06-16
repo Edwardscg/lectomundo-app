@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.ImageView?>
+
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.lectomundo.controller.cliente.DetalleDocumentoControlador"
-            prefHeight="650.0" prefWidth="500.0">
+            prefHeight="650.0" prefWidth="480.0">
 
     <VBox alignment="CENTER" spacing="20">
 
@@ -24,7 +21,7 @@
         <Label fx:id="lblTitulo" style="-fx-font-size: 18px; -fx-font-weight: bold;" wrapText="true"/>
         <Label fx:id="lblAutor" style="-fx-font-size: 14px;"/>
         <Label fx:id="lblGenero" style="-fx-font-size: 14px;"/>
-        <Label fx:id="lblDescripcion" style="-fx-font-size: 14px;"/>
+        <Label fx:id="lblDescripcion" wrapText="true" maxWidth="400" maxHeight="100" style="-fx-font-size: 14px;"/>
 
         <HBox spacing="30">
 

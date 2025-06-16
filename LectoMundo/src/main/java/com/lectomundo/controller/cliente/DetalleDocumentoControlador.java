@@ -26,33 +26,53 @@ public class DetalleDocumentoControlador {
     private Documento documento;
 
     @FXML
-    private void initialize(Documento documento, boolean tiene_membresia, boolean esta_comprado, boolean esta_alquilado) throws Exception {
+    private void initialize(){
+
+    }
+
+    public void cargarDatos(Documento documento){
+
         this.documento = documento;
 
-        MembresiaService membresiaService = new MembresiaService();
-        CompraDocumentoService compraDocumentoService = new CompraDocumentoService();
-        AlquilerService alquilerService = new AlquilerService();
+        try {
+            MembresiaService membresiaService = new MembresiaService();
+            CompraDocumentoService compraDocumentoService = new CompraDocumentoService();
+            AlquilerService alquilerService = new AlquilerService();
 
-        tiene_membresia = membresiaService.tieneMembresiaActiva(ClienteControlador.cliente.getId_usuario());
-        esta_comprado = compraDocumentoService.estaComprado(ClienteControlador.cliente.getId_usuario(), documento.getId_documento());
-        esta_alquilado = alquilerService.estaAlquilado(ClienteControlador.cliente.getId_usuario(), documento.getId_documento());
+            boolean tiene_membresia = membresiaService.tieneMembresiaActiva(ClienteControlador.cliente.getId_usuario());
+            boolean esta_comprado = compraDocumentoService.estaComprado(ClienteControlador.cliente.getId_usuario(), documento.getId_documento());
+            boolean esta_alquilado = alquilerService.estaAlquilado(ClienteControlador.cliente.getId_usuario(), documento.getId_documento());
 
-        imgPortada.setImage(new Image(documento.getPortada_url()));
-        lblTitulo.setText(documento.getTitulo());
-        lblAutor.setText("Autor: " + documento.getAutor());
-        lblGenero.setText("Género: " + documento.getGenero());
-        lblDescripcion.setText("Descripción: " + documento.getDescripcion());
+            imgPortada.setImage(new Image(documento.getPortada_url()));
+            lblTitulo.setText(documento.getTitulo());
+            lblAutor.setText("Autor: " + documento.getAutor());
+            lblGenero.setText("Género: " + documento.getGenero());
+            lblDescripcion.setText("Descripción: " + documento.getDescripcion());
 
-        if(tiene_membresia || esta_comprado){
+            System.out.println("ID Cliente: " + ClienteControlador.cliente.getId_usuario());
+            System.out.println("ID Documento: " + documento.getId_documento());
+            System.out.println("Tiene membresía: " + tiene_membresia);
+            System.out.println("Está comprado: " + esta_comprado);
+            System.out.println("Está alquilado: " + esta_alquilado);
 
-            btnAlquilar.setVisible(false);
-            btnComprar.setVisible(false);
-            btnLeer.setVisible(true);
-        } else if (esta_alquilado){
+            if (tiene_membresia || esta_comprado) {
+                btnAlquilar.setVisible(false);
+                btnComprar.setVisible(false);
+                btnLeer.setVisible(true);
+            } else if (esta_alquilado) {
+                btnAlquilar.setVisible(false);
+                btnDevolver.setVisible(true);
+                btnLeer.setVisible(true);
+            }else {
 
-            btnAlquilar.setVisible(false);
-            btnDevolver.setVisible(true);
-            btnLeer.setVisible(true);
+                btnAlquilar.setVisible(true);
+                btnComprar.setVisible(true);
+                btnLeer.setVisible(false);
+                btnDevolver.setVisible(false);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

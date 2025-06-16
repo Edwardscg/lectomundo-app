@@ -47,9 +47,9 @@ public class MembresiaDAO {
 
     public boolean tieneMembresiaActiva(int id_usuario) throws Exception {
 
-        String sql = "SELECT COUNT(*) FROM membresia WHERE id_usuario = ? AND estado = ?";
+        String sql = "SELECT * FROM membresia WHERE id_usuario = ? AND estado = 'activo' AND CURDATE() BETWEEN fecha_inicio AND fecha_fin";
 
-        return DBHelper.obtenerEntidad(sql, rs -> true, id_usuario, Estado.activo.toString()) !=null;
+        return DBHelper.obtenerEntidad(sql, rs -> true, id_usuario) !=null;
     }
 
     public List<Membresia> verMembresiasPorUsuario(int id_usuario) throws Exception {

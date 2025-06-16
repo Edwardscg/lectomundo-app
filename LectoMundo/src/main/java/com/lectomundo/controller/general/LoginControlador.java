@@ -1,8 +1,10 @@
 package com.lectomundo.controller.general;
 
 import com.lectomundo.controller.UIHelper;
+import com.lectomundo.controller.cliente.ClienteControlador;
 import com.lectomundo.logic.CorreoService;
 import com.lectomundo.logic.UsuarioService;
+import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Usuario;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -37,7 +39,16 @@ public class LoginControlador {
         if(usuario!=null && verificado){
 
             Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
-            UIHelper.abrirVentana(ventana_actual, "/view/admin/admin.fxml", "Administrador");
+
+            if(usuario instanceof Cliente){
+
+                ClienteControlador.cliente = (Cliente) usuario;
+                UIHelper.abrirVentana(ventana_actual, "/view/cliente/cliente.fxml", "Cliente");
+            }else {
+
+                UIHelper.abrirVentana(ventana_actual, "/view/admin/admin.fxml", "Administrador");
+            }
+
 
         }else {
 

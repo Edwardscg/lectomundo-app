@@ -2,10 +2,14 @@ package com.lectomundo.controller.cliente;
 
 import com.lectomundo.model.Documento;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 public class ItemDocumentoControlador {
 
@@ -31,6 +35,27 @@ public class ItemDocumentoControlador {
         }catch (Exception e){
             e.printStackTrace();
             imgPortada.setImage(null);
+        }
+    }
+
+    @FXML
+    private void verDetalle(){
+
+        try{
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/detalleDocumento.fxml"));
+            Parent root = loader.load();
+
+            DetalleDocumentoControlador detalleDocumentoControlador = loader.getController();
+            detalleDocumentoControlador.cargarDatos(documento);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        }catch (Exception e){
+
+            e.printStackTrace();
         }
     }
 }

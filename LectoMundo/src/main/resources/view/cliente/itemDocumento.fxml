@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.ImageView?>
+
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.lectomundo.controller.cliente.ItemDocumentoControlador"
@@ -21,6 +18,6 @@
     <ImageView fx:id="imgPortada" fitHeight="150" fitWidth="200" preserveRatio="true"/>
     <Label fx:id="lblTitulo" wrapText="true" style="-fx-font-size: 14pt; -fx-font-weight: bold;"/>
     <Label fx:id="lblDescripcion" wrapText="true" style="-fx-font-size: 11pt;" maxHeight="60"/>
-    <Button fx:id="btnVer" text="Ver" maxWidth="Infinity" style="-fx-background-color: #2980B9; -fx-text-fill: white;"/>
+    <Button fx:id="btnVer" onAction="#verDetalle" text="Ver" maxWidth="Infinity" style="-fx-background-color: #2980B9; -fx-text-fill: white;"/>
 
 </VBox>
