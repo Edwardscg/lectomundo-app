@@ -27,7 +27,7 @@
 
             <Button fx:id="btnAlquilar" onAction="#alquilarDocumento" text="Alquilar"/>
             <Button fx:id="btnComprar" onAction="#comprarDocumento" text="Comprar" />
-            <Button fx:id="btnLeer" text="Leer" visible="false"/>
+            <Button fx:id="btnLeer" onAction="#leerDocumento" text="Leer" visible="false"/>
             <Button fx:id="btnDevolver" onAction="#devolverDocumento" text="Devolver" visible="false"/>
 
         </HBox>

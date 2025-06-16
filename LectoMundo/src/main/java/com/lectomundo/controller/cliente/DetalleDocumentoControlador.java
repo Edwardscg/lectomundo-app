@@ -1,15 +1,20 @@
 package com.lectomundo.controller.cliente;
 
+import com.lectomundo.controller.UIHelper;
 import com.lectomundo.logic.AlquilerService;
 import com.lectomundo.logic.CompraDocumentoService;
 import com.lectomundo.logic.MembresiaService;
 import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Documento;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 
 public class DetalleDocumentoControlador {
@@ -96,6 +101,18 @@ public class DetalleDocumentoControlador {
         } catch (Exception e) {
 
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void leerDocumento(){
+
+        try {
+            String url = documento.getPdf_url();
+            java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
+        } catch (Exception e) {
+            e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "No se pudo abrir el documento en el navegador.");
         }
     }
 
