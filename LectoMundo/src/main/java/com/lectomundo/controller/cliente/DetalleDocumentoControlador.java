@@ -81,6 +81,24 @@ public class DetalleDocumentoControlador {
         }
     }
 
+    @FXML
+    private void comprarDocumento(){
+
+        try {
+
+            compraDocumentoService.comprarDocumento(cliente, documento);
+
+            btnAlquilar.setVisible(false);
+            btnComprar.setVisible(false);
+            btnDevolver.setVisible(false);
+            btnLeer.setVisible(true);
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+    }
+
     public void cargarDatos(Documento documento) {
 
         this.documento = documento;
