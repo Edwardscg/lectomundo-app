@@ -31,8 +31,8 @@ public class SubirDocumentoControlador {
     public void seleccionarPDF(){
 
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Seleccionar archivo PDF");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+        fileChooser.setTitle("Seleccionar documento PDF");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
         archivoPDF = fileChooser.showOpenDialog(new Stage());
 
         if(archivoPDF !=null){

@@ -45,7 +45,7 @@ public class FavoritoDAO {
 
     public boolean esFavorito(int id_usuario, int id_documento) throws Exception {
 
-        String sql = "SELECT 1 FROM favorito WHERE id_usuario = ? AND id_documento = ? LIMIT 1";
+        String sql = "SELECT 1 FROM favorito WHERE id_usuario = ? AND id_documento = ? AND es_favorito = 1 LIMIT 1";
 
         return DBHelper.obtenerEntidad(sql, rs -> true, id_usuario, id_documento) != null;
     }

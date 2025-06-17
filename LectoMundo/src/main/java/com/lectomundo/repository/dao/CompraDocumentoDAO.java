@@ -29,6 +29,7 @@ public class CompraDocumentoDAO {
         return DBHelper.obtenerEntidad(sql, rs -> true, id_usuario, id_documento) !=null;
     }
 
+    // POSIBLE BORRADO, SIN USO
     public List<CompraDocumento> verComprasPorUsuario(int id_usuario) throws Exception {
 
         String sql = "SELECT * FROM compra_documento WHERE id_usuario = ?;";
@@ -43,6 +44,7 @@ public class CompraDocumentoDAO {
         return DBHelper.obtenerListaEntidad(sql, documentoDAO::mapearDocumento, id_usuario);
     }
 
+    // CAMBIAR A OBSERVABLE LIST
     public List<CompraDocumento> verCompras() throws Exception {
 
         String sql = "SELECT * FROM compra_libro;";
@@ -58,5 +60,4 @@ public class CompraDocumentoDAO {
         return new CompraDocumento(rs.getInt("id_compra_libro"), (Cliente) usuario, documento, rs.getTimestamp("fecha_compra").toLocalDateTime(), rs.getInt("costo"));
     }
 
-    // Agregar metodo observablelist para llenarTabla
 }

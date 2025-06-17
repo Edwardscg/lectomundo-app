@@ -16,7 +16,7 @@ public class AlquilerService {
     private MembresiaDAO membresiaDAO = new MembresiaDAO();
     private final int dias_alquiler = 7;
 
-    public void alquilarDocumento(Cliente cliente, Documento documento) throws Exception{
+    public void registrarAlquiler(Cliente cliente, Documento documento) throws Exception{
 
         if (cliente == null || documento == null) {
             throw new IllegalArgumentException("Cliente o documento no válido.");

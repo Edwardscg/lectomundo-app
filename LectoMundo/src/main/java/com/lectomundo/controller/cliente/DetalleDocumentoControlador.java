@@ -6,11 +6,19 @@ import com.lectomundo.logic.CompraDocumentoService;
 import com.lectomundo.logic.MembresiaService;
 import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Documento;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
 
 public class DetalleDocumentoControlador {
 
@@ -32,6 +40,8 @@ public class DetalleDocumentoControlador {
     private Button btnLeer;
     @FXML
     private Button btnDevolver;
+    @FXML
+    private Button btnDescargar;
 
     private Documento documento;
     private Cliente cliente = ClienteControlador.cliente;
@@ -52,7 +62,7 @@ public class DetalleDocumentoControlador {
 
         try {
 
-            alquilerService.alquilarDocumento(cliente, documento);
+            alquilerService.registrarAlquiler(cliente, documento);
 
             btnAlquilar.setVisible(false);
             btnDevolver.setVisible(true);
@@ -82,11 +92,11 @@ public class DetalleDocumentoControlador {
     }
 
     @FXML
-    private void comprarDocumento(){
+    private void comprarDocumento() {
 
         try {
 
-            compraDocumentoService.comprarDocumento(cliente, documento);
+            compraDocumentoService.registrarCompra(cliente, documento);
 
             btnAlquilar.setVisible(false);
             btnComprar.setVisible(false);
@@ -100,7 +110,7 @@ public class DetalleDocumentoControlador {
     }
 
     @FXML
-    private void leerDocumento(){
+    private void leerDocumento() {
 
         try {
             String url = documento.getPdf_url();
@@ -108,6 +118,40 @@ public class DetalleDocumentoControlador {
         } catch (Exception e) {
             e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "No se pudo abrir el documento en el navegador.");
+        }
+    }
+
+    @FXML
+    private void descargarDocumento(){
+
+        try{
+
+            String url = documento.getPdf_url();
+
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Descargar Documento");
+            fileChooser.setInitialFileName(documento.getTitulo().replaceAll("\\s+","_") + ".pdf");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos PDF", "*.pdf"));
+            File destino = fileChooser.showSaveDialog(btnDescargar.getScene().getWindow());
+
+            if(destino != null){
+
+                try(InputStream inputStream = new URL(url).openStream();
+                    OutputStream outputStream = new FileOutputStream(destino)){
+
+                    byte[] buffer = new byte[4096];
+                    int bytes_read;
+
+                    while((bytes_read = inputStream.read(buffer)) != -1){
+
+                        outputStream.write(buffer, 0, bytes_read);
+                        UIHelper.mostrarAlerta("Éxito", "El documento se ha descargado.");
+                    }
+                }
+            }
+        }catch (Exception e){
+
+            UIHelper.mostrarAlerta("Error", "No se pudo descargar el documento");
         }
     }
 
@@ -137,6 +181,7 @@ public class DetalleDocumentoControlador {
                 btnAlquilar.setVisible(false);
                 btnComprar.setVisible(false);
                 btnLeer.setVisible(true);
+                btnDescargar.setVisible(esta_comprado);
             } else if (esta_alquilado) {
                 btnAlquilar.setVisible(false);
                 btnDevolver.setVisible(true);
@@ -151,7 +196,7 @@ public class DetalleDocumentoControlador {
 
         } catch (Exception e) {
             e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "No se pudo cargar los datos del documento.");
         }
     }
-
 }

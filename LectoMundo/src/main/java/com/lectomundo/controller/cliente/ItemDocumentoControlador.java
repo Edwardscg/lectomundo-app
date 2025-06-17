@@ -13,35 +13,39 @@ import javafx.stage.Stage;
 
 public class ItemDocumentoControlador {
 
-    @FXML private ImageView imgPortada;
-    @FXML private Label lblTitulo;
-    @FXML private Label lblDescripcion;
-    @FXML private Button btnVer;
+    @FXML
+    private ImageView imgPortada;
+    @FXML
+    private Label lblTitulo;
+    @FXML
+    private Label lblDescripcion;
+    @FXML
+    private Button btnVer;
 
     private Documento documento;
 
-    public void mostrarDocumento(Documento documento){
+    public void mostrarDocumento(Documento documento) {
 
         this.documento = documento;
 
         lblTitulo.setText(documento.getTitulo());
         lblDescripcion.setText(documento.getDescripcion());
 
-        try{
+        try {
 
             Image portada = new Image(documento.getPortada_url(), true);
             imgPortada.setImage(portada);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             imgPortada.setImage(null);
         }
     }
 
     @FXML
-    private void verDetalle(){
+    private void verDetalle() {
 
-        try{
+        try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/detalleDocumento.fxml"));
             Parent root = loader.load();
@@ -53,7 +57,7 @@ public class ItemDocumentoControlador {
             stage.setScene(new Scene(root));
             stage.show();
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
             e.printStackTrace();
         }

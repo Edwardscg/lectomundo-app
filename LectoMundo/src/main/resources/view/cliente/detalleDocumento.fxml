@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
@@ -24,14 +23,11 @@
         <Label fx:id="lblDescripcion" wrapText="true" maxWidth="400" maxHeight="100" style="-fx-font-size: 14px;"/>
 
         <HBox spacing="30">
-
             <Button fx:id="btnAlquilar" onAction="#alquilarDocumento" text="Alquilar"/>
             <Button fx:id="btnComprar" onAction="#comprarDocumento" text="Comprar" />
             <Button fx:id="btnLeer" onAction="#leerDocumento" text="Leer" visible="false"/>
             <Button fx:id="btnDevolver" onAction="#devolverDocumento" text="Devolver" visible="false"/>
-
+            <Button fx:id="btnDescargar" onAction="#descargarDocumento" text="Devolver" visible="false"/>
         </HBox>
-
     </VBox>
-
 </AnchorPane>

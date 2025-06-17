@@ -80,11 +80,12 @@ public class UsuarioService {
         usuarioDAO.actualizarUsuario(usuario);
     }
 
-    public void actualizarMonedas(int id_usuario, int nuevasMonedas) throws Exception{
+    public void actualizarMonedas(int id_usuario, int nuevas_monedas) throws Exception{
 
-        usuarioDAO.actualizarMonedas(id_usuario, nuevasMonedas);
+        usuarioDAO.actualizarMonedas(id_usuario, nuevas_monedas);
     }
 
+    // POSIBLE BORRADO, RAZON: SIN USO
     public Usuario buscarUsuarioPorId(int id_usuario) throws Exception {
 
         if (id_usuario <= 0) {
@@ -103,6 +104,8 @@ public class UsuarioService {
         return usuarioDAO.buscarUsuarioPorCorreo(correo);
     }
 
+
+    // CAMBIAR A QUE RETORNE UN OBSERVABLE LIST Y ACTUALIZAR UML
     public List<Usuario> buscarUsuarioPorTipo(String tipo_usuario) throws Exception{
 
         if(tipo_usuario == null || tipo_usuario.isBlank()){
