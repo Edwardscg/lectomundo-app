@@ -60,11 +60,11 @@
                 </Button>
 
                 <Button fx:id="btnExplorar" onAction="#explorarDocumentos" text="📚 Explorar" prefWidth="200"/>
-                <Button fx:id="btnAlquilados" text="📖 Documentos Alquilados" prefWidth="200"/>
-                <Button fx:id="btnComprados" text="🛒 Documentos Comprados" prefWidth="200"/>
-                <Button fx:id="btnFavoritos" text="⭐ Favoritos" prefWidth="200"/>
-                <Button fx:id="btnMembresia" text="🎫 Membresía" prefWidth="200"/>
-                <Button fx:id="btnCuenta" text="👤 Cuenta" prefWidth="200"/>
+                <Button fx:id="btnAlquilados" text="Documentos Alquilados" prefWidth="200"/>
+                <Button fx:id="btnComprados" onAction="#verDocumentosComprados" text="Documentos Comprados" prefWidth="200"/>
+                <Button fx:id="btnFavoritos" text="Favoritos" prefWidth="200"/>
+                <Button fx:id="btnMembresia" text="Membresía" prefWidth="200"/>
+                <Button fx:id="btnCuenta" text="Cuenta" prefWidth="200"/>
 
                 <Region VBox.vgrow="ALWAYS"/>
 

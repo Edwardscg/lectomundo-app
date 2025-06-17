@@ -1,6 +1,8 @@
 package com.lectomundo.controller.cliente;
 
-import com.lectomundo.logic.DocumentoService;
+import com.lectomundo.controller.UIHelper;
+import com.lectomundo.logic.CompraDocumentoService;
+import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Documento;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,28 +11,30 @@ import javafx.scene.layout.VBox;
 
 import java.util.List;
 
-public class ExplorarDocumentosControlador {
+public class DocumentosCompradosControlador {
 
     @FXML
     VBox vboxContenedor;
 
-    private DocumentoService documentoService = new DocumentoService();
+    private CompraDocumentoService compraDocumentoService = new CompraDocumentoService();
+    private Cliente cliente = ClienteControlador.cliente;
 
     @FXML
-    private void initialize() {
+    private void initialize(){
 
-        cargarDocumentos();
+        cargarDocumentosComprados();
     }
 
-    private void cargarDocumentos() {
-        try {
+    private void cargarDocumentosComprados(){
 
-            List<Documento> documentos = documentoService.traerDocumentos();
+        try{
+
+            List<Documento> documentosComprados = compraDocumentoService.verDocumentosCompradosPorUsuario(cliente.getId_usuario());
 
             HBox fila = new HBox(20);
             int contador = 0;
 
-            for (Documento documento : documentos) {
+            for(Documento documento : documentosComprados){
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/itemDocumento.fxml"));
                 VBox item = loader.load();
@@ -41,21 +45,21 @@ public class ExplorarDocumentosControlador {
                 fila.getChildren().add(item);
                 contador++;
 
-                if (contador % 3 == 0) {
+                if(contador%3 ==0){
 
                     vboxContenedor.getChildren().add(fila);
                     fila = new HBox(20);
                 }
             }
 
-            if (!fila.getChildren().isEmpty()) {
+            if(!fila.getChildren().isEmpty()){
 
                 vboxContenedor.getChildren().add(fila);
             }
 
-        } catch (Exception e) {
+        }catch (Exception e){
 
-            e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "No se pudo cargar los documentos comprados.");
         }
     }
 }

@@ -39,7 +39,7 @@ public class CompraDocumentoDAO {
 
     public List<Documento> verDocumentosCompradosPorUsuario(int id_usuario) throws Exception{
 
-        String sql = " SELECT d.* FROM documento d JOIN compra_documento cd ON d.id_documento = cd.id_documento WHERE c.id_usuario = ? ";
+        String sql = " SELECT d.* FROM documento d JOIN compra_documento cd ON d.id_documento = cd.id_documento WHERE cd.id_usuario = ? ";
 
         return DBHelper.obtenerListaEntidad(sql, documentoDAO::mapearDocumento, id_usuario);
     }
