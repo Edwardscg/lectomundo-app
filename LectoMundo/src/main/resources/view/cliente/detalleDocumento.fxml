@@ -16,7 +16,25 @@
             <Insets top="20" left="20" right="20" bottom="20"/>
         </padding>
 
+        <Button fx:id="btnFavoritoVacio" onAction="#marcarFavorito" style="-fx-background-color: transparent;" visible="true">
+            <graphic>
+                <ImageView fitHeight="24" fitWidth="24">
+                    <image>
+                        <Image url="@/images/me-gusta.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
 
+        <Button fx:id="btnFavoritoLleno" onAction="#desmarcarFavorito" style="-fx-background-color: transparent;" visible="false">
+            <graphic>
+                <ImageView fitHeight="24" fitWidth="24">
+                    <image>
+                        <Image url="@/images/me-gusta-2.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
 
         <ImageView fx:id="imgPortada" fitWidth="200" fitHeight="250" preserveRatio="true"/>
 

@@ -3,6 +3,7 @@ package com.lectomundo.controller.cliente;
 import com.lectomundo.controller.UIHelper;
 import com.lectomundo.logic.AlquilerService;
 import com.lectomundo.logic.CompraDocumentoService;
+import com.lectomundo.logic.FavoritoService;
 import com.lectomundo.logic.MembresiaService;
 import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Documento;
@@ -42,12 +43,17 @@ public class DetalleDocumentoControlador {
     private Button btnDevolver;
     @FXML
     private Button btnDescargar;
+    @FXML
+    private Button btnFavoritoVacio;
+    @FXML
+    private Button btnFavoritoLleno;
 
     private Documento documento;
     private Cliente cliente = ClienteControlador.cliente;
     private MembresiaService membresiaService = new MembresiaService();
     private CompraDocumentoService compraDocumentoService = new CompraDocumentoService();
     private AlquilerService alquilerService = new AlquilerService();
+    private FavoritoService favoritoService = new FavoritoService();
     private boolean tiene_membresia = false;
     private boolean esta_comprado = false;
     private boolean esta_alquilado = false;
@@ -156,6 +162,38 @@ public class DetalleDocumentoControlador {
         }
     }
 
+    @FXML
+    private void marcarFavorito(){
+
+        try{
+
+            favoritoService.agregarFavorito(cliente, documento);
+            btnFavoritoVacio.setVisible(false);
+            btnFavoritoLleno.setVisible(true);
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "No se pudo marcar como favorito.");
+        }
+    }
+
+    @FXML
+    private void desmarcarFavorito(){
+
+        try{
+
+            favoritoService.eliminarFavorito(cliente, documento);
+            btnFavoritoVacio.setVisible(true);
+            btnFavoritoLleno.setVisible(false);
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "No se pudo quitar de favoritos.");
+        }
+    }
+
     public void cargarDatos(Documento documento) {
 
         this.documento = documento;
@@ -165,6 +203,7 @@ public class DetalleDocumentoControlador {
             tiene_membresia = membresiaService.tieneMembresiaActiva(cliente.getId_usuario());
             esta_comprado = compraDocumentoService.estaComprado(cliente.getId_usuario(), documento.getId_documento());
             esta_alquilado = alquilerService.estaAlquilado(cliente.getId_usuario(), documento.getId_documento());
+            boolean es_favorito = favoritoService.esFavorito(cliente.getId_usuario(), documento.getId_documento());
 
             imgPortada.setImage(new Image(documento.getPortada_url()));
             lblTitulo.setText(documento.getTitulo());
@@ -177,6 +216,16 @@ public class DetalleDocumentoControlador {
             System.out.println("Tiene membresía: " + tiene_membresia);
             System.out.println("Está comprado: " + esta_comprado);
             System.out.println("Está alquilado: " + esta_alquilado);
+
+            if(es_favorito){
+
+                btnFavoritoLleno.setVisible(true);
+                btnFavoritoVacio.setVisible(false);
+            }else {
+
+                btnFavoritoVacio.setVisible(true);
+                btnFavoritoLleno.setVisible(false);
+            }
 
             if (tiene_membresia || esta_comprado) {
                 btnAlquilar.setVisible(false);
