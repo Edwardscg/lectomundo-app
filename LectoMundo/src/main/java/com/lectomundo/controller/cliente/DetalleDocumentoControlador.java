@@ -145,8 +145,9 @@ public class DetalleDocumentoControlador {
                     while((bytes_read = inputStream.read(buffer)) != -1){
 
                         outputStream.write(buffer, 0, bytes_read);
-                        UIHelper.mostrarAlerta("Éxito", "El documento se ha descargado.");
+
                     }
+                    UIHelper.mostrarAlerta("Éxito", "El documento se ha descargado.");
                 }
             }
         }catch (Exception e){

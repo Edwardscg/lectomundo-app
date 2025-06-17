@@ -27,7 +27,7 @@
             <Button fx:id="btnComprar" onAction="#comprarDocumento" text="Comprar" />
             <Button fx:id="btnLeer" onAction="#leerDocumento" text="Leer" visible="false"/>
             <Button fx:id="btnDevolver" onAction="#devolverDocumento" text="Devolver" visible="false"/>
-            <Button fx:id="btnDescargar" onAction="#descargarDocumento" text="Devolver" visible="false"/>
+            <Button fx:id="btnDescargar" onAction="#descargarDocumento" text="Descargar" visible="false"/>
         </HBox>
     </VBox>
 </AnchorPane>
