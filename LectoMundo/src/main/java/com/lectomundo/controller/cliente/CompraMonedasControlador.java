@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 public class CompraMonedasControlador {
 
     private MovimientoMonedaService movimientoMonedaService = new MovimientoMonedaService();
+    private ClienteControlador clienteControlador;
     private Cliente cliente = ClienteControlador.cliente;
 
     @FXML
@@ -51,6 +52,8 @@ public class CompraMonedasControlador {
         try{
 
             movimientoMonedaService.comprarMonedas(cliente, monto);
+            cliente.setMonedas(cliente.getMonedas() + monto);
+            clienteControlador.actualizarMonedas(cliente.getMonedas());
             UIHelper.mostrarAlerta("Compra exitosa", "Se han comprado " + monto + " monedas.");
 
         }catch (Exception e){
@@ -58,5 +61,10 @@ public class CompraMonedasControlador {
             e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "No se pudo completar la compra.");
         }
+    }
+
+    public void setClienteControlador(ClienteControlador clienteControlador){
+
+        this.clienteControlador = clienteControlador;
     }
 }

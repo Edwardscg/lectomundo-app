@@ -17,9 +17,9 @@ public class MovimientoMonedaDAO {
 
     public void registrarMovimiento(MovimientoMoneda movimiviento) throws Exception {
 
-        String sql = "INSERT INTO movimiento_moneda (id_usuario, tipo_movimiento, monto, fecha) VALUES (?, ?, ?, ?);";
+        String sql = "INSERT INTO movimiento_moneda (id_usuario, tipo_movimiento, monto) VALUES (?, ?, ?);";
 
-        DBHelper.manejarEntidad(sql, movimiviento.getCliente().getId_usuario(), movimiviento.getTipo_movimiento(), movimiviento.getMonto(), Timestamp.valueOf(movimiviento.getFecha_movimiento()));
+        DBHelper.manejarEntidad(sql, movimiviento.getCliente().getId_usuario(), movimiviento.getTipo_movimiento(), movimiviento.getMonto());
     }
 
     // POSIBLE BORRADO

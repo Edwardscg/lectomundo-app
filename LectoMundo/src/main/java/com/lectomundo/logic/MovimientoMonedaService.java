@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 public class MovimientoMonedaService {
 
     private MovimientoMonedaDAO movimientoMonedaDAO = new MovimientoMonedaDAO();
+    private UsuarioService usuarioService = new UsuarioService();
 
     public void comprarMonedas(Cliente cliente, int monto)throws Exception{
 
@@ -17,11 +18,12 @@ public class MovimientoMonedaService {
             throw new IllegalArgumentException("Cliente inválido o monto no válido.");
         }
 
-        cliente.setMonedas(cliente.getMonedas() + monto);
+        int nuevas_monedas = cliente.getMonedas() + monto;
+        usuarioService.actualizarMonedas(cliente.getId_usuario(), nuevas_monedas);
 
         MovimientoMoneda movimientoMoneda = new MovimientoMoneda();
         movimientoMoneda.setCliente(cliente);
-        movimientoMoneda.setTipo_movimiento("compra");
+        movimientoMoneda.setTipo_movimiento("recarga");
         movimientoMoneda.setMonto(monto);
 
         movimientoMonedaDAO.registrarMovimiento(movimientoMoneda);
@@ -38,7 +40,8 @@ public class MovimientoMonedaService {
             return;
         }
 
-        cliente.setMonedas(cliente.getMonedas() - monto);
+        int nuevas_monedas = cliente.getMonedas() - monto;
+        usuarioService.actualizarMonedas(cliente.getId_usuario(), nuevas_monedas);
 
         MovimientoMoneda movimientoMoneda = new MovimientoMoneda();
         movimientoMoneda.setCliente(cliente);
