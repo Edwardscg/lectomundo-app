@@ -21,6 +21,7 @@ public class MovimientoMonedaDAO {
         DBHelper.manejarEntidad(sql, movimiviento.getCliente().getId_usuario(), movimiviento.getTipo_movimiento(), movimiviento.getMonto(), Timestamp.valueOf(movimiviento.getFecha_movimiento()));
     }
 
+    // CAMBIAR A OBSERVABLE LIST
     public List<MovimientoMoneda> verMovimientosPorUsuario(int id_usuario) throws Exception {
 
         String sql = "SELECT * FROM movimiento_moneda WHERE id_usuario = ? ORDER BY fecha DESC;";
@@ -28,6 +29,7 @@ public class MovimientoMonedaDAO {
         return DBHelper.obtenerListaEntidad(sql, this::mapearMovimiento, id_usuario);
     }
 
+    // CAMBIAR A OBSERVABLE LIST
     public List<MovimientoMoneda> verMovimientos() throws Exception {
 
         String sql = "SELECT * FROM movimiento_moneda ORDER BY fecha DESC;";

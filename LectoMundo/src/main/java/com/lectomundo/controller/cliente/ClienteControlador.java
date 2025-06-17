@@ -38,4 +38,19 @@ public class ClienteControlador {
         }
     }
 
+    @FXML
+    private void verDocumentosComprados(){
+
+        try{
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/documentosComprados.fxml"));
+            Node contenido = loader.load();
+            panelContenedor.getChildren().setAll(contenido);
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -5,18 +5,14 @@ import com.lectomundo.repository.dao.CompraDocumentoDAO;
 import com.lectomundo.repository.dao.MembresiaDAO;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class CompraDocumentoService {
 
-    CompraDocumentoDAO compraDocumentoDAO;
-    MembresiaDAO membresiaDAO;
+    CompraDocumentoDAO compraDocumentoDAO = new CompraDocumentoDAO();
+    MembresiaDAO membresiaDAO = new MembresiaDAO();
 
-    public CompraDocumentoService() {
-        compraDocumentoDAO = new CompraDocumentoDAO();
-        membresiaDAO = new MembresiaDAO();
-    }
-
-    public void comprarDocumento(Cliente cliente, Documento documento) throws Exception{
+    public void registrarCompra(Cliente cliente, Documento documento) throws Exception{
 
         if (cliente == null || documento == null) {
             throw new IllegalArgumentException("Cliente o documento no válido.");
@@ -40,6 +36,11 @@ public class CompraDocumentoService {
         compraDocumento.setCosto(documento.getPrecio()*3);
 
         compraDocumentoDAO.registrarCompra(compraDocumento);
+    }
+
+    public List<Documento> verDocumentosCompradosPorUsuario(int id_usuario) throws Exception{
+
+        return compraDocumentoDAO.verDocumentosCompradosPorUsuario(id_usuario);
     }
 
     public boolean estaComprado(int id_usuario, int id_documento) throws Exception{

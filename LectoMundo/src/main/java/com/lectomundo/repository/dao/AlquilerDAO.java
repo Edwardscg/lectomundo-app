@@ -26,6 +26,7 @@ public class AlquilerDAO {
         DBHelper.manejarEntidad(sql, id_alquiler);
     }
 
+    // POSIBLE BORRADO, SIN USO
     public Alquiler buscarAlquilerPorId(int id_alquiler) throws Exception {
 
         String sql = "SELECT * FROM alquiler WHERE id_alquiler = ?";
@@ -33,6 +34,7 @@ public class AlquilerDAO {
         return DBHelper.obtenerEntidad(sql, this::mapearAlquiler, id_alquiler);
     }
 
+    // POSIBLE BORRADO, SIN USO
     public List<Alquiler> verAlquileres() throws Exception {
         List<Alquiler> lista_alquileres = new ArrayList<>();
 
@@ -41,6 +43,7 @@ public class AlquilerDAO {
         return DBHelper.obtenerListaEntidad(sql, this::mapearAlquiler);
     }
 
+    // POSIBLE BORRADO, SIN USO
     public List<Alquiler> verAlquileresPorUsuario(int id_usuario) throws Exception {
 
         String sql = "SELECT * FROM alquiler WHERE id_usuario = ?";

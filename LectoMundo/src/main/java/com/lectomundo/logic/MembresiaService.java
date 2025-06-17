@@ -11,6 +11,7 @@ public class MembresiaService {
 
     MembresiaDAO membresiaDAO = new MembresiaDAO();
 
+    // CAMBIAR A QUE RECIBA CLIENTE COMO ARGUMENTO
     public void registrarMembresia(Membresia membresia) throws Exception{
 
         validarMembresia(membresia);
