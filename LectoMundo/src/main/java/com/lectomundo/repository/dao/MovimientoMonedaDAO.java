@@ -4,6 +4,7 @@ import com.lectomundo.model.Cliente;
 import com.lectomundo.model.MovimientoMoneda;
 import com.lectomundo.model.Usuario;
 import com.lectomundo.repository.helper.DBHelper;
+import javafx.collections.ObservableList;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -16,25 +17,25 @@ public class MovimientoMonedaDAO {
 
     public void registrarMovimiento(MovimientoMoneda movimiviento) throws Exception {
 
-        String sql = "INSERT INTO movimiento_moneda (id_usuario, tipo_movimiento, monto, fecha) VALUES (?, ?, ?, ?);";
+        String sql = "INSERT INTO movimiento_moneda (id_usuario, tipo_movimiento, monto) VALUES (?, ?, ?);";
 
-        DBHelper.manejarEntidad(sql, movimiviento.getCliente().getId_usuario(), movimiviento.getTipo_movimiento(), movimiviento.getMonto(), Timestamp.valueOf(movimiviento.getFecha_movimiento()));
+        DBHelper.manejarEntidad(sql, movimiviento.getCliente().getId_usuario(), movimiviento.getTipo_movimiento(), movimiviento.getMonto());
     }
 
-    // CAMBIAR A OBSERVABLE LIST
-    public List<MovimientoMoneda> verMovimientosPorUsuario(int id_usuario) throws Exception {
+    // POSIBLE BORRADO
+    public ObservableList<MovimientoMoneda> verMovimientosPorUsuario(int id_usuario) throws Exception {
 
         String sql = "SELECT * FROM movimiento_moneda WHERE id_usuario = ? ORDER BY fecha DESC;";
 
-        return DBHelper.obtenerListaEntidad(sql, this::mapearMovimiento, id_usuario);
+        return DBHelper.llenarTabla(sql, this::mapearMovimiento);
     }
 
     // CAMBIAR A OBSERVABLE LIST
-    public List<MovimientoMoneda> verMovimientos() throws Exception {
+    public ObservableList<MovimientoMoneda> verMovimientos() throws Exception {
 
         String sql = "SELECT * FROM movimiento_moneda ORDER BY fecha DESC;";
 
-        return DBHelper.obtenerListaEntidad(sql, this::mapearMovimiento);
+        return DBHelper.llenarTabla(sql, this::mapearMovimiento);
     }
 
     private MovimientoMoneda mapearMovimiento(ResultSet rs) throws Exception{

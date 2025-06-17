@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.lectomundo.controller.cliente.CompraMonedasControlador"
+            prefHeight="650.0" prefWidth="1000.0">
+
+    <VBox spacing="20" alignment="CENTER" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+
+        <Label text="COMPRA DE MONEDAS" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+        <FlowPane hgap="20" vgap="20" alignment="CENTER">
+
+            <padding>
+                <Insets top="20" left="10" right="10" bottom="20"/>
+            </padding>
+
+            <VBox spacing="10" alignment="CENTER">
+                <ImageView fx:id="img1" fitHeight="100" fitWidth="100"/>
+                <Label text="60 Monedas"/>
+                <Button text="Comprar" onAction="#comprar60Monedas"/>
+            </VBox>
+
+            <VBox spacing="10" alignment="CENTER">
+                <ImageView fx:id="img2" fitHeight="100" fitWidth="100"/>
+                <Label text="300 Monedas"/>
+                <Button text="Comprar" onAction="#comprar300Monedas"/>
+            </VBox>
+
+            <VBox spacing="10" alignment="CENTER">
+                <ImageView fx:id="img3" fitHeight="100" fitWidth="100"/>
+                <Label text="980 Monedas"/>
+                <Button text="Comprar" onAction="#comprar980Monedas"/>
+            </VBox>
+
+        </FlowPane>
+
+        <FlowPane hgap="20" vgap="20" alignment="CENTER">
+
+            <padding>
+                <Insets top="20" left="10" right="10" bottom="20"/>
+            </padding>
+
+            <VBox spacing="10" alignment="CENTER">
+                <ImageView fx:id="img4" fitHeight="100" fitWidth="100"/>
+                <Label text="1980 Monedas"/>
+                <Button text="Comprar" onAction="#comprar1980Monedas"/>
+            </VBox>
+
+            <VBox spacing="10" alignment="CENTER">
+                <ImageView fx:id="img5" fitHeight="100" fitWidth="100"/>
+                <Label text="3280 Monedas"/>
+                <Button text="Comprar" onAction="#comprar3280Monedas"/>
+            </VBox>
+
+            <VBox spacing="10" alignment="CENTER">
+                <ImageView fx:id="img6" fitHeight="100" fitWidth="100"/>
+                <Label text="6480 Monedas"/>
+                <Button text="Comprar" onAction="#comprar6480Monedas"/>
+            </VBox>
+
+        </FlowPane>
+
+    </VBox>
+
+</AnchorPane>

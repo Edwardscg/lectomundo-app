@@ -6,6 +6,9 @@ public class Favorito {
     private Documento documento;
     private boolean es_favorito;
 
+    public Favorito() {
+    }
+
     public Favorito(int id_favorito, Cliente cliente, Documento documento, boolean es_favorito) {
         this.id_favorito = id_favorito;
         this.cliente = cliente;

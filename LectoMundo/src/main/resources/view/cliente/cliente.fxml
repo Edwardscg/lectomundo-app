@@ -17,10 +17,10 @@
 
             <HBox spacing="5" alignment="CENTER">
                 <ImageView fx:id="iconoMoneda" fitHeight="24" fitWidth="24" pickOnBounds="true" preserveRatio="true"/>
-                <Label fx:id="lblMonedas" text="0" style="-fx-font-size: 14pt; -fx-font-weight: bold;"/>
+                <Label fx:id="lblMonedas" style="-fx-font-size: 14pt; -fx-font-weight: bold;"/>
             </HBox>
 
-            <Button fx:id="btnComprarMonedas" text="➕">
+            <Button fx:id="btnComprarMonedas" text="➕" onAction="#irATiendaMonedas">
 
                 <tooltip>
 
@@ -60,7 +60,7 @@
                 </Button>
 
                 <Button fx:id="btnExplorar" onAction="#explorarDocumentos" text="📚 Explorar" prefWidth="200"/>
-                <Button fx:id="btnAlquilados" text="Documentos Alquilados" prefWidth="200"/>
+                <Button fx:id="btnAlquilados" onAction="#verDocumentosAlquilados" text="Documentos Alquilados" prefWidth="200"/>
                 <Button fx:id="btnComprados" onAction="#verDocumentosComprados" text="Documentos Comprados" prefWidth="200"/>
                 <Button fx:id="btnFavoritos" text="Favoritos" prefWidth="200"/>
                 <Button fx:id="btnMembresia" text="Membresía" prefWidth="200"/>

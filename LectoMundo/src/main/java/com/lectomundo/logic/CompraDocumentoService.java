@@ -38,9 +38,9 @@ public class CompraDocumentoService {
         compraDocumentoDAO.registrarCompra(compraDocumento);
     }
 
-    public List<Documento> verDocumentosCompradosPorUsuario(int id_usuario) throws Exception{
+    public List<Documento> verDocumentosCompradosPorUsuario(Cliente cliente) throws Exception{
 
-        return compraDocumentoDAO.verDocumentosCompradosPorUsuario(id_usuario);
+        return compraDocumentoDAO.verDocumentosCompradosPorUsuario(cliente.getId_usuario());
     }
 
     public boolean estaComprado(int id_usuario, int id_documento) throws Exception{

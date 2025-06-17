@@ -13,7 +13,7 @@ public class FavoritoDAO {
 
     public void agregarFavorito(int id_usuario, int id_documento) throws Exception {
 
-        if (esFavorito(id_usuario, id_documento)) {
+        if (existeregistro(id_usuario, id_documento)) {
 
             String sql = "UPDATE favorito SET es_favorito = 1 WHERE id_usuario = ? AND id_documento = ?";
 
@@ -41,6 +41,13 @@ public class FavoritoDAO {
         String sql = "SELECT d.* FROM favorito f JOIN documento d ON f.id_documento = d.id_documento WHERE f.id_usuario = ? AND f.es_favorito = 1";
 
         return DBHelper.obtenerListaEntidad(sql, documentoDAO::mapearDocumento, id_usuario);
+    }
+
+    private boolean existeregistro(int id_usuario, int id_documento) throws Exception{
+
+        String sql = "SELECT 1 FROM favorito WHERE id_usuario = ? AND id_documento = ? LIMIT 1";
+
+        return DBHelper.obtenerEntidad(sql, rs -> true, id_usuario, id_documento) != null;
     }
 
     public boolean esFavorito(int id_usuario, int id_documento) throws Exception {
