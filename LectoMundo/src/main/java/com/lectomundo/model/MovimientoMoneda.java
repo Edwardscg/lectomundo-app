@@ -9,6 +9,9 @@ public class MovimientoMoneda {
     private int monto;
     private LocalDateTime fecha_movimiento;
 
+    public MovimientoMoneda() {
+    }
+
     public MovimientoMoneda(int id_movimiento, Cliente cliente, String tipo_movimiento, int monto, LocalDateTime fecha_movimiento) {
         this.id_movimiento = id_movimiento;
         this.cliente = cliente;
