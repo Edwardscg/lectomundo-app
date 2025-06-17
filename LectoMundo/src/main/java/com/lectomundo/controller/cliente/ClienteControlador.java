@@ -39,6 +39,22 @@ public class ClienteControlador {
     }
 
     @FXML
+    private void verDocumentosAlquilados(){
+
+        try{
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/documentosAlquilados.fxml"));
+            Node contenido = loader.load();
+            panelContenedor.getChildren().setAll(contenido);
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
     private void verDocumentosComprados(){
 
         try{

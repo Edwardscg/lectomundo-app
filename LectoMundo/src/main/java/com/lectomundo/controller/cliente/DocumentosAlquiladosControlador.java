@@ -1,7 +1,7 @@
 package com.lectomundo.controller.cliente;
 
 import com.lectomundo.controller.UIHelper;
-import com.lectomundo.logic.CompraDocumentoService;
+import com.lectomundo.logic.AlquilerService;
 import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Documento;
 import javafx.fxml.FXML;
@@ -11,30 +11,30 @@ import javafx.scene.layout.VBox;
 
 import java.util.List;
 
-public class DocumentosCompradosControlador {
+public class DocumentosAlquiladosControlador {
 
     @FXML
     VBox vboxContenedor;
 
-    private CompraDocumentoService compraDocumentoService = new CompraDocumentoService();
+    private AlquilerService alquilerService = new AlquilerService();
     private Cliente cliente = ClienteControlador.cliente;
 
     @FXML
     private void initialize(){
 
-        cargarDocumentosComprados();
+        cargarDocumentosAlquilados();
     }
 
-    private void cargarDocumentosComprados(){
+    private void cargarDocumentosAlquilados(){
 
         try{
 
-            List<Documento> documentosComprados = compraDocumentoService.verDocumentosCompradosPorUsuario(cliente);
+            List<Documento> documentosAlquilados = alquilerService.obtenerAlquileresActivosPorUsuario(cliente);
 
             HBox fila = new HBox(20);
             int contador = 0;
 
-            for(Documento documento : documentosComprados){
+            for(Documento documento : documentosAlquilados){
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/itemDocumento.fxml"));
                 VBox item = loader.load();
@@ -59,7 +59,7 @@ public class DocumentosCompradosControlador {
 
         }catch (Exception e){
 
-            UIHelper.mostrarAlerta("Error", "No se pudo cargar los documentos comprados.");
+            UIHelper.mostrarAlerta("Error", "No se pudo cargar los documentos alquilados.");
         }
     }
 }
