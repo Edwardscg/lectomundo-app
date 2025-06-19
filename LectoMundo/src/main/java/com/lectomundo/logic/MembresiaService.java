@@ -15,10 +15,6 @@ public class MembresiaService {
     // CAMBIAR A QUE RECIBA CLIENTE COMO ARGUMENTO
     public void registrarMembresia(Cliente cliente) throws Exception{
 
-        if (cliente == null) {
-            throw new IllegalArgumentException("Cliente o documento no válido.");
-        }
-
         if(membresiaDAO.tieneMembresiaActiva(cliente.getId_usuario())){
 
             throw new IllegalArgumentException("Ya cuentas con una membresía activa.");
@@ -35,19 +31,16 @@ public class MembresiaService {
 
     public void actualizarMembresia (Cliente cliente) throws Exception{
 
-        validarMembresia(membresia);
+        LocalDate fechaFin = LocalDate.now().plusDays(30);
+        Membresia membresia = new Membresia();
+        membresia.setFecha_fin(fechaFin);
 
         membresiaDAO.actualizarMembresia(membresia);
     }
 
     public void finalizarMembresia(int id_membresia) throws Exception{
 
-        if(id_membresia <=0){
-
-            throw new IllegalArgumentException("ID de membresía inválido");
-        }
-
-        membresiaDAO.finalizarMembresia(id_membresia);
+        membresiaDAO.finalizarMembresia(id_membresia, LocalDate.now());
     }
 
     public boolean tieneMembresiaActiva(int id_usuario) throws Exception{
@@ -58,29 +51,5 @@ public class MembresiaService {
     public ObservableList<Membresia> verMembresias() throws Exception{
 
         return membresiaDAO.verMembresias();
-    }
-
-    private void validarMembresia(Membresia membresia) throws Exception{
-
-        if (membresia == null) {
-            throw new IllegalArgumentException("La membresía no puede ser nula.");
-        }
-
-        if (membresia.getCliente().getId_usuario() <= 0) {
-            throw new IllegalArgumentException("ID de usuario inválido.");
-        }
-
-        if (membresia.getFecha_fin() == null || membresia.getFecha_fin().isBefore(LocalDate.now())) {
-            throw new IllegalArgumentException("La fecha de fin debe ser posterior a hoy.");
-        }
-
-        if (membresia.getPrecio() < 0) {
-            throw new IllegalArgumentException("El costo no puede ser negativo.");
-        }
-
-        Estado estado = membresia.getEstado_membresia();
-        if ((estado != Estado.activo && estado != Estado.finalizado)) {
-            throw new IllegalArgumentException("Estado inválido. Debe ser 'activo' o 'finalizado'.");
-        }
     }
 }

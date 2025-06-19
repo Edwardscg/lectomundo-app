@@ -24,14 +24,14 @@ public class MembresiaDAO {
 
         String sql = "UPDATE membresia SET fecha_fin = ? WHERE id_membresia = ?";
 
-        DBHelper.manejarEntidad(sql, Date.valueOf(membresia.getFecha_inicio()), membresia.getId_membresia());
+        DBHelper.manejarEntidad(sql, membresia.getFecha_fin(), membresia.getId_membresia());
     }
 
-    public void finalizarMembresia(int id_membresia) throws Exception {
+    public void finalizarMembresia(int id_membresia, LocalDate fecha_fin) throws Exception {
 
         String sql = "UPDATE membresia SET estado = ?, fecha_fin = ? WHERE id_membresia = ?";
 
-        DBHelper.manejarEntidad(sql, Estado.finalizado.toString(), Date.valueOf(LocalDate.now()), id_membresia);
+        DBHelper.manejarEntidad(sql, Estado.finalizado.toString(), fecha_fin, id_membresia);
     }
 
     public Membresia buscarMembresiaPorId(int id_membresia) throws Exception {
