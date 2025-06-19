@@ -1,39 +1,62 @@
 package com.lectomundo.logic;
 
-import com.lectomundo.model.Estado;
+import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Membresia;
 import com.lectomundo.repository.dao.MembresiaDAO;
+import com.lectomundo.repository.dao.UsuarioDAO;
 import javafx.collections.ObservableList;
-
 import java.time.LocalDate;
 
 public class MembresiaService {
 
     MembresiaDAO membresiaDAO = new MembresiaDAO();
+    UsuarioService usuarioService = new UsuarioService();
 
     // CAMBIAR A QUE RECIBA CLIENTE COMO ARGUMENTO
-    public void registrarMembresia(Membresia membresia) throws Exception{
+    public Cliente registrarMembresia(Cliente cliente) throws Exception{
 
-        validarMembresia(membresia);
+        if(membresiaDAO.tieneMembresiaActiva(cliente.getId_usuario())){
 
-        membresiaDAO.registrarMembresia(membresia);
-    }
-
-    public void actualizarMembresia (Membresia membresia) throws Exception{
-
-        validarMembresia(membresia);
-
-        membresiaDAO.actualizarMembresia(membresia);
-    }
-
-    public void finalizarMembresia(int id_membresia) throws Exception{
-
-        if(id_membresia <=0){
-
-            throw new IllegalArgumentException("ID de membresía inválido");
+            throw new IllegalArgumentException("Ya cuentas con una membresía activa.");
         }
 
-        membresiaDAO.finalizarMembresia(id_membresia);
+        Membresia membresia = new Membresia();
+
+        if(cliente.getMonedas()<membresia.getPrecio()) {
+            return null;
+        }
+
+        int nuevas_monedas = cliente.getMonedas() - membresia.getPrecio();
+        usuarioService.actualizarMonedas(cliente.getId_usuario(), nuevas_monedas);
+        cliente.setMonedas(nuevas_monedas);
+
+        LocalDate fechaFin = LocalDate.now().plusDays(30);
+        membresia.setCliente(cliente);
+        membresia.setFecha_inicio(LocalDate.now());
+        membresia.setFecha_fin(fechaFin);
+
+        membresiaDAO.registrarMembresia(membresia);
+
+        return cliente;
+    }
+
+    public Cliente actualizarMembresia (Cliente cliente) throws Exception{
+
+        LocalDate fechaFin = LocalDate.now().plusDays(30);
+        Membresia membresia = new Membresia();
+
+        int nuevas_monedas = cliente.getMonedas() - membresia.getPrecio();
+        usuarioService.actualizarMonedas(cliente.getId_usuario(), nuevas_monedas);
+        cliente.setMonedas(nuevas_monedas);
+
+        membresiaDAO.actualizarMembresia(cliente.getId_usuario(), fechaFin);
+
+        return cliente;
+    }
+
+    public void finalizarMembresia(Cliente cliente) throws Exception{
+
+        membresiaDAO.finalizarMembresia(cliente.getId_usuario(), LocalDate.now());
     }
 
     public boolean tieneMembresiaActiva(int id_usuario) throws Exception{
@@ -44,29 +67,5 @@ public class MembresiaService {
     public ObservableList<Membresia> verMembresias() throws Exception{
 
         return membresiaDAO.verMembresias();
-    }
-
-    private void validarMembresia(Membresia membresia) throws Exception{
-
-        if (membresia == null) {
-            throw new IllegalArgumentException("La membresía no puede ser nula.");
-        }
-
-        if (membresia.getCliente().getId_usuario() <= 0) {
-            throw new IllegalArgumentException("ID de usuario inválido.");
-        }
-
-        if (membresia.getFecha_fin() == null || membresia.getFecha_fin().isBefore(LocalDate.now())) {
-            throw new IllegalArgumentException("La fecha de fin debe ser posterior a hoy.");
-        }
-
-        if (membresia.getPrecio() < 0) {
-            throw new IllegalArgumentException("El costo no puede ser negativo.");
-        }
-
-        Estado estado = membresia.getEstado_membresia();
-        if ((estado != Estado.activo && estado != Estado.finalizado)) {
-            throw new IllegalArgumentException("Estado inválido. Debe ser 'activo' o 'finalizado'.");
-        }
     }
 }

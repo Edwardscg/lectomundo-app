@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.lectomundo.controller.cliente.MembresiaControlador"
+            prefHeight="650.0" prefWidth="1000.0"
+            spacing="20" style="-fx-padding: 30;">
+
+    <Label fx:id="lblEstado" style="-fx-font-size: 16px;"/>
+
+    <Button fx:id="btnAdquirir" onAction="#adquirirMembresia" text="Adquirir Membresía" alignment="TOP_RIGHT"/>
+    <Button fx:id="btnExtender" onAction="#extenderMembresia" text="Extender Membresía" visible="false"/>
+    <Button fx:id="btnFinalizar" onAction="#finalizarMembresia" text="Finalizar Membresía" visible="false"/>
+
+</VBox>

@@ -15,27 +15,23 @@ public class MembresiaDAO {
 
     public void registrarMembresia(Membresia membresia) throws Exception {
 
-        String sql = "INSERT INTO membresia (id_usuario, fecha_inicio, fecha_fin, costo, estado) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO membresia (id_usuario, fecha_inicio, fecha_fin, costo) VALUES (?, ?, ?, ?)";
 
-        DBHelper.manejarEntidad(sql, membresia.getCliente().getId_usuario(), Date.valueOf(membresia.getFecha_inicio()), Date.valueOf(membresia.getFecha_fin()), membresia.getPrecio(), membresia.getEstado_membresia().toString());
+        DBHelper.manejarEntidad(sql, membresia.getCliente().getId_usuario(), membresia.getFecha_inicio(), membresia.getFecha_fin(), membresia.getPrecio());
     }
 
-    public void actualizarMembresia(Membresia membresia) throws Exception {
+    public void actualizarMembresia(int id_usuario, LocalDate fecha_fin) throws Exception {
 
-        LocalDate nuevaFechaFin = membresia.getFecha_fin().plusDays(30);
+        String sql = "UPDATE membresia SET fecha_fin = ? WHERE id_usuario = ?";
 
-        String sql = "UPDATE membresia SET fecha_fin = ? WHERE id_membresia = ?";
-
-        DBHelper.manejarEntidad(sql, Date.valueOf(nuevaFechaFin), membresia.getId_membresia());
-
-        membresia.setFecha_fin(nuevaFechaFin);
+        DBHelper.manejarEntidad(sql, fecha_fin, id_usuario);
     }
 
-    public void finalizarMembresia(int id_membresia) throws Exception {
+    public void finalizarMembresia(int id_usuario, LocalDate fecha_fin) throws Exception {
 
-        String sql = "UPDATE membresia SET estado = ?, fecha_fin = ? WHERE id_membresia = ?";
+        String sql = "UPDATE membresia SET estado = ?, fecha_fin = ? WHERE id_usuario = ? AND estado = 'activo'";
 
-        DBHelper.manejarEntidad(sql, Estado.finalizado.toString(), Date.valueOf(LocalDate.now()), id_membresia);
+        DBHelper.manejarEntidad(sql, Estado.finalizado.toString(), fecha_fin, id_usuario);
     }
 
     public Membresia buscarMembresiaPorId(int id_membresia) throws Exception {
@@ -52,6 +48,7 @@ public class MembresiaDAO {
         return DBHelper.obtenerEntidad(sql, rs -> true, id_usuario) !=null;
     }
 
+    //POSIBLE BORRADO
     public List<Membresia> verMembresiasPorUsuario(int id_usuario) throws Exception {
 
         String sql = "SELECT * FROM membresia WHERE id_usuario = ? ORDER BY fecha_inicio DESC";

@@ -57,6 +57,7 @@ public class DetalleDocumentoControlador {
     private boolean tiene_membresia = false;
     private boolean esta_comprado = false;
     private boolean esta_alquilado = false;
+    private boolean es_favorito = false;
 
     @FXML
     private void initialize() {
@@ -128,27 +129,27 @@ public class DetalleDocumentoControlador {
     }
 
     @FXML
-    private void descargarDocumento(){
+    private void descargarDocumento() {
 
-        try{
+        try {
 
             String url = documento.getPdf_url();
 
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Descargar Documento");
-            fileChooser.setInitialFileName(documento.getTitulo().replaceAll("\\s+","_") + ".pdf");
+            fileChooser.setInitialFileName(documento.getTitulo().replaceAll("\\s+", "_") + ".pdf");
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos PDF", "*.pdf"));
             File destino = fileChooser.showSaveDialog(btnDescargar.getScene().getWindow());
 
-            if(destino != null){
+            if (destino != null) {
 
-                try(InputStream inputStream = new URL(url).openStream();
-                    OutputStream outputStream = new FileOutputStream(destino)){
+                try (InputStream inputStream = new URL(url).openStream();
+                     OutputStream outputStream = new FileOutputStream(destino)) {
 
                     byte[] buffer = new byte[4096];
                     int bytes_read;
 
-                    while((bytes_read = inputStream.read(buffer)) != -1){
+                    while ((bytes_read = inputStream.read(buffer)) != -1) {
 
                         outputStream.write(buffer, 0, bytes_read);
 
@@ -156,22 +157,22 @@ public class DetalleDocumentoControlador {
                     UIHelper.mostrarAlerta("Éxito", "El documento se ha descargado.");
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "No se pudo descargar el documento");
         }
     }
 
     @FXML
-    private void marcarFavorito(){
+    private void marcarFavorito() {
 
-        try{
+        try {
 
             favoritoService.agregarFavorito(cliente, documento);
             btnFavoritoVacio.setVisible(false);
             btnFavoritoLleno.setVisible(true);
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
             e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "No se pudo marcar como favorito.");
@@ -179,15 +180,15 @@ public class DetalleDocumentoControlador {
     }
 
     @FXML
-    private void desmarcarFavorito(){
+    private void desmarcarFavorito() {
 
-        try{
+        try {
 
             favoritoService.eliminarFavorito(cliente, documento);
             btnFavoritoVacio.setVisible(true);
             btnFavoritoLleno.setVisible(false);
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
             e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "No se pudo quitar de favoritos.");
@@ -203,7 +204,7 @@ public class DetalleDocumentoControlador {
             tiene_membresia = membresiaService.tieneMembresiaActiva(cliente.getId_usuario());
             esta_comprado = compraDocumentoService.estaComprado(cliente.getId_usuario(), documento.getId_documento());
             esta_alquilado = alquilerService.estaAlquilado(cliente.getId_usuario(), documento.getId_documento());
-            boolean es_favorito = favoritoService.esFavorito(cliente.getId_usuario(), documento.getId_documento());
+            es_favorito = favoritoService.esFavorito(cliente.getId_usuario(), documento.getId_documento());
 
             imgPortada.setImage(new Image(documento.getPortada_url()));
             lblTitulo.setText(documento.getTitulo());
@@ -217,21 +218,26 @@ public class DetalleDocumentoControlador {
             System.out.println("Está comprado: " + esta_comprado);
             System.out.println("Está alquilado: " + esta_alquilado);
 
-            if(es_favorito){
+            if (es_favorito) {
 
                 btnFavoritoLleno.setVisible(true);
                 btnFavoritoVacio.setVisible(false);
-            }else {
+            } else {
 
                 btnFavoritoVacio.setVisible(true);
                 btnFavoritoLleno.setVisible(false);
             }
 
-            if (tiene_membresia || esta_comprado) {
+            if (tiene_membresia) {
+                btnAlquilar.setVisible(false);
+                btnComprar.setVisible(true);
+                btnLeer.setVisible(true);
+                btnDescargar.setVisible(esta_comprado);
+            } else if (esta_comprado) {
                 btnAlquilar.setVisible(false);
                 btnComprar.setVisible(false);
                 btnLeer.setVisible(true);
-                btnDescargar.setVisible(esta_comprado);
+                btnDescargar.setVisible(true);
             } else if (esta_alquilado) {
                 btnAlquilar.setVisible(false);
                 btnDevolver.setVisible(true);
