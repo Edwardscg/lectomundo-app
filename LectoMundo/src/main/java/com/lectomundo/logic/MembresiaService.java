@@ -1,11 +1,9 @@
 package com.lectomundo.logic;
 
 import com.lectomundo.model.Cliente;
-import com.lectomundo.model.Estado;
 import com.lectomundo.model.Membresia;
 import com.lectomundo.repository.dao.MembresiaDAO;
 import javafx.collections.ObservableList;
-
 import java.time.LocalDate;
 
 public class MembresiaService {

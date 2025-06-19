@@ -1,6 +1,7 @@
 package com.lectomundo.controller.cliente;
 
 import com.lectomundo.logic.DocumentoService;
+import com.lectomundo.logic.MembresiaService;
 import com.lectomundo.model.Documento;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
