@@ -68,6 +68,21 @@ public class ClienteControlador {
     }
 
     @FXML
+    private void verDocumentosFavoritos(){
+
+        try{
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/documentosFavoritos.fxml"));
+            Node contenido = loader.load();
+            panelContenedor.getChildren().setAll(contenido);
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     private void irATiendaMonedas(){
 
         try{
