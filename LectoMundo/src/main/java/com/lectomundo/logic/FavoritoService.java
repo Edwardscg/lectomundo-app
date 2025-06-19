@@ -43,7 +43,7 @@ public class FavoritoService {
         return favoritoDAO.esFavorito(id_usuario, id_documento);
     }
 
-    public List<Documento> obtenerFavoritosPorUsuario(Cliente cliente, Documento documento) throws Exception {
+    public List<Documento> obtenerFavoritosPorUsuario(Cliente cliente) throws Exception {
 
         return favoritoDAO.obtenerFavoritosPorUsuario(cliente.getId_usuario());
     }
