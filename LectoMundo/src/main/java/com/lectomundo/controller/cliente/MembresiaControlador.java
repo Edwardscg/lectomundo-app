@@ -37,4 +37,19 @@ public class MembresiaControlador {
             UIHelper.mostrarAlerta("Error", "No se pudo adquirir la membresia.");
         }
     }
+
+    @FXML
+    private void extenderMembresia(){
+
+        try{
+
+            membresiaService.actualizarMembresia(cliente);
+            UIHelper.mostrarAlerta("Membresía Extendedia", "Se ha extendido la membresía por 30 días más.");
+            initialize();
+
+        }catch (Exception e){
+
+            UIHelper.mostrarAlerta("Error", "No se pudo extender la membresía.");
+        }
+    }
 }
