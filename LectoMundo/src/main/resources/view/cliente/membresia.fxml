@@ -14,7 +14,7 @@
 
     <Label fx:id="lblEstado" style="-fx-font-size: 16px;"/>
 
-    <Button fx:id="btnAdquirir" text="Adquirir Membresía" alignment="TOP_RIGHT"/>
+    <Button fx:id="btnAdquirir" onAction="#adquirirMembresia" text="Adquirir Membresía" alignment="TOP_RIGHT"/>
     <Button fx:id="btnExtender" text="Extender Membresía" visible="false"/>
     <Button fx:id="btnFinalizar" text="Finalizar Membresía" visible="false"/>
 

@@ -18,8 +18,14 @@ public class MembresiaService {
             throw new IllegalArgumentException("Ya cuentas con una membresía activa.");
         }
 
-        LocalDate fechaFin = LocalDate.now().plusDays(30);
         Membresia membresia = new Membresia();
+
+        if(cliente.getMonedas()<membresia.getPrecio()){
+
+            return;
+        }
+
+        LocalDate fechaFin = LocalDate.now().plusDays(30);
         membresia.setCliente(cliente);
         membresia.setFecha_inicio(LocalDate.now());
         membresia.setFecha_fin(fechaFin);
