@@ -16,6 +16,6 @@
 
     <Button fx:id="btnAdquirir" onAction="#adquirirMembresia" text="Adquirir Membresía" alignment="TOP_RIGHT"/>
     <Button fx:id="btnExtender" onAction="#extenderMembresia" text="Extender Membresía" visible="false"/>
-    <Button fx:id="btnFinalizar" text="Finalizar Membresía" visible="false"/>
+    <Button fx:id="btnFinalizar" onAction="#finalizarMembresia" text="Finalizar Membresía" visible="false"/>
 
 </VBox>

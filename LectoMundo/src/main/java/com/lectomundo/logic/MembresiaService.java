@@ -42,9 +42,9 @@ public class MembresiaService {
         membresiaDAO.actualizarMembresia(membresia);
     }
 
-    public void finalizarMembresia(int id_membresia) throws Exception{
+    public void finalizarMembresia(Cliente cliente) throws Exception{
 
-        membresiaDAO.finalizarMembresia(id_membresia, LocalDate.now());
+        membresiaDAO.finalizarMembresia(cliente.getId_usuario(), LocalDate.now());
     }
 
     public boolean tieneMembresiaActiva(int id_usuario) throws Exception{

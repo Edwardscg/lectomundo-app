@@ -20,7 +20,26 @@ public class MembresiaControlador {
     @FXML
     private void initialize(){
 
+        try{
 
+            if(membresiaService.tieneMembresiaActiva(cliente.getId_usuario())){
+
+                lblEstado.setText("Membresía Activa");
+                btnAdquirir.setVisible(false);
+                btnExtender.setVisible(true);
+                btnFinalizar.setVisible(true);
+            }else {
+
+                lblEstado.setText("Sin Membresía");
+                btnAdquirir.setVisible(true);
+                btnExtender.setVisible(false);
+                btnFinalizar.setVisible(false);
+            }
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -50,6 +69,21 @@ public class MembresiaControlador {
         }catch (Exception e){
 
             UIHelper.mostrarAlerta("Error", "No se pudo extender la membresía.");
+        }
+    }
+
+    @FXML
+    private void finalizarMembresia(){
+
+        try{
+
+            membresiaService.finalizarMembresia(cliente);
+            UIHelper.mostrarAlerta("Membresía finalizada", "Tu membresía ha sido cancelada.");
+            initialize();
+
+        }catch (Exception e){
+
+            UIHelper.mostrarAlerta("Error", "No se pudo finalizar la membresía.");
         }
     }
 }
