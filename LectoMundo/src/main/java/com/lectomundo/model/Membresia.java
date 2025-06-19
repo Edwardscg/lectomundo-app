@@ -8,7 +8,7 @@ public class Membresia {
     private Cliente cliente;
     private LocalDate fecha_inicio;
     private LocalDate fecha_fin;
-    private int precio;
+    private int precio = 150;
     private Estado estado_membresia;
 
     public Membresia(int id_membresia, Cliente cliente, LocalDate fecha_inicio, LocalDate fecha_fin, int precio, Estado estado_membresia) {
@@ -18,6 +18,9 @@ public class Membresia {
         this.fecha_fin = fecha_fin;
         this.precio = precio;
         this.estado_membresia = estado_membresia;
+    }
+
+    public Membresia() {
     }
 
     public int getId_membresia() {

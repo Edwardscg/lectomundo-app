@@ -1,5 +1,6 @@
 package com.lectomundo.logic;
 
+import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Estado;
 import com.lectomundo.model.Membresia;
 import com.lectomundo.repository.dao.MembresiaDAO;
@@ -12,14 +13,27 @@ public class MembresiaService {
     MembresiaDAO membresiaDAO = new MembresiaDAO();
 
     // CAMBIAR A QUE RECIBA CLIENTE COMO ARGUMENTO
-    public void registrarMembresia(Membresia membresia) throws Exception{
+    public void registrarMembresia(Cliente cliente) throws Exception{
 
-        validarMembresia(membresia);
+        if (cliente == null) {
+            throw new IllegalArgumentException("Cliente o documento no válido.");
+        }
+
+        if(membresiaDAO.tieneMembresiaActiva(cliente.getId_usuario())){
+
+            throw new IllegalArgumentException("Ya cuentas con una membresía activa.");
+        }
+
+        LocalDate fechaFin = LocalDate.now().plusDays(30);
+        Membresia membresia = new Membresia();
+        membresia.setCliente(cliente);
+        membresia.setFecha_inicio(LocalDate.now());
+        membresia.setFecha_fin(fechaFin);
 
         membresiaDAO.registrarMembresia(membresia);
     }
 
-    public void actualizarMembresia (Membresia membresia) throws Exception{
+    public void actualizarMembresia (Cliente cliente) throws Exception{
 
         validarMembresia(membresia);
 
