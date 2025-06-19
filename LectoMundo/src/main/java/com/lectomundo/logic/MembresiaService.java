@@ -3,15 +3,17 @@ package com.lectomundo.logic;
 import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Membresia;
 import com.lectomundo.repository.dao.MembresiaDAO;
+import com.lectomundo.repository.dao.UsuarioDAO;
 import javafx.collections.ObservableList;
 import java.time.LocalDate;
 
 public class MembresiaService {
 
     MembresiaDAO membresiaDAO = new MembresiaDAO();
+    UsuarioService usuarioService = new UsuarioService();
 
     // CAMBIAR A QUE RECIBA CLIENTE COMO ARGUMENTO
-    public void registrarMembresia(Cliente cliente) throws Exception{
+    public Cliente registrarMembresia(Cliente cliente) throws Exception{
 
         if(membresiaDAO.tieneMembresiaActiva(cliente.getId_usuario())){
 
@@ -20,10 +22,13 @@ public class MembresiaService {
 
         Membresia membresia = new Membresia();
 
-        if(cliente.getMonedas()<membresia.getPrecio()){
-
-            return;
+        if(cliente.getMonedas()<membresia.getPrecio()) {
+            return null;
         }
+
+        int nuevas_monedas = cliente.getMonedas() - membresia.getPrecio();
+        usuarioService.actualizarMonedas(cliente.getId_usuario(), nuevas_monedas);
+        cliente.setMonedas(nuevas_monedas);
 
         LocalDate fechaFin = LocalDate.now().plusDays(30);
         membresia.setCliente(cliente);
@@ -31,15 +36,22 @@ public class MembresiaService {
         membresia.setFecha_fin(fechaFin);
 
         membresiaDAO.registrarMembresia(membresia);
+
+        return cliente;
     }
 
-    public void actualizarMembresia (Cliente cliente) throws Exception{
+    public Cliente actualizarMembresia (Cliente cliente) throws Exception{
 
         LocalDate fechaFin = LocalDate.now().plusDays(30);
         Membresia membresia = new Membresia();
-        membresia.setFecha_fin(fechaFin);
 
-        membresiaDAO.actualizarMembresia(membresia);
+        int nuevas_monedas = cliente.getMonedas() - membresia.getPrecio();
+        usuarioService.actualizarMonedas(cliente.getId_usuario(), nuevas_monedas);
+        cliente.setMonedas(nuevas_monedas);
+
+        membresiaDAO.actualizarMembresia(cliente.getId_usuario(), fechaFin);
+
+        return cliente;
     }
 
     public void finalizarMembresia(Cliente cliente) throws Exception{

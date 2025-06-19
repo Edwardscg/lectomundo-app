@@ -116,6 +116,24 @@ public class ClienteControlador {
         }
     }
 
+    @FXML
+    private void verMembresia(){
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/membresia.fxml"));
+            Node contenido = loader.load();
+            panelContenedor.getChildren().setAll(contenido);
+
+            MembresiaControlador membresiaControlador = loader.getController();
+            membresiaControlador.setClienteControlador(this);
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+    }
+
     public void actualizarMonedas(int nuevas_monedas){
 
         lblMonedas.setText(String.valueOf(nuevas_monedas));

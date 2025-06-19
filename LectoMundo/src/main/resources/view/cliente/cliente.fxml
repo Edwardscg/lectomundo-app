@@ -63,7 +63,7 @@
                 <Button fx:id="btnAlquilados" onAction="#verDocumentosAlquilados" text="Documentos Alquilados" prefWidth="200"/>
                 <Button fx:id="btnComprados" onAction="#verDocumentosComprados" text="Documentos Comprados" prefWidth="200"/>
                 <Button fx:id="btnFavoritos" onAction="#verDocumentosFavoritos" text="Favoritos" prefWidth="200"/>
-                <Button fx:id="btnMembresia" text="Membresía" prefWidth="200"/>
+                <Button fx:id="btnMembresia" onAction="#verMembresia" text="Membresía" prefWidth="200"/>
                 <Button fx:id="btnCuenta" text="Cuenta" prefWidth="200"/>
 
                 <Region VBox.vgrow="ALWAYS"/>

@@ -20,11 +20,11 @@ public class MembresiaDAO {
         DBHelper.manejarEntidad(sql, membresia.getCliente().getId_usuario(), membresia.getFecha_inicio(), membresia.getFecha_fin(), membresia.getPrecio());
     }
 
-    public void actualizarMembresia(Membresia membresia) throws Exception {
+    public void actualizarMembresia(int id_usuario, LocalDate fecha_fin) throws Exception {
 
-        String sql = "UPDATE membresia SET fecha_fin = ? WHERE id_membresia = ?";
+        String sql = "UPDATE membresia SET fecha_fin = ? WHERE id_usuario = ?";
 
-        DBHelper.manejarEntidad(sql, membresia.getFecha_fin(), membresia.getId_membresia());
+        DBHelper.manejarEntidad(sql, fecha_fin, id_usuario);
     }
 
     public void finalizarMembresia(int id_usuario, LocalDate fecha_fin) throws Exception {
