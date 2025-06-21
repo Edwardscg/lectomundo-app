@@ -18,14 +18,6 @@ public class AlquilerService {
 
     public void registrarAlquiler(Cliente cliente, Documento documento) throws Exception{
 
-        if (cliente == null || documento == null) {
-            throw new IllegalArgumentException("Cliente o documento no válido.");
-        }
-
-        if (membresiaDAO.tieneMembresiaActiva(cliente.getId_usuario())) {
-            throw new IllegalStateException("Con membresía activa, no se requiere alquilar.");
-        }
-
         if (alquilerDAO.estaAlquilado(cliente.getId_usuario(), documento.getId_documento())) {
             throw new IllegalStateException("El documento ya está alquilado por este cliente.");
         }

@@ -12,7 +12,6 @@ public class MembresiaService {
     MembresiaDAO membresiaDAO = new MembresiaDAO();
     UsuarioService usuarioService = new UsuarioService();
 
-    // CAMBIAR A QUE RECIBA CLIENTE COMO ARGUMENTO
     public Cliente registrarMembresia(Cliente cliente) throws Exception{
 
         if(membresiaDAO.tieneMembresiaActiva(cliente.getId_usuario())){
