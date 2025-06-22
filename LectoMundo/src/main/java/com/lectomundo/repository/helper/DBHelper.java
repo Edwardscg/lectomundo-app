@@ -26,23 +26,30 @@ public class DBHelper {
 
     // Ejecuta una consulta SQL con parámetros y devuelve un objeto ConsultaResult
     // que encapsula la conexión, PreparedStatement y ResultSet asociados.
-    public static  ConsultaManager ejecutarConsulta(String sql, Object... parametros) throws SQLException {
+    public static  ConsultaManager ejecutarConsulta(String sql, Object... parametros) {
 
-        Connection conn = DBConexion.establecerConexion();
-        PreparedStatement ps = conn.prepareStatement(sql);
+        try{
 
-        asignarParametros(ps, parametros);
+            Connection conn = DBConexion.establecerConexion();
+            PreparedStatement ps = conn.prepareStatement(sql);
 
-        ResultSet rs = ps.executeQuery();
+            asignarParametros(ps, parametros);
 
-        return new ConsultaManager(conn, ps, rs);
+            ResultSet rs = ps.executeQuery();
+
+            return new ConsultaManager(conn, ps, rs);
+
+        }catch (SQLException e){
+
+            throw new RuntimeException("Error al ejecutar consulta en la Base de Datos.");
+        }
     }
 
     // Ejecuta una consulta SQL con parámetros, mapea la primera fila del resultado a un objeto T
     // mediante un RowMapper, y cierra automáticamente los recursos asociados.
-    public static <T> T obtenerEntidad(String sql, RowMapper<T> mapper, Object... parametros) throws Exception{
+    public static <T> T obtenerEntidad(String sql, RowMapper<T> mapper, Object... parametros) {
 
-        T entidad = null;
+
         ConsultaManager cr = null;
 
         try{
@@ -52,9 +59,13 @@ public class DBHelper {
 
             if(rs.next()){
 
-                entidad = mapper.mapRow(rs);
+                return mapper.mapRow(rs);
             }
+            return null;
 
+        } catch (Exception e){
+
+            throw new RuntimeException("Error al obtener entidad de la Base de Datos.");
         }finally {
 
             if(cr!=null){
@@ -62,12 +73,11 @@ public class DBHelper {
                 cr.cerrar();
             }
         }
-        return entidad;
     }
 
     // Ejecuta una consulta SQL con parámetros, mapea cada fila del ResultSet a un objeto de tipo T
     // usando un RowMapper, y devuelve una lista con todos los objetos mapeados.
-    public static <T> List<T> obtenerListaEntidad(String sql, RowMapper<T> mapper, Object... parametros) throws Exception{
+    public static <T> List<T> obtenerListaEntidad(String sql, RowMapper<T> mapper, Object... parametros) {
 
         List<T> lista = new ArrayList<>();
 
@@ -83,6 +93,10 @@ public class DBHelper {
                 lista.add(mapper.mapRow(rs));
             }
 
+            return lista;
+        } catch (Exception e){
+
+            throw new RuntimeException("Error al obtener lista de entidades de la Base de Datos.");
         }finally {
 
             if(cr!=null){
@@ -90,8 +104,6 @@ public class DBHelper {
                 cr.cerrar();
             }
         }
-
-        return lista;
     }
 
     // Ejecuta una consulta SQL y llena una ObservableList con objetos mapeados desde el ResultSet.
@@ -109,15 +121,11 @@ public class DBHelper {
                 lista.add(objeto);
             }
 
-        } catch (SQLException e) {
-
-            e.printStackTrace();
+            return lista;
         } catch (Exception e) {
 
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error al llenar tabla desde la Base de Datos.");
         }
-
-        return lista;
     }
 
     private static void asignarParametros(PreparedStatement ps, Object... parametros) throws SQLException{

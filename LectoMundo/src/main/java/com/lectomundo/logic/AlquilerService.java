@@ -39,11 +39,20 @@ public class AlquilerService {
 
     }
 
-    public void devolverDocumento(Cliente cliente, Documento documento) throws Exception{
+    public void devolverDocumento(Cliente cliente, Documento documento) {
 
-        Alquiler alquiler_activo = alquilerDAO.obtenerAlquilerActivo(cliente.getId_usuario(), documento.getId_documento());
+        try{
 
-        alquilerDAO.finalizarAlquiler(alquiler_activo.getId_alquiler());
+            Alquiler alquiler_activo = alquilerDAO.obtenerAlquilerActivo(cliente.getId_usuario(), documento.getId_documento());
+
+            alquilerDAO.finalizarAlquiler(alquiler_activo.getId_alquiler());
+
+        }catch (RuntimeException e){
+
+            throw new RuntimeException("");
+        }
+
+
     }
 
     public boolean estaAlquilado(int id_usuario, int id_documento) throws Exception{
