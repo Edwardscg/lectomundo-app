@@ -10,36 +10,17 @@ import java.util.List;
 public class DBHelper {
 
     // Ejecuta una sentencia SQL de tipo INSERT, UPDATE o DELETE con parámetros dinámicos.
-    public static int manejarEntidad(String sql, Object... parametros) throws SQLException {
+    public static int manejarEntidad(String sql, Object... parametros) {
 
         try (Connection conn = DBConexion.establecerConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            for (int i = 0; i < parametros.length; i++) {
-
-                Object obj = parametros[i];
-                int indice = i + 1;
-
-                if (obj == null) {
-
-                    ps.setNull(indice, Types.INTEGER);
-                } else if (obj instanceof java.sql.Time) {
-
-                    ps.setTime(indice, (java.sql.Time) obj);
-                } else if (obj instanceof java.sql.Date) {
-
-                    ps.setDate(indice, (java.sql.Date) obj);
-                } else {
-
-                    ps.setObject(indice, obj);
-                }
-            }
+            asignarParametros(ps, parametros);
 
             return ps.executeUpdate();
         } catch (SQLException e) {
 
-            System.out.println("Error en DBHelper.manejarEntidad(): " + e.getMessage());
-            throw e;
+            throw new RuntimeException("Error en conectar con la Base de Datos.");
         }
     }
 
@@ -50,25 +31,7 @@ public class DBHelper {
         Connection conn = DBConexion.establecerConexion();
         PreparedStatement ps = conn.prepareStatement(sql);
 
-        for (int i = 0; i < parametros.length; i++) {
-
-            Object obj = parametros[i];
-            int indice = i + 1;
-
-            if (obj == null) {
-
-                ps.setNull(indice, Types.INTEGER);
-            } else if (obj instanceof java.sql.Time) {
-
-                ps.setTime(indice, (java.sql.Time) obj);
-            } else if (obj instanceof java.sql.Date) {
-
-                ps.setDate(indice, (java.sql.Date) obj);
-            } else {
-
-                ps.setObject(indice, obj);
-            }
-        }
+        asignarParametros(ps, parametros);
 
         ResultSet rs = ps.executeQuery();
 
@@ -155,5 +118,28 @@ public class DBHelper {
         }
 
         return lista;
+    }
+
+    private static void asignarParametros(PreparedStatement ps, Object... parametros) throws SQLException{
+
+        for (int i = 0; i < parametros.length; i++) {
+
+            Object obj = parametros[i];
+            int indice = i + 1;
+
+            if (obj == null) {
+
+                ps.setNull(indice, Types.INTEGER);
+            } else if (obj instanceof java.sql.Time) {
+
+                ps.setTime(indice, (java.sql.Time) obj);
+            } else if (obj instanceof java.sql.Date) {
+
+                ps.setDate(indice, (java.sql.Date) obj);
+            } else {
+
+                ps.setObject(indice, obj);
+            }
+        }
     }
 }

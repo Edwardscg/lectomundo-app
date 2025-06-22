@@ -75,9 +75,9 @@ public class DetalleDocumentoControlador {
             btnDevolver.setVisible(true);
             btnLeer.setVisible(true);
 
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
 
-            e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", e.getMessage());
         }
     }
 

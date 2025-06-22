@@ -16,23 +16,27 @@ public class AlquilerService {
     private MembresiaDAO membresiaDAO = new MembresiaDAO();
     private final int dias_alquiler = 7;
 
-    public void registrarAlquiler(Cliente cliente, Documento documento) throws Exception{
+    public void registrarAlquiler(Cliente cliente, Documento documento){
 
-        if (alquilerDAO.estaAlquilado(cliente.getId_usuario(), documento.getId_documento())) {
-            throw new IllegalStateException("El documento ya está alquilado por este cliente.");
+        try{
+
+            LocalDateTime inicio = LocalDateTime.now();
+            LocalDateTime fin = inicio.plusDays(dias_alquiler);
+
+            Alquiler alquiler = new Alquiler();
+            alquiler.setCliente(cliente);
+            alquiler.setDocumento(documento);
+            alquiler.setFecha_inicio(inicio);
+            alquiler.setFecha_fin(fin);
+            alquiler.setEstado_alquiler(Estado.activo);
+
+            alquilerDAO.registrarAlquiler(alquiler);
+
+        }catch (RuntimeException e){
+
+            throw new RuntimeException("No se pudo registrar el alquiler, intente nuevamente.");
         }
 
-        LocalDateTime inicio = LocalDateTime.now();
-        LocalDateTime fin = inicio.plusDays(dias_alquiler);
-
-        Alquiler alquiler = new Alquiler();
-        alquiler.setCliente(cliente);
-        alquiler.setDocumento(documento);
-        alquiler.setFecha_inicio(inicio);
-        alquiler.setFecha_fin(fin);
-        alquiler.setEstado_alquiler(Estado.activo);
-
-        alquilerDAO.registrarAlquiler(alquiler);
     }
 
     public void devolverDocumento(Cliente cliente, Documento documento) throws Exception{
@@ -51,6 +55,4 @@ public class AlquilerService {
 
         return alquilerDAO.verDocumentosAlquiladosPorUsuario(cliente.getId_usuario());
     }
-
-
 }
