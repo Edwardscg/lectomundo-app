@@ -71,9 +71,9 @@ public class AdminDocumentosControlador {
     @FXML
     private void editarDocumentoSeleccionado(){
 
-        Documento documentoSeleccionado = tblDocumentos.getSelectionModel().getSelectedItem();
+        Documento documento_seleccionado = tblDocumentos.getSelectionModel().getSelectedItem();
 
-        if(documentoSeleccionado == null){
+        if(documento_seleccionado == null){
 
             UIHelper.mostrarAlerta("Advertencia", "Selecciona un documento para editar");
             return;
@@ -85,7 +85,7 @@ public class AdminDocumentosControlador {
             Parent root = loader.load();
 
             EditarDocumentoControlador editarDocumentoControlador = loader.getController();
-            editarDocumentoControlador.cargarDocumento(documentoSeleccionado);
+            editarDocumentoControlador.cargarDocumento(documento_seleccionado);
 
             Stage stage = new Stage();
             stage.setTitle("Editar Documento");
@@ -94,31 +94,35 @@ public class AdminDocumentosControlador {
 
         }catch (Exception e){
 
-            e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "Nose pudo abrir la ventana de edicion");
         }
     }
 
     @FXML
-    private void eliminarDocumentoSeleccionado() throws Exception {
+    private void eliminarDocumentoSeleccionado() {
 
-        Documento documentoSeleccionado = tblDocumentos.getSelectionModel().getSelectedItem();
+        try{
 
-        if(documentoSeleccionado == null){
+            Documento documentoSeleccionado = tblDocumentos.getSelectionModel().getSelectedItem();
 
-            UIHelper.mostrarAlerta("Advertencia", "Selecciona un documento para eliminar");
-            return;
-        }
+            if(documentoSeleccionado == null){
 
-        boolean corfirmar_accion = UIHelper.abrirVentanaConfirmacion("¿Estás seguro de eliminar este documento?");
+                UIHelper.mostrarAlerta("Advertencia", "Selecciona un documento para eliminar");
+                return;
+            }
 
-        if(corfirmar_accion){
+            boolean corfirmar_accion = UIHelper.abrirVentanaConfirmacion("¿Estás seguro de eliminar este documento?");
 
-            documentoService.eliminarDocumento(documentoSeleccionado.getId_documento());
-            UIHelper.mostrarAlerta("Éxito", "Documento eliminado.");
-            cargarDocumentos();
+            if(corfirmar_accion){
+
+                documentoService.eliminarDocumento(documentoSeleccionado.getId_documento());
+                UIHelper.mostrarAlerta("Éxito", "Documento eliminado.");
+                cargarDocumentos();
+            }
+
+        }catch (Exception e){
+
+            UIHelper.mostrarAlerta("Error", "Nose pudo eliminar el documento.");
         }
     }
-
-
 }

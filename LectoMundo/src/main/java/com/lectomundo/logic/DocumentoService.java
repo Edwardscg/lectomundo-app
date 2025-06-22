@@ -10,97 +10,81 @@ public class DocumentoService {
 
     private DocumentoDAO documentoDAO = new DocumentoDAO();
 
-    public void registrarDocumento(Documento documento) throws Exception {
+    public void registrarDocumento(Documento documento) {
 
         validarDocumento(documento, false);
         documentoDAO.registrarDocumento(documento);
     }
 
-    public void editarDocumento(Documento documento) throws Exception {
+    public void editarDocumento(Documento documento) {
 
         validarDocumento(documento, true);
         documentoDAO.editarDocumento(documento);
     }
 
-    public void eliminarDocumento(int id_documento) throws Exception {
-        if (id_documento <= 0) {
-            throw new IllegalArgumentException("ID de documento inválido.");
-        }
+    public void eliminarDocumento(int id_documento) {
+
         documentoDAO.eliminarDocumento(id_documento);
     }
 
-    public Documento buscarDocumentoporId(int id_documento) throws Exception {
-        if (id_documento <= 0) {
-            throw new IllegalArgumentException("ID de documento inválido.");
-        }
+    // CAMBIAR A OBSERVABLELIST
+    public Documento buscarDocumentoporId(int id_documento) {
+
         return documentoDAO.buscarDocumentoPorId(id_documento);
     }
 
-    public List<Documento> buscarDocumentosPorTitulo(String titulo) throws Exception {
-        if (titulo == null || titulo.isEmpty()) {
-            throw new IllegalArgumentException("El campo título no puede estar vacío.");
-        }
+    public List<Documento> buscarDocumentosPorTitulo(String titulo) {
+
         return documentoDAO.buscarDocumentosPorTitulo(titulo);
     }
 
-    public List<Documento> buscarDocumentosPorAutor(String autor) throws Exception {
-        if (autor == null || autor.isEmpty()) {
-            throw new IllegalArgumentException("El campo autor no puede estar vacío.");
-        }
+    public List<Documento> buscarDocumentosPorAutor(String autor) {
+
         return documentoDAO.buscarDocumentosPorAutor(autor);
     }
 
-    public List<Documento> buscarDocumentoPorTipo(String tipo_documento) throws Exception{
-
-        if(tipo_documento == null || tipo_documento.isBlank()){
-
-            throw new IllegalArgumentException("El campo tipo de documento no puede estar vacio.");
-        }
+    public List<Documento> buscarDocumentoPorTipo(String tipo_documento) {
 
         return documentoDAO.buscarDocumentosPorTipo(tipo_documento);
     }
 
-    public List<Documento> buscarDocumentosPorGenero(String genero) throws Exception {
-        if (genero == null || genero.isEmpty()) {
-            throw new IllegalArgumentException("El campo género no puede estar vacío.");
-        }
+    public List<Documento> buscarDocumentosPorGenero(String genero) {
+
         return documentoDAO.buscarDocumentosPorGenero(genero);
     }
 
-    public List<Documento> traerDocumentos()throws Exception{
+    public List<Documento> traerDocumentos() {
 
         return documentoDAO.obtenerDocumentos();
     }
 
-    public ObservableList<Documento> verDocumentos(){
+    public ObservableList<Documento> verDocumentos() {
 
         return documentoDAO.verDocumentos();
     }
 
-    private void validarDocumento(Documento documento, boolean requiere_id) throws Exception {
-        if (documento == null) {
-            throw new IllegalArgumentException("El documento no puede ser nulo.");
-        }
+    private void validarDocumento(Documento documento, boolean requiere_id) {
+
         if (requiere_id && documento.getId_documento() <= 0) {
-            throw new IllegalArgumentException("ID de documento inválido.");
+            throw new RuntimeException("ID de documento inválido.");
         }
         if (documento.getTitulo() == null || documento.getTitulo().isBlank()) {
-            throw new IllegalArgumentException("El título es obligatorio.");
+            throw new RuntimeException("El título es obligatorio.");
         }
         if (documento.getAutor() == null || documento.getAutor().isBlank()) {
-            throw new IllegalArgumentException("El autor es obligatorio.");
+            throw new RuntimeException("El autor es obligatorio.");
         }
         if (documento.getPrecio() < 0) {
-            throw new IllegalArgumentException("El precio no puede ser negativo.");
+            throw new RuntimeException("El precio no puede ser negativo.");
         }
         if (documento.getPuntuacion_promedio() < 0.0 || documento.getPuntuacion_promedio() > 5.0) {
-            throw new IllegalArgumentException("La puntuación debe estar entre 0 y 5.");
+            throw new RuntimeException("La puntuación debe estar entre 0 y 5.");
         }
         if (documento.getCantidad_valoraciones() < 0) {
-            throw new IllegalArgumentException("La cantidad de valoraciones no puede ser negativa.");
+            throw new RuntimeException("La cantidad de valoraciones no puede ser negativa.");
         }
         if (documento.getFecha_publicacion() == null || documento.getFecha_publicacion().toString().isBlank()) {
-            throw new IllegalArgumentException("La fecha de publicación es obligatoria.");
+            throw new RuntimeException("La fecha de publicación es obligatoria.");
         }
     }
 }

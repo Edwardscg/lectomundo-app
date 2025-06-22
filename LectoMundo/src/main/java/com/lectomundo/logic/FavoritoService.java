@@ -11,11 +11,7 @@ public class FavoritoService {
 
     private FavoritoDAO favoritoDAO = new FavoritoDAO();
 
-    public void agregarFavorito(Cliente cliente, Documento documento) throws Exception {
-
-        if (cliente == null || documento == null) {
-            throw new IllegalArgumentException("Cliente o documento no válido.");
-        }
+    public void agregarFavorito(Cliente cliente, Documento documento) {
 
         if (esFavorito(cliente.getId_usuario(), documento.getId_documento())) {
 
@@ -29,7 +25,7 @@ public class FavoritoService {
         favoritoDAO.agregarFavorito(cliente.getId_usuario(), documento.getId_documento());
     }
 
-    public void eliminarFavorito(Cliente cliente, Documento documento) throws Exception {
+    public void eliminarFavorito(Cliente cliente, Documento documento) {
 
         if (cliente == null || documento == null) {
             throw new IllegalArgumentException("Cliente o documento no válido.");
@@ -38,12 +34,12 @@ public class FavoritoService {
         favoritoDAO.eliminarFavorito(cliente.getId_usuario(), documento.getId_documento());
     }
 
-    public boolean esFavorito(int id_usuario, int id_documento) throws Exception{
+    public boolean esFavorito(int id_usuario, int id_documento) {
 
         return favoritoDAO.esFavorito(id_usuario, id_documento);
     }
 
-    public List<Documento> obtenerFavoritosPorUsuario(Cliente cliente) throws Exception {
+    public List<Documento> obtenerFavoritosPorUsuario(Cliente cliente) {
 
         return favoritoDAO.obtenerFavoritosPorUsuario(cliente.getId_usuario());
     }

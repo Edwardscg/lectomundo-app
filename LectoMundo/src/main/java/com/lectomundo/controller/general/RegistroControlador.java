@@ -20,54 +20,68 @@ public class RegistroControlador {
     @FXML
     private void Registrarse() throws Exception{
 
-        String nombre = txtNombreUsuario.getText().trim();
-        String correo = txtCorreo.getText().trim();
-        String contraseña = txtContraseña.getText();
-        String confirmar = txtConfirmarContraseña.getText();
+        try{
 
-        if(nombre.isEmpty() || correo.isEmpty() || contraseña.isEmpty() || confirmar.isEmpty()){
+            String nombre = txtNombreUsuario.getText().trim();
+            String correo = txtCorreo.getText().trim();
+            String contraseña = txtContraseña.getText();
+            String confirmar = txtConfirmarContraseña.getText();
 
-            UIHelper.mostrarAlerta("Error", "Todos los datos son obligatorios.");
-            return;
-        }
+            if(nombre.isEmpty() || correo.isEmpty() || contraseña.isEmpty() || confirmar.isEmpty()){
 
-        if(!contraseña.equals(confirmar)){
+                UIHelper.mostrarAlerta("Error", "Todos los datos son obligatorios.");
+                return;
+            }
 
-            UIHelper.mostrarAlerta("Error", "Las contraseñas no coinciden.");
-            return;
-        }
+            if(!contraseña.equals(confirmar)){
 
-        UsuarioService usuarioService = new UsuarioService();
-        Usuario usuario = usuarioService.buscarUsuarioPorCorreo(correo);
+                UIHelper.mostrarAlerta("Error", "Las contraseñas no coinciden.");
+                return;
+            }
 
-        if(usuario!= null){
+            UsuarioService usuarioService = new UsuarioService();
+            Usuario usuario = usuarioService.buscarUsuarioPorCorreo(correo);
 
-            UIHelper.mostrarAlerta("Error", "Ya existe un usuario registrado con ese correo.");
-            return;
-        }
+            if(usuario!= null){
 
-        String codigo = CorreoService.generarCodigoDeVerificacion();
-        CorreoService.enviarCodigoPorCorreo(correo, codigo);
+                UIHelper.mostrarAlerta("Error", "Ya existe un usuario registrado con ese correo.");
+                return;
+            }
 
-        boolean verificado = UIHelper.abrirVentanaDeVerificacion(correo, codigo);
+            String codigo = CorreoService.generarCodigoDeVerificacion();
+            CorreoService.enviarCodigoPorCorreo(correo, codigo);
 
-        if(verificado){
+            boolean verificado = UIHelper.abrirVentanaDeVerificacion(correo, codigo);
 
-            Cliente cliente = new Cliente(0, nombre, correo, contraseña, "cliente", 0);
-            usuarioService.registrarUsuario(cliente);
+            if(verificado){
 
-            Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
-            UIHelper.abrirVentana(ventana_actual, "/view/general/login.fxml", "Login");
-        }else{
+                Cliente cliente = new Cliente(0, nombre, correo, contraseña, "cliente", 0);
+                usuarioService.registrarUsuario(cliente);
 
-            UIHelper.mostrarAlerta("Error", "No se completó la verificación.");
+                Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
+                UIHelper.abrirVentana(ventana_actual, "/view/general/login.fxml", "Login");
+            }else{
+
+                UIHelper.mostrarAlerta("Error", "No se completó la verificación.");
+            }
+
+        }catch (Exception e){
+
+            UIHelper.mostrarAlerta("Error", "No se pudo realizar el registro.");
         }
     }
 
     @FXML
     private void Cancelar(){
 
-        Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
-        UIHelper.abrirVentana(ventana_actual, "/view/general/login.fxml", "Login");
+        try{
+
+            Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
+            UIHelper.abrirVentana(ventana_actual, "/view/general/login.fxml", "Login");
+
+        }catch (Exception e){
+
+            UIHelper.mostrarAlerta("Error", "No se pudo volver a login.");
+        }
     }
 }

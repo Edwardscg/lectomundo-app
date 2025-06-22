@@ -5,7 +5,7 @@ import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Documento;
 import com.lectomundo.model.Estado;
 import com.lectomundo.repository.dao.AlquilerDAO;
-import com.lectomundo.repository.dao.MembresiaDAO;
+
 import javafx.collections.ObservableList;
 
 import java.time.LocalDateTime;
@@ -14,7 +14,6 @@ import java.util.List;
 public class AlquilerService {
 
     private AlquilerDAO alquilerDAO = new AlquilerDAO();
-    private MembresiaDAO membresiaDAO = new MembresiaDAO();
     private final int dias_alquiler = 7;
 
     public void registrarAlquiler(Cliente cliente, Documento documento) {
@@ -42,16 +41,15 @@ public class AlquilerService {
     public boolean estaAlquilado(int id_usuario, int id_documento) {
 
         return alquilerDAO.estaAlquilado(id_usuario, id_documento);
-
     }
 
-    public List<Documento> obtenerAlquileresActivosPorUsuario(Cliente cliente) {
+    public List<Documento> obtenerDocumentosAlquiladosActivosPorUsuario(Cliente cliente) {
 
         return alquilerDAO.verDocumentosAlquiladosPorUsuario(cliente.getId_usuario());
     }
 
-    public ObservableList<Documento> verDocumentosAlquiladosActivosPorUsuario(int id_usuario){
+    public ObservableList<Documento> verDocumentosAlquiladosActivosPorUsuario(int id_usuario) {
 
-        return alquilerDAO.verDocumentosAlquiladosActivosPorUsuario(id_usuario);
+        return alquilerDAO.llenarTablaDocumentosAlquiladosActivosPorUsuario(id_usuario);
     }
 }
