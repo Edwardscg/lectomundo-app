@@ -12,13 +12,7 @@ public class MembresiaService {
     MembresiaDAO membresiaDAO = new MembresiaDAO();
     UsuarioService usuarioService = new UsuarioService();
 
-    // CAMBIAR A QUE RECIBA CLIENTE COMO ARGUMENTO
-    public Cliente registrarMembresia(Cliente cliente) throws Exception{
-
-        if(membresiaDAO.tieneMembresiaActiva(cliente.getId_usuario())){
-
-            throw new IllegalArgumentException("Ya cuentas con una membresía activa.");
-        }
+    public Cliente registrarMembresia(Cliente cliente) {
 
         Membresia membresia = new Membresia();
 
@@ -40,7 +34,7 @@ public class MembresiaService {
         return cliente;
     }
 
-    public Cliente actualizarMembresia (Cliente cliente) throws Exception{
+    public Cliente actualizarMembresia (Cliente cliente) {
 
         LocalDate fechaFin = LocalDate.now().plusDays(30);
         Membresia membresia = new Membresia();
@@ -54,17 +48,17 @@ public class MembresiaService {
         return cliente;
     }
 
-    public void finalizarMembresia(Cliente cliente) throws Exception{
+    public void finalizarMembresia(Cliente cliente) {
 
         membresiaDAO.finalizarMembresia(cliente.getId_usuario(), LocalDate.now());
     }
 
-    public boolean tieneMembresiaActiva(int id_usuario) throws Exception{
+    public boolean tieneMembresiaActiva(int id_usuario) {
 
         return membresiaDAO.tieneMembresiaActiva(id_usuario);
     }
 
-    public ObservableList<Membresia> verMembresias() throws Exception{
+    public ObservableList<Membresia> verMembresias() {
 
         return membresiaDAO.verMembresias();
     }

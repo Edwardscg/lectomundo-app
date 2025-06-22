@@ -73,13 +73,11 @@ public class EditarDocumentoControlador {
             UIHelper.cerrarVentana(ventana_actual);
 
         }catch (NumberFormatException e){
-
-            e.printStackTrace();
+            
             UIHelper.mostrarAlerta("Error", "El precio debe ser un número valido.");
         }
         catch (Exception e){
 
-            e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "No se pudo actualizar el documento.");
         }
     }

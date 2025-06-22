@@ -75,9 +75,9 @@ public class DetalleDocumentoControlador {
             btnDevolver.setVisible(true);
             btnLeer.setVisible(true);
 
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
 
-            e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "No se pudo alquilar el documento.");
         }
     }
 
@@ -92,9 +92,9 @@ public class DetalleDocumentoControlador {
             btnDevolver.setVisible(false);
             btnLeer.setVisible(true);
 
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
 
-            e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "No se pudo devolver el documento.");
         }
     }
 
@@ -110,9 +110,9 @@ public class DetalleDocumentoControlador {
             btnDevolver.setVisible(false);
             btnLeer.setVisible(true);
 
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
 
-            e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "No se pudo comprar el documento.");
         }
     }
 
@@ -120,10 +120,12 @@ public class DetalleDocumentoControlador {
     private void leerDocumento() {
 
         try {
+
             String url = documento.getPdf_url();
             java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
+
         } catch (Exception e) {
-            e.printStackTrace();
+
             UIHelper.mostrarAlerta("Error", "No se pudo abrir el documento en el navegador.");
         }
     }
@@ -174,7 +176,6 @@ public class DetalleDocumentoControlador {
 
         } catch (Exception e) {
 
-            e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "No se pudo marcar como favorito.");
         }
     }
@@ -190,16 +191,15 @@ public class DetalleDocumentoControlador {
 
         } catch (Exception e) {
 
-            e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "No se pudo quitar de favoritos.");
         }
     }
 
     public void cargarDatos(Documento documento) {
 
-        this.documento = documento;
-
         try {
+
+            this.documento = documento;
 
             tiene_membresia = membresiaService.tieneMembresiaActiva(cliente.getId_usuario());
             esta_comprado = compraDocumentoService.estaComprado(cliente.getId_usuario(), documento.getId_documento());
@@ -251,7 +251,7 @@ public class DetalleDocumentoControlador {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+
             UIHelper.mostrarAlerta("Error", "No se pudo cargar los datos del documento.");
         }
     }

@@ -101,14 +101,19 @@ public class MembresiaControlador {
 
         } catch (Exception e) {
 
-            e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "No se pudo actualizar la vista de membresía.");
         }
-
     }
 
     private void actualizarVistaMonedas() {
 
-        clienteControlador.actualizarMonedas(cliente.getMonedas());
-    }
+        try {
 
+            clienteControlador.actualizarMonedas(cliente.getMonedas());
+
+        } catch (Exception e) {
+
+            UIHelper.mostrarAlerta("Error", "No se pudo actualizar la vista de monedas.");
+        }
+    }
 }

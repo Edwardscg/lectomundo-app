@@ -1,8 +1,6 @@
 package com.lectomundo.repository.dao;
 
-import com.lectomundo.model.Cliente;
-import com.lectomundo.model.MovimientoMoneda;
-import com.lectomundo.model.Usuario;
+import com.lectomundo.model.*;
 import com.lectomundo.repository.helper.DBHelper;
 import javafx.collections.ObservableList;
 
@@ -15,7 +13,7 @@ public class MovimientoMonedaDAO {
 
     private final UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-    public void registrarMovimiento(MovimientoMoneda movimiviento) throws Exception {
+    public void registrarMovimiento(MovimientoMoneda movimiviento) {
 
         String sql = "INSERT INTO movimiento_moneda (id_usuario, tipo_movimiento, monto) VALUES (?, ?, ?);";
 
@@ -23,25 +21,31 @@ public class MovimientoMonedaDAO {
     }
 
     // POSIBLE BORRADO
-    public ObservableList<MovimientoMoneda> verMovimientosPorUsuario(int id_usuario) throws Exception {
+    public ObservableList<MovimientoMoneda> verMovimientosPorUsuario(int id_usuario) {
 
         String sql = "SELECT * FROM movimiento_moneda WHERE id_usuario = ? ORDER BY fecha DESC;";
 
-        return DBHelper.llenarTabla(sql, this::mapearMovimiento);
+        return DBHelper.llenarTablaPorParametro(sql, this::mapearMovimiento, id_usuario);
     }
 
-    // CAMBIAR A OBSERVABLE LIST
-    public ObservableList<MovimientoMoneda> verMovimientos() throws Exception {
+    public ObservableList<MovimientoMoneda> verMovimientos() {
 
         String sql = "SELECT * FROM movimiento_moneda ORDER BY fecha DESC;";
 
         return DBHelper.llenarTabla(sql, this::mapearMovimiento);
     }
 
-    private MovimientoMoneda mapearMovimiento(ResultSet rs) throws Exception{
+    private MovimientoMoneda mapearMovimiento(ResultSet rs) {
 
-        Usuario usuario = usuarioDAO.buscarUsuarioPorId(rs.getInt("id_usuario"));
+        try {
 
-        return new MovimientoMoneda(rs.getInt("id_movimiento"), (Cliente) usuario, rs.getString("tipo_movimiento"), rs.getInt("monto"), rs.getTimestamp("fecha").toLocalDateTime());
+            Usuario usuario = usuarioDAO.buscarUsuarioPorId(rs.getInt("id_usuario"));
+
+            return new MovimientoMoneda(rs.getInt("id_movimiento"), (Cliente) usuario, rs.getString("tipo_movimiento"), rs.getInt("monto"), rs.getTimestamp("fecha").toLocalDateTime());
+
+        } catch (Exception e) {
+
+            throw new RuntimeException("Error al mapear datos de movimiento de monedas desde la Base de Datos.");
+        }
     }
 }

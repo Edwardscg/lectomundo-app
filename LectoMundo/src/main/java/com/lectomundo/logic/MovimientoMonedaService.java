@@ -12,11 +12,7 @@ public class MovimientoMonedaService {
     private MovimientoMonedaDAO movimientoMonedaDAO = new MovimientoMonedaDAO();
     private UsuarioService usuarioService = new UsuarioService();
 
-    public void comprarMonedas(Cliente cliente, int monto)throws Exception{
-
-        if (cliente == null || monto <= 0) {
-            throw new IllegalArgumentException("Cliente inválido o monto no válido.");
-        }
+    public void comprarMonedas(Cliente cliente, int monto) {
 
         int nuevas_monedas = cliente.getMonedas() + monto;
         usuarioService.actualizarMonedas(cliente.getId_usuario(), nuevas_monedas);
@@ -29,11 +25,7 @@ public class MovimientoMonedaService {
         movimientoMonedaDAO.registrarMovimiento(movimientoMoneda);
     }
 
-    public void gastarMonedas(Cliente cliente, int monto) throws Exception{
-
-        if (cliente == null || monto <= 0) {
-            throw new IllegalArgumentException("Cliente inválido o monto no válido.");
-        }
+    public void gastarMonedas(Cliente cliente, int monto) {
 
         if(cliente.getMonedas() < monto){
 
@@ -51,7 +43,7 @@ public class MovimientoMonedaService {
         movimientoMonedaDAO.registrarMovimiento(movimientoMoneda);
     }
 
-    public ObservableList<MovimientoMoneda> obtenerMovimientos()throws Exception{
+    public ObservableList<MovimientoMoneda> obtenerMovimientos() {
 
         return movimientoMonedaDAO.verMovimientos();
     }

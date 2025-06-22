@@ -5,7 +5,8 @@ import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Documento;
 import com.lectomundo.model.Estado;
 import com.lectomundo.repository.dao.AlquilerDAO;
-import com.lectomundo.repository.dao.MembresiaDAO;
+
+import javafx.collections.ObservableList;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,22 +14,9 @@ import java.util.List;
 public class AlquilerService {
 
     private AlquilerDAO alquilerDAO = new AlquilerDAO();
-    private MembresiaDAO membresiaDAO = new MembresiaDAO();
     private final int dias_alquiler = 7;
 
-    public void registrarAlquiler(Cliente cliente, Documento documento) throws Exception{
-
-        if (cliente == null || documento == null) {
-            throw new IllegalArgumentException("Cliente o documento no válido.");
-        }
-
-        if (membresiaDAO.tieneMembresiaActiva(cliente.getId_usuario())) {
-            throw new IllegalStateException("Con membresía activa, no se requiere alquilar.");
-        }
-
-        if (alquilerDAO.estaAlquilado(cliente.getId_usuario(), documento.getId_documento())) {
-            throw new IllegalStateException("El documento ya está alquilado por este cliente.");
-        }
+    public void registrarAlquiler(Cliente cliente, Documento documento) {
 
         LocalDateTime inicio = LocalDateTime.now();
         LocalDateTime fin = inicio.plusDays(dias_alquiler);
@@ -43,22 +31,25 @@ public class AlquilerService {
         alquilerDAO.registrarAlquiler(alquiler);
     }
 
-    public void devolverDocumento(Cliente cliente, Documento documento) throws Exception{
+    public void devolverDocumento(Cliente cliente, Documento documento) {
 
         Alquiler alquiler_activo = alquilerDAO.obtenerAlquilerActivo(cliente.getId_usuario(), documento.getId_documento());
 
         alquilerDAO.finalizarAlquiler(alquiler_activo.getId_alquiler());
     }
 
-    public boolean estaAlquilado(int id_usuario, int id_documento) throws Exception{
+    public boolean estaAlquilado(int id_usuario, int id_documento) {
 
         return alquilerDAO.estaAlquilado(id_usuario, id_documento);
     }
 
-    public List<Documento> obtenerAlquileresActivosPorUsuario(Cliente cliente) throws Exception{
+    public List<Documento> obtenerDocumentosAlquiladosActivosPorUsuario(Cliente cliente) {
 
         return alquilerDAO.verDocumentosAlquiladosPorUsuario(cliente.getId_usuario());
     }
 
+    public ObservableList<Documento> verDocumentosAlquiladosActivosPorUsuario(int id_usuario) {
 
+        return alquilerDAO.llenarTablaDocumentosAlquiladosActivosPorUsuario(id_usuario);
+    }
 }
