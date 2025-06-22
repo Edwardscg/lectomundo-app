@@ -46,56 +46,56 @@ public class DocumentoDAO {
         }
     }
 
-    public Documento buscarDocumentoPorId(int id_documento) throws Exception {
+    public Documento buscarDocumentoPorId(int id_documento) {
 
         String sql = "SELECT * FROM documento WHERE id_documento = ?;";
 
         return DBHelper.obtenerEntidad(sql, this::mapearDocumento, id_documento);
     }
 
-    public List<Documento> obtenerDocumentos() throws Exception{
+    public List<Documento> obtenerDocumentos() {
 
         String sql = "select * from documento";
 
         return DBHelper.obtenerListaEntidad(sql, this::mapearDocumento);
     }
 
-    public List<Documento> buscarDocumentosPorTitulo(String titulo) throws Exception {
+    public List<Documento> buscarDocumentosPorTitulo(String titulo) {
 
         String sql = "SELECT * FROM documento WHERE titulo LIKE ?";
 
         return DBHelper.obtenerListaEntidad(sql, this::mapearDocumento, titulo);
     }
 
-    public List<Documento> buscarDocumentosPorAutor(String autor) throws Exception {
+    public List<Documento> buscarDocumentosPorAutor(String autor) {
 
         String sql = "SELECT * FROM documento WHERE autor LIKE ?";
 
         return DBHelper.obtenerListaEntidad(sql, this::mapearDocumento, autor);
     }
 
-    public List<Documento> buscarDocumentosPorTipo(String tipo_documento) throws Exception{
+    public List<Documento> buscarDocumentosPorTipo(String tipo_documento) {
 
         String sql = "SELECT * FROM documento WHERE tipo_documento LIKE ?";
 
         return DBHelper.obtenerListaEntidad(sql, this::mapearDocumento, tipo_documento);
     }
 
-    public List<Documento> buscarDocumentosPorGenero(String genero) throws Exception {
+    public List<Documento> buscarDocumentosPorGenero(String genero) {
 
         String sql = "SELECT * FROM documento WHERE genero LIKE ?";
 
         return DBHelper.obtenerListaEntidad(sql, this::mapearDocumento, genero);
     }
 
-    public void actualizarPuntuacionYValoracion(int id_documento, float promedio, int cantidad_valoraciones) throws Exception {
+    public void actualizarPuntuacionYValoracion(int id_documento, float promedio, int cantidad_valoraciones) {
 
         String sql = "UPDATE documento SET puntuacion_promedio = ?, cantidad_valoraciones = ? WHERE id_documento = ?";
 
         DBHelper.manejarEntidad(sql, promedio, cantidad_valoraciones, id_documento);
     }
 
-    public ObservableList<Documento> verDocumentos() throws Exception{
+    public ObservableList<Documento> verDocumentos() {
 
         String sql = "SELECT * FROM documento";
 

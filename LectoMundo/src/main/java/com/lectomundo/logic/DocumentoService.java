@@ -72,7 +72,7 @@ public class DocumentoService {
         return documentoDAO.obtenerDocumentos();
     }
 
-    public ObservableList<Documento> verDocumentos()throws Exception{
+    public ObservableList<Documento> verDocumentos(){
 
         return documentoDAO.verDocumentos();
     }

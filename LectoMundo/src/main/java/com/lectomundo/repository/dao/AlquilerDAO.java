@@ -2,6 +2,7 @@ package com.lectomundo.repository.dao;
 
 import com.lectomundo.model.*;
 import com.lectomundo.repository.helper.DBHelper;
+import javafx.collections.ObservableList;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -16,92 +17,55 @@ public class AlquilerDAO {
 
     public void registrarAlquiler(Alquiler alquiler) {
 
-        try {
+        String sql = "INSERT INTO alquiler (id_usuario, id_documento, fecha_inicio, fecha_fin, estado) VALUES (?, ?, ?, ?, ?)";
 
-            String sql = "INSERT INTO alquiler (id_usuario, id_documento, fecha_inicio, fecha_fin, estado) VALUES (?, ?, ?, ?, ?)";
-
-            DBHelper.manejarEntidad(sql, alquiler.getCliente().getId_usuario(), alquiler.getDocumento().getId_documento(), Timestamp.valueOf(alquiler.getFecha_inicio()), Timestamp.valueOf(alquiler.getFecha_fin()), alquiler.getEstado_alquiler().name());
-
-        }catch (RuntimeException e){
-
-            throw new RuntimeException("No se pudo registrar el alquiler.");
-        }
+        DBHelper.manejarEntidad(sql, alquiler.getCliente().getId_usuario(), alquiler.getDocumento().getId_documento(), Timestamp.valueOf(alquiler.getFecha_inicio()), Timestamp.valueOf(alquiler.getFecha_fin()), alquiler.getEstado_alquiler().name());
     }
 
-    public void finalizarAlquiler(int id_alquiler){
+    public void finalizarAlquiler(int id_alquiler) {
 
-        try{
-
-            String sql = "UPDATE alquiler SET estado = 'finalizado' WHERE id_alquiler = ?";
-            DBHelper.manejarEntidad(sql, id_alquiler);
-
-        }catch (RuntimeException e){
-
-            throw new RuntimeException("No se pudo finalizar el alquiler.");
-        }
-
-    }
-
-    // CAMBIAR POR OBSERBABLELIST DE ALQUILERS POR USUARIO
-    public Alquiler buscarAlquilerPorId(int id_alquiler) throws Exception {
-
-        String sql = "SELECT * FROM alquiler WHERE id_alquiler = ?";
-
-        return DBHelper.obtenerEntidad(sql, this::mapearAlquiler, id_alquiler);
+        String sql = "UPDATE alquiler SET estado = 'finalizado' WHERE id_alquiler = ?";
+        DBHelper.manejarEntidad(sql, id_alquiler);
     }
 
     public List<Documento> verDocumentosAlquiladosPorUsuario(int id_usuario) {
 
-        try{
+        String sql = " SELECT d.* FROM documento d JOIN alquiler a ON d.id_documento = a.id_documento WHERE a.id_usuario = ? AND a.estado = 'activo'";
 
-            String sql = " SELECT d.* FROM documento d JOIN alquiler a ON d.id_documento = a.id_documento WHERE a.id_usuario = ? AND a.estado = 'activo'";
+        return DBHelper.obtenerListaEntidad(sql, documentoDAO::mapearDocumento, id_usuario);
+    }
 
-            return DBHelper.obtenerListaEntidad(sql, documentoDAO::mapearDocumento, id_usuario);
+    public ObservableList<Documento> verDocumentosAlquiladosActivosPorUsuario(int id_usuario){
 
-        }catch (RuntimeException e){
+        String sql = "SELECT d.* FROM documento d JOIN alquiler a ON d.id_documento = a.id_documento WHERE a.id_usuario = ? AND a.estado = 'activo'";
 
-            throw new RuntimeException("No se pudo traer los documentos alquilados.");
-        }
+        return DBHelper.llenarTablaPorParametro(sql, rs -> new Documento(rs.getInt("id_documento"), rs.getString("titulo"), rs.getString("autor"), rs.getString("tipo_documento"), rs.getDate("fecha_publicacion").toLocalDate(), rs.getString("genero"), rs.getString("descripcion"), rs.getInt("precio"), rs.getFloat("puntuacion_promedio"), rs.getInt("cantidad_valoraciones")), id_usuario);
     }
 
     public boolean estaAlquilado(int id_usuario, int id_documento) {
 
-        try{
+        String sql = "SELECT 1 FROM alquiler WHERE id_usuario = ? AND id_documento = ? AND estado = 'activo' LIMIT 1;";
 
-            String sql = "SELECT 1 FROM alquiler WHERE id_usuario = ? AND id_documento = ? AND estado = 'activo' LIMIT 1;";
-
-            return DBHelper.obtenerEntidad(sql, rs -> true, id_usuario, id_documento) !=null;
-
-        }catch (RuntimeException e){
-
-            throw new RuntimeException("No se pudo verificar si el documento está alquilado.");
-        }
+        return DBHelper.obtenerEntidad(sql, rs -> true, id_usuario, id_documento) != null;
     }
 
     public Alquiler obtenerAlquilerActivo(int id_usuario, int id_documento) {
 
-        try{
+        String sql = "SELECT * FROM alquiler WHERE id_usuario = ? AND id_documento = ? AND estado = 'activo' LIMIT 1";
 
-            String sql = "SELECT * FROM alquiler WHERE id_usuario = ? AND id_documento = ? AND estado = 'activo' LIMIT 1";
-
-            return DBHelper.obtenerEntidad(sql, this::mapearAlquiler, id_usuario, id_documento);
-
-        }catch (RuntimeException e){
-
-            throw new RuntimeException("No se pudo obtener el alquiler activo del documento.");
-        }
+        return DBHelper.obtenerEntidad(sql, this::mapearAlquiler, id_usuario, id_documento);
     }
 
-    private Alquiler mapearAlquiler(ResultSet rs){
+    private Alquiler mapearAlquiler(ResultSet rs) {
 
-        try{
+        try {
 
             Usuario usuario = usuarioDAO.buscarUsuarioPorId(rs.getInt("id_usuario"));
             Documento documento = documentoDAO.buscarDocumentoPorId(rs.getInt("id_documento"));
 
             return new Alquiler(rs.getInt("id_alquiler"), (Cliente) usuario, documento, rs.getTimestamp("fecha_inicio").toLocalDateTime(), rs.getTimestamp("fecha_fin").toLocalDateTime(), Estado.valueOf(rs.getString("estado")));
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
             throw new RuntimeException("Error al mapear datos del alquiler desde la Base de Datos.");
         }

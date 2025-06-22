@@ -112,13 +112,35 @@ public class DBHelper {
         ObservableList<T> lista = FXCollections.observableArrayList();
 
         try (Connection conn = DBConexion.establecerConexion();
-             Statement st = conn.createStatement();
-             ResultSet rs = st.executeQuery(sql)) {
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
+                lista.add(mapper.mapRow(rs));
+            }
 
-                T objeto = mapper.mapRow(rs);
-                lista.add(objeto);
+            return lista;
+        } catch (Exception e) {
+
+            throw new RuntimeException("Error al llenar tabla desde la Base de Datos.");
+        }
+    }
+
+    public static <T> ObservableList<T> llenarTablaPorParametro(String sql, RowMapper<T> mapper, Object... parametros) {
+
+        ObservableList<T> lista = FXCollections.observableArrayList();
+
+        try (Connection conn = DBConexion.establecerConexion();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            for (int i = 0; i < parametros.length; i++) {
+                ps.setObject(i + 1, parametros[i]);
+            }
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(mapper.mapRow(rs));
+                }
             }
 
             return lista;
