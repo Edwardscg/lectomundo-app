@@ -50,5 +50,8 @@
             <Button fx:id="btnDevolver" onAction="#devolverDocumento" text="Devolver" visible="false"/>
             <Button fx:id="btnDescargar" onAction="#descargarDocumento" text="Descargar" visible="false"/>
         </HBox>
+
+        <Button fx:id="btnValorar" onAction="#irAValorar" text="Valorar" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" maxWidth="70" />
+
     </VBox>
 </AnchorPane>

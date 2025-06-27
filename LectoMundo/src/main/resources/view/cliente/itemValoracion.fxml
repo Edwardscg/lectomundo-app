@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.lectomundo.controller.cliente.ItemValoracionControlador"
+            prefHeight="100.0" prefWidth="500.0" spacing="20">
+    <VBox spacing="10">
+        <Label fx:id="lblUsuario" style="-fx-font-weight: bold;"/>
+        <Label fx:id="lblComentario" wrapText="true" style="-fx-font-size: 12px;"/>
+        <HBox fx:id="hboxEstrellas" spacing="2"/>
+        <Label fx:id="lblFecha" style="-fx-font-size: 10px; -fx-text-fill: gray;"/>
+    </VBox>
+
+</HBox>

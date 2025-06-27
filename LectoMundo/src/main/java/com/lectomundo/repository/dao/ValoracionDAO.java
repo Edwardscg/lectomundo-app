@@ -36,7 +36,7 @@ public class ValoracionDAO {
 
     public List<Valoracion> verValoracionesPorDocumento(int id_documento) {
 
-        String sql = "SELECT * FROM valoracion WHERE id_documento = ? ORDER BY fecha DESC;";
+        String sql = "SELECT * FROM valoracion WHERE id_documento = ? ORDER BY fecha_valoracion DESC;";
 
         return DBHelper.obtenerListaEntidad(sql, this::mapearValoracion, id_documento);
     }
