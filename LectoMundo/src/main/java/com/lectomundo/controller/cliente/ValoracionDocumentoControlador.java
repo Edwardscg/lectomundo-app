@@ -97,7 +97,6 @@ public class ValoracionDocumentoControlador {
             cargarValoraciones();
         }catch (Exception e){
 
-            e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "No se pudo registrar la valoración.");
         }
     }
@@ -121,7 +120,7 @@ public class ValoracionDocumentoControlador {
                 vboxValoraciones.getChildren().add(item);
             }
         }catch (Exception e){
-            e.printStackTrace();
+
             UIHelper.mostrarAlerta("Error", "No se pudo cargar las valoraciones.");
         }
     }

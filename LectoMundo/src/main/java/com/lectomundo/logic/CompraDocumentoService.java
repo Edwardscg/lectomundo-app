@@ -10,9 +10,12 @@ import java.util.List;
 public class CompraDocumentoService {
 
     CompraDocumentoDAO compraDocumentoDAO = new CompraDocumentoDAO();
+    UsuarioService usuarioService = new UsuarioService();
     private NotificacionService notificacionService = new NotificacionService();
 
-    public void registrarCompra(Cliente cliente, Documento documento) {
+    public Cliente registrarCompra(Cliente cliente, Documento documento) {
+
+        documento.setPrecio(documento.getPrecio() * 3);
 
         LocalDateTime fecha_hoy = LocalDateTime.now();
 
@@ -20,10 +23,16 @@ public class CompraDocumentoService {
         compraDocumento.setCliente(cliente);
         compraDocumento.setDocumento(documento);
         compraDocumento.setFecha_compra(fecha_hoy);
-        compraDocumento.setCosto(documento.getPrecio() * 3);
+        compraDocumento.setCosto(documento.getPrecio());
 
         compraDocumentoDAO.registrarCompra(compraDocumento);
         notificacionService.notificacionCompraDocumento(cliente, documento);
+
+        int nuevas_monedas = cliente.getMonedas() - documento.getPrecio();
+        usuarioService.actualizarMonedas(cliente.getId_usuario(), nuevas_monedas);
+        cliente.setMonedas(nuevas_monedas);
+
+        return cliente;
     }
 
     public List<Documento> verDocumentosCompradosPorUsuario(Cliente cliente) {

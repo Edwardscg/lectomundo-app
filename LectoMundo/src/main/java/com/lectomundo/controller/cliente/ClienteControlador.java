@@ -44,6 +44,10 @@ public class ClienteControlador {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/explorarDocumentos.fxml"));
             Node contenido = loader.load();
+
+            ExplorarDocumentosControlador explorarDocumentosControlador = loader.getController();
+            explorarDocumentosControlador.setClienteControlador(this);
+
             panelContenedor.getChildren().setAll(contenido);
 
         }catch (Exception e){

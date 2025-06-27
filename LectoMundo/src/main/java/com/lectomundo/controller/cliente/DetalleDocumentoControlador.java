@@ -52,6 +52,7 @@ public class DetalleDocumentoControlador {
     @FXML
     private Button btnFavoritoLleno;
 
+    private ClienteControlador clienteControlador;
     private Documento documento;
     private Cliente cliente = ClienteControlador.cliente;
     private MembresiaService membresiaService = new MembresiaService();
@@ -64,23 +65,19 @@ public class DetalleDocumentoControlador {
     private boolean es_favorito = false;
 
     @FXML
-    private void initialize() {
-
-    }
-
-    @FXML
     private void alquilarDocumento() {
 
         try {
 
-            alquilerService.registrarAlquiler(cliente, documento);
+            cliente = alquilerService.registrarAlquiler(cliente, documento);
+            clienteControlador.actualizarMonedas(cliente.getMonedas());
 
             btnAlquilar.setVisible(false);
             btnDevolver.setVisible(true);
             btnLeer.setVisible(true);
 
         } catch (RuntimeException e) {
-
+            e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "No se pudo alquilar el documento.");
         }
     }
@@ -107,7 +104,8 @@ public class DetalleDocumentoControlador {
 
         try {
 
-            compraDocumentoService.registrarCompra(cliente, documento);
+            cliente = compraDocumentoService.registrarCompra(cliente, documento);
+            clienteControlador.actualizarMonedas(cliente.getMonedas());
 
             btnAlquilar.setVisible(false);
             btnComprar.setVisible(false);
@@ -216,9 +214,13 @@ public class DetalleDocumentoControlador {
 
         }catch (Exception e){
 
-            e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "No se pudo abrir la ventana de valoración.");
         }
+    }
+
+    public void setClienteControlador(ClienteControlador clienteControlador) {
+
+        this.clienteControlador = clienteControlador;
     }
 
     public void cargarDatos(Documento documento) {
@@ -237,12 +239,6 @@ public class DetalleDocumentoControlador {
             lblAutor.setText("Autor: " + documento.getAutor());
             lblGenero.setText("Género: " + documento.getGenero());
             lblDescripcion.setText("Descripción: " + documento.getDescripcion());
-
-            System.out.println("ID Cliente: " + ClienteControlador.cliente.getId_usuario());
-            System.out.println("ID Documento: " + documento.getId_documento());
-            System.out.println("Tiene membresía: " + tiene_membresia);
-            System.out.println("Está comprado: " + esta_comprado);
-            System.out.println("Está alquilado: " + esta_alquilado);
 
             if (es_favorito) {
 

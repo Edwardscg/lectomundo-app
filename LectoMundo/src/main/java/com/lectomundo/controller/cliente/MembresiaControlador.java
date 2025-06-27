@@ -35,7 +35,7 @@ public class MembresiaControlador {
         try {
 
             cliente = membresiaService.registrarMembresia(cliente);
-            actualizarVistaMonedas();
+            clienteControlador.actualizarMonedas(cliente.getMonedas());
             UIHelper.mostrarAlerta("Membresia Activada", "Ahora tienes acceso ilimitado por 30 días.");
             initialize();
 
@@ -51,7 +51,7 @@ public class MembresiaControlador {
         try {
 
             cliente = membresiaService.actualizarMembresia(cliente);
-            actualizarVistaMonedas();
+            clienteControlador.actualizarMonedas(cliente.getMonedas());
             UIHelper.mostrarAlerta("Membresía Extendedia", "Se ha extendido la membresía por 30 días más.");
             initialize();
 
@@ -102,18 +102,6 @@ public class MembresiaControlador {
         } catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "No se pudo actualizar la vista de membresía.");
-        }
-    }
-
-    private void actualizarVistaMonedas() {
-
-        try {
-
-            clienteControlador.actualizarMonedas(cliente.getMonedas());
-
-        } catch (Exception e) {
-
-            UIHelper.mostrarAlerta("Error", "No se pudo actualizar la vista de monedas.");
         }
     }
 }
