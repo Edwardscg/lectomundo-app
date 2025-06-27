@@ -14,10 +14,11 @@ import java.util.List;
 public class AlquilerService {
 
     private AlquilerDAO alquilerDAO = new AlquilerDAO();
+    UsuarioService usuarioService = new UsuarioService();
     private NotificacionService notificacionService = new NotificacionService();
     private final int dias_alquiler = 7;
 
-    public void registrarAlquiler(Cliente cliente, Documento documento) {
+    public Cliente registrarAlquiler(Cliente cliente, Documento documento) {
 
         LocalDateTime inicio = LocalDateTime.now();
         LocalDateTime fin = inicio.plusDays(dias_alquiler);
@@ -31,6 +32,12 @@ public class AlquilerService {
 
         alquilerDAO.registrarAlquiler(alquiler);
         notificacionService.notificacionAlquilerDocumento(cliente, documento);
+
+        int nuevas_monedas = cliente.getMonedas() - documento.getPrecio();
+        usuarioService.actualizarMonedas(cliente.getId_usuario(), nuevas_monedas);
+        cliente.setMonedas(nuevas_monedas);
+
+        return cliente;
     }
 
     public void devolverDocumento(Cliente cliente, Documento documento) {

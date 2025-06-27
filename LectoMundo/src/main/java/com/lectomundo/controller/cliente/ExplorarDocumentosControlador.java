@@ -18,10 +18,10 @@ public class ExplorarDocumentosControlador {
     VBox vboxContenedor;
 
     private DocumentoService documentoService = new DocumentoService();
+    private ClienteControlador clienteControlador;
 
-    @FXML
-    private void initialize() {
-
+    public void setClienteControlador(ClienteControlador clienteControlador) {
+        this.clienteControlador = clienteControlador;
         cargarDocumentos();
     }
 
@@ -39,6 +39,7 @@ public class ExplorarDocumentosControlador {
                 Node item = loader.load();
 
                 ItemDocumentoControlador itemDocumentoControlador = loader.getController();
+                itemDocumentoControlador.setClienteControlador(clienteControlador);
                 itemDocumentoControlador.mostrarDocumento(documento);
 
                 fila.getChildren().add(item);

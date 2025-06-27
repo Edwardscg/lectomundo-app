@@ -22,6 +22,7 @@ public class ItemDocumentoControlador {
     private Label lblDescripcion;
 
     private Documento documento;
+    private ClienteControlador clienteControlador;
 
     public void mostrarDocumento(Documento documento) {
 
@@ -41,6 +42,10 @@ public class ItemDocumentoControlador {
         }
     }
 
+    public void setClienteControlador(ClienteControlador clienteControlador) {
+        this.clienteControlador = clienteControlador;
+    }
+
     @FXML
     private void verDetalle() {
 
@@ -50,6 +55,7 @@ public class ItemDocumentoControlador {
             Parent root = loader.load();
 
             DetalleDocumentoControlador detalleDocumentoControlador = loader.getController();
+            detalleDocumentoControlador.setClienteControlador(clienteControlador);
             detalleDocumentoControlador.cargarDatos(documento);
 
             Stage stage = new Stage();
