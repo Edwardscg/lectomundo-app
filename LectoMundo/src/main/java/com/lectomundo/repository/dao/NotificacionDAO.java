@@ -14,9 +14,9 @@ public class NotificacionDAO {
 
     public void registrarNotificacion(Notificacion notificacion) {
 
-        String sql = "INSERT INTO notificacion (id_usuario, tipo, mensaje, fecha_envio, es_leido) VALUES (?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO notificacion (id_usuario, tipo, mensaje, es_leido) VALUES (?, ?, ?, ?);";
 
-        DBHelper.manejarEntidad(sql, notificacion.getCliente().getId_usuario(), notificacion.getTipo(), notificacion.getMensaje(), Timestamp.valueOf(notificacion.getFecha_envio()), notificacion.isEs_leido());
+        DBHelper.manejarEntidad(sql, notificacion.getCliente().getId_usuario(), notificacion.getTipo(), notificacion.getMensaje(), notificacion.isEs_leido());
     }
 
     public List<Notificacion> obtenerNotificacionesPorUsuario(int id_usuario) {
