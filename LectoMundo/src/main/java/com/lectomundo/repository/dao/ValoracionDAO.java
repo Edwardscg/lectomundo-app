@@ -14,11 +14,12 @@ public class ValoracionDAO {
 
     public void registrarValoracion(Valoracion valoracion) {
 
-        String sql = "INSERT INTO valoracion (id_usuario, id_documento, puntuacion, comentario, fecha_valoracion) VALUES (?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO valoracion (id_usuario, id_documento, puntuacion, comentario) VALUES (?, ?, ?, ?);";
 
-        DBHelper.manejarEntidad(sql, valoracion.getCliente().getId_usuario(), valoracion.getDocumento().getId_documento(), valoracion.getPuntuacion(), valoracion.getComentario(), Date.valueOf(valoracion.getFecha_valoracion()));
+        DBHelper.manejarEntidad(sql, valoracion.getCliente().getId_usuario(), valoracion.getDocumento().getId_documento(), valoracion.getPuntuacion(), valoracion.getComentario());
     }
 
+    // IMPLEMENTACION EN UN FUTURO
     public void actualizarValoracion(Valoracion valoracion) {
 
         String sql = "UPDATE valoracion SET puntuacion = ?, comentario = ?, fecha_valoracion = ? WHERE id_usuario = ? AND id_documento = ?;";
@@ -26,6 +27,7 @@ public class ValoracionDAO {
         DBHelper.manejarEntidad(sql, valoracion.getPuntuacion(), valoracion.getComentario(), Date.valueOf(valoracion.getFecha_valoracion()), valoracion.getCliente().getId_usuario(), valoracion.getDocumento().getId_documento());
     }
 
+    // IMPLEMENTACION EN UN FUTURO
     public void eliminarValoracion(int id_usuario, int id_documento) {
         String sql = "DELETE FROM valoracion WHERE id_usuario = ? AND id_documento = ?;";
 
