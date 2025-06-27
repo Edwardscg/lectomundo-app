@@ -10,6 +10,7 @@ import java.util.List;
 public class CompraDocumentoService {
 
     CompraDocumentoDAO compraDocumentoDAO = new CompraDocumentoDAO();
+    private NotificacionService notificacionService = new NotificacionService();
 
     public void registrarCompra(Cliente cliente, Documento documento) {
 
@@ -22,6 +23,7 @@ public class CompraDocumentoService {
         compraDocumento.setCosto(documento.getPrecio() * 3);
 
         compraDocumentoDAO.registrarCompra(compraDocumento);
+        notificacionService.notificacionCompraDocumento(cliente, documento);
     }
 
     public List<Documento> verDocumentosCompradosPorUsuario(Cliente cliente) {

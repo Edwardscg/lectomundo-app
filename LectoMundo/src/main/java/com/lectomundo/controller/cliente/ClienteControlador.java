@@ -134,6 +134,21 @@ public class ClienteControlador {
         }
     }
 
+    @FXML
+    private void verNotificaciones(){
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/notificaciones.fxml"));
+            Node contenido = loader.load();
+            panelContenedor.getChildren().setAll(contenido);
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+    }
+
     public void actualizarMonedas(int nuevas_monedas){
 
         lblMonedas.setText(String.valueOf(nuevas_monedas));

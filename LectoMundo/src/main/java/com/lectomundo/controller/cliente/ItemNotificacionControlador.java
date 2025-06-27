@@ -37,9 +37,6 @@ public class ItemNotificacionControlador {
                 case "Compra", "Alquiler":
                     caja.setStyle("-fx-border-color: #27ae60; -fx-border-width: 2;");
                     break;
-                case "Aviso":
-                    caja.setStyle("-fx-border-color: #e67e22; -fx-border-width: 2;");
-                    break;
                 default:
                     caja.setStyle("-fx-border-color: #3498db; -fx-border-width: 2;");
             }

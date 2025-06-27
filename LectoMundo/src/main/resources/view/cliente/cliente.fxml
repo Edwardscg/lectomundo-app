@@ -29,7 +29,7 @@
                 </tooltip>
 
             </Button>
-            <Button fx:id="btnNotificaciones" text="🔔">
+            <Button fx:id="btnNotificaciones" text="🔔" onAction="#verNotificaciones">
 
                 <tooltip>
 

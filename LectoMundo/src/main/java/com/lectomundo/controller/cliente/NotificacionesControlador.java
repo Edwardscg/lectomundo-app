@@ -21,7 +21,7 @@ public class NotificacionesControlador {
     @FXML
     private void initialize(){
 
-
+        cargarNotificaciones();
     }
 
     private void cargarNotificaciones(){

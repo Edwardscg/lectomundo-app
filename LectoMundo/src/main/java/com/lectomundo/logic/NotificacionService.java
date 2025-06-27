@@ -42,16 +42,4 @@ public class NotificacionService {
         String mensaje = "Has alquilado el documento: " + documento.getTitulo();
         registrarNotificacion(cliente, "Alquiler", mensaje);
     }
-
-    public void notificacionUltimoDiaAlquiler(Cliente cliente, Documento documento){
-
-        String mensaje = "Hos es el ultimo día de alquiler del documento: " + documento.getTitulo();
-        registrarNotificacion(cliente, "Aviso", mensaje);
-    }
-
-    public void notificacionUltimoDiaMembresia(Cliente cliente){
-
-        String mensaje = "Hoy es el ultimo dia de tu membresía, renueva para seguir teniendo acceso completo a los documentos.";
-        registrarNotificacion(cliente, "Aviso", mensaje);
-    }
 }
