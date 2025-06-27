@@ -10,6 +10,9 @@ public class Notificacion {
     private LocalDateTime fecha_envio;
     private boolean es_leido;
 
+    public Notificacion() {
+    }
+
     public Notificacion(int id_notificacion, Cliente cliente, String tipo, String mensaje, LocalDateTime fecha_envio, boolean es_leido) {
         this.id_notificacion = id_notificacion;
         this.cliente = cliente;

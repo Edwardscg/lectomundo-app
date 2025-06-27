@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.lectomundo.controller.cliente.ValoracionDocumentoControlador"
+      prefHeight="700.0" prefWidth="600.0">
+
+    <VBox spacing="20" style="-fx-background-color: #f0f0f0; -fx-background-radius: 10;">
+
+        <padding>
+            <Insets top="10" left="30" right="30" bottom="10"/>
+        </padding>
+
+        <Label text="¡Valora!" style="-fx-font-size: 16pt; -fx-font-weight: bold;"/>
+        <TextArea fx:id="txtComentario" promptText="Escribe tu comentario..." prefRowCount="3"/>
+
+        <HBox fx:id="hboxEstrellas" spacing="10" alignment="CENTER_LEFT">
+            <Button fx:id="estrella1" text="☆" style="-fx-font-size: 20pt; -fx-background-color: transparent;" onAction="#seleccionarEstrella1"/>
+            <Button fx:id="estrella2" text="☆" style="-fx-font-size: 20pt; -fx-background-color: transparent;" onAction="#seleccionarEstrella2"/>
+            <Button fx:id="estrella3" text="☆" style="-fx-font-size: 20pt; -fx-background-color: transparent;" onAction="#seleccionarEstrella3"/>
+            <Button fx:id="estrella4" text="☆" style="-fx-font-size: 20pt; -fx-background-color: transparent;" onAction="#seleccionarEstrella4"/>
+            <Button fx:id="estrella5" text="☆" style="-fx-font-size: 20pt; -fx-background-color: transparent;" onAction="#seleccionarEstrella5"/>
+        </HBox>
+
+        <HBox alignment="BOTTOM_RIGHT">
+            <Button fx:id="btnValorar" text="Valorar" onAction="#valorarDocumento"/>
+        </HBox>
+    </VBox>
+
+    <VBox fx:id="vboxValoraciones" spacing="20">
+
+        <padding>
+            <Insets top="10" left="30" right="30" bottom="10"/>
+        </padding>
+
+    </VBox>
+
+</VBox>

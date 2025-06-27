@@ -14,6 +14,7 @@ import java.util.List;
 public class AlquilerService {
 
     private AlquilerDAO alquilerDAO = new AlquilerDAO();
+    private NotificacionService notificacionService = new NotificacionService();
     private final int dias_alquiler = 7;
 
     public void registrarAlquiler(Cliente cliente, Documento documento) {
@@ -29,6 +30,7 @@ public class AlquilerService {
         alquiler.setEstado_alquiler(Estado.activo);
 
         alquilerDAO.registrarAlquiler(alquiler);
+        notificacionService.notificacionAlquilerDocumento(cliente, documento);
     }
 
     public void devolverDocumento(Cliente cliente, Documento documento) {

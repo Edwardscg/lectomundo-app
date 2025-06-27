@@ -9,11 +9,15 @@ import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Documento;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -192,6 +196,28 @@ public class DetalleDocumentoControlador {
         } catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "No se pudo quitar de favoritos.");
+        }
+    }
+
+    @FXML
+    private void irAValorar(){
+
+        try{
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/valoracionDocumento.fxml"));
+            Parent root = loader.load();
+
+            ValoracionDocumentoControlador valoracionDocumentoControlador = loader.getController();
+            valoracionDocumentoControlador.cargarDatos(cliente, documento);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "No se pudo abrir la ventana de valoración.");
         }
     }
 

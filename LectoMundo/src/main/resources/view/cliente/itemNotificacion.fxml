@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<HBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.lectomundo.controller.cliente.ItemNotificacionControlador"
+      prefHeight="100.0" prefWidth="500.0"
+      fx:id="caja">
+
+    <VBox spacing="5" VBox.vgrow="ALWAYS">
+        <Label fx:id="lblTipo" style="-fx-font-weight: bold; -fx-font-size: 13px;"/>
+        <Label fx:id="lblMensaje" wrapText="true"/>
+        <Label fx:id="lblFecha" style="-fx-font-size: 10px; -fx-text-fill: gray;"/>
+    </VBox>
+
+    <Button fx:id="btnMarcarLeida" text="Marcar como leída" onAction="#marcarComoLeida"/>
+
+    <padding>
+        <Insets top="10" bottom="10" left="15" right="15"/>
+    </padding>
+</HBox>

@@ -1,10 +1,12 @@
 package com.lectomundo.controller.cliente;
 
+import com.lectomundo.controller.UIHelper;
 import com.lectomundo.logic.DocumentoService;
 import com.lectomundo.logic.MembresiaService;
 import com.lectomundo.model.Documento;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -34,7 +36,7 @@ public class ExplorarDocumentosControlador {
             for (Documento documento : documentos) {
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/itemDocumento.fxml"));
-                VBox item = loader.load();
+                Node item = loader.load();
 
                 ItemDocumentoControlador itemDocumentoControlador = loader.getController();
                 itemDocumentoControlador.mostrarDocumento(documento);
@@ -56,7 +58,7 @@ public class ExplorarDocumentosControlador {
 
         } catch (Exception e) {
 
-            e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "No se puedo cargar los documentos.");
         }
     }
 }

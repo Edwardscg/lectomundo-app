@@ -1,5 +1,6 @@
 package com.lectomundo.controller.cliente;
 
+import com.lectomundo.controller.UIHelper;
 import com.lectomundo.model.Documento;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,8 +20,6 @@ public class ItemDocumentoControlador {
     private Label lblTitulo;
     @FXML
     private Label lblDescripcion;
-    @FXML
-    private Button btnVer;
 
     private Documento documento;
 
@@ -37,7 +36,7 @@ public class ItemDocumentoControlador {
             imgPortada.setImage(portada);
 
         } catch (Exception e) {
-            e.printStackTrace();
+
             imgPortada.setImage(null);
         }
     }
@@ -59,7 +58,7 @@ public class ItemDocumentoControlador {
 
         } catch (Exception e) {
 
-            e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "No se pudo mostrar la ventana con los detalles del documento.");
         }
     }
 }

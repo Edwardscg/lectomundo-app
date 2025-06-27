@@ -10,6 +10,9 @@ public class Valoracion {
     private String comentario;
     private LocalDate fecha_valoracion;
 
+    public Valoracion() {
+    }
+
     public Valoracion(int id_valoracion, Cliente cliente, Documento documento, int puntuacion, String comentario, LocalDate fecha_valoracion) {
         this.id_valoracion = id_valoracion;
         this.cliente = cliente;
