@@ -1,5 +1,6 @@
 package com.lectomundo.app;
 
+import com.lectomundo.controller.UIHelper;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,7 +18,7 @@ public class Main extends Application {
             stage.show();
         }catch (Exception e){
 
-            e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "No se pudo cargar la aplicación.");
         }
     }
 

@@ -30,7 +30,7 @@ public class ExplorarDocumentosControlador {
 
             List<Documento> documentos = documentoService.traerDocumentos();
 
-            HBox fila = new HBox(20);
+            HBox fila = new HBox(35);
             int contador = 0;
 
             for (Documento documento : documentos) {
@@ -59,7 +59,8 @@ public class ExplorarDocumentosControlador {
 
         } catch (Exception e) {
 
-            UIHelper.mostrarAlerta("Error", "No se puedo cargar los documentos.");
+            e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "No se pudo cargar los documentos.");
         }
     }
 }

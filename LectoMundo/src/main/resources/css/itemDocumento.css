@@ -1,0 +1,52 @@
+.card-item {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #e0e0e0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 8, 0.1, 0, 4);
+    -fx-cursor: hand;
+    -fx-padding: 10;
+    -fx-overflow: hidden;
+    -fx-margin: 10;
+}
+
+.img-portada {
+    -fx-background-radius: 12;
+    -fx-transition: all 0.5s ease;
+}
+
+.info-overlay {
+    -fx-background-color: rgba(255, 255, 255, 0.92);
+    -fx-background-radius: 0 0 12 12;
+    -fx-padding: 10;
+}
+
+.info-box {
+    -fx-padding: 0 12 12 12;
+}
+
+.titulo {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1E3A8A;
+    -fx-text-alignment: left;
+}
+
+.descripcion {
+    -fx-font-size: 11px;
+    -fx-text-fill: #374151;
+    -fx-text-alignment: justify;
+    -fx-max-height: 90;
+}
+
+.boton-ver {
+    -fx-background-color: #3A86FF;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-padding: 6 14;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+.boton-ver:hover {
+    -fx-background-color: #1E3A8A;
+}
