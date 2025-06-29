@@ -48,7 +48,7 @@ public class ExplorarDocumentosControlador {
                 if (contador % 3 == 0) {
 
                     vboxContenedor.getChildren().add(fila);
-                    fila = new HBox(20);
+                    fila = new HBox(35);
                 }
             }
 

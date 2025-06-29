@@ -72,9 +72,7 @@ public class DetalleDocumentoControlador {
             cliente = alquilerService.registrarAlquiler(cliente, documento);
             clienteControlador.actualizarMonedas(cliente.getMonedas());
 
-            btnAlquilar.setVisible(false);
-            btnDevolver.setVisible(true);
-            btnLeer.setVisible(true);
+            actualizarBotones();
 
         } catch (RuntimeException e) {
             e.printStackTrace();
@@ -89,9 +87,7 @@ public class DetalleDocumentoControlador {
 
             alquilerService.devolverDocumento(cliente, documento);
 
-            btnAlquilar.setVisible(true);
-            btnDevolver.setVisible(false);
-            btnLeer.setVisible(true);
+            actualizarBotones();
 
         } catch (RuntimeException e) {
 
@@ -107,10 +103,7 @@ public class DetalleDocumentoControlador {
             cliente = compraDocumentoService.registrarCompra(cliente, documento);
             clienteControlador.actualizarMonedas(cliente.getMonedas());
 
-            btnAlquilar.setVisible(false);
-            btnComprar.setVisible(false);
-            btnDevolver.setVisible(false);
-            btnLeer.setVisible(true);
+            actualizarBotones();
 
         } catch (RuntimeException e) {
 
@@ -174,7 +167,9 @@ public class DetalleDocumentoControlador {
 
             favoritoService.agregarFavorito(cliente, documento);
             btnFavoritoVacio.setVisible(false);
+            btnFavoritoVacio.setManaged(false);
             btnFavoritoLleno.setVisible(true);
+            btnFavoritoLleno.setManaged(true);
 
         } catch (Exception e) {
 
@@ -189,7 +184,9 @@ public class DetalleDocumentoControlador {
 
             favoritoService.eliminarFavorito(cliente, documento);
             btnFavoritoVacio.setVisible(true);
+            btnFavoritoVacio.setManaged(true);
             btnFavoritoLleno.setVisible(false);
+            btnFavoritoLleno.setManaged(false);
 
         } catch (Exception e) {
 
@@ -198,9 +195,9 @@ public class DetalleDocumentoControlador {
     }
 
     @FXML
-    private void irAValorar(){
+    private void irAValorar() {
 
-        try{
+        try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/valoracionDocumento.fxml"));
             Parent root = loader.load();
@@ -212,7 +209,7 @@ public class DetalleDocumentoControlador {
             stage.setScene(new Scene(root));
             stage.show();
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "No se pudo abrir la ventana de valoración.");
         }
@@ -229,52 +226,89 @@ public class DetalleDocumentoControlador {
 
             this.documento = documento;
 
-            tiene_membresia = membresiaService.tieneMembresiaActiva(cliente.getId_usuario());
-            esta_comprado = compraDocumentoService.estaComprado(cliente.getId_usuario(), documento.getId_documento());
-            esta_alquilado = alquilerService.estaAlquilado(cliente.getId_usuario(), documento.getId_documento());
-            es_favorito = favoritoService.esFavorito(cliente.getId_usuario(), documento.getId_documento());
-
             imgPortada.setImage(new Image(documento.getPortada_url()));
             lblTitulo.setText(documento.getTitulo());
             lblAutor.setText("Autor: " + documento.getAutor());
             lblGenero.setText("Género: " + documento.getGenero());
             lblDescripcion.setText("Descripción: " + documento.getDescripcion());
 
-            if (es_favorito) {
+            es_favorito = favoritoService.esFavorito(cliente.getId_usuario(), documento.getId_documento());
 
-                btnFavoritoLleno.setVisible(true);
-                btnFavoritoVacio.setVisible(false);
-            } else {
+            btnFavoritoLleno.setVisible(es_favorito);
+            btnFavoritoLleno.setManaged(es_favorito);
 
-                btnFavoritoVacio.setVisible(true);
-                btnFavoritoLleno.setVisible(false);
-            }
+            btnFavoritoVacio.setVisible(!es_favorito);
+            btnFavoritoVacio.setManaged(!es_favorito);
 
-            if (tiene_membresia) {
-                btnAlquilar.setVisible(false);
-                btnComprar.setVisible(true);
-                btnLeer.setVisible(true);
-                btnDescargar.setVisible(esta_comprado);
-            } else if (esta_comprado) {
-                btnAlquilar.setVisible(false);
-                btnComprar.setVisible(false);
-                btnLeer.setVisible(true);
-                btnDescargar.setVisible(true);
-            } else if (esta_alquilado) {
-                btnAlquilar.setVisible(false);
-                btnDevolver.setVisible(true);
-                btnLeer.setVisible(true);
-            } else {
-
-                btnAlquilar.setVisible(true);
-                btnComprar.setVisible(true);
-                btnLeer.setVisible(false);
-                btnDevolver.setVisible(false);
-            }
-
+            actualizarBotones();
         } catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "No se pudo cargar los datos del documento.");
+        }
+    }
+
+    private void actualizarBotones() {
+
+        tiene_membresia = membresiaService.tieneMembresiaActiva(cliente.getId_usuario());
+        esta_comprado = compraDocumentoService.estaComprado(cliente.getId_usuario(), documento.getId_documento());
+        esta_alquilado = alquilerService.estaAlquilado(cliente.getId_usuario(), documento.getId_documento());
+
+        btnAlquilar.setVisible(false);
+        btnAlquilar.setManaged(false);
+
+        btnComprar.setVisible(false);
+        btnComprar.setManaged(false);
+
+        btnLeer.setVisible(false);
+        btnLeer.setManaged(false);
+
+        btnDevolver.setVisible(false);
+        btnDevolver.setManaged(false);
+
+        btnDescargar.setVisible(false);
+        btnDescargar.setManaged(false);
+
+        if (tiene_membresia) {
+
+            btnLeer.setVisible(true);
+            btnLeer.setManaged(true);
+
+            if (esta_comprado) {
+
+                btnDescargar.setVisible(true);
+                btnDescargar.setManaged(true);
+            } else {
+
+                btnComprar.setVisible(true);
+                btnComprar.setManaged(true);
+            }
+
+        } else if (esta_comprado) {
+
+            btnLeer.setVisible(true);
+            btnLeer.setManaged(true);
+
+            btnDescargar.setVisible(true);
+            btnDescargar.setManaged(true);
+
+        } else if (esta_alquilado) {
+
+            btnComprar.setVisible(true);
+            btnComprar.setManaged(true);
+
+            btnLeer.setVisible(true);
+            btnLeer.setManaged(true);
+
+            btnDevolver.setVisible(true);
+            btnDevolver.setManaged(true);
+
+        } else {
+
+            btnAlquilar.setVisible(true);
+            btnAlquilar.setManaged(true);
+
+            btnComprar.setVisible(true);
+            btnComprar.setManaged(true);
         }
     }
 }

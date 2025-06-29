@@ -6,6 +6,7 @@ import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Documento;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -31,13 +32,13 @@ public class DocumentosAlquiladosControlador {
 
             List<Documento> documentosAlquilados = alquilerService.obtenerDocumentosAlquiladosActivosPorUsuario(cliente);
 
-            HBox fila = new HBox(20);
+            HBox fila = new HBox(35);
             int contador = 0;
 
             for(Documento documento : documentosAlquilados){
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/itemDocumento.fxml"));
-                VBox item = loader.load();
+                Node item = loader.load();
 
                 ItemDocumentoControlador itemDocumentoControlador = loader.getController();
                 itemDocumentoControlador.mostrarDocumento(documento);
@@ -48,7 +49,7 @@ public class DocumentosAlquiladosControlador {
                 if(contador%3 ==0){
 
                     vboxContenedor.getChildren().add(fila);
-                    fila = new HBox(20);
+                    fila = new HBox(35);
                 }
             }
 
@@ -58,7 +59,7 @@ public class DocumentosAlquiladosControlador {
             }
 
         }catch (Exception e){
-
+            e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "No se pudo cargar los documentos alquilados.");
         }
     }

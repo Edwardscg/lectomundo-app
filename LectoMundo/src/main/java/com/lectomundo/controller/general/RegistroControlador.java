@@ -18,22 +18,22 @@ public class RegistroControlador {
     @FXML private TextField txtConfirmarContraseña;
 
     @FXML
-    private void Registrarse() throws Exception{
+    private void Registrarse() {
 
         try{
 
             String nombre = txtNombreUsuario.getText().trim();
             String correo = txtCorreo.getText().trim();
             String contraseña = txtContraseña.getText();
-            String confirmar = txtConfirmarContraseña.getText();
+            String confirmar_contraseña = txtConfirmarContraseña.getText();
 
-            if(nombre.isEmpty() || correo.isEmpty() || contraseña.isEmpty() || confirmar.isEmpty()){
+            if(nombre.isEmpty() || correo.isEmpty() || contraseña.isEmpty() || confirmar_contraseña.isEmpty()){
 
                 UIHelper.mostrarAlerta("Error", "Todos los datos son obligatorios.");
                 return;
             }
 
-            if(!contraseña.equals(confirmar)){
+            if(!contraseña.equals(confirmar_contraseña)){
 
                 UIHelper.mostrarAlerta("Error", "Las contraseñas no coinciden.");
                 return;
@@ -59,7 +59,9 @@ public class RegistroControlador {
                 usuarioService.registrarUsuario(cliente);
 
                 Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
+
                 UIHelper.abrirVentana(ventana_actual, "/view/general/login.fxml", "Login");
+
             }else{
 
                 UIHelper.mostrarAlerta("Error", "No se completó la verificación.");

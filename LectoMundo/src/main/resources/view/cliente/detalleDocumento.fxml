@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.image.ImageView?>
-
 <?import javafx.scene.image.Image?>
+
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.lectomundo.controller.cliente.DetalleDocumentoControlador"
-            prefHeight="650.0" prefWidth="450.0">
+            prefHeight="650.0" prefWidth="500.0"
+            stylesheets="@/css/detalleDocumento.css">
 
-    <VBox alignment="CENTER" spacing="20">
-
-        <padding>
-            <Insets top="20" left="20" right="20" bottom="20"/>
-        </padding>
-
-        <Button fx:id="btnFavoritoVacio" onAction="#marcarFavorito" style="-fx-background-color: transparent;" visible="true">
+    <StackPane fx:id="stackFavorito" styleClass="favorito-container" AnchorPane.topAnchor="10" AnchorPane.rightAnchor="10">
+        <Button fx:id="btnFavoritoVacio" onAction="#marcarFavorito" styleClass="boton-favorito" visible="true" managed="true">
             <graphic>
                 <ImageView fitHeight="24" fitWidth="24">
                     <image>
@@ -26,7 +21,7 @@
             </graphic>
         </Button>
 
-        <Button fx:id="btnFavoritoLleno" onAction="#desmarcarFavorito" style="-fx-background-color: transparent;" visible="false">
+        <Button fx:id="btnFavoritoLleno" onAction="#desmarcarFavorito" styleClass="boton-favorito" visible="false" managed="false">
             <graphic>
                 <ImageView fitHeight="24" fitWidth="24">
                     <image>
@@ -35,23 +30,27 @@
                 </ImageView>
             </graphic>
         </Button>
+    </StackPane>
 
-        <ImageView fx:id="imgPortada" fitWidth="200" fitHeight="250" preserveRatio="true"/>
 
-        <Label fx:id="lblTitulo" style="-fx-font-size: 18px; -fx-font-weight: bold;" wrapText="true"/>
-        <Label fx:id="lblAutor" style="-fx-font-size: 14px;"/>
-        <Label fx:id="lblGenero" style="-fx-font-size: 14px;"/>
-        <Label fx:id="lblDescripcion" wrapText="true" maxWidth="400" maxHeight="100" style="-fx-font-size: 14px;"/>
+    <VBox alignment="CENTER" spacing="15" styleClass="detalle-contenido" AnchorPane.topAnchor="50" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="30" AnchorPane.rightAnchor="30">
 
-        <HBox spacing="30">
-            <Button fx:id="btnAlquilar" onAction="#alquilarDocumento" text="Alquilar"/>
-            <Button fx:id="btnComprar" onAction="#comprarDocumento" text="Comprar" />
-            <Button fx:id="btnLeer" onAction="#leerDocumento" text="Leer" visible="false"/>
-            <Button fx:id="btnDevolver" onAction="#devolverDocumento" text="Devolver" visible="false"/>
-            <Button fx:id="btnDescargar" onAction="#descargarDocumento" text="Descargar" visible="false"/>
+        <ImageView fx:id="imgPortada" fitWidth="250" fitHeight="300" preserveRatio="true"/>
+
+        <Label fx:id="lblTitulo" wrapText="true" styleClass="titulo"/>
+        <Label fx:id="lblAutor" styleClass="subinfo"/>
+        <Label fx:id="lblGenero" styleClass="subinfo"/>
+        <Label fx:id="lblDescripcion" wrapText="true" maxWidth="400" styleClass="descripcion"/>
+
+        <HBox spacing="15" alignment="CENTER">
+            <Button fx:id="btnAlquilar" onAction="#alquilarDocumento" text="Alquilar" styleClass="boton-accion" minWidth="90"/>
+            <Button fx:id="btnComprar" onAction="#comprarDocumento" text="Comprar" styleClass="boton-accion" minWidth="90"/>
+            <Button fx:id="btnLeer" onAction="#leerDocumento" text="Leer" visible="false" styleClass="boton-accion" minWidth="90"/>
+            <Button fx:id="btnDevolver" onAction="#devolverDocumento" text="Devolver" visible="false" styleClass="boton-accion" minWidth="90"/>
+            <Button fx:id="btnDescargar" onAction="#descargarDocumento" text="Descargar" visible="false" styleClass="boton-accion" minWidth="90"/>
         </HBox>
 
-        <Button fx:id="btnValorar" onAction="#irAValorar" text="Valorar" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" maxWidth="70" />
-
+        <Button fx:id="btnValorar" onAction="#irAValorar" text="Valorar" styleClass="boton-valorar"/>
     </VBox>
+
 </AnchorPane>
