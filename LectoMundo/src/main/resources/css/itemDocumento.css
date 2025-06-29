@@ -5,14 +5,15 @@
     -fx-border-color: #e0e0e0;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 8, 0.1, 0, 4);
     -fx-cursor: hand;
-    -fx-padding: 10;
+    -fx-padding: 25;
     -fx-overflow: hidden;
     -fx-margin: 10;
 }
 
 .img-portada {
-    -fx-background-radius: 12;
+    -fx-background-radius: 25;
     -fx-transition: all 0.5s ease;
+    -fx-border-radius: 10;
 }
 
 .info-overlay {

@@ -1,87 +1,72 @@
 package com.lectomundo.controller.general;
 
 import com.lectomundo.controller.UIHelper;
-import com.lectomundo.logic.CorreoService;
 import com.lectomundo.logic.UsuarioService;
-import com.lectomundo.model.Cliente;
-import com.lectomundo.model.Usuario;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class RegistroControlador {
 
+    UsuarioService usuarioService = new UsuarioService();
 
-    @FXML private TextField txtNombreUsuario;
-    @FXML private TextField txtCorreo;
-    @FXML private TextField txtContraseña;
-    @FXML private TextField txtConfirmarContraseña;
+    @FXML
+    private TextField txtNombreUsuario;
+    @FXML
+    private TextField txtCorreo;
+    @FXML
+    private TextField txtContraseña;
+    @FXML
+    private TextField txtConfirmarContraseña;
 
     @FXML
     private void Registrarse() {
 
-        try{
+        String nombre = txtNombreUsuario.getText().trim();
+        String correo = txtCorreo.getText().trim();
+        String contraseña = txtContraseña.getText();
+        String confirmar_contraseña = txtConfirmarContraseña.getText();
+        String tipo_usuario = "cliente";
 
-            String nombre = txtNombreUsuario.getText().trim();
-            String correo = txtCorreo.getText().trim();
-            String contraseña = txtContraseña.getText();
-            String confirmar_contraseña = txtConfirmarContraseña.getText();
+        if (nombre.isBlank() || correo.isBlank() || contraseña.isBlank() || confirmar_contraseña.isBlank()) {
 
-            if(nombre.isEmpty() || correo.isEmpty() || contraseña.isEmpty() || confirmar_contraseña.isEmpty()){
+            UIHelper.mostrarAlerta("Error", "Todos los datos son obligatorios.");
+            return;
+        }
 
-                UIHelper.mostrarAlerta("Error", "Todos los datos son obligatorios.");
-                return;
-            }
+        if (!contraseña.equals(confirmar_contraseña)) {
 
-            if(!contraseña.equals(confirmar_contraseña)){
+            UIHelper.mostrarAlerta("Error", "Las contraseñas no coinciden.");
+            return;
+        }
 
-                UIHelper.mostrarAlerta("Error", "Las contraseñas no coinciden.");
-                return;
-            }
+        try {
 
-            UsuarioService usuarioService = new UsuarioService();
-            Usuario usuario = usuarioService.buscarUsuarioPorCorreo(correo);
+            usuarioService.registrarUsuario(nombre, correo, contraseña, tipo_usuario);
 
-            if(usuario!= null){
+            Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
 
-                UIHelper.mostrarAlerta("Error", "Ya existe un usuario registrado con ese correo.");
-                return;
-            }
+            UIHelper.abrirYCerrarVentanaActual(ventana_actual, "/view/general/login.fxml", "Login");
 
-            String codigo = CorreoService.generarCodigoDeVerificacion();
-            CorreoService.enviarCodigoPorCorreo(correo, codigo);
+        } catch (IllegalArgumentException e) {
 
-            boolean verificado = UIHelper.abrirVentanaDeVerificacion(correo, codigo);
+            UIHelper.mostrarAlerta("Error", e.getMessage());
 
-            if(verificado){
-
-                Cliente cliente = new Cliente(0, nombre, correo, contraseña, "cliente", 0);
-                usuarioService.registrarUsuario(cliente);
-
-                Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
-
-                UIHelper.abrirVentana(ventana_actual, "/view/general/login.fxml", "Login");
-
-            }else{
-
-                UIHelper.mostrarAlerta("Error", "No se completó la verificación.");
-            }
-
-        }catch (Exception e){
+        } catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "No se pudo realizar el registro.");
         }
     }
 
     @FXML
-    private void Cancelar(){
+    private void Cancelar() {
 
-        try{
+        try {
 
             Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
-            UIHelper.abrirVentana(ventana_actual, "/view/general/login.fxml", "Login");
+            UIHelper.abrirYCerrarVentanaActual(ventana_actual, "/view/general/login.fxml", "Login");
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "No se pudo volver a login.");
         }

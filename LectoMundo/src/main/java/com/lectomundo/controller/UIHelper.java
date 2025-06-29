@@ -10,7 +10,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.function.Consumer;
 
 public class UIHelper {
 
@@ -23,48 +22,49 @@ public class UIHelper {
         alerta.showAndWait();
     }
 
-    public static void abrirVentana(Stage ventana_actual, String fxml_ubicacion, String titulo){
+    public static void abrirYCerrarVentanaActual(Stage ventana_actual, String fxml_ubicacion, String titulo){
 
         try{
 
             FXMLLoader loader = new FXMLLoader(UIHelper.class.getResource(fxml_ubicacion));
             Parent root = loader.load();
 
-            Stage stage = new Stage();
-            stage.setTitle(titulo);
-            stage.setScene(new Scene(root));
-            stage.show();
+            Stage nueva_ventana = new Stage();
+            nueva_ventana.setTitle(titulo);
+            nueva_ventana.setScene(new Scene(root));
+            nueva_ventana.setResizable(false);
+            nueva_ventana.show();
 
             if(ventana_actual!=null){
 
                 ventana_actual.close();
             }
 
-        }catch (IOException e){
-
-            e.printStackTrace();
-            System.err.println("Error al cargar: "+ fxml_ubicacion);
-        }catch (Exception e){
+        } catch (Exception e){
 
             e.printStackTrace();
             mostrarAlerta("Error", "No se pudo abrir la ventana." +titulo);
         }
     }
 
-    public static void cambiarEscena(Stage stage, String fxml_ubicacion, String titulo){
+    public static void abrirVentanaOcultandoAnterior(Stage ventana_anterior, String fxml_ubicacion, String titulo){
 
         try{
 
             FXMLLoader loader = new FXMLLoader(UIHelper.class.getResource(fxml_ubicacion));
             Parent root = loader.load();
 
-            stage.setTitle(titulo);
-            stage.setScene(new Scene(root));
+            Stage nueva_ventana = new Stage();
+            nueva_ventana.setTitle(titulo);
+            nueva_ventana.setScene(new Scene(root));
+            nueva_ventana.setOnHidden(e -> ventana_anterior.show());
+            ventana_anterior.hide();
+            nueva_ventana.show();
 
         }catch (Exception e){
 
             e.printStackTrace();
-            mostrarAlerta("Error", "No se pudo cambiar la escena a :" + titulo);
+            mostrarAlerta("Error", "No se pudo cambiar la ventana a :" + titulo);
         }
     }
 
@@ -79,11 +79,14 @@ public class UIHelper {
             codigoVerificacionControlador.inicializarDatos(correo, codigo_generado);
 
             Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Verificación de Código");
             stage.setScene(new Scene(root));
+            stage.setResizable(false);
             stage.showAndWait();
 
             return codigoVerificacionControlador.fueVerificado();
+
         }catch (Exception e){
 
             e.printStackTrace();

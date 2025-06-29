@@ -7,14 +7,13 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -66,9 +65,22 @@ public class ItemDocumentoControlador {
             detalleDocumentoControlador.setClienteControlador(clienteControlador);
             detalleDocumentoControlador.cargarDatos(documento);
 
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+            Stage ventana_detalle = new Stage();
+            ventana_detalle.setScene(new Scene(root));
+
+            Stage ventana_principal = (Stage) ((Node) imgPortada).getScene().getWindow();
+            ventana_principal.hide();
+
+
+
+            ventana_detalle.setOnHiding(e -> {
+                if (!ventana_principal.isShowing()) {
+                    ventana_principal.show();
+                }
+            });
+
+            ventana_detalle.setResizable(false);
+            ventana_detalle.show();
 
         } catch (Exception e) {
 

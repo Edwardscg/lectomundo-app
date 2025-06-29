@@ -6,7 +6,7 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.lectomundo.controller.general.RegistroControlador"
-            prefHeight="400.0" prefWidth="600.0"
+            prefHeight="450.0" prefWidth="600.0"
             stylesheets="@/css/estilos.css">
 
     <VBox alignment="CENTER" spacing="20" AnchorPane.topAnchor="40" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50">
@@ -18,11 +18,11 @@
         <PasswordField fx:id="txtContraseña" promptText="Contraseña" prefWidth="350" styleClass="password-field"/>
         <PasswordField fx:id="txtConfirmarContraseña" promptText="Confirmar contraseña" prefWidth="350" styleClass="password-field"/>
 
-        <HBox spacing="15" alignment="CENTER">
+        <VBox spacing="15" alignment="CENTER">
             <Button text="Registrarse" onAction="#Registrarse" prefWidth="180" styleClass="boton-principal"/>
 
-            <Button text="Regresar a Login" onAction="#Cancelar" prefWidth="180" styleClass="boton-principal"/>
-        </HBox>
+            <Button text="Volver a Login" onAction="#Cancelar" prefWidth="180" styleClass="boton-principal"/>
+        </VBox>
 
     </VBox>
 </AnchorPane>

@@ -1,6 +1,6 @@
 package com.lectomundo.model;
 
-public abstract class Usuario {
+public class Usuario {
 
     protected int id_usuario;
     protected String nombre_usuario;

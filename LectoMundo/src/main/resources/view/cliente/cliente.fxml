@@ -5,22 +5,23 @@
 <?import javafx.scene.image.ImageView?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.lectomundo.controller.cliente.ClienteControlador"
-      prefHeight="700.0" prefWidth="1250.0">
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.lectomundo.controller.cliente.ClienteControlador"
+            prefHeight="700.0" prefWidth="1250.0"
+            stylesheets="@/css/clientePrincipal.css">
 
     <top>
-        <HBox spacing="15" alignment="CENTER_RIGHT" style="-fx-background-color: #aeb6bf;" prefHeight="50">
+        <HBox fx:id="topBar" spacing="15" alignment="CENTER_RIGHT"  prefHeight="50" styleClass="top-bar">
             <padding>
                 <Insets left="10" right="20" top="5" bottom="5"/>
             </padding>
 
             <HBox spacing="5" alignment="CENTER">
                 <ImageView fx:id="iconoMoneda" fitHeight="24" fitWidth="24" pickOnBounds="true" preserveRatio="true"/>
-                <Label fx:id="lblMonedas" style="-fx-font-size: 14pt; -fx-font-weight: bold;"/>
+                <Label fx:id="lblMonedas" styleClass="label"/>
             </HBox>
 
-            <Button fx:id="btnComprarMonedas" text="➕" onAction="#irATiendaMonedas">
+            <Button fx:id="btnComprarMonedas" text="➕" onAction="#irATiendaMonedas" styleClass="button">
 
                 <tooltip>
 
@@ -29,7 +30,7 @@
                 </tooltip>
 
             </Button>
-            <Button fx:id="btnNotificaciones" text="🔔" onAction="#verNotificaciones">
+            <Button fx:id="btnNotificaciones" text="🔔" onAction="#verNotificaciones" styleClass="button">
 
                 <tooltip>
 
@@ -44,34 +45,23 @@
 
     <center>
         <HBox>
-            <VBox fx:id="menuLateral" spacing="10" style="-fx-background-color: #2C3E50;" prefWidth="220" alignment="TOP_LEFT">
+            <VBox fx:id="menuLateral" spacing="10" styleClass="menu-lateral" prefWidth="220" alignment="TOP_LEFT">
                 <padding>
                     <Insets top="20" left="10" right="10" bottom="20"/>
                 </padding>
 
-                <Button fx:id="btnAlternar" text="☰" prefWidth="40">
-
-                    <tooltip>
-
-                        <Tooltip text="Mostrar/Ocultar"/>
-
-                    </tooltip>
-
-                </Button>
-
-                <Button fx:id="btnExplorar" onAction="#explorarDocumentos" text="📚 Explorar" prefWidth="200"/>
-                <Button fx:id="btnAlquilados" onAction="#verDocumentosAlquilados" text="Documentos Alquilados" prefWidth="200"/>
-                <Button fx:id="btnComprados" onAction="#verDocumentosComprados" text="Documentos Comprados" prefWidth="200"/>
-                <Button fx:id="btnFavoritos" onAction="#verDocumentosFavoritos" text="Favoritos" prefWidth="200"/>
-                <Button fx:id="btnMembresia" onAction="#verMembresia" text="Membresía" prefWidth="200"/>
-                <Button fx:id="btnCuenta" text="Cuenta" prefWidth="200"/>
+                <Button fx:id="btnExplorar" onAction="#explorarDocumentos" text="📚 Explorar" prefWidth="200" styleClass="button"/>
+                <Button fx:id="btnAlquilados" onAction="#verDocumentosAlquilados" text="Alquilados" prefWidth="200" styleClass="button"/>
+                <Button fx:id="btnComprados" onAction="#verDocumentosComprados" text="Comprados" prefWidth="200" styleClass="button"/>
+                <Button fx:id="btnFavoritos" onAction="#verDocumentosFavoritos" text="Favoritos" prefWidth="200" styleClass="button"/>
+                <Button fx:id="btnMembresia" onAction="#verMembresia" text="Membresía" prefWidth="200" styleClass="button"/>
 
                 <Region VBox.vgrow="ALWAYS"/>
 
-                <Button fx:id="btnCerrarSesion" text="⏻ Cerrar Sesión" style="-fx-text-fill: red;" prefWidth="200"/>
+                <Button fx:id="btnCerrarSesion" text="Cerrar Sesión" onAction="#cerrarSesion" styleClass="button button-cerrar" prefWidth="200"/>
             </VBox>
 
-            <StackPane fx:id="panelContenedor" VBox.vgrow="ALWAYS" />
+            <StackPane fx:id="panelContenedor" VBox.vgrow="ALWAYS" styleClass="stack-contenedor"/>
 
         </HBox>
 

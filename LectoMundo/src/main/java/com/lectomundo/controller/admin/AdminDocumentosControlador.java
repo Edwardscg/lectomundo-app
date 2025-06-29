@@ -39,7 +39,7 @@ public class AdminDocumentosControlador {
     private void irASubirDocumento(){
 
         Stage ventana_actual = (Stage) txtBuscar.getScene().getWindow();
-        UIHelper.abrirVentana(ventana_actual, "/view/admin/subirDocumento.fxml", "Subir Documento");
+        UIHelper.abrirYCerrarVentanaActual(ventana_actual, "/view/admin/subirDocumento.fxml", "Subir Documento");
     }
 
     private void configurarColumnas(){

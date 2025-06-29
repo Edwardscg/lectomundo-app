@@ -14,7 +14,7 @@
         <content>
             <VBox fx:id="vboxContenedor" spacing="20" style="-fx-background-color: #F4F6F7;">
                 <padding>
-                    <Insets left="35" right="35" top="35" bottom="35"/>
+                    <Insets left="45" right="45" top="40" bottom="40"/>
                 </padding>
             </VBox>
         </content>

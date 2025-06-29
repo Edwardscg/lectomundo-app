@@ -10,6 +10,7 @@ import com.lectomundo.model.Documento;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -205,9 +206,16 @@ public class DetalleDocumentoControlador {
             ValoracionDocumentoControlador valoracionDocumentoControlador = loader.getController();
             valoracionDocumentoControlador.cargarDatos(cliente, documento);
 
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+            Stage ventana_valorar = new Stage();
+            ventana_valorar.setScene(new Scene(root));
+
+            Stage ventana_detalle = (Stage) ((Node) imgPortada).getScene().getWindow();
+            ventana_detalle.setOpacity(0);
+
+            ventana_valorar.setOnHidden(e -> ventana_detalle.setOpacity(1));
+
+            ventana_valorar.setResizable(false);
+            ventana_valorar.show();
 
         } catch (Exception e) {
 

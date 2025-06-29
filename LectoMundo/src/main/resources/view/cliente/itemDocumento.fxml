@@ -13,13 +13,9 @@
            onMouseEntered="#expandirItem"
            onMouseExited="#colapsarItem">
 
-    <padding>
-        <Insets top="15" left="15" right="15" bottom="15"/>
-    </padding>
-
     <VBox spacing="0" alignment="TOP_CENTER" >
 
-        <ImageView fx:id="imgPortada" fitHeight="280" fitWidth="260" preserveRatio="true" styleClass="img-portada"/>
+        <ImageView fx:id="imgPortada" fitHeight="260" fitWidth="220" preserveRatio="true" styleClass="img-portada"/>
 
         <StackPane fx:id="infoBox" visible="false" managed="false" opacity="0" styleClass="info-overlay" prefHeight="100" maxHeight="100">
 

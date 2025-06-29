@@ -7,7 +7,7 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.lectomundo.controller.cliente.DetalleDocumentoControlador"
-            prefHeight="650.0" prefWidth="500.0"
+            prefHeight="700.0" prefWidth="500.0"
             stylesheets="@/css/detalleDocumento.css">
 
     <StackPane fx:id="stackFavorito" styleClass="favorito-container" AnchorPane.topAnchor="10" AnchorPane.rightAnchor="10">
@@ -33,7 +33,7 @@
     </StackPane>
 
 
-    <VBox alignment="CENTER" spacing="15" styleClass="detalle-contenido" AnchorPane.topAnchor="50" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="30" AnchorPane.rightAnchor="30">
+    <VBox alignment="CENTER" spacing="15" styleClass="detalle-contenido" AnchorPane.topAnchor="40" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
 
         <ImageView fx:id="imgPortada" fitWidth="250" fitHeight="300" preserveRatio="true"/>
 
