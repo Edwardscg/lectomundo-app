@@ -1,0 +1,58 @@
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-background-color: #ECF0F1;
+}
+
+.top-bar {
+    -fx-background-color: #3498DB;
+    -fx-padding: 5 20 5 10;
+}
+
+.top-bar .label {
+    -fx-text-fill: white;
+    -fx-font-size: 14pt;
+    -fx-font-weight: bold;
+}
+
+.top-bar .button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 14pt;
+}
+
+.menu-lateral {
+    -fx-background-color: #2C3E50;
+    -fx-spacing: 12;
+}
+
+.menu-lateral .button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 13pt;
+    -fx-pref-height: 40;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 0 0 10;
+}
+
+.menu-lateral .button:hover {
+    -fx-background-color: #34495E;
+    -fx-cursor: hand;
+}
+
+.menu-lateral .button:focused {
+    -fx-background-color: #1ABC9C;
+}
+
+.button-cerrar {
+    -fx-text-fill: #E74C3C;
+    -fx-font-weight: bold;
+}
+
+.stack-contenedor {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 15;
+    -fx-border-color: #BDC3C7;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}

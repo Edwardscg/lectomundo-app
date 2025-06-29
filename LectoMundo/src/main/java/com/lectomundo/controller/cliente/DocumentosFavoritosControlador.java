@@ -6,6 +6,7 @@ import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Documento;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -30,13 +31,13 @@ public class DocumentosFavoritosControlador {
 
             List<Documento> documentosFavoritos = favoritoService.obtenerFavoritosPorUsuario(cliente);
 
-            HBox fila = new HBox(20);
+            HBox fila = new HBox(35);
             int contador = 0;
 
             for(Documento documento : documentosFavoritos){
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/itemDocumento.fxml"));
-                VBox item = loader.load();
+                Node item = loader.load();
 
                 ItemDocumentoControlador itemDocumentoControlador = loader.getController();
                 itemDocumentoControlador.mostrarDocumento(documento);
@@ -47,7 +48,7 @@ public class DocumentosFavoritosControlador {
                 if(contador%3 ==0){
 
                     vboxContenedor.getChildren().add(fila);
-                    fila = new HBox(20);
+                    fila = new HBox(35);
                 }
             }
 
@@ -57,7 +58,7 @@ public class DocumentosFavoritosControlador {
             }
 
         }catch (Exception e){
-
+            e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "No se pudo cargar los documentos Favoritos.");
         }
     }

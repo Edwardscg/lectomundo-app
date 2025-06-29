@@ -1,0 +1,62 @@
+.root {
+    -fx-background-color: #F8FAFC;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+.label-titulo {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1E3A8A;
+}
+
+.label-subtitulo {
+    -fx-font-size: 12px;
+    -fx-text-fill: #6B7280;
+}
+
+.text-field, .password-field {
+    -fx-background-color: white;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: #CBD5E1;
+    -fx-padding: 8 10;
+    -fx-font-size: 14px;
+}
+
+.boton-principal {
+    -fx-background-color: #3A86FF;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-padding: 10 20;
+}
+.boton-principal:hover {
+    -fx-background-color: #1E3A8A;
+}
+
+.boton-secundario {
+    -fx-background-color: transparent;
+    -fx-border-color: #3A86FF;
+    -fx-text-fill: #3A86FF;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-padding: 10 20;
+}
+.boton-secundario:hover {
+    -fx-background-color: #E0F2FF;
+}
+
+.hyperlink {
+    -fx-text-fill: #3A86FF;
+    -fx-underline: false;
+    -fx-font-size: 12px;
+}
+
+.hyperlink:hover {
+    -fx-underline: true;
+}

@@ -1,0 +1,63 @@
+.root {
+    -fx-background-color: #F8FAFC;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+.detalle-contenido {
+    -fx-padding: 20 15 20 15;
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 8, 0.1, 0, 4);
+}
+
+.titulo {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1E3A8A;
+}
+
+.subinfo {
+    -fx-font-size: 14px;
+    -fx-text-fill: #6B7280;
+}
+
+.descripcion {
+    -fx-font-size: 14px;
+    -fx-text-fill: #374151;
+    -fx-padding: 10 0 0 0;
+}
+
+.boton-accion {
+    -fx-background-color: #3A86FF;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+}
+.boton-accion:hover {
+    -fx-background-color: #1E3A8A;
+}
+
+.boton-valorar {
+    -fx-background-color: #10B981;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+}
+.boton-valorar:hover {
+    -fx-background-color: #059669;
+}
+
+.boton-favorito {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.favorito-container {
+    -fx-padding: 0;
+}

@@ -5,19 +5,30 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.ImageView?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.lectomundo.controller.cliente.ItemDocumentoControlador"
-      prefHeight="300.0" prefWidth="250.0"
-      style="-fx-background-color: #ffffff; -fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0.1, 0, 3);">
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.lectomundo.controller.cliente.ItemDocumentoControlador"
+           prefHeight="350" prefWidth="260"
+           styleClass="card-item"
+           onMouseEntered="#expandirItem"
+           onMouseExited="#colapsarItem">
 
-    <padding>
-        <Insets top="10" left="10" right="10" bottom="10"/>
-    </padding>
+    <VBox spacing="0" alignment="TOP_CENTER" >
 
-    <ImageView fx:id="imgPortada" fitHeight="150" fitWidth="200" preserveRatio="true"/>
-    <Label fx:id="lblTitulo" wrapText="true" style="-fx-font-size: 14pt; -fx-font-weight: bold;"/>
-    <Label fx:id="lblDescripcion" wrapText="true" style="-fx-font-size: 11pt;" maxHeight="60"/>
-    <Button fx:id="btnVer" onAction="#verDetalle" text="Ver" maxWidth="Infinity" style="-fx-background-color: #2980B9; -fx-text-fill: white;"/>
+        <ImageView fx:id="imgPortada" fitHeight="260" fitWidth="220" preserveRatio="true" styleClass="img-portada"/>
 
-</VBox>
+        <StackPane fx:id="infoBox" visible="false" managed="false" opacity="0" styleClass="info-overlay" prefHeight="100" maxHeight="100">
+
+            <VBox alignment="BOTTOM_CENTER" spacing="5" styleClass="info-box">
+
+                <Label fx:id="lblTitulo" wrapText="true" styleClass="titulo"/>
+                <Label fx:id="lblDescripcion" wrapText="true" styleClass="descripcion"/>
+                <Button fx:id="btnVer" onAction="#verDetalle" text="Ver" styleClass="boton-ver"/>
+
+            </VBox>
+
+        </StackPane>
+
+    </VBox>
+
+</StackPane>

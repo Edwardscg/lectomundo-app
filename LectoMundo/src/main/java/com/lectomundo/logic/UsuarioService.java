@@ -1,5 +1,7 @@
 package com.lectomundo.logic;
 
+import com.lectomundo.controller.UIHelper;
+import com.lectomundo.model.Administrador;
 import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Usuario;
 import com.lectomundo.repository.dao.UsuarioDAO;
@@ -11,19 +13,33 @@ public class UsuarioService {
 
     UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-    public void registrarUsuario(Usuario usuario) {
+    public void registrarUsuario(String nombre, String correo, String contraseña, String tipo_usuario) {
 
-        if (usuario instanceof Cliente) {
+        if(buscarUsuarioPorCorreo(correo) != null){
 
-            usuario.setTipo_usuario("cliente");
+            throw new IllegalArgumentException("Ya existe un usuario con el correo ingresado.");
         }
 
-        Usuario usuario_existente = usuarioDAO.buscarUsuarioPorCorreo(usuario.getCorreo());
+        String codigo = CorreoService.generarCodigoDeVerificacion();
+        CorreoService.enviarCodigoPorCorreo(correo, codigo);
 
-        if (usuario_existente != null) {
+        boolean verificado = UIHelper.abrirVentanaDeVerificacion(correo, codigo);
 
-            throw new RuntimeException("Ya existe un usuario registrado con ese correo.");
+        if(!verificado){
+
+            throw new IllegalArgumentException("No se completó la verificación");
         }
+
+        Usuario usuario;
+
+        if(tipo_usuario.equals("cliente")){
+
+            usuario = new Cliente(0, nombre, correo, contraseña, tipo_usuario, 0);
+        }else{
+
+            usuario = new Administrador(0, nombre, correo, contraseña, tipo_usuario);
+        }
+
         usuarioDAO.registrarUsuario(usuario);
     }
 
@@ -31,11 +47,22 @@ public class UsuarioService {
 
         Usuario usuario = usuarioDAO.loguearUsuario(correo, contraseña);
 
-        if (usuario != null) {
+        if (usuario == null) {
 
-            return usuario;
+            throw new IllegalArgumentException("Correo o contraseña incorrecta.");
         }
-        return null;
+
+        String codigo = CorreoService.generarCodigoDeVerificacion();
+        CorreoService.enviarCodigoPorCorreo(correo, codigo);
+
+        boolean verificado = UIHelper.abrirVentanaDeVerificacion(correo, codigo);
+
+        if(!verificado){
+
+            throw new IllegalArgumentException("Código incorrecto");
+        }
+
+        return usuario;
     }
 
     public boolean actualizarContraseña(String correo, String nueva_contraseña) {

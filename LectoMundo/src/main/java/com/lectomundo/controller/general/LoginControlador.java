@@ -22,37 +22,38 @@ public class LoginControlador {
         String correo = txtCorreo.getText();
         String contraseña = txtContraseña.getText();
 
-        if(correo.isEmpty() || contraseña.isEmpty()){
+        if(correo.isBlank() || contraseña.isBlank()){
 
             UIHelper.mostrarAlerta("Entradas vacías", "Llene todos los campos.");
             return;
         }
 
-        UsuarioService usuarioService = new UsuarioService();
-        Usuario usuario = usuarioService.loguearUsuario(correo, contraseña);
+        try{
 
-        String codigo = CorreoService.generarCodigoDeVerificacion();
-        CorreoService.enviarCodigoPorCorreo(correo, codigo);
-
-        boolean verificado = UIHelper.abrirVentanaDeVerificacion(correo, codigo);
-
-        if(usuario!=null && verificado){
+            UsuarioService usuarioService = new UsuarioService();
+            Usuario usuario = usuarioService.loguearUsuario(correo, contraseña);
 
             Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
 
-            if(usuario instanceof Cliente){
+            if(usuario instanceof Cliente cliente){
 
-                ClienteControlador.cliente = (Cliente) usuario;
-                UIHelper.abrirVentana(ventana_actual, "/view/cliente/cliente.fxml", "Cliente");
+                ClienteControlador.cliente = cliente;
+                UIHelper.abrirYCerrarVentanaActual(ventana_actual, "/view/cliente/cliente.fxml", "Cliente");
+
+
             }else {
 
-                UIHelper.abrirVentana(ventana_actual, "/view/admin/admin.fxml", "Administrador");
+                UIHelper.abrirYCerrarVentanaActual(ventana_actual, "/view/admin/admin.fxml", "Administrador");
+
+
             }
 
+        } catch (IllegalArgumentException e){
 
-        }else {
-
-            UIHelper.mostrarAlerta("Error", "Correo o contraseña incorrectos.");
+            UIHelper.mostrarAlerta("Error", e.getMessage());
+        }catch (Exception e){
+            e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "Ocurrió un error al iniciar sesión.");
         }
     }
 
@@ -60,13 +61,13 @@ public class LoginControlador {
     private void AbrirRegistro(){
 
         Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
-        UIHelper.abrirVentana(ventana_actual, "/view/general/registro.fxml", "Registro");
+        UIHelper.abrirYCerrarVentanaActual(ventana_actual, "/view/general/registro.fxml", "Registro");
     }
 
     @FXML
     private void RecuperarContraseña(){
 
         Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
-        UIHelper.abrirVentana(ventana_actual, "/view/general/recuperarContraseña.fxml", "Recuperación de Contraseña");
+        UIHelper.abrirYCerrarVentanaActual(ventana_actual, "/view/general/recuperarContraseña.fxml", "Recuperación de Contraseña");
     }
 }

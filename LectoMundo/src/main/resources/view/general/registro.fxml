@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.lectomundo.controller.general.RegistroControlador"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="450.0" prefWidth="600.0"
+            stylesheets="@/css/estilos.css">
 
-    <VBox alignment="CENTER" spacing="12.0"
-          AnchorPane.topAnchor="20.0"
-          AnchorPane.leftAnchor="30.0"
-          AnchorPane.rightAnchor="30">
+    <VBox alignment="CENTER" spacing="20" AnchorPane.topAnchor="40" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50">
 
-        <Label text="Registro" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+        <Label text="Registro" styleClass="label-titulo"/>
 
-        <TextField fx:id="txtNombreUsuario" promptText="Nombre de Usuario"/>
-        <TextField fx:id="txtCorreo" promptText="Correo electrónico"/>
-        <PasswordField fx:id="txtContraseña" promptText="Contraseña"/>
-        <PasswordField fx:id="txtConfirmarContraseña" promptText="Confirmar contraseña"/>
+        <TextField fx:id="txtNombreUsuario" promptText="Nombre de Usuario" prefWidth="350" styleClass="text-field"/>
+        <TextField fx:id="txtCorreo" promptText="Correo electrónico" prefWidth="350" styleClass="text-field"/>
+        <PasswordField fx:id="txtContraseña" promptText="Contraseña" prefWidth="350" styleClass="password-field"/>
+        <PasswordField fx:id="txtConfirmarContraseña" promptText="Confirmar contraseña" prefWidth="350" styleClass="password-field"/>
 
-        <Button text="Registrarse" onAction="#Registrarse" prefWidth="200"/>
-        <Button text="Cancelar" onAction="#Cancelar" prefWidth="200"/>
+        <VBox spacing="15" alignment="CENTER">
+            <Button text="Registrarse" onAction="#Registrarse" prefWidth="180" styleClass="boton-principal"/>
+
+            <Button text="Volver a Login" onAction="#Cancelar" prefWidth="180" styleClass="boton-principal"/>
+        </VBox>
 
     </VBox>
 </AnchorPane>

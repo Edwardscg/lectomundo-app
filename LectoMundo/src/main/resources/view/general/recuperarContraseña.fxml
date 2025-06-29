@@ -1,35 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.lectomundo.controller.general.RecuperarContraseñaControlador"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="500.0" prefWidth="600.0"
+            stylesheets="@/css/estilos.css">
 
-    <VBox alignment="CENTER" spacing="10" layoutX="50" layoutY="30" prefWidth="300" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50">
+    <VBox alignment="CENTER" spacing="20" AnchorPane.topAnchor="30" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50">
 
-        <Label text="Recuperación de Contraseña" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+        <Label text="Recuperación de Contraseña" styleClass="label-titulo"/>
 
-        <Label text="Ingresa tu correo: "/>
-        <TextField fx:id="txtCorreo" promptText="correo@ejemplo.com"/>
+        <Label text="Ingresa tu correo: " styleClass="label-subtitulo"/>
+        <TextField fx:id="txtCorreo" promptText="correo@ejemplo.com" prefWidth="350" styleClass="text-field"/>
 
-        <Button text="Enviar código" onAction="#EnviarCodigo"/>
+        <Button text="Enviar código" onAction="#EnviarCodigo" prefWidth="200" styleClass="boton-principal"/>
 
         <VBox alignment="CENTER" fx:id="vboxSeccionCodigo" visible="false" spacing="10">
 
-            <TextField fx:id="txtCodigo" promptText="Código recibido"/>
-            <PasswordField fx:id="txtNuevaContraseña" promptText="Nueva contraseña"/>
-            <PasswordField fx:id="txtConfirmarContraseña" promptText="Confirmar nueva contraseña"/>
-            <Button text="Confirmar cambio" onAction="#ConfirmarCambio"/>
+            <TextField fx:id="txtCodigo" promptText="Código recibido" prefWidth="250" styleClass="text-field"/>
+            <PasswordField fx:id="txtNuevaContraseña" promptText="Nueva contraseña" prefWidth="350" styleClass="password-field"/>
+            <PasswordField fx:id="txtConfirmarContraseña" promptText="Confirmar nueva contraseña" prefWidth="350" styleClass="password-field"/>
+            <Button text="Confirmar cambio" onAction="#ConfirmarCambio" prefWidth="200" styleClass="boton-principal"/>
 
         </VBox>
 
-        <Button text="Regresar a Login" onAction="#IrALogin"/>
+        <Button text="Regresar a Login" onAction="#IrALogin" prefWidth="200" styleClass="boton-principal"/>
 
     </VBox>
 

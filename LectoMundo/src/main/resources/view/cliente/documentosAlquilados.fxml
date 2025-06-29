@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.geometry.Insets?>
+
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.lectomundo.controller.cliente.DocumentosAlquiladosControlador"
-            prefHeight="650.0" prefWidth="1000.0">
+            prefHeight="650.0" prefWidth="1000.0"
+            stylesheets="@/css/itemDocumento.css">
 
     <ScrollPane fitToWidth="true" prefHeight="650.0" prefWidth="1000.0">
         <content>
             <VBox fx:id="vboxContenedor" spacing="20" style="-fx-background-color: #F4F6F7;">
                 <padding>
-                    <Insets left="10" right="20" top="5" bottom="5"/>
+                    <Insets left="35" right="35" top="35" bottom="35"/>
                 </padding>
             </VBox>
         </content>

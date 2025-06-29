@@ -1,13 +1,16 @@
 package com.lectomundo.controller.cliente;
 
+import com.lectomundo.controller.UIHelper;
 import com.lectomundo.logic.MembresiaService;
 import com.lectomundo.model.Cliente;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 public class ClienteControlador {
 
@@ -34,6 +37,7 @@ public class ClienteControlador {
         }catch (Exception e){
 
             e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo comprobar la membresía activa.");
         }
     }
 
@@ -53,6 +57,7 @@ public class ClienteControlador {
         }catch (Exception e){
 
             e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo ir a la sección explorar documentos.");
         }
     }
 
@@ -68,6 +73,7 @@ public class ClienteControlador {
         }catch (Exception e){
 
             e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo ir a la sección documentos alquilados.");
         }
 
     }
@@ -84,6 +90,7 @@ public class ClienteControlador {
         }catch (Exception e){
 
             e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo ir a la sección documentos comprados.");
         }
     }
 
@@ -99,6 +106,7 @@ public class ClienteControlador {
         }catch (Exception e){
 
             e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo ir a la sección documentos favoritos.");
         }
     }
 
@@ -117,6 +125,7 @@ public class ClienteControlador {
         }catch (Exception e){
 
             e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo ir a la tienda.");
         }
     }
 
@@ -135,6 +144,7 @@ public class ClienteControlador {
         } catch (Exception e) {
 
             e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo ir a la sección membresía.");
         }
     }
 
@@ -150,6 +160,22 @@ public class ClienteControlador {
         } catch (Exception e) {
 
             e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo ir a la sección notificaciones.");
+        }
+    }
+
+    @FXML
+    private void cerrarSesion(){
+
+        try{
+
+            Stage ventana_actual = (Stage) panelContenedor.getScene().getWindow();
+
+            UIHelper.abrirYCerrarVentanaActual(ventana_actual, "/view/general/login.fxml", "Login");
+
+        }catch (Exception e){
+
+            UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo cerrar sesión.");
         }
     }
 

@@ -11,7 +11,8 @@ public class CompraDocumentoService {
 
     CompraDocumentoDAO compraDocumentoDAO = new CompraDocumentoDAO();
     UsuarioService usuarioService = new UsuarioService();
-    private NotificacionService notificacionService = new NotificacionService();
+    NotificacionService notificacionService = new NotificacionService();
+    AlquilerService alquilerService = new AlquilerService();
 
     public Cliente registrarCompra(Cliente cliente, Documento documento) {
 
@@ -26,6 +27,7 @@ public class CompraDocumentoService {
         compraDocumento.setCosto(documento.getPrecio());
 
         compraDocumentoDAO.registrarCompra(compraDocumento);
+        alquilerService.devolverDocumento(cliente, documento);
         notificacionService.notificacionCompraDocumento(cliente, documento);
 
         int nuevas_monedas = cliente.getMonedas() - documento.getPrecio();
