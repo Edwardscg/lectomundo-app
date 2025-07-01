@@ -1,6 +1,7 @@
 package com.lectomundo.controller.cliente;
 
 import com.lectomundo.controller.UIHelper;
+import com.lectomundo.logic.AlquilerService;
 import com.lectomundo.logic.MembresiaService;
 import com.lectomundo.model.Cliente;
 
@@ -19,16 +20,13 @@ public class ClienteControlador {
     @FXML private Button btnAlquilados;
 
     public static Cliente cliente;
+    private MembresiaService membresiaService = new MembresiaService();
+    private AlquilerService alquilerService = new AlquilerService();
 
     @FXML
     private void initialize(){
-
-        explorarDocumentos();
-        actualizarMonedas(cliente.getMonedas());
-
         try {
 
-            MembresiaService membresiaService = new MembresiaService();
             if(membresiaService.tieneMembresiaActiva(cliente.getId_usuario())){
 
                 btnAlquilados.setVisible(false);
@@ -39,6 +37,19 @@ public class ClienteControlador {
             e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo comprobar la membresía activa.");
         }
+
+        try{
+
+            alquilerService.verificarYEstablecerEstadoAlquiler(cliente);
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo comprobar el estado activo de alquiler de documentos alquilados.");
+        }
+
+        explorarDocumentos();
+        actualizarMonedas(cliente.getMonedas());
     }
 
     @FXML

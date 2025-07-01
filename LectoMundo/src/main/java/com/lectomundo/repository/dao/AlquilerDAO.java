@@ -26,11 +26,18 @@ public class AlquilerDAO {
         DBHelper.manejarEntidad(sql, id_alquiler);
     }
 
-    public List<Documento> verDocumentosAlquiladosPorUsuario(int id_usuario) {
+    public List<Documento> verDocumentosAlquiladosPorCliente(int id_usuario) {
 
         String sql = " SELECT d.* FROM documento d JOIN alquiler a ON d.id_documento = a.id_documento WHERE a.id_usuario = ? AND a.estado = 'activo'";
 
         return DBHelper.obtenerListaEntidad(sql, documentoDAO::mapearDocumento, id_usuario);
+    }
+
+    public List<Alquiler> obtenerAlquileresActivosPorCliente(int id_usuario){
+
+        String sql = " SELECT * From alquiler WHERE id_usuario = ? AND estado = 'activo';";
+
+        return DBHelper.obtenerListaEntidad(sql, this::mapearAlquiler, id_usuario);
     }
 
     public ObservableList<Documento> llenarTablaDocumentosAlquiladosActivosPorUsuario(int id_usuario){

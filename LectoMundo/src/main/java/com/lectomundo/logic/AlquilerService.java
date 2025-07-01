@@ -6,8 +6,6 @@ import com.lectomundo.model.Documento;
 import com.lectomundo.model.Estado;
 import com.lectomundo.repository.dao.AlquilerDAO;
 
-import javafx.collections.ObservableList;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -52,13 +50,21 @@ public class AlquilerService {
         return alquilerDAO.estaAlquilado(id_usuario, id_documento);
     }
 
-    public List<Documento> obtenerDocumentosAlquiladosActivosPorUsuario(Cliente cliente) {
+    public List<Documento> obtenerDocumentosAlquiladosActivosPorCliente(Cliente cliente) {
 
-        return alquilerDAO.verDocumentosAlquiladosPorUsuario(cliente.getId_usuario());
+        return alquilerDAO.verDocumentosAlquiladosPorCliente(cliente.getId_usuario());
     }
 
-    public ObservableList<Documento> verDocumentosAlquiladosActivosPorUsuario(int id_usuario) {
+    public void verificarYEstablecerEstadoAlquiler(Cliente cliente){
 
-        return alquilerDAO.llenarTablaDocumentosAlquiladosActivosPorUsuario(id_usuario);
+        List<Alquiler> alquileres_activos = alquilerDAO.obtenerAlquileresActivosPorCliente(cliente.getId_usuario());
+
+        for (Alquiler alquiler : alquileres_activos){
+
+            if(alquiler.getFecha_fin().isBefore(LocalDateTime.now())){
+
+                alquilerDAO.finalizarAlquiler(alquiler.getId_alquiler());
+            }
+        }
     }
 }
