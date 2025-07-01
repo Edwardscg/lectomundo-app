@@ -10,6 +10,11 @@ public class AdminControlador {
 
     @FXML private StackPane paneContenido;
 
+    @FXML private void initialize(){
+
+        cargarDocumentos();
+    }
+
     @FXML
     private void cargarDocumentos(){
 
@@ -51,7 +56,23 @@ public class AdminControlador {
 
         }catch (Exception e){
             e.printStackTrace();
-            UIHelper.mostrarAlerta("Error", "No se pudo carg.");
+            UIHelper.mostrarAlerta("Error", "No se pudo cargar la vista de membresías.");
+        }
+    }
+
+    @FXML
+    private void crearCuenta(){
+
+        try{
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/admin/crearCuenta.fxml"));
+            Parent root = loader.load();
+            paneContenido.getChildren().setAll(root);
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "No se pudo cargar la vista de crear cuenta de administrador.");
         }
     }
 }

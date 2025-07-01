@@ -9,9 +9,9 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     @Override
-    public void start(Stage stage) throws Exception{
+    public void start(Stage stage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/general/login.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/view/admin/admin.fxml"));
             Scene scene = new Scene(root);
             stage.setTitle("Lecto Mundo");
             stage.setScene(scene);
@@ -27,5 +27,4 @@ public class Main extends Application {
 
         launch(args);
     }
-
 }

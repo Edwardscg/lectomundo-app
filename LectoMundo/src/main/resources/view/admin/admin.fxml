@@ -3,26 +3,35 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.geometry.Insets?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.lectomundo.controller.admin.AdminControlador"
-            prefHeight="650.0" prefWidth="1200.0">
+            prefHeight="700.0" prefWidth="1200.0"
+            stylesheets="@/css/clientePrincipal.css">
     <top>
         <HBox spacing="20" style="-fx-background-color: #2c3e50; -fx-padding: 15;">
 
             <Label fx:id="lbTitulo" text="Panel de Administrador" style="-fx-text-fill: white; -fx-font-size: 18;"/>
-            <Region HBox.hgrow="ALWAYS"/>
-            <Button fx:id="btnCerrarSesion" text="Cerrar Sesión" style="-fx-background-color: #e74c3c; -fx-text-fill: white;"/>
 
         </HBox>
     </top>
 
     <left>
-        <VBox spacing="10" alignment="TOP_CENTER" style="-fx-background-color: #34495e; -fx-padding: 20;">
+        <VBox spacing="10" alignment="TOP_CENTER" styleClass="menu-lateral">
 
-            <Button fx:id="btnDocumentos" text="Documentos" onAction="#cargarDocumentos" prefWidth="150" style="-fx-background-color: #ecf0f1;"/>
-            <Button fx:id="btnUsuarios" text="Usuarios" onAction="#cargarUsuarios" prefWidth="150" style="-fx-background-color: #ecf0f1;"/>
-            <Button fx:id="btnMembresias" text="Membresias" onAction="#cargarMembresias" prefWidth="150" style="-fx-background-color: #ecf0f1;"/>
+            <padding>
+                <Insets top="20" left="10" right="10" bottom="20"/>
+            </padding>
+
+            <Button fx:id="btnDocumentos" text="Documentos" onAction="#cargarDocumentos" prefWidth="150" styleClass="button"/>
+            <Button fx:id="btnUsuarios" text="Usuarios" onAction="#cargarUsuarios" prefWidth="150" styleClass="button"/>
+            <Button fx:id="btnMembresias" text="Membresias" onAction="#cargarMembresias" prefWidth="150" styleClass="button"/>
+            <Button fx:id="btnCrearCuenta" text="Crear Admin" onAction="#crearCuenta" prefWidth="150" styleClass="button"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Button fx:id="btnCerrarSesion" text="Cerrar Sesión" styleClass="button button-cerrar"/>
 
         </VBox>
     </left>
