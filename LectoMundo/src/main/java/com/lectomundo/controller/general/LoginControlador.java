@@ -7,6 +7,9 @@ import com.lectomundo.logic.UsuarioService;
 import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Usuario;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
@@ -38,7 +41,22 @@ public class LoginControlador {
             if(usuario instanceof Cliente cliente){
 
                 ClienteControlador.cliente = cliente;
-                UIHelper.abrirYCerrarVentanaActual(ventana_actual, "/view/cliente/cliente.fxml", "Cliente");
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/cliente.fxml"));
+                Parent root = loader.load();
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.setResizable(false);
+                stage.show();
+                stage.setOnCloseRequest(event -> {
+
+                    event.consume();
+                });
+
+                ventana_actual.close();
+
+                //UIHelper.abrirYCerrarVentanaActual(ventana_actual, "/view/cliente/cliente.fxml", "Cliente");
 
 
             }else {

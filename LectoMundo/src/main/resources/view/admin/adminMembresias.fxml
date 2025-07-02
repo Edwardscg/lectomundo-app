@@ -11,17 +11,6 @@
             fx:controller="com.lectomundo.controller.admin.AdminMembresiaControlador"
             prefHeight="600.0" prefWidth="1000.0">
 
-    <top>
-
-        <HBox spacing="10" style="-fx-background-color: #ecf0f1; -fx-padding: 25;">
-
-            <TextField fx:id="txtBuscar" promptText="Buscar por nombre, tipo..." HBox.hgrow="ALWAYS"/>
-            <Button fx:id="btnBuscar" text="Buscar"/>
-
-        </HBox>
-
-    </top>
-
     <center>
 
         <TableView fx:id="tblMembresias" prefHeight="550" style="-fx-background-color: #212f3c; -fx-padding: 15;">

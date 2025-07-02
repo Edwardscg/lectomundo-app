@@ -184,6 +184,7 @@ public class DetalleDocumentoControlador {
         try {
 
             favoritoService.eliminarFavorito(cliente, documento);
+
             btnFavoritoVacio.setVisible(true);
             btnFavoritoVacio.setManaged(true);
             btnFavoritoLleno.setVisible(false);

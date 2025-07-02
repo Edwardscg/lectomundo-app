@@ -4,6 +4,7 @@ import com.lectomundo.controller.UIHelper;
 import com.lectomundo.logic.MembresiaService;
 import com.lectomundo.model.Membresia;
 import com.lectomundo.model.Usuario;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -34,7 +35,7 @@ public class AdminMembresiaControlador {
     private void configurarColumnas(){
 
         colId.setCellValueFactory(new PropertyValueFactory<>("id_membresia"));
-        colIdCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
+        colIdCliente.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getCliente().getId_usuario()).asObject());
         colFechaInicio.setCellValueFactory(new PropertyValueFactory<>("fecha_inicio"));
         colFechaFin.setCellValueFactory(new PropertyValueFactory<>("fecha_fin"));
         colCosto.setCellValueFactory(new PropertyValueFactory<>("precio"));

@@ -51,3 +51,27 @@
 .boton-ver:hover {
     -fx-background-color: #1E3A8A;
 }
+
+.text-field {
+    -fx-background-color: white;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: #CBD5E1;
+    -fx-padding: 8 10;
+    -fx-font-size: 14px;
+}
+
+.boton-busqueda {
+    -fx-background-color: #1ABC9C;
+    -fx-text-fill: white;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-padding: 10 20;
+}
+
+.boton-busqueda:hover {
+    -fx-background-color: #128A6E;
+}
