@@ -5,6 +5,7 @@ import com.lectomundo.logic.AlquilerService;
 import com.lectomundo.logic.MembresiaService;
 import com.lectomundo.model.Cliente;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,6 +14,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 public class ClienteControlador {
 
     @FXML private StackPane panelContenedor;
@@ -20,8 +25,11 @@ public class ClienteControlador {
     @FXML private Button btnAlquilados;
 
     public static Cliente cliente;
+
     private MembresiaService membresiaService = new MembresiaService();
     private AlquilerService alquilerService = new AlquilerService();
+
+    private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
     @FXML
     private void initialize(){
@@ -38,15 +46,18 @@ public class ClienteControlador {
             UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo comprobar la membresía activa.");
         }
 
-        try{
+        scheduler.scheduleAtFixedRate(() -> {
+            try{
 
-            alquilerService.verificarYEstablecerEstadoAlquiler(cliente);
+                alquilerService.verificarYEstablecerEstadoAlquiler(cliente);
 
-        }catch (Exception e){
+            }catch (Exception e){
 
-            e.printStackTrace();
-            UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo comprobar el estado activo de alquiler de documentos alquilados.");
-        }
+                Platform.runLater(() -> {
+                    UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo comprobar el estado activo de alquiler de documentos alquilados.");
+                });
+            }
+        }, 0, 5, TimeUnit.MINUTES);
 
         explorarDocumentos();
         actualizarMonedas(cliente.getMonedas());
@@ -179,6 +190,11 @@ public class ClienteControlador {
     private void cerrarSesion(){
 
         try{
+
+            if(scheduler != null && !scheduler.isShutdown()){
+
+                scheduler.shutdown();
+            }
 
             Stage ventana_actual = (Stage) panelContenedor.getScene().getWindow();
 
