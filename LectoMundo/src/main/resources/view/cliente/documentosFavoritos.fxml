@@ -16,6 +16,8 @@
                 <padding>
                     <Insets left="45" right="45" top="40" bottom="40"/>
                 </padding>
+
+                <Label fx:id="lblMensaje" style="-fx-font-size: 24px;-fx-font-weight: bold; -fx-text-fill: #1E3A8A;"/>
             </VBox>
         </content>
     </ScrollPane>

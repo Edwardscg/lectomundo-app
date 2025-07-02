@@ -33,18 +33,6 @@ public class ClienteControlador {
 
     @FXML
     private void initialize(){
-        try {
-
-            if(membresiaService.tieneMembresiaActiva(cliente.getId_usuario())){
-
-                btnAlquilados.setVisible(false);
-            }
-
-        }catch (Exception e){
-
-            e.printStackTrace();
-            UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo comprobar la membresía activa.");
-        }
 
         scheduler.scheduleAtFixedRate(() -> {
             try{

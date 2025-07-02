@@ -31,7 +31,7 @@ public class CrearCuentaControlador {
 
         if(!confirmar_contraseña.equals(confirmar_contraseña)){
 
-            UIHelper.mostrarAlerta("Advertencia", "Las contrseñas no coinciden.");
+            UIHelper.mostrarAlerta("Advertencia", "Las contraseñas no coinciden.");
             return;
         }
 

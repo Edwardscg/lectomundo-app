@@ -7,6 +7,7 @@ import com.lectomundo.model.Documento;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -15,6 +16,7 @@ import java.util.List;
 public class DocumentosFavoritosControlador {
 
     @FXML VBox vboxContenedor;
+    @FXML Label lblMensaje;
 
     private FavoritoService favoritoService = new FavoritoService();
     private Cliente cliente = ClienteControlador.cliente;
@@ -30,6 +32,12 @@ public class DocumentosFavoritosControlador {
         try{
 
             List<Documento> documentosFavoritos = favoritoService.obtenerFavoritosPorUsuario(cliente);
+
+            if(documentosFavoritos.isEmpty()){
+
+                lblMensaje.setText("No cuentas con documentos favoritos marcados");
+                return;
+            }
 
             HBox fila = new HBox(35);
             int contador = 0;
@@ -58,7 +66,7 @@ public class DocumentosFavoritosControlador {
             }
 
         }catch (Exception e){
-            e.printStackTrace();
+
             UIHelper.mostrarAlerta("Error", "No se pudo cargar los documentos Favoritos.");
         }
     }
