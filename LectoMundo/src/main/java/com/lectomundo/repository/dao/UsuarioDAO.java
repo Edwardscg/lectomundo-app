@@ -2,9 +2,11 @@ package com.lectomundo.repository.dao;
 
 import com.lectomundo.model.*;
 import com.lectomundo.repository.helper.DBHelper;
+
 import javafx.collections.ObservableList;
 
 import java.sql.ResultSet;
+
 import java.util.List;
 
 public class UsuarioDAO {
@@ -26,7 +28,7 @@ public class UsuarioDAO {
 
         if (es_admin) {
             DBHelper.manejarEntidad(sql, usuario.getNombre_usuario(), usuario.getCorreo(), usuario.getContraseña(), usuario.getTipo_usuario(), usuario.getId_usuario());
-        }else {
+        } else {
             DBHelper.manejarEntidad(sql, usuario.getNombre_usuario(), usuario.getCorreo(), usuario.getContraseña(), usuario.getTipo_usuario(), ((Cliente) usuario).getMonedas(), usuario.getId_usuario());
         }
     }
@@ -38,12 +40,8 @@ public class UsuarioDAO {
         DBHelper.manejarEntidad(sql, nuevas_monedas, id_usuario);
     }
 
-    public void cambiarContraseña(int id_usuario, String contraseña_actual, String nueva_contrasena) {
-
-        String sql = "UPDATE usuario SET contraseña = ? WHERE id_usuario = ? AND contraseña = ?";
-
-        DBHelper.manejarEntidad(sql, nueva_contrasena, id_usuario, contraseña_actual);
-    }
+    /*
+    FUTURA IMPLEMENTACIÓN
 
     public void eliminarUsuario(int id_usuario) {
 
@@ -51,6 +49,7 @@ public class UsuarioDAO {
 
         DBHelper.manejarEntidad(sql, id_usuario);
     }
+    */
 
     public Usuario buscarUsuarioPorId(int id_usuario) {
         String sql = "SELECT * FROM usuario WHERE id_usuario = ?;";
@@ -71,19 +70,16 @@ public class UsuarioDAO {
         return DBHelper.obtenerEntidad(sql, this::mapearFilaUsuario, correo, contrasena);
     }
 
+    /*
+    FUTURA IMPLEMETACIÓN
+
     public List<Usuario> buscarUsuariosPorTipo(String tipo_usuario) {
 
         String sql = "SELECT * FROM usuario WHERE tipo = ?;";
 
         return DBHelper.obtenerListaEntidad(sql, this::mapearFilaUsuario, tipo_usuario);
     }
-
-    public List<Usuario> obtenerUsuarios() {
-
-        String sql = "select * from usuario";
-
-        return DBHelper.obtenerListaEntidad(sql, this::mapearFilaUsuario);
-    }
+    */
 
     public ObservableList<Usuario> verUsuarios() {
 

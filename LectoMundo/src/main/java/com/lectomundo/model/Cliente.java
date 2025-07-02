@@ -1,6 +1,6 @@
 package com.lectomundo.model;
 
-public class Cliente extends Usuario{
+public class Cliente extends Usuario {
     private int monedas;
 
     public Cliente(int id_usuario, String nombre_usuario, String correo, String contraseña, String tipo_usuario, int monedas) {

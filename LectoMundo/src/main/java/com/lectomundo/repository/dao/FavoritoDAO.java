@@ -1,10 +1,8 @@
 package com.lectomundo.repository.dao;
 
 import com.lectomundo.model.Documento;
-import com.lectomundo.model.Favorito;
 import com.lectomundo.repository.helper.DBHelper;
 
-import java.sql.ResultSet;
 import java.util.List;
 
 public class FavoritoDAO {

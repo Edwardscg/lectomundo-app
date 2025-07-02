@@ -11,7 +11,7 @@ public class NotificacionService {
 
     private NotificacionDAO notificacionDAO = new NotificacionDAO();
 
-    public void registrarNotificacion(Cliente cliente, String tipo, String mensaje){
+    public void registrarNotificacion(Cliente cliente, String tipo, String mensaje) {
 
         Notificacion notificacion = new Notificacion();
         notificacion.setCliente(cliente);
@@ -21,23 +21,23 @@ public class NotificacionService {
         notificacionDAO.registrarNotificacion(notificacion);
     }
 
-    public List<Notificacion> obtenerNotificacionesPorUsuario(int id_usuario){
+    public List<Notificacion> obtenerNotificacionesPorUsuario(int id_usuario) {
 
         return notificacionDAO.obtenerNotificacionesPorUsuario(id_usuario);
     }
 
-    public void marcarComoLeida(int id_notificacion){
+    public void marcarComoLeida(int id_notificacion) {
 
         notificacionDAO.marcarNotificacionComoLeida(id_notificacion);
     }
 
-    public void notificacionCompraDocumento(Cliente cliente, Documento documento){
+    public void notificacionCompraDocumento(Cliente cliente, Documento documento) {
 
         String mensaje = "Has comprado el documento: " + documento.getTitulo();
         registrarNotificacion(cliente, "Compra", mensaje);
     }
 
-    public void notificacionAlquilerDocumento(Cliente cliente, Documento documento){
+    public void notificacionAlquilerDocumento(Cliente cliente, Documento documento) {
 
         String mensaje = "Has alquilado el documento: " + documento.getTitulo();
         registrarNotificacion(cliente, "Alquiler", mensaje);

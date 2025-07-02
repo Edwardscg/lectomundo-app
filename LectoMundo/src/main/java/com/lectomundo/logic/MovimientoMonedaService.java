@@ -24,15 +24,16 @@ public class MovimientoMonedaService {
         movimientoMonedaDAO.registrarMovimiento(movimientoMoneda);
     }
 
-    public void gastarMonedas(Cliente cliente, int monto) {
+    public Cliente gastarMonedas(Cliente cliente, int monto) {
 
         if (cliente.getMonedas() < monto) {
 
-            return;
+            return null;
         }
 
         int nuevas_monedas = cliente.getMonedas() - monto;
         usuarioService.actualizarMonedas(cliente.getId_usuario(), nuevas_monedas);
+        cliente.setMonedas(nuevas_monedas);
 
         MovimientoMoneda movimientoMoneda = new MovimientoMoneda();
         movimientoMoneda.setCliente(cliente);
@@ -40,6 +41,8 @@ public class MovimientoMonedaService {
         movimientoMoneda.setMonto(monto);
 
         movimientoMonedaDAO.registrarMovimiento(movimientoMoneda);
+
+        return cliente;
     }
 
     /*

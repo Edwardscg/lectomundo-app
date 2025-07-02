@@ -11,7 +11,7 @@ public class ValoracionService {
 
     private ValoracionDAO valoracionDAO = new ValoracionDAO();
 
-    public void registrarValoracion(Cliente cliente, Documento documento, String comentario, int puntuacion){
+    public void registrarValoracion(Cliente cliente, Documento documento, String comentario, int puntuacion) {
 
         Valoracion valoracion = new Valoracion();
         valoracion.setCliente(cliente);
@@ -22,17 +22,19 @@ public class ValoracionService {
         valoracionDAO.registrarValoracion(valoracion);
     }
 
-    public List<Valoracion> verValoracionesPorDocumento(int id_documento){
+    public List<Valoracion> verValoracionesPorDocumento(int id_documento) {
 
         return valoracionDAO.verValoracionesPorDocumento(id_documento);
     }
 
-    public float obtenerPromedioValoracion(int id_documento){
+    // FALTA IMPLEMENTAR
+
+    public float obtenerPromedioValoracion(int id_documento) {
 
         return valoracionDAO.obtenerPromedioValoracion(id_documento);
     }
 
-    public int contarValoraciones(int id_documento){
+    public int contarValoraciones(int id_documento) {
 
         return valoracionDAO.contarValoracionesPorDocumento(id_documento);
     }

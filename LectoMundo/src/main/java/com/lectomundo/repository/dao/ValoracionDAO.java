@@ -19,7 +19,9 @@ public class ValoracionDAO {
         DBHelper.manejarEntidad(sql, valoracion.getCliente().getId_usuario(), valoracion.getDocumento().getId_documento(), valoracion.getPuntuacion(), valoracion.getComentario());
     }
 
-    // IMPLEMENTACION EN UN FUTURO
+    /*
+    FUTURA IMPLEMENTACIÓN
+
     public void actualizarValoracion(Valoracion valoracion) {
 
         String sql = "UPDATE valoracion SET puntuacion = ?, comentario = ?, fecha_valoracion = ? WHERE id_usuario = ? AND id_documento = ?;";
@@ -33,6 +35,7 @@ public class ValoracionDAO {
 
         DBHelper.manejarEntidad(sql, id_usuario, id_documento);
     }
+    */
 
     public List<Valoracion> verValoracionesPorDocumento(int id_documento) {
 
@@ -47,7 +50,7 @@ public class ValoracionDAO {
 
         Float promedio = DBHelper.obtenerEntidad(sql, rs -> rs.getFloat("promedio"), id_libro);
 
-        return promedio!=null ? promedio: 0;
+        return promedio != null ? promedio : 0;
     }
 
     public int contarValoracionesPorDocumento(int id_documento) {

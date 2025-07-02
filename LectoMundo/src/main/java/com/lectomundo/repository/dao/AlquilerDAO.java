@@ -2,7 +2,6 @@ package com.lectomundo.repository.dao;
 
 import com.lectomundo.model.*;
 import com.lectomundo.repository.helper.DBHelper;
-import javafx.collections.ObservableList;
 
 import java.sql.ResultSet;
 import java.sql.Timestamp;
@@ -33,12 +32,15 @@ public class AlquilerDAO {
         return DBHelper.obtenerListaEntidad(sql, documentoDAO::mapearDocumento, id_usuario);
     }
 
-    public List<Alquiler> obtenerAlquileresActivosPorCliente(int id_usuario){
+    public List<Alquiler> obtenerAlquileresActivosPorCliente(int id_usuario) {
 
         String sql = " SELECT * From alquiler WHERE id_usuario = ? AND estado = 'activo';";
 
         return DBHelper.obtenerListaEntidad(sql, this::mapearAlquiler, id_usuario);
     }
+
+    /*
+    FUTURA IMPLEMENTACIÓN
 
     public ObservableList<Documento> llenarTablaDocumentosAlquiladosActivosPorUsuario(int id_usuario){
 
@@ -46,6 +48,7 @@ public class AlquilerDAO {
 
         return DBHelper.llenarTablaPorParametro(sql, rs -> new Documento(rs.getInt("id_documento"), rs.getString("titulo"), rs.getString("autor"), rs.getString("tipo_documento"), rs.getDate("fecha_publicacion").toLocalDate(), rs.getString("genero"), rs.getString("descripcion"), rs.getInt("precio"), rs.getFloat("puntuacion_promedio"), rs.getInt("cantidad_valoraciones")), id_usuario);
     }
+    */
 
     public boolean estaAlquilado(int id_usuario, int id_documento) {
 

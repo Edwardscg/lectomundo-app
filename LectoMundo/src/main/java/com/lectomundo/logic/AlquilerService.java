@@ -32,9 +32,7 @@ public class AlquilerService {
         alquilerDAO.registrarAlquiler(alquiler);
         notificacionService.notificacionAlquilerDocumento(cliente, documento);
 
-        int nuevas_monedas = cliente.getMonedas() - documento.getPrecio();
-        usuarioService.actualizarMonedas(cliente.getId_usuario(), nuevas_monedas);
-        cliente.setMonedas(nuevas_monedas);
+        cliente = movimientoMonedaService.gastarMonedas(cliente, documento.getPrecio());
 
         return cliente;
     }

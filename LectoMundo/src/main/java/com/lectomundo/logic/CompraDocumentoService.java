@@ -14,10 +14,11 @@ public class CompraDocumentoService {
     UsuarioService usuarioService = new UsuarioService();
     NotificacionService notificacionService = new NotificacionService();
     AlquilerService alquilerService = new AlquilerService();
+    MovimientoMonedaService movimientoMonedaService = new MovimientoMonedaService();
 
     public Cliente registrarCompra(Cliente cliente, Documento documento) {
 
-        documento.setPrecio(documento.getPrecio() * 3);
+        int costo = documento.getPrecio() * 3;
 
         LocalDateTime fecha_hoy = LocalDateTime.now();
 
@@ -25,15 +26,13 @@ public class CompraDocumentoService {
         compraDocumento.setCliente(cliente);
         compraDocumento.setDocumento(documento);
         compraDocumento.setFecha_compra(fecha_hoy);
-        compraDocumento.setCosto(documento.getPrecio());
+        compraDocumento.setCosto(costo);
 
         compraDocumentoDAO.registrarCompra(compraDocumento);
         alquilerService.devolverDocumento(cliente, documento);
         notificacionService.notificacionCompraDocumento(cliente, documento);
 
-        int nuevas_monedas = cliente.getMonedas() - documento.getPrecio();
-        usuarioService.actualizarMonedas(cliente.getId_usuario(), nuevas_monedas);
-        cliente.setMonedas(nuevas_monedas);
+        cliente = movimientoMonedaService.gastarMonedas(cliente, costo);
 
         return cliente;
     }

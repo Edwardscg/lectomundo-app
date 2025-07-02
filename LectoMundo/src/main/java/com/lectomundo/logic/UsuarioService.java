@@ -5,9 +5,8 @@ import com.lectomundo.model.Administrador;
 import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Usuario;
 import com.lectomundo.repository.dao.UsuarioDAO;
-import javafx.collections.ObservableList;
 
-import java.util.List;
+import javafx.collections.ObservableList;
 
 public class UsuarioService {
 
@@ -15,7 +14,7 @@ public class UsuarioService {
 
     public void registrarUsuario(String nombre, String correo, String contraseña, String tipo_usuario) {
 
-        if(buscarUsuarioPorCorreo(correo) != null){
+        if (buscarUsuarioPorCorreo(correo) != null) {
 
             throw new IllegalArgumentException("Ya existe un usuario con el correo ingresado.");
         }
@@ -25,17 +24,17 @@ public class UsuarioService {
 
         boolean verificado = UIHelper.abrirVentanaDeVerificacion(correo, codigo);
 
-        if(!verificado){
+        if (!verificado) {
 
             throw new IllegalArgumentException("No se completó la verificación");
         }
 
         Usuario usuario;
 
-        if(tipo_usuario.equals("cliente")){
+        if (tipo_usuario.equals("cliente")) {
 
             usuario = new Cliente(0, nombre, correo, contraseña, tipo_usuario, 0);
-        }else{
+        } else {
 
             usuario = new Administrador(0, nombre, correo, contraseña, tipo_usuario);
         }
@@ -57,7 +56,7 @@ public class UsuarioService {
 
         boolean verificado = UIHelper.abrirVentanaDeVerificacion(correo, codigo);
 
-        if(!verificado){
+        if (!verificado) {
 
             throw new IllegalArgumentException("Código incorrecto");
         }
@@ -78,7 +77,7 @@ public class UsuarioService {
         if (usuario == null) {
 
             return false;
-        }else {
+        } else {
 
             usuario.setContraseña(nueva_contraseña);
             usuarioDAO.actualizarUsuario(usuario);
@@ -87,38 +86,43 @@ public class UsuarioService {
         }
     }
 
+    /*
+    FUTURA IMPLEMENTACIÓN
+
     public void actualizarUsuario(Usuario usuario) {
 
         usuarioDAO.actualizarUsuario(usuario);
     }
+    */
+
 
     public void actualizarMonedas(int id_usuario, int nuevas_monedas) {
 
         usuarioDAO.actualizarMonedas(id_usuario, nuevas_monedas);
     }
 
-    // POSIBLE BORRADO, RAZON: SIN USO
+    /*
+    FUTURA IMPLEMENTACIÓN
+
     public Usuario buscarUsuarioPorId(int id_usuario) {
 
         return usuarioDAO.buscarUsuarioPorId(id_usuario);
     }
+    */
 
     public Usuario buscarUsuarioPorCorreo(String correo) {
 
         return usuarioDAO.buscarUsuarioPorCorreo(correo);
     }
 
-
-    // CAMBIAR A QUE RETORNE UN OBSERVABLE LIST Y ACTUALIZAR UML
-    public List<Usuario> buscarUsuarioPorTipo(String tipo_usuario) {
-
-        return usuarioDAO.buscarUsuariosPorTipo(tipo_usuario);
-    }
+    /*
+    FUTURA IMPLEMENTACIÓN
 
     public void eliminarUsuario(int id_usuario) {
 
         usuarioDAO.eliminarUsuario(id_usuario);
     }
+    */
 
     public ObservableList<Usuario> verUsuarios() {
 

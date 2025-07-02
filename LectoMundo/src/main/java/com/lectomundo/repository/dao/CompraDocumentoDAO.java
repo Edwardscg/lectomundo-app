@@ -1,13 +1,9 @@
 package com.lectomundo.repository.dao;
 
-import com.lectomundo.model.Cliente;
 import com.lectomundo.model.CompraDocumento;
 import com.lectomundo.model.Documento;
-import com.lectomundo.model.Usuario;
 import com.lectomundo.repository.helper.DBHelper;
-import javafx.collections.ObservableList;
 
-import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -37,14 +33,20 @@ public class CompraDocumentoDAO {
         return DBHelper.obtenerListaEntidad(sql, documentoDAO::mapearDocumento, id_usuario);
     }
 
+    /*
+    FUTURA IMPLEMENTACIÓN
+
     public ObservableList<Documento> llenarTablaDocumentosCompradosPorUsuario(int id_usuario) {
 
         String sql = "SELECT d.* FROM documento d JOIN compra_documento cd ON d.id_documento = cd.id_documento WHERE cd.id_usuario = ?;";
 
         return DBHelper.llenarTablaPorParametro(sql, rs -> new Documento(rs.getInt("id_documento"), rs.getString("titulo"), rs.getString("autor"), rs.getString("tipo_documento"), rs.getDate("fecha_publicacion").toLocalDate(), rs.getString("genero"), rs.getString("descripcion"), rs.getInt("precio"), rs.getFloat("puntuacion_promedio"), rs.getInt("cantidad_valoraciones")), id_usuario);
     }
+    */
 
-    // POSIBLE BORRADO
+    /*
+    FUTURA IMPLEMENTACIÓN
+
     private CompraDocumento mapearCompra(ResultSet rs) {
 
         try {
@@ -59,4 +61,5 @@ public class CompraDocumentoDAO {
             throw new RuntimeException("Error al mapear datos de compra desde la Base de Datos.");
         }
     }
+    */
 }

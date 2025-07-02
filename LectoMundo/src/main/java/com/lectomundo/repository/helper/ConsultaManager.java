@@ -20,35 +20,35 @@ public class ConsultaManager {
         this.rs = rs;
     }
 
-    public ResultSet getResultSet(){
+    public ResultSet getResultSet() {
 
         return rs;
     }
 
-    public void cerrar(){
+    public void cerrar() {
 
-        try{
+        try {
 
-            if(rs!=null){
+            if (rs != null) {
                 rs.close();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        try{
+        try {
 
-            if(ps!=null){
+            if (ps != null) {
                 ps.close();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        try{
+        try {
 
-            if(conn!=null){
+            if (conn != null) {
                 conn.close();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

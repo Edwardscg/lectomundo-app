@@ -2,12 +2,10 @@ package com.lectomundo.repository.dao;
 
 import com.lectomundo.model.*;
 import com.lectomundo.repository.helper.DBHelper;
+
 import javafx.collections.ObservableList;
 
-import java.sql.Date;
-import java.sql.ResultSet;
 import java.time.LocalDate;
-import java.util.List;
 
 public class MembresiaDAO {
 
@@ -34,26 +32,22 @@ public class MembresiaDAO {
         DBHelper.manejarEntidad(sql, Estado.finalizado.toString(), fecha_fin, id_usuario);
     }
 
+    /*
+    FUTURA IMPLEMENTACIÓN
+
     public Membresia buscarMembresiaPorId(int id_membresia) {
 
         String sql = "SELECT * FROM membresia WHERE id_membresia = ?";
 
         return DBHelper.obtenerEntidad(sql, this::mapearMembresia, id_membresia);
     }
+    */
 
     public boolean tieneMembresiaActiva(int id_usuario) {
 
         String sql = "SELECT * FROM membresia WHERE id_usuario = ? AND estado = 'activo' AND CURDATE() BETWEEN fecha_inicio AND fecha_fin";
 
         return DBHelper.obtenerEntidad(sql, rs -> true, id_usuario) != null;
-    }
-
-    //POSIBLE BORRADO
-    public List<Membresia> verMembresiasPorUsuario(int id_usuario) {
-
-        String sql = "SELECT * FROM membresia WHERE id_usuario = ? ORDER BY fecha_inicio DESC";
-
-        return DBHelper.obtenerListaEntidad(sql, this::mapearMembresia, id_usuario);
     }
 
     public ObservableList<Membresia> verMembresias() {
@@ -66,6 +60,9 @@ public class MembresiaDAO {
             return new Membresia(rs.getInt("id_membresia"), cliente, rs.getDate("fecha_inicio").toLocalDate(), rs.getDate("fecha_fin").toLocalDate(), rs.getInt("costo"), Estado.valueOf(rs.getString("estado")));
         });
     }
+
+    /*
+    FUTURA IMPLEMENTACIÓN
 
     private Membresia mapearMembresia(ResultSet rs) {
 
@@ -80,4 +77,5 @@ public class MembresiaDAO {
             throw new RuntimeException("Error al mapear datos de membresía desde la Base de Datos.");
         }
     }
+    */
 }

@@ -1,7 +1,6 @@
 package com.lectomundo.repository.dao;
 
 import com.lectomundo.model.*;
-import com.lectomundo.repository.helper.DBConexion;
 import com.lectomundo.repository.helper.DBHelper;
 import javafx.collections.ObservableList;
 
@@ -72,6 +71,8 @@ public class DocumentoDAO {
 
         return DBHelper.obtenerListaEntidad(sql, this::mapearDocumento, genero);
     }
+
+    // FALTA IMPLEMENTAR
 
     public void actualizarPuntuacionYValoracion(int id_documento, float promedio, int cantidad_valoraciones) {
 

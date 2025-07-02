@@ -12,6 +12,7 @@ public class MembresiaService {
 
     MembresiaDAO membresiaDAO = new MembresiaDAO();
     UsuarioService usuarioService = new UsuarioService();
+    MovimientoMonedaService movimientoMonedaService = new MovimientoMonedaService();
 
     public Cliente registrarMembresia(Cliente cliente) {
 
@@ -21,9 +22,7 @@ public class MembresiaService {
             return null;
         }
 
-        int nuevas_monedas = cliente.getMonedas() - membresia.getPrecio();
-        usuarioService.actualizarMonedas(cliente.getId_usuario(), nuevas_monedas);
-        cliente.setMonedas(nuevas_monedas);
+        cliente = movimientoMonedaService.gastarMonedas(cliente, membresia.getPrecio());
 
         LocalDate fechaFin = LocalDate.now().plusDays(30);
         membresia.setCliente(cliente);
@@ -40,9 +39,7 @@ public class MembresiaService {
         LocalDate fechaFin = LocalDate.now().plusDays(30);
         Membresia membresia = new Membresia();
 
-        int nuevas_monedas = cliente.getMonedas() - membresia.getPrecio();
-        usuarioService.actualizarMonedas(cliente.getId_usuario(), nuevas_monedas);
-        cliente.setMonedas(nuevas_monedas);
+        cliente = movimientoMonedaService.gastarMonedas(cliente, membresia.getPrecio());
 
         membresiaDAO.actualizarMembresia(cliente.getId_usuario(), fechaFin);
 

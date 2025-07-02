@@ -2,12 +2,10 @@ package com.lectomundo.repository.dao;
 
 import com.lectomundo.model.*;
 import com.lectomundo.repository.helper.DBHelper;
+
 import javafx.collections.ObservableList;
 
-import java.sql.Date;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
-import java.util.List;
 
 public class MovimientoMonedaDAO {
 
@@ -20,13 +18,16 @@ public class MovimientoMonedaDAO {
         DBHelper.manejarEntidad(sql, movimiviento.getCliente().getId_usuario(), movimiviento.getTipo_movimiento(), movimiviento.getMonto());
     }
 
-    // POSIBLE BORRADO
+    /*
+    FUTURA IMPLEMENTACIÓN
+
     public ObservableList<MovimientoMoneda> verMovimientosPorUsuario(int id_usuario) {
 
         String sql = "SELECT * FROM movimiento_moneda WHERE id_usuario = ? ORDER BY fecha DESC;";
 
         return DBHelper.llenarTablaPorParametro(sql, this::mapearMovimiento, id_usuario);
     }
+    */
 
     public ObservableList<MovimientoMoneda> verMovimientos() {
 

@@ -3,9 +3,8 @@ package com.lectomundo.repository.dao;
 import com.lectomundo.model.*;
 import com.lectomundo.repository.helper.DBHelper;
 
-import java.sql.Date;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
+
 import java.util.List;
 
 public class NotificacionDAO {

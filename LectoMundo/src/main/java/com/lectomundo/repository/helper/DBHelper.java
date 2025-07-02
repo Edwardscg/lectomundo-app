@@ -26,9 +26,9 @@ public class DBHelper {
 
     // Ejecuta una consulta SQL con parámetros y devuelve un objeto ConsultaResult
     // que encapsula la conexión, PreparedStatement y ResultSet asociados.
-    public static  ConsultaManager ejecutarConsulta(String sql, Object... parametros) {
+    public static ConsultaManager ejecutarConsulta(String sql, Object... parametros) {
 
-        try{
+        try {
 
             Connection conn = DBConexion.establecerConexion();
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -39,7 +39,7 @@ public class DBHelper {
 
             return new ConsultaManager(conn, ps, rs);
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
 
             throw new RuntimeException("Error al ejecutar consulta en la Base de Datos.");
         }
@@ -52,23 +52,23 @@ public class DBHelper {
 
         ConsultaManager cr = null;
 
-        try{
+        try {
 
             cr = ejecutarConsulta(sql, parametros);
             ResultSet rs = cr.getResultSet();
 
-            if(rs.next()){
+            if (rs.next()) {
 
                 return mapper.mapRow(rs);
             }
             return null;
 
-        } catch (Exception e){
+        } catch (Exception e) {
 
             throw new RuntimeException("Error al obtener entidad de la Base de Datos.");
-        }finally {
+        } finally {
 
-            if(cr!=null){
+            if (cr != null) {
 
                 cr.cerrar();
             }
@@ -83,23 +83,23 @@ public class DBHelper {
 
         ConsultaManager cr = null;
 
-        try{
+        try {
 
             cr = ejecutarConsulta(sql, parametros);
             ResultSet rs = cr.getResultSet();
 
-            while(rs.next()){
+            while (rs.next()) {
 
                 lista.add(mapper.mapRow(rs));
             }
 
             return lista;
-        } catch (Exception e){
+        } catch (Exception e) {
 
             throw new RuntimeException("Error al obtener lista de entidades de la Base de Datos.");
-        }finally {
+        } finally {
 
-            if(cr!=null){
+            if (cr != null) {
 
                 cr.cerrar();
             }
@@ -150,7 +150,7 @@ public class DBHelper {
         }
     }
 
-    private static void asignarParametros(PreparedStatement ps, Object... parametros) throws SQLException{
+    private static void asignarParametros(PreparedStatement ps, Object... parametros) throws SQLException {
 
         for (int i = 0; i < parametros.length; i++) {
 
