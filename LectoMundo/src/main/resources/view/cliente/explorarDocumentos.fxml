@@ -14,7 +14,7 @@
         <content>
             <VBox fx:id="vboxContenedor" spacing="20" style="-fx-background-color: #F4F6F7;">
                 <padding>
-                    <Insets left="45" right="45" top="40" bottom="40"/>
+                    <Insets left="45" right="45" top="20" bottom="40"/>
                 </padding>
 
                 <HBox alignment="CENTER" spacing="10">
@@ -22,12 +22,14 @@
                 </HBox>
 
                 <HBox alignment="CENTER" spacing="15">
-                    <Button fx:id="btnTodos" text="Todos" styleClass="boton-busqueda"/>
-                    <Button fx:id="btnTitulo" text="Título" styleClass="boton-busqueda"/>
-                    <Button fx:id="btnAutor" text="Autor" styleClass="boton-busqueda"/>
-                    <Button fx:id="btnTipo" text="Tipo" styleClass="boton-busqueda"/>
-                    <Button fx:id="btnGenero" text="Género" styleClass="boton-busqueda"/>
+                    <Button fx:id="btnTodos" text="Todos" onAction="#mostrarTodos" styleClass="boton-busqueda"/>
+                    <Button fx:id="btnTitulo" text="Título" onAction="#buscarPorTitulo" styleClass="boton-busqueda"/>
+                    <Button fx:id="btnAutor" text="Autor" onAction="#buscarPorAutor" styleClass="boton-busqueda"/>
+                    <Button fx:id="btnTipo" text="Tipo" onAction="#buscarPorTipo" styleClass="boton-busqueda"/>
+                    <Button fx:id="btnGenero" text="Género" onAction="#buscarPorGenero" styleClass="boton-busqueda"/>
                 </HBox>
+
+                <VBox fx:id="vboxItems" spacing="20"/>
 
             </VBox>
         </content>
