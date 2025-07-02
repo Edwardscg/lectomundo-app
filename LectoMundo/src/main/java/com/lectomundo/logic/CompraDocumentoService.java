@@ -2,6 +2,7 @@ package com.lectomundo.logic;
 
 import com.lectomundo.model.*;
 import com.lectomundo.repository.dao.CompraDocumentoDAO;
+
 import javafx.collections.ObservableList;
 
 import java.time.LocalDateTime;
@@ -42,10 +43,16 @@ public class CompraDocumentoService {
         return compraDocumentoDAO.verDocumentosCompradosPorUsuario(cliente.getId_usuario());
     }
 
+
+    /*
+
+    FUTURA IMPLEMEMNTACIÓN
+
     public ObservableList<Documento> llenarTablaDocumentosCompradosPorUsuario(int id_usuario) {
 
         return compraDocumentoDAO.llenarTablaDocumentosCompradosPorUsuario(id_usuario);
     }
+    */
 
     public boolean estaComprado(int id_usuario, int id_documento) {
 

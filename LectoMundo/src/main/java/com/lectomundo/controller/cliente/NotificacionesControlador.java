@@ -4,6 +4,7 @@ import com.lectomundo.controller.UIHelper;
 import com.lectomundo.logic.NotificacionService;
 import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Notificacion;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,24 +14,25 @@ import java.util.List;
 
 public class NotificacionesControlador {
 
-    @FXML private VBox contenedorNotificaciones;
+    @FXML
+    private VBox contenedorNotificaciones;
 
     private NotificacionService notificacionService = new NotificacionService();
     private Cliente cliente = ClienteControlador.cliente;
 
     @FXML
-    private void initialize(){
+    private void initialize() {
 
         cargarNotificaciones();
     }
 
-    private void cargarNotificaciones(){
+    private void cargarNotificaciones() {
 
-        try{
+        try {
 
             List<Notificacion> notificaciones = notificacionService.obtenerNotificacionesPorUsuario(cliente.getId_usuario());
 
-            for (Notificacion n : notificaciones){
+            for (Notificacion n : notificaciones) {
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/itemNotificacion.fxml"));
                 Node item = loader.load();
@@ -41,7 +43,7 @@ public class NotificacionesControlador {
                 contenedorNotificaciones.getChildren().add(item);
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "No se pudo cargar las notificaciones.");
         }

@@ -3,9 +3,8 @@ package com.lectomundo.logic;
 import com.lectomundo.model.Cliente;
 import com.lectomundo.model.MovimientoMoneda;
 import com.lectomundo.repository.dao.MovimientoMonedaDAO;
-import javafx.collections.ObservableList;
 
-import java.time.LocalDateTime;
+import javafx.collections.ObservableList;
 
 public class MovimientoMonedaService {
 
@@ -27,7 +26,7 @@ public class MovimientoMonedaService {
 
     public void gastarMonedas(Cliente cliente, int monto) {
 
-        if(cliente.getMonedas() < monto){
+        if (cliente.getMonedas() < monto) {
 
             return;
         }
@@ -43,8 +42,12 @@ public class MovimientoMonedaService {
         movimientoMonedaDAO.registrarMovimiento(movimientoMoneda);
     }
 
+    /*
+    FUTURA IMPLEMENTACIÓN
+
     public ObservableList<MovimientoMoneda> obtenerMovimientos() {
 
         return movimientoMonedaDAO.verMovimientos();
     }
+    */
 }

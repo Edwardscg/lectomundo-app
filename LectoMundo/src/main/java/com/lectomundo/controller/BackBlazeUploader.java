@@ -2,6 +2,7 @@ package com.lectomundo.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import okhttp3.*;
 
 import java.io.File;
@@ -13,9 +14,9 @@ import java.util.Base64;
 
 public class BackBlazeUploader {
 
-    private static final String id_cuenta= "005da0be82a0ebf0000000001";
-    private static final String llave_aplicacion="K005EPTrizZx+uZKRwTWKqp9NmSw674";
-    private static final String nombre_deposito="BibliotecaVirtual";
+    private static final String id_cuenta = "005da0be82a0ebf0000000001";
+    private static final String llave_aplicacion = "K005EPTrizZx+uZKRwTWKqp9NmSw674";
+    private static final String nombre_deposito = "BibliotecaVirtual";
     private static final String url_backblaze = "https://api.backblazeb2.com";
 
     private final OkHttpClient client = new OkHttpClient();
@@ -27,20 +28,20 @@ public class BackBlazeUploader {
     private String bucketId;
     private String downloadUrl;
 
-    public BackBlazeUploader() throws Exception{
+    public BackBlazeUploader() throws Exception {
 
         authorizeAccount();
         getBucketId();
     }
 
-    private void authorizeAccount() throws Exception{
+    private void authorizeAccount() throws Exception {
 
         String credentials = id_cuenta + ":" + llave_aplicacion;
         String encoded = Base64.getEncoder().encodeToString(credentials.getBytes());
 
-        Request request = new Request.Builder().url(url_backblaze + "/b2api/v2/b2_authorize_account").header("Authorization", "Basic "+ encoded).build();
+        Request request = new Request.Builder().url(url_backblaze + "/b2api/v2/b2_authorize_account").header("Authorization", "Basic " + encoded).build();
 
-        try(Response response = client.newCall(request).execute()){
+        try (Response response = client.newCall(request).execute()) {
 
             String jsonString = response.body().string();
             JsonNode jsonNode = objectMapper.readTree(jsonString);
@@ -52,13 +53,13 @@ public class BackBlazeUploader {
         }
     }
 
-    private void getBucketId()throws Exception{
+    private void getBucketId() throws Exception {
 
-        RequestBody body = RequestBody.create("{\"accountId\":\""+ accountId + "\"}",MediaType.parse("application/json"));
+        RequestBody body = RequestBody.create("{\"accountId\":\"" + accountId + "\"}", MediaType.parse("application/json"));
 
         Request request = new Request.Builder().url(apiUrl + "/b2api/v2/b2_list_buckets").header("Authorization", authToken).post(body).build();
 
-        try(Response response = client.newCall(request).execute()){
+        try (Response response = client.newCall(request).execute()) {
 
             String jsonString = response.body().string();
 
@@ -77,24 +78,19 @@ public class BackBlazeUploader {
             for (JsonNode bucket : buckets) {
                 String nombre = bucket.get("bucketName").asText();
                 String id = bucket.get("bucketId").asText();
-                System.out.println("Nombre: " + nombre + " | ID: "+id);
+                System.out.println("Nombre: " + nombre + " | ID: " + id);
 
                 if (nombre.equals(nombre_deposito)) {
                     this.bucketId = id;
                     return;
                 }
-                /*
-                if (bucket.get("bucketName").asText().equals(nombre_deposito)) {
-                    this.bucketId = bucket.get("bucketId").asText();
-                    return;
-                }*/
             }
 
             throw new IllegalArgumentException("Bucket no encontrado: " + nombre_deposito);
         }
     }
 
-    public String uploadFile(File file, String fileName, String mimeType) throws Exception{
+    public String uploadFile(File file, String fileName, String mimeType) throws Exception {
 
         RequestBody getUploadUrlBody = RequestBody.create("{\"bucketId\":\"" + bucketId + "\"}", MediaType.parse("application/json"));
 
@@ -103,7 +99,7 @@ public class BackBlazeUploader {
         String uploadUrl;
         String uploadAuthToken;
 
-        try(Response response = client.newCall(getUploadUrlRequest).execute()){
+        try (Response response = client.newCall(getUploadUrlRequest).execute()) {
 
             JsonNode jsonNode = objectMapper.readTree(response.body().string());
             uploadUrl = jsonNode.get("uploadUrl").asText();
@@ -116,9 +112,9 @@ public class BackBlazeUploader {
         String encodedFileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8.toString());
         Request uploadRequest = new Request.Builder().url(uploadUrl).header("Authorization", uploadAuthToken).header("X-Bz-File-Name", encodedFileName).header("Content-Type", mimeType).header("X-Bz-Content-Sha1", sha1).post(RequestBody.create(fileBytes)).build();
 
-        try(Response response = client.newCall(uploadRequest).execute()){
+        try (Response response = client.newCall(uploadRequest).execute()) {
 
-            if(!response.isSuccessful()){
+            if (!response.isSuccessful()) {
 
                 String errorBody = response.body() != null ? response.body().string() : "Respuesta vacía";
                 throw new IOException("Error al subir archivo: " + errorBody);
@@ -129,15 +125,15 @@ public class BackBlazeUploader {
         }
     }
 
-    public String getPublicUrl(String fileName){
+    public String getPublicUrl(String fileName) {
 
         String[] partes = fileName.split("/");
         StringBuilder pathCodificado = new StringBuilder();
 
-        for (int i = 0; i < partes.length; i++){
+        for (int i = 0; i < partes.length; i++) {
 
             pathCodificado.append(URLEncoder.encode(partes[i], StandardCharsets.UTF_8));
-            if(i<partes.length -1){
+            if (i < partes.length - 1) {
 
                 pathCodificado.append("/");
             }

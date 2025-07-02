@@ -3,6 +3,7 @@ package com.lectomundo.controller.cliente;
 import com.lectomundo.controller.UIHelper;
 import com.lectomundo.logic.DocumentoService;
 import com.lectomundo.model.Documento;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -24,15 +25,15 @@ public class ExplorarDocumentosControlador {
     private List<Documento> documentos;
 
     @FXML
-    private void mostrarTodos(){
+    private void mostrarTodos() {
 
-        try{
+        try {
 
             documentos = documentoService.verDocumentos();
 
             cargarDocumentos(documentos);
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "Ha ocurrido un error y no se pudo buscar los documentos.");
         }
@@ -43,17 +44,17 @@ public class ExplorarDocumentosControlador {
 
         String busqueda = txtBuscar.getText().trim();
 
-        if(busqueda.isBlank()){
+        if (busqueda.isBlank()) {
 
             UIHelper.mostrarAlerta("Advertencia", "Se debe llenar el campo de búsqueda.");
             return;
         }
 
-        try{
+        try {
 
             documentos = documentoService.buscarDocumentosPorTitulo(busqueda);
 
-            if(documentos.isEmpty()){
+            if (documentos.isEmpty()) {
 
                 UIHelper.mostrarAlerta("Aviso", "No se encontraron resultados para su búsqueda.");
                 return;
@@ -63,28 +64,28 @@ public class ExplorarDocumentosControlador {
 
             cargarDocumentos(documentos);
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "Ha ocurrido un error y no se pudo buscar los documentos.");
         }
     }
 
     @FXML
-    private void buscarPorAutor(){
+    private void buscarPorAutor() {
 
         String busqueda = txtBuscar.getText().trim();
 
-        if(busqueda.isBlank()){
+        if (busqueda.isBlank()) {
 
             UIHelper.mostrarAlerta("Advertencia", "Se debe llenar el campo de búsqueda.");
             return;
         }
 
-        try{
+        try {
 
             documentos = documentoService.buscarDocumentosPorAutor(busqueda);
 
-            if(documentos.isEmpty()){
+            if (documentos.isEmpty()) {
 
                 UIHelper.mostrarAlerta("Aviso", "No se encontraron resultados para su búsqueda.");
                 return;
@@ -94,28 +95,28 @@ public class ExplorarDocumentosControlador {
 
             cargarDocumentos(documentos);
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "Ha ocurrido un error y no se pudo buscar los documentos.");
         }
     }
 
     @FXML
-    private void buscarPorTipo(){
+    private void buscarPorTipo() {
 
         String busqueda = txtBuscar.getText().trim();
 
-        if(busqueda.isBlank()){
+        if (busqueda.isBlank()) {
 
             UIHelper.mostrarAlerta("Advertencia", "Se debe llenar el campo de búsqueda.");
             return;
         }
 
-        try{
+        try {
 
             documentos = documentoService.buscarDocumentoPorTipo(busqueda);
 
-            if(documentos.isEmpty()){
+            if (documentos.isEmpty()) {
 
                 UIHelper.mostrarAlerta("Aviso", "No se encontraron resultados para su búsqueda.");
                 return;
@@ -125,28 +126,28 @@ public class ExplorarDocumentosControlador {
 
             cargarDocumentos(documentos);
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "Ha ocurrido un error y no se pudo buscar los documentos.");
         }
     }
 
     @FXML
-    private void buscarPorGenero(){
+    private void buscarPorGenero() {
 
         String busqueda = txtBuscar.getText().trim();
 
-        if(busqueda.isBlank()){
+        if (busqueda.isBlank()) {
 
             UIHelper.mostrarAlerta("Advertencia", "Se debe llenar el campo de búsqueda.");
             return;
         }
 
-        try{
+        try {
 
             documentos = documentoService.buscarDocumentosPorGenero(busqueda);
 
-            if(documentos.isEmpty()){
+            if (documentos.isEmpty()) {
 
                 UIHelper.mostrarAlerta("Aviso", "No se encontraron resultados para su búsqueda.");
                 return;
@@ -156,7 +157,7 @@ public class ExplorarDocumentosControlador {
 
             cargarDocumentos(documentos);
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "Ha ocurrido un error y no se pudo buscar los documentos.");
         }
@@ -203,7 +204,6 @@ public class ExplorarDocumentosControlador {
 
         } catch (Exception e) {
 
-            e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "No se pudo cargar los documentos.");
         }
     }

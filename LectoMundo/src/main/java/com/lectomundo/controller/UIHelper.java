@@ -2,6 +2,7 @@ package com.lectomundo.controller;
 
 import com.lectomundo.controller.general.CodigoVerificacionControlador;
 import com.lectomundo.controller.general.ConfirmarAccionControlador;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,7 +14,7 @@ import java.io.IOException;
 
 public class UIHelper {
 
-    public static void mostrarAlerta(String titulo, String mensaje){
+    public static void mostrarAlerta(String titulo, String mensaje) {
 
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
         alerta.setTitle(titulo);
@@ -22,9 +23,9 @@ public class UIHelper {
         alerta.showAndWait();
     }
 
-    public static void abrirYCerrarVentanaActual(Stage ventana_actual, String fxml_ubicacion, String titulo){
+    public static void abrirYCerrarVentanaActual(Stage ventana_actual, String fxml_ubicacion, String titulo) {
 
-        try{
+        try {
 
             FXMLLoader loader = new FXMLLoader(UIHelper.class.getResource(fxml_ubicacion));
             Parent root = loader.load();
@@ -35,21 +36,20 @@ public class UIHelper {
             nueva_ventana.setResizable(false);
             nueva_ventana.show();
 
-            if(ventana_actual!=null){
+            if (ventana_actual != null) {
 
                 ventana_actual.close();
             }
 
-        } catch (Exception e){
+        } catch (Exception e) {
 
-            e.printStackTrace();
-            mostrarAlerta("Error", "No se pudo abrir la ventana." +titulo);
+            mostrarAlerta("Error", "No se pudo abrir la ventana." + titulo);
         }
     }
 
-    public static void abrirVentanaOcultandoAnterior(Stage ventana_anterior, String fxml_ubicacion, String titulo){
+    public static void abrirVentanaOcultandoAnterior(Stage ventana_anterior, String fxml_ubicacion, String titulo) {
 
-        try{
+        try {
 
             FXMLLoader loader = new FXMLLoader(UIHelper.class.getResource(fxml_ubicacion));
             Parent root = loader.load();
@@ -61,16 +61,15 @@ public class UIHelper {
             ventana_anterior.hide();
             nueva_ventana.show();
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
-            e.printStackTrace();
             mostrarAlerta("Error", "No se pudo cambiar la ventana a :" + titulo);
         }
     }
 
-    public static boolean abrirVentanaDeVerificacion(String correo, String codigo_generado){
+    public static boolean abrirVentanaDeVerificacion(String correo, String codigo_generado) {
 
-        try{
+        try {
 
             FXMLLoader loader = new FXMLLoader(UIHelper.class.getResource("/view/general/codigoVerificacion.fxml"));
             Parent root = loader.load();
@@ -87,25 +86,24 @@ public class UIHelper {
 
             return codigoVerificacionControlador.fueVerificado();
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
-            e.printStackTrace();
             mostrarAlerta("Error", "No se pudo abrir la ventana de verificación.");
             return false;
         }
     }
 
-    public static void cerrarVentana(Stage stage){
+    public static void cerrarVentana(Stage stage) {
 
-        if(stage!=null){
+        if (stage != null) {
 
             stage.close();
         }
     }
 
-    public static boolean abrirVentanaConfirmacion(String mensaje){
+    public static boolean abrirVentanaConfirmacion(String mensaje) {
 
-        try{
+        try {
 
             FXMLLoader loader = new FXMLLoader(UIHelper.class.getResource("/view/general/confirmarAccion.fxml"));
             Parent root = loader.load();
@@ -121,9 +119,8 @@ public class UIHelper {
 
             return ConfirmarAccionControlador.confirmar_accion;
 
-        }catch (IOException e){
+        } catch (IOException e) {
 
-            e.printStackTrace();
             mostrarAlerta("Error", "No se pudo abrir la ventana de confirmación..");
             return false;
         }

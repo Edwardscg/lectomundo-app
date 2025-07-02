@@ -4,6 +4,7 @@ import com.lectomundo.controller.UIHelper;
 import com.lectomundo.logic.CorreoService;
 import com.lectomundo.logic.UsuarioService;
 import com.lectomundo.model.Usuario;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -12,11 +13,16 @@ import javafx.stage.Stage;
 
 public class RecuperarContraseñaControlador {
 
-    @FXML private TextField txtCorreo;
-    @FXML private TextField txtCodigo;
-    @FXML private PasswordField txtNuevaContraseña;
-    @FXML private PasswordField txtConfirmarContraseña;
-    @FXML private VBox vboxSeccionCodigo;
+    @FXML
+    private TextField txtCorreo;
+    @FXML
+    private TextField txtCodigo;
+    @FXML
+    private PasswordField txtNuevaContraseña;
+    @FXML
+    private PasswordField txtConfirmarContraseña;
+    @FXML
+    private VBox vboxSeccionCodigo;
 
     private String codigo_generado;
 
@@ -33,7 +39,7 @@ public class RecuperarContraseñaControlador {
         UsuarioService usuarioService = new UsuarioService();
         Usuario usuario = usuarioService.buscarUsuarioPorCorreo(correo);
 
-        if(usuario==null){
+        if (usuario == null) {
 
             UIHelper.mostrarAlerta("Error", "No existe un usuario con el correo ingresado");
             return;
@@ -46,7 +52,7 @@ public class RecuperarContraseñaControlador {
 
             UIHelper.mostrarAlerta("Éxito", "Se envió el codigo a su correo.");
             vboxSeccionCodigo.setVisible(true);
-        }else {
+        } else {
 
             UIHelper.mostrarAlerta("Error", "No se pudo enviar el código a su correo.");
         }
@@ -59,19 +65,19 @@ public class RecuperarContraseñaControlador {
         String nueva_contraseña = txtNuevaContraseña.getText();
         String confirmar_contraseña = txtConfirmarContraseña.getText();
 
-        if(!codigo_ingresado.equals(codigo_generado)){
+        if (!codigo_ingresado.equals(codigo_generado)) {
 
             UIHelper.mostrarAlerta("Error", "El código ingresado es incorrecto.");
             return;
         }
 
-        if(nueva_contraseña.isEmpty() || confirmar_contraseña.isEmpty()){
+        if (nueva_contraseña.isEmpty() || confirmar_contraseña.isEmpty()) {
 
             UIHelper.mostrarAlerta("Error", "Los campos de contraseña no pueden estar vacíos.");
             return;
         }
 
-        if(!nueva_contraseña.equals(confirmar_contraseña)){
+        if (!nueva_contraseña.equals(confirmar_contraseña)) {
 
             UIHelper.mostrarAlerta("Error", "Las contraseñas no coinciden.");
             return;
@@ -79,19 +85,19 @@ public class RecuperarContraseñaControlador {
 
         boolean usuario_actualizado = new UsuarioService().actualizarContraseña(txtCorreo.getText(), nueva_contraseña);
 
-        if(usuario_actualizado){
+        if (usuario_actualizado) {
 
             UIHelper.mostrarAlerta("Éxito", "La contraseña se cambió correctamente");
             Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
             UIHelper.abrirYCerrarVentanaActual(ventana_actual, "/view/general/login.fxml", "Login");
-        }else {
+        } else {
 
             UIHelper.mostrarAlerta("Error", "No se puedo actualizar la contraseña.");
         }
     }
 
     @FXML
-    private void IrALogin(){
+    private void IrALogin() {
 
         Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
         UIHelper.abrirYCerrarVentanaActual(ventana_actual, "/view/general/login.fxml", "Login");

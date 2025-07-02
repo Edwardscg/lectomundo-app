@@ -2,6 +2,7 @@ package com.lectomundo.logic;
 
 import com.lectomundo.model.Documento;
 import com.lectomundo.repository.dao.DocumentoDAO;
+
 import javafx.collections.ObservableList;
 
 import java.util.List;
@@ -27,11 +28,14 @@ public class DocumentoService {
         documentoDAO.eliminarDocumento(id_documento);
     }
 
-    // CAMBIAR A OBSERVABLELIST
+    /*
+    FUTURA IMPLEMENTACIÓN
+
     public Documento buscarDocumentoporId(int id_documento) {
 
         return documentoDAO.buscarDocumentoPorId(id_documento);
     }
+    */
 
     public List<Documento> buscarDocumentosPorTitulo(String titulo) {
 

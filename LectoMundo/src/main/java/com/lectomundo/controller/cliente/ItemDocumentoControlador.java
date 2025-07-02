@@ -2,6 +2,7 @@ package com.lectomundo.controller.cliente;
 
 import com.lectomundo.controller.UIHelper;
 import com.lectomundo.model.Documento;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -70,7 +71,6 @@ public class ItemDocumentoControlador {
 
             Stage ventana_principal = (Stage) ((Node) imgPortada).getScene().getWindow();
             ventana_principal.hide();
-
 
 
             ventana_detalle.setOnHiding(e -> {

@@ -12,8 +12,9 @@ import java.util.List;
 public class AlquilerService {
 
     private AlquilerDAO alquilerDAO = new AlquilerDAO();
-    UsuarioService usuarioService = new UsuarioService();
+    private UsuarioService usuarioService = new UsuarioService();
     private NotificacionService notificacionService = new NotificacionService();
+    private MovimientoMonedaService movimientoMonedaService = new MovimientoMonedaService();
     private final int dias_alquiler = 7;
 
     public Cliente registrarAlquiler(Cliente cliente, Documento documento) {
@@ -55,13 +56,13 @@ public class AlquilerService {
         return alquilerDAO.verDocumentosAlquiladosPorCliente(cliente.getId_usuario());
     }
 
-    public void verificarYEstablecerEstadoAlquiler(Cliente cliente){
+    public void verificarYEstablecerEstadoAlquiler(Cliente cliente) {
 
         List<Alquiler> alquileres_activos = alquilerDAO.obtenerAlquileresActivosPorCliente(cliente.getId_usuario());
 
-        for (Alquiler alquiler : alquileres_activos){
+        for (Alquiler alquiler : alquileres_activos) {
 
-            if(alquiler.getFecha_fin().isBefore(LocalDateTime.now())){
+            if (alquiler.getFecha_fin().isBefore(LocalDateTime.now())) {
 
                 alquilerDAO.finalizarAlquiler(alquiler.getId_alquiler());
             }

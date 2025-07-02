@@ -4,6 +4,7 @@ import com.lectomundo.controller.BackBlazeUploader;
 import com.lectomundo.controller.UIHelper;
 import com.lectomundo.logic.DocumentoService;
 import com.lectomundo.model.Documento;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
@@ -14,63 +15,72 @@ import java.nio.file.Files;
 
 public class SubirDocumentoControlador {
 
-    @FXML private TextField txtTitulo;
-    @FXML private TextField txtAutor;
-    @FXML private TextField txtTipo;
-    @FXML private TextField txtGenero;
-    @FXML private TextArea areaDescripcion;
-    @FXML private TextField txtPrecio;
-    @FXML private DatePicker pickerFechaPublicacion;
-    @FXML private Label lblNombrePDF;
-    @FXML private Label lblNombrePortada;
+    @FXML
+    private TextField txtTitulo;
+    @FXML
+    private TextField txtAutor;
+    @FXML
+    private TextField txtTipo;
+    @FXML
+    private TextField txtGenero;
+    @FXML
+    private TextArea areaDescripcion;
+    @FXML
+    private TextField txtPrecio;
+    @FXML
+    private DatePicker pickerFechaPublicacion;
+    @FXML
+    private Label lblNombrePDF;
+    @FXML
+    private Label lblNombrePortada;
 
     private File archivoPDF;
     private File imagenPortada;
 
     @FXML
-    public void seleccionarPDF(){
+    public void seleccionarPDF() {
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleccionar documento PDF");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
         archivoPDF = fileChooser.showOpenDialog(new Stage());
 
-        if(archivoPDF !=null){
+        if (archivoPDF != null) {
 
             lblNombrePDF.setText(archivoPDF.getName());
-        }else {
+        } else {
 
             lblNombrePDF.setText("Ningun archivo seleccionado.");
         }
     }
 
     @FXML
-    public void seleccionarPortada(){
+    public void seleccionarPortada() {
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleccionar imagen de portada");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Imagenes", "*.jpg", "*.jpeg", "*.png", "*.webp"));
         imagenPortada = fileChooser.showOpenDialog(new Stage());
 
-        if(imagenPortada!= null){
+        if (imagenPortada != null) {
 
             lblNombrePortada.setText(imagenPortada.getName());
-        }else {
+        } else {
 
             lblNombrePortada.setText("Ninguna imagen seleccionada.");
         }
     }
 
     @FXML
-    public void subirDocumento(){
+    public void subirDocumento() {
 
-        if(txtTitulo.getText().isEmpty() || txtAutor.getText().isEmpty() || txtTipo.getText().isEmpty() || txtGenero.getText().isEmpty() || areaDescripcion.getText().isEmpty()|| txtPrecio.getText().isEmpty() || pickerFechaPublicacion.getValue() == null || archivoPDF == null || imagenPortada == null){
+        if (txtTitulo.getText().isEmpty() || txtAutor.getText().isEmpty() || txtTipo.getText().isEmpty() || txtGenero.getText().isEmpty() || areaDescripcion.getText().isEmpty() || txtPrecio.getText().isEmpty() || pickerFechaPublicacion.getValue() == null || archivoPDF == null || imagenPortada == null) {
 
             UIHelper.mostrarAlerta("Campos Incompletos", "Complete todos los campos y selecciona los archivos.");
             return;
         }
 
-        try{
+        try {
 
             BackBlazeUploader uploader = new BackBlazeUploader();
             String nombre_pdf = "documentos/" + System.currentTimeMillis() + "_" + archivoPDF.getName();
@@ -79,21 +89,21 @@ public class SubirDocumentoControlador {
             String pdf_url = uploader.getPublicUrl(uploader.uploadFile(archivoPDF, nombre_pdf, "application/pdf"));
             String portada_url = uploader.getPublicUrl(uploader.uploadFile(imagenPortada, nombre_portada, Files.probeContentType(imagenPortada.toPath())));
 
-            Documento documento = new Documento(0,txtTitulo.getText(), txtAutor.getText(), txtTipo.getText(), pickerFechaPublicacion.getValue(), txtGenero.getText(), areaDescripcion.getText(), pdf_url, portada_url, Integer.parseInt(txtPrecio.getText()), 0, 0);
+            Documento documento = new Documento(0, txtTitulo.getText(), txtAutor.getText(), txtTipo.getText(), pickerFechaPublicacion.getValue(), txtGenero.getText(), areaDescripcion.getText(), pdf_url, portada_url, Integer.parseInt(txtPrecio.getText()), 0, 0);
 
             DocumentoService documentoService = new DocumentoService();
             documentoService.registrarDocumento(documento);
 
             UIHelper.mostrarAlerta("Éxito", "El documento ha sido subido correctamente.");
-            //limpiarCampos();
+            limpiarCampos();
 
         } catch (Exception e) {
-            e.printStackTrace();
-            UIHelper.mostrarAlerta("Error", "No se pudo subir el documento: "+ e.getMessage());
+
+            UIHelper.mostrarAlerta("Error", "No se pudo subir el documento: " + e.getMessage());
         }
     }
 
-    private void limpiarCampos(){
+    private void limpiarCampos() {
 
         txtTitulo.clear();
         txtAutor.clear();

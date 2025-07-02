@@ -1,6 +1,7 @@
 package com.lectomundo.controller.admin;
 
 import com.lectomundo.controller.UIHelper;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.StackPane;
@@ -8,70 +9,71 @@ import javafx.scene.Parent;
 
 public class AdminControlador {
 
-    @FXML private StackPane paneContenido;
+    @FXML
+    private StackPane paneContenido;
 
-    @FXML private void initialize(){
+    @FXML
+    private void initialize() {
 
         cargarDocumentos();
     }
 
     @FXML
-    private void cargarDocumentos(){
+    private void cargarDocumentos() {
 
-        try{
+        try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/admin/adminDocumentos.fxml"));
             Parent root = loader.load();
             paneContenido.getChildren().setAll(root);
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "No se pudo cargar los documentos.");
         }
     }
 
     @FXML
-    private void cargarUsuarios(){
+    private void cargarUsuarios() {
 
-        try{
+        try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/admin/adminUsuarios.fxml"));
             Parent root = loader.load();
             paneContenido.getChildren().setAll(root);
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "No se pudo cargar los usuarios.");
         }
     }
 
     @FXML
-    private void cargarMembresias(){
+    private void cargarMembresias() {
 
-        try{
+        try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/admin/adminMembresias.fxml"));
             Parent root = loader.load();
             paneContenido.getChildren().setAll(root);
 
-        }catch (Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+
             UIHelper.mostrarAlerta("Error", "No se pudo cargar la vista de membresías.");
         }
     }
 
     @FXML
-    private void crearCuenta(){
+    private void crearCuenta() {
 
-        try{
+        try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/admin/crearCuenta.fxml"));
             Parent root = loader.load();
             paneContenido.getChildren().setAll(root);
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
-            e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "No se pudo cargar la vista de crear cuenta de administrador.");
         }
     }

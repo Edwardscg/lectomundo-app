@@ -76,7 +76,7 @@ public class DetalleDocumentoControlador {
             actualizarBotones();
 
         } catch (RuntimeException e) {
-            e.printStackTrace();
+
             UIHelper.mostrarAlerta("Error", "No se pudo alquilar el documento.");
         }
     }

@@ -3,8 +3,9 @@ package com.lectomundo.logic;
 import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Membresia;
 import com.lectomundo.repository.dao.MembresiaDAO;
-import com.lectomundo.repository.dao.UsuarioDAO;
+
 import javafx.collections.ObservableList;
+
 import java.time.LocalDate;
 
 public class MembresiaService {
@@ -16,7 +17,7 @@ public class MembresiaService {
 
         Membresia membresia = new Membresia();
 
-        if(cliente.getMonedas()<membresia.getPrecio()) {
+        if (cliente.getMonedas() < membresia.getPrecio()) {
             return null;
         }
 
@@ -34,7 +35,7 @@ public class MembresiaService {
         return cliente;
     }
 
-    public Cliente actualizarMembresia (Cliente cliente) {
+    public Cliente actualizarMembresia(Cliente cliente) {
 
         LocalDate fechaFin = LocalDate.now().plusDays(30);
         Membresia membresia = new Membresia();

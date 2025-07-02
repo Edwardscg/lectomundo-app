@@ -20,9 +20,12 @@ import java.util.concurrent.TimeUnit;
 
 public class ClienteControlador {
 
-    @FXML private StackPane panelContenedor;
-    @FXML private Label lblMonedas;
-    @FXML private Button btnAlquilados;
+    @FXML
+    private StackPane panelContenedor;
+    @FXML
+    private Label lblMonedas;
+    @FXML
+    private Button btnAlquilados;
 
     public static Cliente cliente;
 
@@ -32,14 +35,14 @@ public class ClienteControlador {
     private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
     @FXML
-    private void initialize(){
+    private void initialize() {
 
         scheduler.scheduleAtFixedRate(() -> {
-            try{
+            try {
 
                 alquilerService.verificarYEstablecerEstadoAlquiler(cliente);
 
-            }catch (Exception e){
+            } catch (Exception e) {
 
                 Platform.runLater(() -> {
                     UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo comprobar el estado activo de alquiler de documentos alquilados.");
@@ -52,9 +55,9 @@ public class ClienteControlador {
     }
 
     @FXML
-    private void explorarDocumentos(){
+    private void explorarDocumentos() {
 
-        try{
+        try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/explorarDocumentos.fxml"));
             Node contenido = loader.load();
@@ -64,66 +67,62 @@ public class ClienteControlador {
 
             panelContenedor.getChildren().setAll(contenido);
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
-            e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo ir a la sección explorar documentos.");
         }
     }
 
     @FXML
-    private void verDocumentosAlquilados(){
+    private void verDocumentosAlquilados() {
 
-        try{
+        try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/documentosAlquilados.fxml"));
             Node contenido = loader.load();
             panelContenedor.getChildren().setAll(contenido);
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
-            e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo ir a la sección documentos alquilados.");
         }
 
     }
 
     @FXML
-    private void verDocumentosComprados(){
+    private void verDocumentosComprados() {
 
-        try{
+        try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/documentosComprados.fxml"));
             Node contenido = loader.load();
             panelContenedor.getChildren().setAll(contenido);
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
-            e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo ir a la sección documentos comprados.");
         }
     }
 
     @FXML
-    private void verDocumentosFavoritos(){
+    private void verDocumentosFavoritos() {
 
-        try{
+        try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/documentosFavoritos.fxml"));
             Node contenido = loader.load();
             panelContenedor.getChildren().setAll(contenido);
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
-            e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo ir a la sección documentos favoritos.");
         }
     }
 
     @FXML
-    private void irATiendaMonedas(){
+    private void irATiendaMonedas() {
 
-        try{
+        try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/compraMonedas.fxml"));
             Node contenido = loader.load();
@@ -132,15 +131,14 @@ public class ClienteControlador {
             CompraMonedasControlador compraMonedasControlador = loader.getController();
             compraMonedasControlador.setClienteControlador(this);
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
-            e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo ir a la tienda.");
         }
     }
 
     @FXML
-    private void verMembresia(){
+    private void verMembresia() {
 
         try {
 
@@ -153,13 +151,12 @@ public class ClienteControlador {
 
         } catch (Exception e) {
 
-            e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo ir a la sección membresía.");
         }
     }
 
     @FXML
-    private void verNotificaciones(){
+    private void verNotificaciones() {
 
         try {
 
@@ -169,17 +166,16 @@ public class ClienteControlador {
 
         } catch (Exception e) {
 
-            e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo ir a la sección notificaciones.");
         }
     }
 
     @FXML
-    private void cerrarSesion(){
+    private void cerrarSesion() {
 
-        try{
+        try {
 
-            if(scheduler != null && !scheduler.isShutdown()){
+            if (scheduler != null && !scheduler.isShutdown()) {
 
                 scheduler.shutdown();
             }
@@ -188,13 +184,13 @@ public class ClienteControlador {
 
             UIHelper.abrirYCerrarVentanaActual(ventana_actual, "/view/general/login.fxml", "Login");
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo cerrar sesión.");
         }
     }
 
-    public void actualizarMonedas(int nuevas_monedas){
+    public void actualizarMonedas(int nuevas_monedas) {
 
         lblMonedas.setText(String.valueOf(nuevas_monedas));
     }
