@@ -1,9 +1,11 @@
 package com.lectomundo.controller.cliente;
 
 import com.lectomundo.controller.UIHelper;
+import com.lectomundo.logic.AlquilerService;
 import com.lectomundo.logic.MembresiaService;
 import com.lectomundo.model.Cliente;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,6 +13,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class ClienteControlador {
 
@@ -20,15 +26,15 @@ public class ClienteControlador {
 
     public static Cliente cliente;
 
+    private MembresiaService membresiaService = new MembresiaService();
+    private AlquilerService alquilerService = new AlquilerService();
+
+    private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+
     @FXML
     private void initialize(){
-
-        explorarDocumentos();
-        actualizarMonedas(cliente.getMonedas());
-
         try {
 
-            MembresiaService membresiaService = new MembresiaService();
             if(membresiaService.tieneMembresiaActiva(cliente.getId_usuario())){
 
                 btnAlquilados.setVisible(false);
@@ -39,6 +45,22 @@ public class ClienteControlador {
             e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo comprobar la membresía activa.");
         }
+
+        scheduler.scheduleAtFixedRate(() -> {
+            try{
+
+                alquilerService.verificarYEstablecerEstadoAlquiler(cliente);
+
+            }catch (Exception e){
+
+                Platform.runLater(() -> {
+                    UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo comprobar el estado activo de alquiler de documentos alquilados.");
+                });
+            }
+        }, 0, 5, TimeUnit.MINUTES);
+
+        explorarDocumentos();
+        actualizarMonedas(cliente.getMonedas());
     }
 
     @FXML
@@ -168,6 +190,11 @@ public class ClienteControlador {
     private void cerrarSesion(){
 
         try{
+
+            if(scheduler != null && !scheduler.isShutdown()){
+
+                scheduler.shutdown();
+            }
 
             Stage ventana_actual = (Stage) panelContenedor.getScene().getWindow();
 

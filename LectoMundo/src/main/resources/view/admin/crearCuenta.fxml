@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.lectomundo.controller.admin.CrearCuentaControlador"
+            prefHeight="600.0" prefWidth="1000.0"
+            stylesheets="@/css/estilos.css">
+
+    <VBox alignment="CENTER" spacing="20" AnchorPane.topAnchor="40" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50">
+
+        <Label text="Registro de Administradores" styleClass="label-titulo"/>
+
+        <TextField fx:id="txtNombreUsuario" promptText="Nombre de Usuario" prefWidth="350" styleClass="text-field"/>
+        <TextField fx:id="txtCorreo" promptText="Correo electrónico" prefWidth="350" styleClass="text-field"/>
+        <PasswordField fx:id="txtContraseña" promptText="Contraseña" prefWidth="350" styleClass="password-field"/>
+        <PasswordField fx:id="txtConfirmarContraseña" promptText="Confirmar contraseña" prefWidth="350" styleClass="password-field"/>
+
+        <VBox spacing="15" alignment="CENTER">
+
+            <Button text="Registrar" onAction="#registrarse" prefWidth="180" styleClass="boton-principal"/>
+
+        </VBox>
+
+    </VBox>
+
+</AnchorPane>

@@ -30,7 +30,7 @@ public class DocumentosAlquiladosControlador {
 
         try{
 
-            List<Documento> documentosAlquilados = alquilerService.obtenerDocumentosAlquiladosActivosPorUsuario(cliente);
+            List<Documento> documentosAlquilados = alquilerService.obtenerDocumentosAlquiladosActivosPorCliente(cliente);
 
             HBox fila = new HBox(35);
             int contador = 0;
