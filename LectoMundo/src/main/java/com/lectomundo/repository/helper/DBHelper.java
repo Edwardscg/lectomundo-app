@@ -7,9 +7,20 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase de ayuda para ejecutar operaciones comunes en la base de datos,
+ * como insertar, actualizar, eliminar o consultar datos.
+ */
+
 public class DBHelper {
 
-    // Ejecuta una sentencia SQL de tipo INSERT, UPDATE o DELETE con parámetros dinámicos.
+    /**
+     * Ejecuta una sentencia SQL (INSERT, UPDATE, DELETE) con parámetros.
+     *
+     * @param sql        Consulta SQL con parámetros ?
+     * @param parametros Valores para reemplazar los ?
+     * @return número de filas afectadas
+     */
     public static int manejarEntidad(String sql, Object... parametros) {
 
         try (Connection conn = DBConexion.establecerConexion();
@@ -18,6 +29,7 @@ public class DBHelper {
             asignarParametros(ps, parametros);
 
             return ps.executeUpdate();
+
         } catch (SQLException e) {
 
             throw new RuntimeException("Error en conectar con la Base de Datos.");
@@ -26,7 +38,7 @@ public class DBHelper {
 
     // Ejecuta una consulta SQL con parámetros y devuelve un objeto ConsultaResult
     // que encapsula la conexión, PreparedStatement y ResultSet asociados.
-    public static ConsultaManager ejecutarConsulta(String sql, Object... parametros) {
+    private static ConsultaManager ejecutarConsulta(String sql, Object... parametros) {
 
         try {
 
@@ -106,7 +118,7 @@ public class DBHelper {
         }
     }
 
-    // Ejecuta una consulta SQL y llena una ObservableList con objetos mapeados desde el ResultSet.
+    // Ejecuta una consulta SQL y llena un ObservableList con objetos mapeados desde el ResultSet.
     public static <T> ObservableList<T> llenarTabla(String sql, RowMapper<T> mapper) {
 
         ObservableList<T> lista = FXCollections.observableArrayList();
@@ -137,11 +149,12 @@ public class DBHelper {
                 ps.setObject(i + 1, parametros[i]);
             }
 
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    lista.add(mapper.mapRow(rs));
-                }
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                lista.add(mapper.mapRow(rs));
             }
+
 
             return lista;
         } catch (Exception e) {
