@@ -21,9 +21,9 @@ public class NotificacionService {
         notificacionDAO.registrarNotificacion(notificacion);
     }
 
-    public List<Notificacion> obtenerNotificacionesPorUsuario(int id_usuario) {
+    public List<Notificacion> obtenerNotificacionesPorCliente(int id_cliente) {
 
-        return notificacionDAO.obtenerNotificacionesPorUsuario(id_usuario);
+        return notificacionDAO.obtenerNotificacionesPorUsuario(id_cliente);
     }
 
     public void marcarComoLeida(int id_notificacion) {

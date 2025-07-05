@@ -52,6 +52,8 @@ public class DetalleDocumentoControlador {
     private Button btnFavoritoVacio;
     @FXML
     private Button btnFavoritoLleno;
+    @FXML
+    private Button btnValorar;
 
     private ClienteControlador clienteControlador;
     private Documento documento;
@@ -77,6 +79,9 @@ public class DetalleDocumentoControlador {
 
         } catch (RuntimeException e) {
 
+            UIHelper.mostrarAlerta("Advertencia", e.getMessage());
+        } catch (Exception e){
+
             UIHelper.mostrarAlerta("Error", "No se pudo alquilar el documento.");
         }
     }
@@ -90,7 +95,7 @@ public class DetalleDocumentoControlador {
 
             actualizarBotones();
 
-        } catch (RuntimeException e) {
+        } catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "No se pudo devolver el documento.");
         }
@@ -107,6 +112,9 @@ public class DetalleDocumentoControlador {
             actualizarBotones();
 
         } catch (RuntimeException e) {
+
+            UIHelper.mostrarAlerta("Error", e.getMessage());
+        } catch (Exception e){
 
             UIHelper.mostrarAlerta("Error", "No se pudo comprar el documento.");
         }
@@ -249,6 +257,8 @@ public class DetalleDocumentoControlador {
             btnFavoritoVacio.setVisible(!es_favorito);
             btnFavoritoVacio.setManaged(!es_favorito);
 
+            btnValorar.setText("Valorar \u2605 " + documento.getPuntuacion_promedio());
+
             actualizarBotones();
         } catch (Exception e) {
 
@@ -290,6 +300,7 @@ public class DetalleDocumentoControlador {
 
                 btnComprar.setVisible(true);
                 btnComprar.setManaged(true);
+                btnComprar.setText("Comprar \uD83D\uDCB0 " + documento.getPrecio() * 3);
             }
 
         } else if (esta_comprado) {
@@ -304,6 +315,7 @@ public class DetalleDocumentoControlador {
 
             btnComprar.setVisible(true);
             btnComprar.setManaged(true);
+            btnComprar.setText("Comprar \uD83D\uDCB0 " + documento.getPrecio() * 3);
 
             btnLeer.setVisible(true);
             btnLeer.setManaged(true);
@@ -315,9 +327,11 @@ public class DetalleDocumentoControlador {
 
             btnAlquilar.setVisible(true);
             btnAlquilar.setManaged(true);
+            btnAlquilar.setText("Alquilar \uD83D\uDCB0 "+ documento.getPrecio());
 
             btnComprar.setVisible(true);
             btnComprar.setManaged(true);
+            btnComprar.setText("Comprar \uD83D\uDCB0 " + documento.getPrecio() * 3);
         }
     }
 }

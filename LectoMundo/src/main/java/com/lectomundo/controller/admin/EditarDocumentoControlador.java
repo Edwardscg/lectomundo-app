@@ -5,7 +5,6 @@ import com.lectomundo.logic.DocumentoService;
 import com.lectomundo.model.Documento;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -24,17 +23,13 @@ public class EditarDocumentoControlador {
     @FXML
     private TextField txtGenero;
     @FXML
-    private TextArea txtDescripcion;
+    private TextArea areaDescripcion;
     @FXML
     private TextField txtPrecio;
     @FXML
     private TextField txtPdf;
     @FXML
     private TextField txtPortada;
-    @FXML
-    private Button btnGuardar;
-    @FXML
-    private Button btnCancelar;
 
     private Documento documento;
     private DocumentoService documentoService = new DocumentoService();
@@ -52,7 +47,7 @@ public class EditarDocumentoControlador {
         txtTipo.setText(documento.getTipo_documento());
         pickerFechaPublicacion.setValue(documento.getFecha_publicacion());
         txtGenero.setText(documento.getGenero());
-        txtDescripcion.setText(documento.getDescripcion());
+        areaDescripcion.setText(documento.getDescripcion());
         txtPrecio.setText(String.valueOf(documento.getPrecio()));
         txtPdf.setText(documento.getPdf_url());
         txtPortada.setText(documento.getPortada_url());
@@ -65,6 +60,26 @@ public class EditarDocumentoControlador {
     @FXML
     private void guardarCambios() {
 
+        if (txtTitulo.getText().isBlank() || txtAutor.getText().isBlank() || txtTipo.getText().isBlank() || pickerFechaPublicacion.getValue() == null || txtGenero.getText().isBlank() || areaDescripcion.getText().isBlank() || txtPrecio.getText().isBlank() ) {
+
+            UIHelper.mostrarAlerta("Campos Incompletos", "Complete todos los campos y selecciona los archivos.");
+            return;
+        }
+
+        try{
+
+            int precio = Integer.parseInt(txtPrecio.getText());
+            if(precio <= 0){
+
+                UIHelper.mostrarAlerta("Advertencia", "Complete todos los campos y selecciona los archivos.");
+                return;
+            }
+
+        }catch (NumberFormatException e){
+
+            UIHelper.mostrarAlerta("Error", "El número ingresado no es válido.");
+        }
+
         try {
 
             documento.setTitulo(txtTitulo.getText());
@@ -72,12 +87,12 @@ public class EditarDocumentoControlador {
             documento.setTipo_documento(txtTipo.getText());
             documento.setFecha_publicacion(pickerFechaPublicacion.getValue());
             documento.setGenero(txtGenero.getText());
-            documento.setDescripcion(txtDescripcion.getText());
+            documento.setDescripcion(areaDescripcion.getText());
             documento.setPrecio(Integer.parseInt(txtPrecio.getText()));
             documento.setPdf_url(txtPdf.getText());
             documento.setPortada_url(txtPortada.getText());
 
-            documentoService.editarDocumento(documento);
+            documentoService.actualizarDocumento(documento);
 
             UIHelper.mostrarAlerta("Éxito", "Documento actualizado correctamente.");
 

@@ -3,6 +3,7 @@ package com.lectomundo.logic;
 import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Documento;
 import com.lectomundo.model.Valoracion;
+import com.lectomundo.repository.dao.DocumentoDAO;
 import com.lectomundo.repository.dao.ValoracionDAO;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 public class ValoracionService {
 
     private ValoracionDAO valoracionDAO = new ValoracionDAO();
+    private DocumentoDAO documentoDAO = new DocumentoDAO();
 
     public void registrarValoracion(Cliente cliente, Documento documento, String comentario, int puntuacion) {
 
@@ -20,22 +22,23 @@ public class ValoracionService {
         valoracion.setPuntuacion(puntuacion);
 
         valoracionDAO.registrarValoracion(valoracion);
+
+        documento.setPuntuacion_promedio(calcularNuevaPuntuacion(puntuacion, documento.getPuntuacion_promedio(), documento.getCantidad_valoraciones()));
+        documento.setCantidad_valoraciones(documento.getCantidad_valoraciones() + 1);
+
+        documentoDAO.actualizarPuntuación(documento);
     }
 
-    public List<Valoracion> verValoracionesPorDocumento(int id_documento) {
+    public List<Valoracion> obtenerValoracionesPorDocumento(int id_documento) {
 
         return valoracionDAO.verValoracionesPorDocumento(id_documento);
     }
 
-    // FALTA IMPLEMENTAR
+    private float calcularNuevaPuntuacion(int puntuacion, float puntuacion_promedio, int cantidad_valoraciones){
 
-    public float obtenerPromedioValoracion(int id_documento) {
+        float nueva_puntuacion = ((puntuacion_promedio * cantidad_valoraciones) + puntuacion) / (cantidad_valoraciones + 1);
+        nueva_puntuacion = Math.round(nueva_puntuacion * 100f) / 100f;
 
-        return valoracionDAO.obtenerPromedioValoracion(id_documento);
-    }
-
-    public int contarValoraciones(int id_documento) {
-
-        return valoracionDAO.contarValoracionesPorDocumento(id_documento);
+        return nueva_puntuacion;
     }
 }

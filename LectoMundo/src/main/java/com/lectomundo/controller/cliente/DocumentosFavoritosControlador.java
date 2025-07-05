@@ -34,7 +34,7 @@ public class DocumentosFavoritosControlador {
 
         try {
 
-            List<Documento> documentosFavoritos = favoritoService.obtenerFavoritosPorUsuario(cliente);
+            List<Documento> documentosFavoritos = favoritoService.obtenerFavoritosPorCliente(cliente);
 
             if (documentosFavoritos.isEmpty()) {
 

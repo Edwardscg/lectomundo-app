@@ -20,7 +20,7 @@
         <TextField fx:id="txtTipo" promptText="Tipo de Documento"/>
         <DatePicker fx:id="pickerFechaPublicacion"/>
         <TextField fx:id="txtGenero" promptText="Género"/>
-        <TextArea fx:id="txtDescripcion" promptText="Descripción" prefRowCount="4"/>
+        <TextArea fx:id="areaDescripcion" promptText="Descripción" prefRowCount="4"/>
         <TextField fx:id="txtPrecio" promptText="Precio"/>
         <TextField fx:id="txtPdf" promptText="PDF URL" editable="false"/>
         <TextField fx:id="txtPortada" promptText="Portada URL" editable="false"/>

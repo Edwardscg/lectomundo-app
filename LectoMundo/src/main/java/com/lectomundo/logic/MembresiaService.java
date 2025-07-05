@@ -11,7 +11,6 @@ import java.time.LocalDate;
 public class MembresiaService {
 
     MembresiaDAO membresiaDAO = new MembresiaDAO();
-    UsuarioService usuarioService = new UsuarioService();
     MovimientoMonedaService movimientoMonedaService = new MovimientoMonedaService();
 
     public Cliente registrarMembresia(Cliente cliente) {
@@ -22,12 +21,16 @@ public class MembresiaService {
             return null;
         }
 
-        cliente = movimientoMonedaService.gastarMonedas(cliente, membresia.getPrecio());
-
         LocalDate fechaFin = LocalDate.now().plusDays(30);
         membresia.setCliente(cliente);
         membresia.setFecha_inicio(LocalDate.now());
         membresia.setFecha_fin(fechaFin);
+
+        cliente = movimientoMonedaService.gastarMonedas(cliente, membresia.getPrecio());
+        if(cliente == null){
+
+            throw new RuntimeException("No cuenta con monedas suficientes.");
+        }
 
         membresiaDAO.registrarMembresia(membresia);
 
@@ -40,6 +43,10 @@ public class MembresiaService {
         Membresia membresia = new Membresia();
 
         cliente = movimientoMonedaService.gastarMonedas(cliente, membresia.getPrecio());
+        if(cliente == null){
+
+            throw new RuntimeException("No cuenta con monedas suficientes.");
+        }
 
         membresiaDAO.actualizarMembresia(cliente.getId_usuario(), fechaFin);
 
@@ -51,9 +58,9 @@ public class MembresiaService {
         membresiaDAO.finalizarMembresia(cliente.getId_usuario(), LocalDate.now());
     }
 
-    public boolean tieneMembresiaActiva(int id_usuario) {
+    public boolean tieneMembresiaActiva(int id_cliente) {
 
-        return membresiaDAO.tieneMembresiaActiva(id_usuario);
+        return membresiaDAO.tieneMembresiaActiva(id_cliente);
     }
 
     public ObservableList<Membresia> verMembresias() {
