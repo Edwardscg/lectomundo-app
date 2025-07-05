@@ -47,26 +47,6 @@ public class UIHelper {
         }
     }
 
-    public static void abrirVentanaOcultandoAnterior(Stage ventana_anterior, String fxml_ubicacion, String titulo) {
-
-        try {
-
-            FXMLLoader loader = new FXMLLoader(UIHelper.class.getResource(fxml_ubicacion));
-            Parent root = loader.load();
-
-            Stage nueva_ventana = new Stage();
-            nueva_ventana.setTitle(titulo);
-            nueva_ventana.setScene(new Scene(root));
-            nueva_ventana.setOnHidden(e -> ventana_anterior.show());
-            ventana_anterior.hide();
-            nueva_ventana.show();
-
-        } catch (Exception e) {
-
-            mostrarAlerta("Error", "No se pudo cambiar la ventana a :" + titulo);
-        }
-    }
-
     public static boolean abrirVentanaDeVerificacion(String correo, String codigo_generado) {
 
         try {
