@@ -12,7 +12,6 @@ import java.util.List;
 public class AlquilerService {
 
     private AlquilerDAO alquilerDAO = new AlquilerDAO();
-    private UsuarioService usuarioService = new UsuarioService();
     private NotificacionService notificacionService = new NotificacionService();
     private MovimientoMonedaService movimientoMonedaService = new MovimientoMonedaService();
     private final int dias_alquiler = 7;
@@ -29,10 +28,14 @@ public class AlquilerService {
         alquiler.setFecha_fin(fin);
         alquiler.setEstado_alquiler(Estado.activo);
 
+        cliente = movimientoMonedaService.gastarMonedas(cliente, documento.getPrecio());
+        if(cliente == null){
+
+            throw new RuntimeException("No cuenta con monedas suficientes.");
+        }
+
         alquilerDAO.registrarAlquiler(alquiler);
         notificacionService.notificacionAlquilerDocumento(cliente, documento);
-
-        cliente = movimientoMonedaService.gastarMonedas(cliente, documento.getPrecio());
 
         return cliente;
     }
@@ -44,9 +47,9 @@ public class AlquilerService {
         alquilerDAO.finalizarAlquiler(alquiler_activo.getId_alquiler());
     }
 
-    public boolean estaAlquilado(int id_usuario, int id_documento) {
+    public boolean estaAlquilado(int id_cliente, int id_documento) {
 
-        return alquilerDAO.estaAlquilado(id_usuario, id_documento);
+        return alquilerDAO.estaAlquilado(id_cliente, id_documento);
     }
 
     public List<Documento> obtenerDocumentosAlquiladosActivosPorCliente(Cliente cliente) {

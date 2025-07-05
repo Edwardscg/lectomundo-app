@@ -12,7 +12,7 @@ public class UsuarioService {
 
     UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-    public void registrarUsuario(String nombre, String correo, String contraseña, String tipo_usuario) {
+    public void registrarUsuario(String nombre_usuario, String correo, String contraseña, String tipo_usuario) {
 
         if (buscarUsuarioPorCorreo(correo) != null) {
 
@@ -33,10 +33,10 @@ public class UsuarioService {
 
         if (tipo_usuario.equals("cliente")) {
 
-            usuario = new Cliente(0, nombre, correo, contraseña, tipo_usuario, 0);
+            usuario = new Cliente(0, nombre_usuario, correo, contraseña, tipo_usuario, 0);
         } else {
 
-            usuario = new Administrador(0, nombre, correo, contraseña, tipo_usuario);
+            usuario = new Administrador(0, nombre_usuario, correo, contraseña, tipo_usuario);
         }
 
         usuarioDAO.registrarUsuario(usuario);
@@ -96,9 +96,9 @@ public class UsuarioService {
     */
 
 
-    public void actualizarMonedas(int id_usuario, int nuevas_monedas) {
+    public void actualizarMonedas(int id_cliente, int nuevas_monedas) {
 
-        usuarioDAO.actualizarMonedas(id_usuario, nuevas_monedas);
+        usuarioDAO.actualizarMonedas(id_cliente, nuevas_monedas);
     }
 
     /*

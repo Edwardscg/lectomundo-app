@@ -90,6 +90,7 @@ public class RecuperarContraseñaControlador {
             UIHelper.mostrarAlerta("Éxito", "La contraseña se cambió correctamente");
             Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
             UIHelper.abrirYCerrarVentanaActual(ventana_actual, "/view/general/login.fxml", "Login");
+
         } else {
 
             UIHelper.mostrarAlerta("Error", "No se puedo actualizar la contraseña.");

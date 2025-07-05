@@ -4,6 +4,7 @@ import com.lectomundo.model.*;
 import com.lectomundo.repository.helper.DBHelper;
 import javafx.collections.ObservableList;
 
+import javax.print.Doc;
 import java.sql.*;
 import java.util.List;
 
@@ -21,6 +22,13 @@ public class DocumentoDAO {
         String sql = "UPDATE documento SET titulo = ?, autor = ?, tipo_documento = ?, fecha_publicacion = ?, genero = ?, descripcion = ?, precio = ? WHERE id_documento = ?;";
 
         DBHelper.manejarEntidad(sql, documento.getTitulo(), documento.getAutor(), documento.getTipo_documento(), Date.valueOf(documento.getFecha_publicacion()), documento.getGenero(), documento.getDescripcion(), documento.getPrecio(), documento.getId_documento());
+    }
+
+    public void actualizarPuntuación(Documento documento){
+
+        String sql = "UPDATE documento set puntuacion_promedio = ?, cantidad_valoraciones = ? where id_documento = ?;";
+
+        DBHelper.manejarEntidad(sql, documento.getPuntuacion_promedio(), documento.getCantidad_valoraciones(), documento.getId_documento());
     }
 
     public void eliminarDocumento(int id_documento) {
@@ -70,15 +78,6 @@ public class DocumentoDAO {
         String sql = "SELECT * FROM documento WHERE genero LIKE ?";
 
         return DBHelper.obtenerListaEntidad(sql, this::mapearDocumento, genero);
-    }
-
-    // FALTA IMPLEMENTAR
-
-    public void actualizarPuntuacionYValoracion(int id_documento, float promedio, int cantidad_valoraciones) {
-
-        String sql = "UPDATE documento SET puntuacion_promedio = ?, cantidad_valoraciones = ? WHERE id_documento = ?";
-
-        DBHelper.manejarEntidad(sql, promedio, cantidad_valoraciones, id_documento);
     }
 
     public ObservableList<Documento> verDocumentos() {

@@ -30,7 +30,7 @@ public class NotificacionesControlador {
 
         try {
 
-            List<Notificacion> notificaciones = notificacionService.obtenerNotificacionesPorUsuario(cliente.getId_usuario());
+            List<Notificacion> notificaciones = notificacionService.obtenerNotificacionesPorCliente(cliente.getId_usuario());
 
             for (Notificacion n : notificaciones) {
 
