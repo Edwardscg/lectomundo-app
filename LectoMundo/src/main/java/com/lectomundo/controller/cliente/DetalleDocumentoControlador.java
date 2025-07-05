@@ -260,6 +260,7 @@ public class DetalleDocumentoControlador {
             btnValorar.setText("Valorar \u2605 " + documento.getPuntuacion_promedio());
 
             actualizarBotones();
+
         } catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "No se pudo cargar los datos del documento.");
@@ -300,6 +301,7 @@ public class DetalleDocumentoControlador {
 
                 btnComprar.setVisible(true);
                 btnComprar.setManaged(true);
+
                 btnComprar.setText("Comprar \uD83D\uDCB0 " + documento.getPrecio() * 3);
             }
 
@@ -315,6 +317,7 @@ public class DetalleDocumentoControlador {
 
             btnComprar.setVisible(true);
             btnComprar.setManaged(true);
+
             btnComprar.setText("Comprar \uD83D\uDCB0 " + documento.getPrecio() * 3);
 
             btnLeer.setVisible(true);
@@ -327,10 +330,12 @@ public class DetalleDocumentoControlador {
 
             btnAlquilar.setVisible(true);
             btnAlquilar.setManaged(true);
+
             btnAlquilar.setText("Alquilar \uD83D\uDCB0 "+ documento.getPrecio());
 
             btnComprar.setVisible(true);
             btnComprar.setManaged(true);
+
             btnComprar.setText("Comprar \uD83D\uDCB0 " + documento.getPrecio() * 3);
         }
     }
