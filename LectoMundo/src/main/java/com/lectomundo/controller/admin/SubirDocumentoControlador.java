@@ -74,10 +74,24 @@ public class SubirDocumentoControlador {
     @FXML
     public void subirDocumento() {
 
-        if (txtTitulo.getText().isEmpty() || txtAutor.getText().isEmpty() || txtTipo.getText().isEmpty() || txtGenero.getText().isEmpty() || areaDescripcion.getText().isEmpty() || txtPrecio.getText().isEmpty() || pickerFechaPublicacion.getValue() == null || archivoPDF == null || imagenPortada == null) {
+        if (txtTitulo.getText().isBlank() || txtAutor.getText().isBlank() || txtTipo.getText().isBlank() || txtGenero.getText().isBlank() || areaDescripcion.getText().isBlank() || txtPrecio.getText().isBlank() || pickerFechaPublicacion.getValue() == null || archivoPDF == null || imagenPortada == null) {
 
             UIHelper.mostrarAlerta("Campos Incompletos", "Complete todos los campos y selecciona los archivos.");
             return;
+        }
+
+        try{
+
+            int precio = Integer.parseInt(txtPrecio.getText());
+            if(precio <= 0){
+
+                UIHelper.mostrarAlerta("Advertencia", "Complete todos los campos y selecciona los archivos.");
+                return;
+            }
+
+        }catch (NumberFormatException e){
+
+            UIHelper.mostrarAlerta("Error", "El número ingresado no es válido.");
         }
 
         try {
@@ -97,9 +111,12 @@ public class SubirDocumentoControlador {
             UIHelper.mostrarAlerta("Éxito", "El documento ha sido subido correctamente.");
             limpiarCampos();
 
-        } catch (Exception e) {
+        }catch (RuntimeException e){
 
-            UIHelper.mostrarAlerta("Error", "No se pudo subir el documento: " + e.getMessage());
+            UIHelper.mostrarAlerta("Advertencia", e.getMessage());
+        }catch (Exception e) {
+
+            UIHelper.mostrarAlerta("Error", "No se pudo subir el documento.");
         }
     }
 

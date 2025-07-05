@@ -34,12 +34,12 @@ public class FavoritoService {
         favoritoDAO.eliminarFavorito(cliente.getId_usuario(), documento.getId_documento());
     }
 
-    public boolean esFavorito(int id_usuario, int id_documento) {
+    public boolean esFavorito(int id_cliente, int id_documento) {
 
-        return favoritoDAO.esFavorito(id_usuario, id_documento);
+        return favoritoDAO.esFavorito(id_cliente, id_documento);
     }
 
-    public List<Documento> obtenerFavoritosPorUsuario(Cliente cliente) {
+    public List<Documento> obtenerFavoritosPorCliente(Cliente cliente) {
 
         return favoritoDAO.obtenerFavoritosPorUsuario(cliente.getId_usuario());
     }

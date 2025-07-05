@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -34,12 +31,18 @@
         </HBox>
     </VBox>
 
-    <VBox fx:id="vboxValoraciones" spacing="20">
+    <ScrollPane>
+        <content>
 
-        <padding>
-            <Insets top="10" left="30" right="30" bottom="10"/>
-        </padding>
+            <VBox fx:id="vboxValoraciones" spacing="20">
 
-    </VBox>
+                <padding>
+                    <Insets top="10" left="30" right="30" bottom="10"/>
+                </padding>
+
+            </VBox>
+
+        </content>
+    </ScrollPane>
 
 </VBox>

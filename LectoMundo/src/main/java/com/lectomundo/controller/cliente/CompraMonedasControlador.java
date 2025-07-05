@@ -52,8 +52,7 @@ public class CompraMonedasControlador {
 
         try {
 
-            movimientoMonedaService.comprarMonedas(cliente, monto);
-            cliente.setMonedas(cliente.getMonedas() + monto);
+            cliente = movimientoMonedaService.comprarMonedas(cliente, monto);
             clienteControlador.actualizarMonedas(cliente.getMonedas());
             UIHelper.mostrarAlerta("Compra exitosa", "Se han comprado " + monto + " monedas.");
 

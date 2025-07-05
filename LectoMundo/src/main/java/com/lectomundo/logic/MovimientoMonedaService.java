@@ -4,14 +4,12 @@ import com.lectomundo.model.Cliente;
 import com.lectomundo.model.MovimientoMoneda;
 import com.lectomundo.repository.dao.MovimientoMonedaDAO;
 
-import javafx.collections.ObservableList;
-
 public class MovimientoMonedaService {
 
     private MovimientoMonedaDAO movimientoMonedaDAO = new MovimientoMonedaDAO();
     private UsuarioService usuarioService = new UsuarioService();
 
-    public void comprarMonedas(Cliente cliente, int monto) {
+    public Cliente comprarMonedas(Cliente cliente, int monto) {
 
         int nuevas_monedas = cliente.getMonedas() + monto;
         usuarioService.actualizarMonedas(cliente.getId_usuario(), nuevas_monedas);
@@ -22,6 +20,8 @@ public class MovimientoMonedaService {
         movimientoMoneda.setMonto(monto);
 
         movimientoMonedaDAO.registrarMovimiento(movimientoMoneda);
+
+        return cliente;
     }
 
     public Cliente gastarMonedas(Cliente cliente, int monto) {

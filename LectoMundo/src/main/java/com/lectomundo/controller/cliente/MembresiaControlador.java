@@ -40,7 +40,10 @@ public class MembresiaControlador {
             UIHelper.mostrarAlerta("Membresia Activada", "Ahora tienes acceso ilimitado por 30 días.");
             initialize();
 
-        } catch (Exception e) {
+        } catch (RuntimeException e){
+
+            UIHelper.mostrarAlerta("Advertencia", e.getMessage());
+        }catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "No se pudo adquirir la membresia.");
         }
@@ -56,6 +59,9 @@ public class MembresiaControlador {
             UIHelper.mostrarAlerta("Membresía Extendedia", "Se ha extendido la membresía por 30 días más.");
             initialize();
 
+        } catch (RuntimeException e){
+
+            UIHelper.mostrarAlerta("Advertencia", e.getMessage());
         } catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "No se pudo extender la membresía.");

@@ -3,15 +3,12 @@ package com.lectomundo.logic;
 import com.lectomundo.model.*;
 import com.lectomundo.repository.dao.CompraDocumentoDAO;
 
-import javafx.collections.ObservableList;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class CompraDocumentoService {
 
     CompraDocumentoDAO compraDocumentoDAO = new CompraDocumentoDAO();
-    UsuarioService usuarioService = new UsuarioService();
     NotificacionService notificacionService = new NotificacionService();
     AlquilerService alquilerService = new AlquilerService();
     MovimientoMonedaService movimientoMonedaService = new MovimientoMonedaService();
@@ -20,19 +17,22 @@ public class CompraDocumentoService {
 
         int costo = documento.getPrecio() * 3;
 
-        LocalDateTime fecha_hoy = LocalDateTime.now();
-
         CompraDocumento compraDocumento = new CompraDocumento();
         compraDocumento.setCliente(cliente);
         compraDocumento.setDocumento(documento);
-        compraDocumento.setFecha_compra(fecha_hoy);
+        compraDocumento.setFecha_compra(LocalDateTime.now());
         compraDocumento.setCosto(costo);
+
+        cliente = movimientoMonedaService.gastarMonedas(cliente, costo);
+
+        if(cliente == null){
+
+            throw new RuntimeException("No cuenta con monedas suficientes.");
+        }
 
         compraDocumentoDAO.registrarCompra(compraDocumento);
         alquilerService.devolverDocumento(cliente, documento);
         notificacionService.notificacionCompraDocumento(cliente, documento);
-
-        cliente = movimientoMonedaService.gastarMonedas(cliente, costo);
 
         return cliente;
     }
@@ -45,7 +45,7 @@ public class CompraDocumentoService {
 
     /*
 
-    FUTURA IMPLEMEMNTACIÓN
+    FUTURA IMPLEMENTACIÓN
 
     public ObservableList<Documento> llenarTablaDocumentosCompradosPorUsuario(int id_usuario) {
 
@@ -53,8 +53,8 @@ public class CompraDocumentoService {
     }
     */
 
-    public boolean estaComprado(int id_usuario, int id_documento) {
+    public boolean estaComprado(int id_cliente, int id_documento) {
 
-        return compraDocumentoDAO.estaComprado(id_usuario, id_documento);
+        return compraDocumentoDAO.estaComprado(id_cliente, id_documento);
     }
 }

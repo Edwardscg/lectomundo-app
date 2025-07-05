@@ -120,7 +120,7 @@ public class ValoracionDocumentoControlador {
 
             vboxValoraciones.getChildren().clear();
 
-            List<Valoracion> valoraciones = valoracionService.verValoracionesPorDocumento(documento.getId_documento());
+            List<Valoracion> valoraciones = valoracionService.obtenerValoracionesPorDocumento(documento.getId_documento());
 
             for (Valoracion v : valoraciones) {
 
