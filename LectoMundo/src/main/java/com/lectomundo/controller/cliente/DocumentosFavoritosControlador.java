@@ -38,7 +38,7 @@ public class DocumentosFavoritosControlador {
 
             if (documentosFavoritos.isEmpty()) {
 
-                lblMensaje.setText("No cuentas con documentos favoritos marcados");
+                lblMensaje.setText("No cuentas con documentos favoritos marcados.");
                 return;
             }
 

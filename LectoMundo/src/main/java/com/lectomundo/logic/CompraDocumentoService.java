@@ -25,13 +25,12 @@ public class CompraDocumentoService {
 
         cliente = movimientoMonedaService.gastarMonedas(cliente, costo);
 
-        if(cliente == null){
+        if (cliente == null) {
 
             throw new RuntimeException("No cuenta con monedas suficientes.");
         }
 
         compraDocumentoDAO.registrarCompra(compraDocumento);
-        alquilerService.devolverDocumento(cliente, documento);
         notificacionService.notificacionCompraDocumento(cliente, documento);
 
         return cliente;

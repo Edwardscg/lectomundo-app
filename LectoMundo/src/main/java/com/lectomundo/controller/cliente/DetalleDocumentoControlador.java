@@ -109,6 +109,8 @@ public class DetalleDocumentoControlador {
             cliente = compraDocumentoService.registrarCompra(cliente, documento);
             clienteControlador.actualizarMonedas(cliente.getMonedas());
 
+            UIHelper.mostrarAlerta("Éxito", "Documento comprado exitosamente.");
+
             actualizarBotones();
 
         } catch (RuntimeException e) {
