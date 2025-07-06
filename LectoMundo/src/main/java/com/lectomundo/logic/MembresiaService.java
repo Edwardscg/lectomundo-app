@@ -18,7 +18,8 @@ public class MembresiaService {
         Membresia membresia = new Membresia();
 
         if (cliente.getMonedas() < membresia.getPrecio()) {
-            return null;
+
+            throw new RuntimeException("No cuenta con monedas suficientes.");
         }
 
         LocalDate fechaFin = LocalDate.now().plusDays(30);
@@ -30,9 +31,10 @@ public class MembresiaService {
         if(cliente == null){
 
             throw new RuntimeException("No cuenta con monedas suficientes.");
-        }
+        }else {
 
-        membresiaDAO.registrarMembresia(membresia);
+            membresiaDAO.registrarMembresia(membresia);
+        }
 
         return cliente;
     }

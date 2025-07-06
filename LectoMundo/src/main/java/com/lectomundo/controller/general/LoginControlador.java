@@ -23,7 +23,7 @@ public class LoginControlador {
     private Hyperlink hyperlinkrecuperarContraseña;
 
     @FXML
-    private void IniciarSesion() throws Exception {
+    private void IniciarSesion() {
 
         String correo = txtCorreo.getText();
         String contraseña = txtContraseña.getText();

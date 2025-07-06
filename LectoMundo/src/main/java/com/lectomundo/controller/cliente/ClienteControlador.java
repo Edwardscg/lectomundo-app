@@ -2,7 +2,6 @@ package com.lectomundo.controller.cliente;
 
 import com.lectomundo.controller.UIHelper;
 import com.lectomundo.logic.AlquilerService;
-import com.lectomundo.logic.MembresiaService;
 import com.lectomundo.model.Cliente;
 
 import javafx.application.Platform;
@@ -28,8 +27,6 @@ public class ClienteControlador {
     private Button btnAlquilados;
 
     public static Cliente cliente;
-
-    private MembresiaService membresiaService = new MembresiaService();
     private AlquilerService alquilerService = new AlquilerService();
 
     private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();

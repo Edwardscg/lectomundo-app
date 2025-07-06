@@ -47,6 +47,8 @@ public class RegistroControlador {
 
             Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
 
+            UIHelper.mostrarAlerta("Exito", "Cuenta registrada exitosamente.");
+
             UIHelper.abrirYCerrarVentanaActual(ventana_actual, "/view/general/login.fxml", "Login");
 
         } catch (IllegalArgumentException e) {

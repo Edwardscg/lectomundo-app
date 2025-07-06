@@ -38,7 +38,7 @@ public class CodigoVerificacionControlador {
             try {
 
                 verificacionHecha = true;
-                UIHelper.mostrarAlerta("Acción exitosa", "Codigo verificado correctamente.");
+                UIHelper.mostrarAlerta("Acción exitosa", "Código verificado correctamente.");
                 Stage ventana_actual = (Stage) txtCodigo.getScene().getWindow();
                 UIHelper.cerrarVentana(ventana_actual);
 

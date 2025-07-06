@@ -25,9 +25,14 @@ public class MembresiaControlador {
     private ClienteControlador clienteControlador;
 
     @FXML
-    private void initialize() {
+    private void initialize(){
 
         actualizarVistaMembresia();
+    }
+
+    public void setClienteControlador(ClienteControlador clienteControlador){
+
+        this.clienteControlador = clienteControlador;
     }
 
     @FXML
@@ -37,8 +42,9 @@ public class MembresiaControlador {
 
             cliente = membresiaService.registrarMembresia(cliente);
             clienteControlador.actualizarMonedas(cliente.getMonedas());
+            actualizarVistaMembresia();
+
             UIHelper.mostrarAlerta("Membresia Activada", "Ahora tienes acceso ilimitado por 30 días.");
-            initialize();
 
         } catch (RuntimeException e){
 
@@ -56,8 +62,9 @@ public class MembresiaControlador {
 
             cliente = membresiaService.actualizarMembresia(cliente);
             clienteControlador.actualizarMonedas(cliente.getMonedas());
+            actualizarVistaMembresia();
+
             UIHelper.mostrarAlerta("Membresía Extendedia", "Se ha extendido la membresía por 30 días más.");
-            initialize();
 
         } catch (RuntimeException e){
 
@@ -74,18 +81,14 @@ public class MembresiaControlador {
         try {
 
             membresiaService.finalizarMembresia(cliente);
+            actualizarVistaMembresia();
+
             UIHelper.mostrarAlerta("Membresía finalizada", "Tu membresía ha sido cancelada.");
-            initialize();
 
         } catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "No se pudo finalizar la membresía.");
         }
-    }
-
-    public void setClienteControlador(ClienteControlador clienteControlador) {
-
-        this.clienteControlador = clienteControlador;
     }
 
     public void actualizarVistaMembresia() {

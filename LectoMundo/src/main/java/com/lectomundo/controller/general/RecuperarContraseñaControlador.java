@@ -41,7 +41,7 @@ public class RecuperarContraseñaControlador {
 
         if (usuario == null) {
 
-            UIHelper.mostrarAlerta("Error", "No existe un usuario con el correo ingresado");
+            UIHelper.mostrarAlerta("Error", "No existe un usuario con el correo ingresado.");
             return;
         }
 
@@ -87,7 +87,7 @@ public class RecuperarContraseñaControlador {
 
         if (usuario_actualizado) {
 
-            UIHelper.mostrarAlerta("Éxito", "La contraseña se cambió correctamente");
+            UIHelper.mostrarAlerta("Éxito", "La contraseña se cambió correctamente.");
             Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
             UIHelper.abrirYCerrarVentanaActual(ventana_actual, "/view/general/login.fxml", "Login");
 

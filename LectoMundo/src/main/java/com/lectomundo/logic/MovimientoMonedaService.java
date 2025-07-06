@@ -13,6 +13,7 @@ public class MovimientoMonedaService {
 
         int nuevas_monedas = cliente.getMonedas() + monto;
         usuarioService.actualizarMonedas(cliente.getId_usuario(), nuevas_monedas);
+        cliente.setMonedas(nuevas_monedas);
 
         MovimientoMoneda movimientoMoneda = new MovimientoMoneda();
         movimientoMoneda.setCliente(cliente);
