@@ -20,10 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.URL;
 
 public class DetalleDocumentoControlador {
@@ -92,7 +89,6 @@ public class DetalleDocumentoControlador {
         try {
 
             alquilerService.devolverDocumento(cliente, documento);
-
             actualizarBotones();
 
         } catch (Exception e) {
@@ -142,6 +138,7 @@ public class DetalleDocumentoControlador {
         try {
 
             String url = documento.getPdf_url();
+            System.out.println(url);
 
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Descargar Documento");
@@ -165,9 +162,9 @@ public class DetalleDocumentoControlador {
                     UIHelper.mostrarAlerta("Éxito", "El documento se ha descargado.");
                 }
             }
-        } catch (Exception e) {
-
-            UIHelper.mostrarAlerta("Error", "No se pudo descargar el documento");
+        } catch (IOException e) {
+            e.printStackTrace();
+            UIHelper.mostrarAlerta("Error", "No se pudo procesar la descarga del documento.");
         }
     }
 

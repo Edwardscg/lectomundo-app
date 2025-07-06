@@ -80,7 +80,7 @@ public class AlquilerDAO {
      */
     public boolean estaAlquilado(int id_cliente, int id_documento) {
 
-        String sql = "SELECT 1 FROM alquiler WHERE id_usuario = ? AND id_documento = ? AND estado = 'activo';";
+        String sql = "SELECT * FROM alquiler WHERE id_usuario = ? AND id_documento = ? AND estado = 'activo';";
 
         return DBHelper.obtenerEntidad(sql, rs -> true, id_cliente, id_documento) != null;
     }
@@ -94,7 +94,7 @@ public class AlquilerDAO {
      */
     public Alquiler obtenerAlquilerActivo(int id_usuario, int id_documento) {
 
-        String sql = "SELECT 1 FROM alquiler WHERE id_usuario = ? AND id_documento = ? AND estado = 'activo';";
+        String sql = "SELECT id_alquiler, id_usuario, id_documento, fecha_inicio, fecha_fin, estado FROM alquiler WHERE id_usuario = ? AND id_documento = ? AND estado = 'activo';";
 
         return DBHelper.obtenerEntidad(sql, this::mapearAlquiler, id_usuario, id_documento);
     }
