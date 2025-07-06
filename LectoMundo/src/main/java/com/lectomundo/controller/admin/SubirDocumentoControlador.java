@@ -74,7 +74,7 @@ public class SubirDocumentoControlador {
     @FXML
     public void subirDocumento() {
 
-        if (txtTitulo.getText().isBlank() || txtAutor.getText().isBlank() || txtTipo.getText().isBlank() || txtGenero.getText().isBlank() || areaDescripcion.getText().isBlank() || txtPrecio.getText().isBlank() || pickerFechaPublicacion.getValue() == null || archivoPDF == null || imagenPortada == null) {
+        if (txtTitulo.getText().isBlank() || txtAutor.getText().isBlank() || txtTipo.getText().isBlank() || txtGenero.getText().isBlank() || areaDescripcion.getText().isBlank() || txtPrecio.getText().isBlank() || pickerFechaPublicacion.getValue() == null) {
 
             UIHelper.mostrarAlerta("Campos Incompletos", "Complete todos los campos y selecciona los archivos.");
             return;
@@ -85,13 +85,21 @@ public class SubirDocumentoControlador {
             int precio = Integer.parseInt(txtPrecio.getText());
             if(precio <= 0){
 
-                UIHelper.mostrarAlerta("Advertencia", "Complete todos los campos y selecciona los archivos.");
+                UIHelper.mostrarAlerta("Advertencia", "El precio debe ser mayor a 0.");
                 return;
             }
 
         }catch (NumberFormatException e){
 
             UIHelper.mostrarAlerta("Error", "El número ingresado no es válido.");
+            return;
+        }
+
+
+        if(lblNombrePDF.getText().equals("Ningún archivo seleccionado")|| lblNombrePortada.getText().equals("Ninguna imagen seleccionada")){
+
+            UIHelper.mostrarAlerta("Campos Incompletos", "Seleccione el documento o imagen de portada faltante.");
+            return;
         }
 
         try {

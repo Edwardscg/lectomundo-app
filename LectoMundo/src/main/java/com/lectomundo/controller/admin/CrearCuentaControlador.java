@@ -21,7 +21,7 @@ public class CrearCuentaControlador {
     private UsuarioService usuarioService = new UsuarioService();
 
     @FXML
-    private void registrarse() {
+    private void registrarAdmin() {
 
         String nombre_usuario = txtNombreUsuario.getText().trim();
         String correo = txtCorreo.getText().trim();
@@ -35,7 +35,7 @@ public class CrearCuentaControlador {
             return;
         }
 
-        if (!confirmar_contraseña.equals(confirmar_contraseña)) {
+        if (!contraseña.equals(confirmar_contraseña)) {
 
             UIHelper.mostrarAlerta("Advertencia", "Las contraseñas no coinciden.");
             return;
@@ -47,7 +47,10 @@ public class CrearCuentaControlador {
 
             UIHelper.mostrarAlerta("Éxito", "Se pudo registrar correctamente la cuenta de administrador.");
 
-        } catch (Exception e) {
+        }catch (RuntimeException e){
+            UIHelper.mostrarAlerta("Error", e.getMessage());
+
+        }catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "No se pudo registrar la cuenta de administrador.");
         }

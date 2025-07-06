@@ -62,7 +62,7 @@ public class EditarDocumentoControlador {
 
         if (txtTitulo.getText().isBlank() || txtAutor.getText().isBlank() || txtTipo.getText().isBlank() || pickerFechaPublicacion.getValue() == null || txtGenero.getText().isBlank() || areaDescripcion.getText().isBlank() || txtPrecio.getText().isBlank() ) {
 
-            UIHelper.mostrarAlerta("Campos Incompletos", "Complete todos los campos y selecciona los archivos.");
+            UIHelper.mostrarAlerta("Campos Incompletos", "Complete todos los campos.");
             return;
         }
 
@@ -71,7 +71,7 @@ public class EditarDocumentoControlador {
             int precio = Integer.parseInt(txtPrecio.getText());
             if(precio <= 0){
 
-                UIHelper.mostrarAlerta("Advertencia", "Complete todos los campos y selecciona los archivos.");
+                UIHelper.mostrarAlerta("Advertencia", "El precio debe ser mayor a 0.");
                 return;
             }
 

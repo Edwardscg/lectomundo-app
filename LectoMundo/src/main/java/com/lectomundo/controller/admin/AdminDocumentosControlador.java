@@ -50,8 +50,20 @@ public class AdminDocumentosControlador {
     @FXML
     private void irASubirDocumento() {
 
-        Stage ventana_actual = (Stage) txtBuscar.getScene().getWindow();
-        UIHelper.abrirYCerrarVentanaActual(ventana_actual, "/view/admin/subirDocumento.fxml", "Subir Documento");
+        try{
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/admin/subirDocumento.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.show();
+
+        }catch (Exception e){
+
+            UIHelper.mostrarAlerta("Error", "No se pudo abrir la ventana de subir documento.");
+        }
     }
 
     private void configurarColumnas() {
@@ -86,7 +98,7 @@ public class AdminDocumentosControlador {
 
         if (documento_seleccionado == null) {
 
-            UIHelper.mostrarAlerta("Advertencia", "Selecciona un documento para editar");
+            UIHelper.mostrarAlerta("Advertencia", "Selecciona un documento para editar.");
             return;
         }
 
@@ -105,7 +117,7 @@ public class AdminDocumentosControlador {
 
         } catch (Exception e) {
 
-            UIHelper.mostrarAlerta("Error", "Nose pudo abrir la ventana de edicion");
+            UIHelper.mostrarAlerta("Error", "No se pudo abrir la ventana de edición.");
         }
     }
 
@@ -118,7 +130,7 @@ public class AdminDocumentosControlador {
 
             if (documentoSeleccionado == null) {
 
-                UIHelper.mostrarAlerta("Advertencia", "Selecciona un documento para eliminar");
+                UIHelper.mostrarAlerta("Advertencia", "Seleccione un documento para eliminar.");
                 return;
             }
 
@@ -133,7 +145,7 @@ public class AdminDocumentosControlador {
 
         } catch (Exception e) {
 
-            UIHelper.mostrarAlerta("Error", "Nose pudo eliminar el documento.");
+            UIHelper.mostrarAlerta("Error", "No se pudo eliminar el documento.");
         }
     }
 }

@@ -74,6 +74,8 @@ public class DetalleDocumentoControlador {
 
             actualizarBotones();
 
+            UIHelper.mostrarAlerta("Éxito", "Documento alquilado exitosamente.");
+
         } catch (RuntimeException e) {
 
             UIHelper.mostrarAlerta("Advertencia", e.getMessage());
@@ -90,6 +92,8 @@ public class DetalleDocumentoControlador {
 
             alquilerService.devolverDocumento(cliente, documento);
             actualizarBotones();
+
+            UIHelper.mostrarAlerta("Éxito", "Documento devuelto exitosamente.");
 
         } catch (Exception e) {
 

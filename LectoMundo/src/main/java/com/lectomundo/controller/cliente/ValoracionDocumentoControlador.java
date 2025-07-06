@@ -85,6 +85,11 @@ public class ValoracionDocumentoControlador {
     private void valorarDocumento() {
 
         String comentario = txtComentario.getText().trim();
+        if (comentario.isEmpty()) {
+
+            UIHelper.mostrarAlerta("Aviso", "El comentario no puede estar vacío.");
+            return;
+        }
 
         if (puntuacion == 0) {
 
@@ -92,11 +97,7 @@ public class ValoracionDocumentoControlador {
             return;
         }
 
-        if (comentario.isEmpty()) {
 
-            UIHelper.mostrarAlerta("Aviso", "El comentario no puede estar vacío.");
-            return;
-        }
 
         try {
 

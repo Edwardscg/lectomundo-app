@@ -16,7 +16,7 @@ public class UsuarioService {
 
         if (buscarUsuarioPorCorreo(correo) != null) {
 
-            throw new IllegalArgumentException("Ya existe un usuario con el correo ingresado.");
+            throw new RuntimeException("Ya existe un usuario con el correo ingresado.");
         }
 
         String codigo = CorreoService.generarCodigoDeVerificacion();

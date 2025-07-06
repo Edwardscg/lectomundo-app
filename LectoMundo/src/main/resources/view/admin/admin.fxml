@@ -26,7 +26,7 @@
 
             <Button fx:id="btnDocumentos" text="Documentos" onAction="#cargarDocumentos" prefWidth="150" styleClass="button"/>
             <Button fx:id="btnUsuarios" text="Usuarios" onAction="#cargarUsuarios" prefWidth="150" styleClass="button"/>
-            <Button fx:id="btnMembresias" text="Membresias" onAction="#cargarMembresias" prefWidth="150" styleClass="button"/>
+            <Button fx:id="btnMembresias" text="Membresías" onAction="#cargarMembresias" prefWidth="150" styleClass="button"/>
             <Button fx:id="btnCrearCuenta" text="Crear Admin" onAction="#crearCuenta" prefWidth="150" styleClass="button"/>
 
             <Region VBox.vgrow="ALWAYS"/>

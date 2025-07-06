@@ -22,7 +22,7 @@
         <HBox spacing="10" alignment="CENTER">
 
             <Button fx:id="btnSeleccionarPDF" text="Seleccionar PDF" onAction="#seleccionarPDF"/>
-            <Label fx:id="lblNombrePDF" text="Ningun archivo seleccionado"/>
+            <Label fx:id="lblNombrePDF" text="Ningún archivo seleccionado"/>
 
         </HBox>
 
