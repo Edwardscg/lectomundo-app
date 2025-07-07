@@ -31,7 +31,7 @@ public class DocumentosCompradosControlador {
 
         try {
 
-            List<Documento> documentosComprados = compraDocumentoService.verDocumentosCompradosPorUsuario(cliente);
+            List<Documento> documentosComprados = compraDocumentoService.verDocumentosCompradosPorCliente(cliente);
 
             HBox fila = new HBox(35);
             int contador = 0;

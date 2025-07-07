@@ -86,6 +86,21 @@ public class UsuarioService {
         }
     }
 
+    public void actualizarMonedas(int id_cliente, int nuevas_monedas) {
+
+        usuarioDAO.actualizarMonedas(id_cliente, nuevas_monedas);
+    }
+
+    public Usuario buscarUsuarioPorCorreo(String correo) {
+
+        return usuarioDAO.buscarUsuarioPorCorreo(correo);
+    }
+
+    public ObservableList<Usuario> verUsuarios() {
+
+        return usuarioDAO.verUsuarios();
+    }
+
     /*
     FUTURA IMPLEMENTACIÓN
 
@@ -94,26 +109,6 @@ public class UsuarioService {
         usuarioDAO.actualizarUsuario(usuario);
     }
     */
-
-
-    public void actualizarMonedas(int id_cliente, int nuevas_monedas) {
-
-        usuarioDAO.actualizarMonedas(id_cliente, nuevas_monedas);
-    }
-
-    /*
-    FUTURA IMPLEMENTACIÓN
-
-    public Usuario buscarUsuarioPorId(int id_usuario) {
-
-        return usuarioDAO.buscarUsuarioPorId(id_usuario);
-    }
-    */
-
-    public Usuario buscarUsuarioPorCorreo(String correo) {
-
-        return usuarioDAO.buscarUsuarioPorCorreo(correo);
-    }
 
     /*
     FUTURA IMPLEMENTACIÓN
@@ -124,8 +119,13 @@ public class UsuarioService {
     }
     */
 
-    public ObservableList<Usuario> verUsuarios() {
+    /*
+    FUTURA IMPLEMENTACIÓN
 
-        return usuarioDAO.verUsuarios();
+    public Usuario buscarUsuarioPorId(int id_usuario) {
+
+        return usuarioDAO.buscarUsuarioPorId(id_usuario);
     }
+    */
+
 }

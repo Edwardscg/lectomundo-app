@@ -36,7 +36,7 @@ public class CompraDocumentoService {
         return cliente;
     }
 
-    public List<Documento> verDocumentosCompradosPorUsuario(Cliente cliente) {
+    public List<Documento> verDocumentosCompradosPorCliente(Cliente cliente) {
 
         return compraDocumentoDAO.verDocumentosCompradosPorUsuario(cliente.getId_usuario());
     }
