@@ -120,7 +120,20 @@
       <version>2.0.30</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.apache.pdfbox</groupId>
+      <artifactId>pdfbox</artifactId>
+      <version>2.0.30</version>
+    </dependency>
+
   </dependencies>
+
+  <repositories>
+    <repository>
+      <id>idrsolutions</id>
+      <url>https://maven.idrsolutions.com</url>
+    </repository>
+  </repositories>
 
   <build>
 

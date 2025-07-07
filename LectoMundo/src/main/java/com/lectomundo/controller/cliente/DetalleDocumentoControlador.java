@@ -125,6 +125,27 @@ public class DetalleDocumentoControlador {
     @FXML
     private void leerDocumento() {
 
+        try{
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/visorPDF.fxml"));
+            Parent root = loader.load();
+
+            VisorPDFControlador controlador = loader.getController();
+            controlador.setPdfURL(documento.getPdf_url());
+            controlador.cargarPDF();
+
+            Stage stage = new Stage();
+            stage.setTitle("Lectura del Documento");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        }catch (Exception e){
+
+            UIHelper.mostrarAlerta("Error", "No se pudo abrir el documento en el navegador.");
+        }
+
+        /*
+
         try {
 
             String url = documento.getPdf_url();
@@ -133,7 +154,7 @@ public class DetalleDocumentoControlador {
         } catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "No se pudo abrir el documento en el navegador.");
-        }
+        }*/
     }
 
     @FXML
