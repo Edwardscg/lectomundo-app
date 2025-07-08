@@ -19,24 +19,6 @@ public class ValoracionDAO {
         DBHelper.manejarEntidad(sql, valoracion.getCliente().getId_usuario(), valoracion.getDocumento().getId_documento(), valoracion.getPuntuacion(), valoracion.getComentario());
     }
 
-    /*
-    FUTURA IMPLEMENTACIÓN
-
-    public void actualizarValoracion(Valoracion valoracion) {
-
-        String sql = "UPDATE valoracion SET puntuacion = ?, comentario = ?, fecha_valoracion = ? WHERE id_usuario = ? AND id_documento = ?;";
-
-        DBHelper.manejarEntidad(sql, valoracion.getPuntuacion(), valoracion.getComentario(), Date.valueOf(valoracion.getFecha_valoracion()), valoracion.getCliente().getId_usuario(), valoracion.getDocumento().getId_documento());
-    }
-
-    // IMPLEMENTACION EN UN FUTURO
-    public void eliminarValoracion(int id_usuario, int id_documento) {
-        String sql = "DELETE FROM valoracion WHERE id_usuario = ? AND id_documento = ?;";
-
-        DBHelper.manejarEntidad(sql, id_usuario, id_documento);
-    }
-    */
-
     public List<Valoracion> verValoracionesPorDocumento(int id_documento) {
 
         String sql = "SELECT * FROM valoracion WHERE id_documento = ? ORDER BY fecha_valoracion DESC;";
@@ -75,4 +57,22 @@ public class ValoracionDAO {
             throw new RuntimeException("Error al mapear datos del alquiler desde la Base de Datos.");
         }
     }
+
+    /*
+    FUTURA IMPLEMENTACIÓN
+
+    public void actualizarValoracion(Valoracion valoracion) {
+
+        String sql = "UPDATE valoracion SET puntuacion = ?, comentario = ?, fecha_valoracion = ? WHERE id_usuario = ? AND id_documento = ?;";
+
+        DBHelper.manejarEntidad(sql, valoracion.getPuntuacion(), valoracion.getComentario(), Date.valueOf(valoracion.getFecha_valoracion()), valoracion.getCliente().getId_usuario(), valoracion.getDocumento().getId_documento());
+    }
+
+    // IMPLEMENTACION EN UN FUTURO
+    public void eliminarValoracion(int id_usuario, int id_documento) {
+        String sql = "DELETE FROM valoracion WHERE id_usuario = ? AND id_documento = ?;";
+
+        DBHelper.manejarEntidad(sql, id_usuario, id_documento);
+    }
+    */
 }

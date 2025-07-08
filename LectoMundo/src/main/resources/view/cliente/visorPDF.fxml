@@ -3,15 +3,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<VBox xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.lectomundo.controller.cliente.VisorPDFControlador"
-            prefHeight="750" prefWidth="700">
+            prefHeight="750" prefWidth="680">
 
-    <children>
-        <ScrollPane fitToWidth="true" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
-                    AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
-            <VBox fx:id="contenedorPaginas" alignment="CENTER" spacing="10" style="-fx-padding: 10;"/>
-        </ScrollPane>
-    </children>
-</AnchorPane>
+    <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS">
+        <VBox fx:id="pdfContainer" />
+    </ScrollPane>
+    <ProgressIndicator fx:id="loadingIndicator" visible="false" />
+
+</VBox>

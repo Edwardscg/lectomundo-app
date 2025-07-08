@@ -126,6 +126,12 @@
       <version>2.0.30</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-swing</artifactId>
+      <version>21</version>
+    </dependency>
+
   </dependencies>
 
   <repositories>

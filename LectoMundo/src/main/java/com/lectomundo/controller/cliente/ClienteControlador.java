@@ -35,6 +35,9 @@ public class ClienteControlador {
     private void initialize() {
 
         scheduler.scheduleAtFixedRate(() -> {
+
+            alquilerService.verificarYEstablecerEstadoAlquiler(cliente);
+            /*
             try {
 
                 alquilerService.verificarYEstablecerEstadoAlquiler(cliente);
@@ -45,6 +48,8 @@ public class ClienteControlador {
                     UIHelper.mostrarAlerta("Error", "Ocurrió un error y no se pudo comprobar el estado activo de alquiler de documentos alquilados.");
                 });
             }
+            */
+
         }, 0, 5, TimeUnit.MINUTES);
 
         explorarDocumentos();

@@ -131,8 +131,7 @@ public class DetalleDocumentoControlador {
             Parent root = loader.load();
 
             VisorPDFControlador controlador = loader.getController();
-            controlador.setPdfURL(documento.getPdf_url());
-            controlador.cargarPDF();
+            controlador.setPdfUrl(documento.getPdf_url());
 
             Stage stage = new Stage();
             stage.setTitle("Lectura del Documento");
@@ -143,18 +142,6 @@ public class DetalleDocumentoControlador {
 
             UIHelper.mostrarAlerta("Error", "No se pudo abrir el documento en el navegador.");
         }
-
-        /*
-
-        try {
-
-            String url = documento.getPdf_url();
-            java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
-
-        } catch (Exception e) {
-
-            UIHelper.mostrarAlerta("Error", "No se pudo abrir el documento en el navegador.");
-        }*/
     }
 
     @FXML
