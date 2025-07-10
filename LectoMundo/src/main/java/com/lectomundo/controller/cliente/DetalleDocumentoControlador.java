@@ -125,14 +125,25 @@ public class DetalleDocumentoControlador {
     @FXML
     private void leerDocumento() {
 
-        try {
+        try{
 
-            String url = documento.getPdf_url();
-            java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cliente/visorPDF.fxml"));
+            Parent root = loader.load();
 
-        } catch (Exception e) {
+            VisorPDFControlador controlador = loader.getController();
+            controlador.setPdfUrl(documento.getPdf_url());
 
-            UIHelper.mostrarAlerta("Error", "No se pudo abrir el documento en el navegador.");
+            Stage stage = new Stage();
+            stage.setTitle("Lectura del Documento");
+            stage.setScene(new Scene(root));
+
+            stage.setOnCloseRequest(evento -> controlador.liberarRecursos());
+
+            stage.show();
+
+        }catch (Exception e){
+
+            UIHelper.mostrarAlerta("Error", "No se pudo abrir el documento.");
         }
     }
 

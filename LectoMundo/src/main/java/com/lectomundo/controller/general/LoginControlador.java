@@ -2,6 +2,7 @@ package com.lectomundo.controller.general;
 
 import com.lectomundo.controller.UIHelper;
 import com.lectomundo.controller.cliente.ClienteControlador;
+import com.lectomundo.logic.CorreoService;
 import com.lectomundo.logic.UsuarioService;
 import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Usuario;
@@ -13,6 +14,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+/**
+ * Controlador de la ventana de inicio de sesión.
+ * Gestiona la autenticación del usuario y redirige a la vista correspondiente según su tipo.
+ */
 public class LoginControlador {
 
     @FXML
@@ -22,6 +27,12 @@ public class LoginControlador {
     @FXML
     private Hyperlink hyperlinkrecuperarContraseña;
 
+    private final UsuarioService usuarioService = new UsuarioService();
+
+    /**
+     * Acción asociada al botón de "Iniciar Sesión".
+     * Valida las entradas, autentica al usuario y carga la vista correspondiente.
+     */
     @FXML
     private void IniciarSesion() {
 
@@ -36,7 +47,12 @@ public class LoginControlador {
 
         try {
 
-            UsuarioService usuarioService = new UsuarioService();
+            String codigo = CorreoService.generarCodigoDeVerificacion();
+            CorreoService.enviarCodigoPorCorreo(correo, codigo);
+            boolean verificado = UIHelper.abrirVentanaDeVerificacion(correo, codigo);
+
+            if(!verificado) return;
+
             Usuario usuario = usuarioService.loguearUsuario(correo, contraseña);
 
             Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
@@ -62,13 +78,12 @@ public class LoginControlador {
             } else {
 
                 UIHelper.abrirYCerrarVentanaActual(ventana_actual, "/view/admin/admin.fxml", "Administrador");
-
-
             }
 
         } catch (IllegalArgumentException e) {
 
             UIHelper.mostrarAlerta("Error", e.getMessage());
+
         } catch (Exception e) {
 
             UIHelper.mostrarAlerta("Error", "Ocurrió un error al iniciar sesión.");
