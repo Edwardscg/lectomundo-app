@@ -40,7 +40,8 @@ public class UsuarioService {
             String codigo = CorreoService.generarCodigoDeVerificacion();
             CorreoService.enviarCodigoPorCorreo(correo, codigo);
 
-            UIHelper.abrirVentanaDeVerificacion(correo, codigo);
+            boolean verificado = UIHelper.abrirVentanaDeVerificacion(correo, codigo);
+            if(!verificado) return;
 
             usuario = new Cliente(0, nombre_usuario, correo, contraseña, tipo_usuario, 0);
 
@@ -67,11 +68,6 @@ public class UsuarioService {
 
             throw new IllegalArgumentException("Correo o contraseña incorrecta.");
         }
-
-        String codigo = CorreoService.generarCodigoDeVerificacion();
-        CorreoService.enviarCodigoPorCorreo(correo, codigo);
-
-        UIHelper.abrirVentanaDeVerificacion(correo, codigo);
 
         return usuario;
     }

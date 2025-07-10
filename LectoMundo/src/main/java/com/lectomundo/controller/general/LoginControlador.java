@@ -2,6 +2,7 @@ package com.lectomundo.controller.general;
 
 import com.lectomundo.controller.UIHelper;
 import com.lectomundo.controller.cliente.ClienteControlador;
+import com.lectomundo.logic.CorreoService;
 import com.lectomundo.logic.UsuarioService;
 import com.lectomundo.model.Cliente;
 import com.lectomundo.model.Usuario;
@@ -45,6 +46,12 @@ public class LoginControlador {
         }
 
         try {
+
+            String codigo = CorreoService.generarCodigoDeVerificacion();
+            CorreoService.enviarCodigoPorCorreo(correo, codigo);
+            boolean verificado = UIHelper.abrirVentanaDeVerificacion(correo, codigo);
+
+            if(!verificado) return;
 
             Usuario usuario = usuarioService.loguearUsuario(correo, contraseña);
 
