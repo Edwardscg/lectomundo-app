@@ -3,22 +3,40 @@ package com.lectomundo.repository.dao;
 import com.lectomundo.model.*;
 import com.lectomundo.repository.helper.DBHelper;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.util.List;
 
+/**
+ * DAO que gestiona las operaciones relacionadas con las valoraciones de documentos por parte de los usuarios.
+ * Permite registrar una nueva valoración y consultar valoraciones por documento.
+ */
 public class ValoracionDAO {
 
     private final UsuarioDAO usuarioDAO = new UsuarioDAO();
     private final DocumentoDAO documentoDAO = new DocumentoDAO();
 
+    /**
+     * Registra una nueva valoración hecha por un cliente sobre un documento.
+     *
+     * @param valoracion Objeto Valoracion con los datos de puntuación, comentario y referencias.
+     */
     public void registrarValoracion(Valoracion valoracion) {
 
         String sql = "INSERT INTO valoracion (id_usuario, id_documento, puntuacion, comentario) VALUES (?, ?, ?, ?);";
 
-        DBHelper.manejarEntidad(sql, valoracion.getCliente().getId_usuario(), valoracion.getDocumento().getId_documento(), valoracion.getPuntuacion(), valoracion.getComentario());
+        DBHelper.manejarEntidad(sql,
+                valoracion.getCliente().getId_usuario(),
+                valoracion.getDocumento().getId_documento(),
+                valoracion.getPuntuacion(),
+                valoracion.getComentario());
     }
 
+    /**
+     * Obtiene todas las valoraciones asociadas a un documento específico, ordenadas por fecha descendente.
+     *
+     * @param id_documento ID del documento del cual se desean ver las valoraciones.
+     * @return Lista de valoraciones realizadas al documento.
+     */
     public List<Valoracion> verValoracionesPorDocumento(int id_documento) {
 
         String sql = "SELECT * FROM valoracion WHERE id_documento = ? ORDER BY fecha_valoracion DESC;";
@@ -26,31 +44,25 @@ public class ValoracionDAO {
         return DBHelper.obtenerListaEntidad(sql, this::mapearValoracion, id_documento);
     }
 
-    public float obtenerPromedioValoracion(int id_libro) {
-
-        String sql = "SELECT AVG(puntuacion) AS promedio FROM valoracion WHERE id_documento = ?;";
-
-        Float promedio = DBHelper.obtenerEntidad(sql, rs -> rs.getFloat("promedio"), id_libro);
-
-        return promedio != null ? promedio : 0;
-    }
-
-    public int contarValoracionesPorDocumento(int id_documento) {
-        String sql = "SELECT COUNT(*) AS total FROM valoracion WHERE id_documento = ?;";
-
-        Integer total = DBHelper.obtenerEntidad(sql, rs -> rs.getInt("total"), id_documento);
-
-        return total != null ? total : 0;
-    }
-
+    /**
+     * Mapea una fila del ResultSet a un objeto Valoracion.
+     *
+     * @param rs ResultSet proveniente de una consulta SQL.
+     * @return Objeto Valoracion con los datos del ResultSet.
+     */
     private Valoracion mapearValoracion(ResultSet rs) {
 
         try {
 
-            Usuario usuario = usuarioDAO.buscarUsuarioPorId(rs.getInt("id_usuario"));
+            Cliente cliente = (Cliente) usuarioDAO.buscarUsuarioPorId(rs.getInt("id_usuario"));
             Documento documento = documentoDAO.buscarDocumentoPorId(rs.getInt("id_documento"));
 
-            return new Valoracion(rs.getInt("id_valoracion"), (Cliente) usuario, documento, rs.getInt("puntuacion"), rs.getString("comentario"), rs.getDate("fecha_valoracion").toLocalDate());
+            return new Valoracion(rs.getInt("id_valoracion"),
+                    cliente,
+                    documento,
+                    rs.getInt("puntuacion"),
+                    rs.getString("comentario"),
+                    rs.getDate("fecha_valoracion").toLocalDate());
 
         } catch (Exception e) {
 
