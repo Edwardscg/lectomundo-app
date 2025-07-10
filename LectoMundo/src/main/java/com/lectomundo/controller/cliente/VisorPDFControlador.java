@@ -1,16 +1,19 @@
 package com.lectomundo.controller.cliente;
-
 import com.lectomundo.controller.UIHelper;
+
 import javafx.fxml.FXML;
+
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.embed.swing.SwingFXUtils;
+
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 
+import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.concurrent.ExecutorService;
@@ -19,28 +22,28 @@ import java.util.concurrent.Executors;
 public class VisorPDFControlador {
 
     @FXML private ScrollPane scrollPane;
-    @FXML private VBox pdfContainer;
-    @FXML private ProgressIndicator loadingIndicator;
+    @FXML private VBox pdfContenedor;
+    @FXML private ProgressIndicator indicador_carga;
 
     private PDDocument pdfDocument;
     private PDFRenderer pdfRenderer;
     private ExecutorService executorService;
-    private int currentPage = 0;
-    private boolean isLoading = false;
-    private final int PAGE_BATCH_SIZE = 3;
+    private int pagina_actual = 0;
+    private boolean esta_cargando = false;
+    private final int num_cargar_paginas = 3;
 
     public void initialize() {
         executorService = Executors.newFixedThreadPool(2);
         scrollPane.vvalueProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal.doubleValue() > 0.9 && !isLoading &&
-                    currentPage < pdfDocument.getNumberOfPages()) {
-                loadNextPages();
+            if (newVal.doubleValue() > 0.9 && !esta_cargando &&
+                    pagina_actual < pdfDocument.getNumberOfPages()) {
+                cargarPaginas();
             }
         });
     }
 
     public void setPdfUrl(String url) {
-        loadingIndicator.setVisible(true);
+        indicador_carga.setVisible(true);
 
         executorService.execute(() -> {
             try {
@@ -50,13 +53,13 @@ public class VisorPDFControlador {
                 pdfRenderer = new PDFRenderer(pdfDocument);
 
                 javafx.application.Platform.runLater(() -> {
-                    loadingIndicator.setVisible(false);
-                    loadNextPages();
+                    indicador_carga.setVisible(false);
+                    cargarPaginas();
                 });
             } catch (Exception e) {
 
                 javafx.application.Platform.runLater(() -> {
-                    loadingIndicator.setVisible(false);
+                    indicador_carga.setVisible(false);
                     UIHelper.mostrarAlerta("Error", "No se pudo cargar el documento. Verifique su conexión.");
 
                 });
@@ -64,47 +67,51 @@ public class VisorPDFControlador {
         });
     }
 
-    private void loadNextPages() {
-        if (isLoading || currentPage >= pdfDocument.getNumberOfPages()) return;
+    private void cargarPaginas() {
+        if (esta_cargando || pagina_actual >= pdfDocument.getNumberOfPages()) return;
 
-        isLoading = true;
-        loadingIndicator.setVisible(true);
+        esta_cargando = true;
+        indicador_carga.setVisible(true);
 
         executorService.execute(() -> {
             try {
-                int endPage = Math.min(currentPage + PAGE_BATCH_SIZE,
+
+                int ultima_pagina = Math.min(pagina_actual + num_cargar_paginas,
                         pdfDocument.getNumberOfPages());
 
-                for (int i = currentPage; i < endPage; i++) {
-                    final int pageNum = i;
-                    java.awt.image.BufferedImage awtImage = pdfRenderer.renderImage(pageNum, 1.0f);
-                    Image fxImage = SwingFXUtils.toFXImage(awtImage, null);
+                for (int i = pagina_actual; i < ultima_pagina; i++) {
+
+                    final int numero_pagina = i;
+
+                    BufferedImage imagen = pdfRenderer.renderImage(numero_pagina, 1.0f);
+                    Image imagen_fx = SwingFXUtils.toFXImage(imagen, null);
 
                     javafx.application.Platform.runLater(() -> {
-                        ImageView pageView = new ImageView(fxImage);
+                        ImageView pageView = new ImageView(imagen_fx);
                         pageView.setPreserveRatio(true);
                         pageView.setFitWidth(scrollPane.getWidth() - 20);
-                        pdfContainer.getChildren().add(pageView);
+                        pdfContenedor.getChildren().add(pageView);
                     });
                 }
 
-                currentPage = endPage;
+                pagina_actual = ultima_pagina;
 
                 javafx.application.Platform.runLater(() -> {
-                    loadingIndicator.setVisible(false);
-                    isLoading = false;
+                    indicador_carga.setVisible(false);
+                    esta_cargando = false;
                 });
+
             } catch (Exception e) {
 
                 javafx.application.Platform.runLater(() -> {
-                    loadingIndicator.setVisible(false);
-                    isLoading = false;
+                    indicador_carga.setVisible(false);
+                    esta_cargando = false;
                 });
             }
         });
     }
 
-    public void cleanup() {
+    public void liberarRecursos() {
         if (executorService != null) {
             executorService.shutdown();
         }

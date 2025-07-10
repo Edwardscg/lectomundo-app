@@ -136,11 +136,14 @@ public class DetalleDocumentoControlador {
             Stage stage = new Stage();
             stage.setTitle("Lectura del Documento");
             stage.setScene(new Scene(root));
+
+            stage.setOnCloseRequest(evento -> controlador.liberarRecursos());
+
             stage.show();
 
         }catch (Exception e){
 
-            UIHelper.mostrarAlerta("Error", "No se pudo abrir el documento en el navegador.");
+            UIHelper.mostrarAlerta("Error", "No se pudo abrir el documento.");
         }
     }
 

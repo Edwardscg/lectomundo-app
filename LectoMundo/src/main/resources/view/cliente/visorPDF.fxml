@@ -3,14 +3,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
+<StackPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.lectomundo.controller.cliente.VisorPDFControlador"
             prefHeight="750" prefWidth="680">
 
     <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS">
-        <VBox fx:id="pdfContainer" />
+        <VBox fx:id="pdfContenedor" />
     </ScrollPane>
-    <ProgressIndicator fx:id="loadingIndicator" visible="false" />
 
-</VBox>
+    <ProgressIndicator fx:id="indicador_carga" visible="false" StackPane.alignment="CENTER"/>
+
+</StackPane>
