@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class FavoritoDAO {
 
-    DocumentoDAO documentoDAO = new DocumentoDAO();
+    private final DocumentoDAO documentoDAO = new DocumentoDAO();
 
     /**
      * Marca un documento como favorito para un cliente.
