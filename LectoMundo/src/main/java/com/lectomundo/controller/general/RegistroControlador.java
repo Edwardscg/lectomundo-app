@@ -7,9 +7,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+/**
+ * Controlador de la ventana de registro de usuarios.
+ * Permite a un nuevo cliente registrarse en el sistema.
+ */
 public class RegistroControlador {
 
-    UsuarioService usuarioService = new UsuarioService();
+    private final UsuarioService usuarioService = new UsuarioService();
 
     @FXML
     private TextField txtNombreUsuario;
@@ -20,6 +24,10 @@ public class RegistroControlador {
     @FXML
     private TextField txtConfirmarContraseña;
 
+    /**
+     * Acción asociada al botón de "Registrarse".
+     * Valida los campos e intenta registrar un nuevo cliente.
+     */
     @FXML
     private void Registrarse() {
 
@@ -48,7 +56,6 @@ public class RegistroControlador {
             Stage ventana_actual = (Stage) txtCorreo.getScene().getWindow();
 
             UIHelper.mostrarAlerta("Exito", "Cuenta registrada exitosamente.");
-
             UIHelper.abrirYCerrarVentanaActual(ventana_actual, "/view/general/login.fxml", "Login");
 
         } catch (IllegalArgumentException e) {
