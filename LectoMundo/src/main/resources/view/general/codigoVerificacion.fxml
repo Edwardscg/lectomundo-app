@@ -5,7 +5,8 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.lectomundo.controller.general.CodigoVerificacionControlador"
-            prefHeight="200.0" prefWidth="600.0">
+            prefHeight="230.0" prefWidth="600.0"
+            stylesheets="@/css/estilos.css">
 
     <VBox alignment="CENTER" spacing="20" AnchorPane.topAnchor="30" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50">
 
@@ -13,7 +14,7 @@
 
         <Label fx:id="lblCorreo" text="Código enviado a: " styleClass="label-subtitulo"/>
 
-        <TextField fx:id="txtCodigo" promptText="Ingrese el código recibido"  styleClass="text-field"/>
+        <TextField fx:id="txtCodigo" promptText="Ingrese el código recibido"  styleClass="text-field" prefWidth="60"/>
 
         <Button text="Verificar" onAction="#VerificarCodigo" styleClass="boton-principal"/>
 
