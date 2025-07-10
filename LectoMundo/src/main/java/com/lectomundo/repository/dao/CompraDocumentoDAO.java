@@ -7,25 +7,51 @@ import com.lectomundo.repository.helper.DBHelper;
 import java.sql.Timestamp;
 import java.util.List;
 
+/**
+ * DAO encargado de manejar operaciones de persistencia relacionadas con la compra de documentos.
+ * Permite registrar compras, verificar si un usuario compró un documento y obtener los documentos comprados como objetos.
+ */
 public class CompraDocumentoDAO {
 
     private final UsuarioDAO usuarioDAO = new UsuarioDAO();
     private final DocumentoDAO documentoDAO = new DocumentoDAO();
 
+    /**
+     * Registra una nueva compra de un documento por parte de un cliente.
+     *
+     * @param compra Objeto CompraDocumento con los datos a registrar.
+     */
     public void registrarCompra(CompraDocumento compra) {
 
         String sql = "INSERT INTO compra_documento (id_usuario, id_documento, fecha_compra, costo) VALUES (?, ?, ?, ?);";
 
-        DBHelper.manejarEntidad(sql, compra.getCliente().getId_usuario(), compra.getDocumento().getId_documento(), Timestamp.valueOf(compra.getFecha_compra()), compra.getCosto());
+        DBHelper.manejarEntidad(sql,
+                compra.getCliente().getId_usuario(),
+                compra.getDocumento().getId_documento(),
+                Timestamp.valueOf(compra.getFecha_compra()),
+                compra.getCosto());
     }
 
+    /**
+     * Verifica si un documento ha sido comprado por un cliente.
+     *
+     * @param id_usuario   ID del cliente.
+     * @param id_documento ID del documento.
+     * @return true si el cliente ya compró el documento, false en caso contrario.
+     */
     public boolean estaComprado(int id_usuario, int id_documento) {
 
-        String sql = "SELECT 1 FROM compra_documento WHERE id_usuario = ? AND id_documento = ? LIMIT 1;";
+        String sql = "SELECT 1 FROM compra_documento WHERE id_usuario = ? AND id_documento = ?;";
 
         return DBHelper.obtenerEntidad(sql, rs -> true, id_usuario, id_documento) != null;
     }
 
+    /**
+     * Obtiene la lista de documentos comprados por un cliente.
+     *
+     * @param id_usuario ID del cliente.
+     * @return Lista de documentos comprados por el cliente.
+     */
     public List<Documento> verDocumentosCompradosPorUsuario(int id_usuario) {
 
         String sql = " SELECT d.* FROM documento d JOIN compra_documento cd ON d.id_documento = cd.id_documento WHERE cd.id_usuario = ?;";
