@@ -294,6 +294,7 @@ public class DetalleDocumentoControlador {
                     UIHelper.mostrarAlerta("Éxito", "El documento se ha descargado.");
                 }
             }
+
         } catch (IOException e) {
 
             UIHelper.mostrarAlerta("Error", "No se pudo procesar la descarga del documento.");
