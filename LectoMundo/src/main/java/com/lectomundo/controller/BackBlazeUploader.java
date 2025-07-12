@@ -6,21 +6,25 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.*;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Base64;
+import java.util.Properties;
 
 public class BackBlazeUploader {
 
-    private static final String id_cuenta = "005da0be82a0ebf0000000001";
-    private static final String llave_aplicacion = "K005EPTrizZx+uZKRwTWKqp9NmSw674";
+
     private static final String nombre_deposito = "BibliotecaVirtual";
     private static final String url_backblaze = "https://api.backblazeb2.com";
 
     private final OkHttpClient client = new OkHttpClient();
     private final ObjectMapper objectMapper = new ObjectMapper();
+
+    private String keyId;
+    private String appKey;
 
     private String accountId;
     private String apiUrl;
@@ -36,7 +40,16 @@ public class BackBlazeUploader {
 
     private void authorizeAccount() throws Exception {
 
-        String credentials = id_cuenta + ":" + llave_aplicacion;
+        Properties props = new Properties();
+
+        // Ruta del archivo de configuración
+        FileInputStream fis = new FileInputStream("config.properties");
+
+        props.load(fis);
+        this.keyId = props.getProperty("BACKBLAZE_KEY_ID");
+        this.appKey = props.getProperty("BACKBLAZE_APP_KEY");
+
+        String credentials = keyId + ":" + appKey;
         String encoded = Base64.getEncoder().encodeToString(credentials.getBytes());
 
         Request request = new Request.Builder().url(url_backblaze + "/b2api/v2/b2_authorize_account").header("Authorization", "Basic " + encoded).build();

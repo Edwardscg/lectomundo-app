@@ -105,8 +105,8 @@ public class SubirDocumentoControlador {
         try {
 
             BackBlazeUploader uploader = new BackBlazeUploader();
-            String nombre_pdf = "documentos/" + System.currentTimeMillis() + "_" + archivoPDF.getName();
-            String nombre_portada = "portadas/" + System.currentTimeMillis() + "_" + imagenPortada.getName();
+            String nombre_pdf = "documentos/" + "_" + archivoPDF.getName();
+            String nombre_portada = "portadas/" + "_" + imagenPortada.getName();
 
             String pdf_url = uploader.getPublicUrl(uploader.uploadFile(archivoPDF, nombre_pdf, "application/pdf"));
             String portada_url = uploader.getPublicUrl(uploader.uploadFile(imagenPortada, nombre_portada, Files.probeContentType(imagenPortada.toPath())));

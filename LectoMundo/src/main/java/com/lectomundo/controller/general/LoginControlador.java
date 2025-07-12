@@ -85,7 +85,7 @@ public class LoginControlador {
             UIHelper.mostrarAlerta("Error", e.getMessage());
 
         } catch (Exception e) {
-
+            e.printStackTrace();
             UIHelper.mostrarAlerta("Error", "Ocurrió un error al iniciar sesión.");
         }
     }

@@ -81,7 +81,7 @@ public class VisorPDFControlador {
 
                 for (int i = pagina_actual; i < ultima_pagina; i++) {
 
-                    final int numero_pagina = i;
+                    int numero_pagina = i;
 
                     BufferedImage imagen = pdfRenderer.renderImage(numero_pagina, 1.0f);
                     Image imagen_fx = SwingFXUtils.toFXImage(imagen, null);
