@@ -23,7 +23,7 @@ public class DBConexion {
             Properties props = new Properties();
 
             // Ruta del archivo de configuración
-            FileInputStream fis = new FileInputStream("db.properties");
+            FileInputStream fis = new FileInputStream("config.properties");
 
             props.load(fis);
             jdbc_url = props.getProperty("JDBC_URL");
